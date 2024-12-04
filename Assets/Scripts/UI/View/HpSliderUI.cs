@@ -10,7 +10,8 @@ public class HpSliderUI : BaseView
     [SerializeField] private Vector2 _pivot;
 
     private int _maxHealth;
-    private Unit _unit;
+    [SerializeField] private Unit _unit;
+    public Unit Unit => _unit;
 
     public enum Sliders
     {
@@ -31,11 +32,9 @@ public class HpSliderUI : BaseView
     public void Show(Unit unit)
     {
         _unit = unit;
-        _maxHealth = _unit.Health; 
+
+        _maxHealth = _unit.Health;
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
-        _rectTransform.anchoredPosition =
-            (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, unit.transform.position) +
-            _pivot;
 
         Get<Slider>((int)Sliders.Hp_Slider).value = 1;
     }
@@ -45,6 +44,7 @@ public class HpSliderUI : BaseView
         _rectTransform.anchoredPosition =
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, _unit.transform.position) +
             _pivot;
+
         Get<Slider>((int)Sliders.Hp_Slider).value = (float)_unit.Health / _maxHealth;
 
         if (_unit.IsDeath)
