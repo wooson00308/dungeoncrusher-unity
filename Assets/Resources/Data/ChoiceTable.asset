@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e54a8599a5384b4ebfcb0c4a1505ca4, type: 3}
+  m_Name: ChoiceTable
+  m_EditorClassIdentifier: 
+  _choiceDatas:
+  - name: 
+    tier: 0
+    description: 
+    iconSprite: {fileID: 21300000, guid: d9b083506eaec234189c07e9fcaec622, type: 3}
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 4a76854baa95245abab4d78266c6ca60, type: 2}
+    skillData: {fileID: 0}
+  - name: PowerStrike
+    tier: 3
+    description: PowerStrikePowerStrikePowerStrikePowerStrike
+    iconSprite: {fileID: 21300000, guid: 38e3f8396103353499c286736668372c, type: 3}
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
