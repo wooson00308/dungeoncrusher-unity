@@ -1,20 +1,25 @@
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ReadyView : BaseView
 {
+    [SerializeField] private List<Transform> _slots;
+
     private void OnEnable()
     {
         BindUI();
-
-        DelayEngage();
     }
 
-    private async void DelayEngage()
+    public void UpdateChoiceView(List<ChoiceData> tripleChoices)
     {
-        await Awaitable.WaitForSecondsAsync(2f);
+        int index = 0;
+        foreach (var choice in tripleChoices)
+        {
+            var prefab = ResourceManager.Instance.SpawnFromPath(choice.GetPrefabPath, _slots[index++]);
+            var choiceView = prefab.GetComponent<ChoiceView>();
 
-        GameEventSystem.Instance.Publish(ProcessEvents.Engage.ToString());
+            choiceView.SetupUI(choice);
+        }
     }
 
     public override void BindUI()
