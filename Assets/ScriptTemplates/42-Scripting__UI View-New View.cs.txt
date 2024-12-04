@@ -1,0 +1,9 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : BaseView
+{
+    public override void BindUI()
+    {
+            
+    }
+}

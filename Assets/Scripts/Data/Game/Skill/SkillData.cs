@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class SkillData : ScriptableObject
+{
+    [SerializeField] protected string _id;
+    [SerializeField] protected string _prefId;
+    [SerializeField] protected string _unitId;
+    [SerializeField] protected int _rarity;
+    [SerializeField] protected string _iconId;
+    [SerializeField] protected string _name;
+    [SerializeField] protected string _description;
+
+    [Space]
+
+    [SerializeField] protected bool _isAreaAttack;
+    [SerializeField] protected bool _isPassiveSkill;
+    [SerializeField] protected UnitEvents _skillEventType;
+
+    [Space]
+
+    [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
+
+    public string Id => _id;
+    public string PrefId => _prefId;
+    public string UnitId => _unitId;
+    public int Rarity => _rarity;
+    public string IconId => _iconId;
+    public string Description(int level)
+    {
+        var skillLevelDetail = GetSkillLevelData(level);
+
+        // 원본 문자열
+        string description = "공격시 {n}(%)확률로 용사 공격력의 {a}%로 추가 공격을 가한다.";
+
+        // 변수값으로 문자열 대체
+        description = _description
+            .Replace("{n}", skillLevelDetail.activationChance.ToString("F0")) // {n}에 확률 값 대입 (소수점 한 자리)
+            .Replace("{a}", skillLevelDetail.skillValue.ToString("F0")); // {a}에 공격 배율 값 대입 (정수로 표시)
+
+        return description;
+    }
+    public bool IsAreaAttack => _isAreaAttack;
+    public bool IsPassiveSkill => _isPassiveSkill;
+    public UnitEvents SkillEventType => _skillEventType;
+
+    public SkillLevelData GetSkillLevelData(int skillLevel)
+    {
+        int skillIndex = skillLevel-1;
+        SkillLevelData defaultSkillLevelData = _skillLevelDatas[^1];
+
+        if (defaultSkillLevelData == null)
+        {
+            string errorMessage = $"{_id}의 레벨 별 스킬 데이터가 존재하지 않습니다.";
+            Debug.LogError(errorMessage);
+            throw new SkillDataNotFoundException(errorMessage);
+        }
+
+        if(_skillLevelDatas.Count-1 < skillIndex)
+        {
+            return defaultSkillLevelData;
+        }
+
+        return _skillLevelDatas[skillIndex];
+    }
+
+    public abstract bool IsValidTarget(Unit unit);
+    public abstract void OnAction(int level, Unit user, List<Unit> targets);
+}
+
+[Serializable]
+public class SkillLevelData
+{
+    [Range(0f, 100f)]
+    public float activationChance;
+    public float skillValue; // n%
+    public string prefabId; 
+}
+
+public class SkillDataNotFoundException : Exception
+{
+    public SkillDataNotFoundException(string message) : base(message) { }
+}
+
+
+

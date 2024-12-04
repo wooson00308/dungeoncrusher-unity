@@ -1,0 +1,9 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : BaseModel
+{
+    public override void Initialize()
+    {
+            
+    }
+}
