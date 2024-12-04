@@ -221,7 +221,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         IsDeath = true;
 
-        Debug.Log($"{killer}이(가) {_id}을(를) 처치하였습니다.");
+        // Debug.Log($"{killer}이(가) {_id}을(를) 처치하였습니다.");
 
         _fsm.TransitionTo<DeathState>();
     }
