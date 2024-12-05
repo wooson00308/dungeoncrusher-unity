@@ -13,7 +13,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public Team Team { get; set; }
 
-    private bool _isFirstSetup = false;
     private float _stunDuration;
 
     private Dictionary<PartType, Item> _equipments = new();
@@ -25,8 +24,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private NavMeshAgent _agent;
     private Animator _animator;
     private FSM _fsm;
-
-    public bool IsIniailized => _isFirstSetup;
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
@@ -57,34 +54,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void SetupStats(IStats stats)
     {
-        if (!_isFirstSetup)
-        {
-            _isFirstSetup = true;
-
-            Health = new(stats.Health.Value);
-            Attack = new(stats.Attack.Value);
-            Defense = new(stats.Defense.Value);
-            Mp = new(stats.Mp.Value);
-            Speed = new(stats.Speed.Value);
-            AttackSpeed = new(stats.AttackSpeed.Value);
-            AttackRange = new(stats.AttackRange.Value);
-            CriticalRate = new(stats.CriticalRate.Value);
-            AttackStunRate = new(stats.AttackStunRate.Value);
-            LifestealRate = new(stats.LifestealRate.Value);
-        }
-        else
-        {
-            Health.Setup(stats.Health.Value);
-            Attack.Setup(stats.Attack.Value);
-            Defense.Setup(stats.Defense.Value);
-            Mp.Setup(stats.Mp.Value);
-            Speed.Setup(stats.Speed.Value);
-            AttackSpeed.Setup(stats.AttackSpeed.Value);
-            AttackRange.Setup(stats.AttackRange.Value);
-            CriticalRate.Setup(stats.CriticalRate.Value);
-            AttackStunRate.Setup(stats.AttackStunRate.Value);
-            LifestealRate.Setup(stats.LifestealRate.Value);
-        }
+        // 이거 굳이 Setup 메서드가 필요한가? new 해버려도 메모리 부하 없을거 같은데..
+        Health = new(stats.Health.Value);
+        Mp = new(stats.Mp.Value);
+        Attack = new(stats.Attack.Value);
+        Defense = new(stats.Defense.Value);
+        Speed = new(stats.Speed.Value);
+        AttackSpeed = new(stats.AttackSpeed.Value);
+        AttackRange = new(stats.AttackRange.Value);
+        CriticalRate = new(stats.CriticalRate.Value);
+        AttackStunRate = new(stats.AttackStunRate.Value);
+        LifestealRate = new(stats.LifestealRate.Value);
 
         if (_agent != null)
         {

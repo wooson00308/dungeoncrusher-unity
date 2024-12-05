@@ -11,90 +11,55 @@ public abstract class Stat<T>
 
     public T Value => _value;
 
-    public abstract void Update(string key, T value);
-    public abstract void Reset(string key);
     public Stat(T value)
     {
         _value = value;
+        _updateStats.Clear();
     }
 
-    public abstract void Setup(T value);
+    public virtual void Reset(string key)
+    {
+        if (!_updateStats.ContainsKey(key))
+        {
+            return;
+        }
+
+        _value = Subtract(_value, _updateStats[key]);
+        _updateStats.Remove(key);
+    }
+
+    public virtual void Update(string key, T value)
+    {
+        if (_updateStats.ContainsKey(key))
+        {
+            _updateStats[key] = Add(_updateStats[key], value);
+        }
+        else
+        {
+            _updateStats.Add(key, value);
+        }
+
+        _value = Add(_value, value);
+    }
+
+    protected abstract T Add(T a, T b);
+    protected abstract T Subtract(T a, T b);
 }
 
 [Serializable]
 public class IntStat : Stat<int>
 {
-    public IntStat(int value) : base(value)
-    {
-    }
+    public IntStat(int value) : base(value) { }
 
-    public override void Setup(int value)
-    {
-        _value = value;
-
-        _updateStats.Clear();
-    }
-
-    public override void Reset(string key)
-    {
-        if (!_updateStats.ContainsKey(key))
-        {
-            return;
-        }
-
-        _value -= _updateStats[key];
-        _updateStats.Remove(key);
-    }
-
-    public override void Update(string key, int value)
-    {
-        if(_updateStats.ContainsKey(key))
-        {
-            _updateStats[key] += value;
-        }
-        else
-        {
-            _updateStats.Add(key, value);
-        }
-
-        _value += value;
-    }
+    protected override int Add(int a, int b) => a + b;
+    protected override int Subtract(int a, int b) => a - b;
 }
 
 [Serializable]
 public class FloatStat : Stat<float>
 {
-    public FloatStat(float value) : base(value)
-    {
-    }
+    public FloatStat(float value) : base(value) { }
 
-    public override void Setup(float value)
-    {
-        _value = value;
-    }
-
-    public override void Reset(string key)
-    {
-        if (!_updateStats.ContainsKey(key))
-        {
-            return;
-        }
-
-        _value -= _updateStats[key];
-        _updateStats.Remove(key);
-    }
-
-    public override void Update(string key, float value)
-    {
-        if (_updateStats.ContainsKey(key))
-        {
-            _updateStats[key] += value;
-        }
-        else
-        {
-            _updateStats.Add(key, value);
-        }
-
-        _value += value;
-    }
+    protected override float Add(float a, float b) => a + b;
+    protected override float Subtract(float a, float b) => a - b;
 }
