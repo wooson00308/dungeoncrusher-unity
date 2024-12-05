@@ -47,6 +47,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public IntStat Health { get; private set; }
     public IntStat Attack { get; private set; }
     public IntStat Defense { get; private set; }
+    public IntStat Mp { get; private set; }
     public FloatStat Speed { get; private set; }
     public FloatStat AttackSpeed { get; private set; }
     public FloatStat AttackRange { get; private set; }
@@ -56,13 +57,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void SetupStats(IStats stats)
     {
-        if(!_isFirstSetup)
+        if (!_isFirstSetup)
         {
             _isFirstSetup = true;
 
             Health = new(stats.Health.Value);
             Attack = new(stats.Attack.Value);
             Defense = new(stats.Defense.Value);
+            Mp = new(stats.Mp.Value);
             Speed = new(stats.Speed.Value);
             AttackSpeed = new(stats.AttackSpeed.Value);
             AttackRange = new(stats.AttackRange.Value);
@@ -75,6 +77,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             Health.Setup(stats.Health.Value);
             Attack.Setup(stats.Attack.Value);
             Defense.Setup(stats.Defense.Value);
+            Mp.Setup(stats.Mp.Value);
             Speed.Setup(stats.Speed.Value);
             AttackSpeed.Setup(stats.AttackSpeed.Value);
             AttackRange.Setup(stats.AttackRange.Value);
@@ -102,9 +105,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health.Update(key, stats.Health.Value);
         Attack.Update(key, stats.Attack.Value);
         Defense.Update(key, stats.Defense.Value);
+        Mp.Update(key, stats.Mp.Value);
         Speed.Update(key, stats.Speed.Value);
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
-        AttackRange.Update(key, stats.AttackRange.Value);   
+        AttackRange.Update(key, stats.AttackRange.Value);
         CriticalRate.Update(key, stats.CriticalRate.Value);
         AttackStunRate.Update(key, stats.AttackStunRate.Value);
         LifestealRate.Update(key, stats.LifestealRate.Value);
@@ -115,6 +119,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health.Reset(key);
         Attack.Reset(key);
         Defense.Reset(key);
+        Mp.Reset(key);
         Speed.Reset(key);
         AttackSpeed.Reset(key);
         AttackRange.Reset(key);
@@ -168,7 +173,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             eventType = UnitEvents.UnitEvent_SetActive.ToString()
         });
 
-        if(!isActive)
+        if (!isActive)
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);

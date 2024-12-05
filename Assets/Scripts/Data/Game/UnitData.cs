@@ -1,16 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "NewUnitData", menuName = "Data/Unit/Create UnitData")]
 public class UnitData : ScriptableObject, IStats
 {
-    [Header("Config")]
-    [SerializeField] private string _id;
+    [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private string _prfId;
 
-    [Header("Stats")]
-    [SerializeField] private IntStat _health;
+    [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
+    [SerializeField] private IntStat _mp;
     [SerializeField] private FloatStat _speed;
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
@@ -25,6 +25,7 @@ public class UnitData : ScriptableObject, IStats
     public IntStat Health => _health;
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
+    public IntStat Mp => _mp;
     public FloatStat Speed => _speed;
     public FloatStat AttackSpeed => _attackSpeed;
     public FloatStat AttackRange => _attackRange;

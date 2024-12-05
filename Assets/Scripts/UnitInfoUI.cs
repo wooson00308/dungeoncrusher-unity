@@ -75,9 +75,9 @@ public class UnitInfoUI : BaseView
 
         if (_unitId != _unit.Id) return;
 
-        if (_maxHealth <= _unit.Health)
+        if (_maxHealth <= _unit.Health.Value)
         {
-            _maxHealth = _unit.Health;
+            _maxHealth = _unit.Health.Value;
         }
     }
 
@@ -86,7 +86,7 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
-        var unitHealth = (float)_unit.Health / _maxHealth;
+        var unitHealth = (float)_unit.Health.Value / _maxHealth;
         Get<Scrollbar>((int)Scrollbars.Unit_Bar_Hp).size = unitHealth;
     }
 
@@ -105,9 +105,9 @@ public class UnitInfoUI : BaseView
 
         if (_unitId != _unit.Id) return;
 
-        if (_maxSkillMp <= _unit.SkillMp)
+        if (_maxSkillMp <= _unit.Mp.Value)
         {
-            _maxSkillMp = _unit.SkillMp;
+            _maxSkillMp = _unit.Mp.Value;
         }
     }
 
@@ -116,7 +116,7 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
-        var unitHealth = _unit.SkillMp / _maxSkillMp;
+        var unitHealth = _unit.Mp.Value / _maxSkillMp;
         Get<Scrollbar>((int)Scrollbars.Unit_Bar_Mp).size = unitHealth;
     }
 
