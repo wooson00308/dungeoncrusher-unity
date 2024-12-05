@@ -9,14 +9,10 @@ public class UnitInfoUI : BaseView
     [SerializeField] private string _unitId;
     private Unit _unit;
 
-    public enum Scrollbars
-    {
-        Unit_Bar_Hp,
-        Unit_Bar_Mp
-    }
-
     public enum Images
     {
+        Unit_Bar_Hp,
+        Unit_Bar_Mp,
         Img_UnitProfile,
         Unit_Equip_Weapon,
         Unit_Equip_Head,
@@ -43,7 +39,6 @@ public class UnitInfoUI : BaseView
 
     public override void BindUI()
     {
-        Bind<Scrollbar>(typeof(Scrollbars));
         Bind<Image>(typeof(Images));
         Bind<RectTransform>(typeof(RectTransforms));
     }
@@ -86,8 +81,8 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
-        var unitHealth = (float)_unit.Health.Value / _maxHealth;
-        Get<Scrollbar>((int)Scrollbars.Unit_Bar_Hp).size = unitHealth;
+        var fillAmount = (float)_unit.Health.Value / _maxHealth;
+        Get<Image>((int)Images.Unit_Bar_Hp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 
     #endregion
@@ -116,8 +111,8 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
-        var unitHealth = _unit.Mp.Value / _maxSkillMp;
-        Get<Scrollbar>((int)Scrollbars.Unit_Bar_Mp).size = unitHealth;
+        var fillAmount = _unit.Mp.Value / _maxSkillMp;
+        Get<Image>((int)Images.Unit_Bar_Mp).rectTransform.localScale = Vector2.up + Vector2.right * fillAmount;
     }
 
     #endregion

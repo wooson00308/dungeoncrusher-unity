@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ChoiceTable", menuName = "Data/Create ChoiceTable")]
@@ -39,7 +40,6 @@ public class ChoiceData
     public string name;
     public int tier;
     public string description;
-    public Sprite iconSprite;
     public string GetPrefabPath
     {
         get
@@ -59,6 +59,16 @@ public class ChoiceData
 
     [Space]
     public ChoiceType choiceType;
+
+    public Sprite Icon()
+    {
+        if (choiceType == ChoiceType.Item)
+            return itemData.Icon;
+        else if (choiceType == ChoiceType.Skill)
+            return skillData.Icon;
+
+        return null;
+    }
 
     public ItemData itemData;
     public SkillData skillData;

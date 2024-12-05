@@ -32,7 +32,7 @@ public class ChoiceView : BaseView
         Get<TextMeshProUGUI>((int)Texts.Txt_Tier).SetText($"{data.tier}");
         Get<TextMeshProUGUI>((int)Texts.Txt_Name).SetText($"{data.name}");
         Get<TextMeshProUGUI>((int)Texts.Txt_Description).SetText($"{data.description}");
-        Get<Image>((int)Images.Icon).sprite = data.iconSprite;
+        Get<Image>((int)Images.Icon).sprite = data.Icon();
     }
 
     public void OnClick()
