@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine;
 
 public class MainView : BaseView
 {
@@ -16,6 +17,7 @@ public class MainView : BaseView
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
+        
     }
 
     private void UpdateStageUI(GameEvent gameEvent)

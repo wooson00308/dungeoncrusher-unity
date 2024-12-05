@@ -5,6 +5,7 @@ public class Skill : MonoBehaviour
     private Unit _owner;
     private int _skillLevel = 1;
     [SerializeField] private SkillData _skillData;
+    public SkillData SkillData => _skillData;
 
     private bool _isInitialized = false;
 
@@ -35,7 +36,7 @@ public class Skill : MonoBehaviour
     public void TrySpawnSkillEffect(GameEvent gameEvent)
     {
         if (!_isInitialized) return;
-        
+
         UnitEventArgs args = (UnitEventArgs)gameEvent.args;
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
@@ -51,13 +52,13 @@ public class Skill : MonoBehaviour
 
         string prefabId = skillLevelDetails.prefabId;
         var skillPrefab = ResourceManager.Instance.SpawnFromPath($"Skill/Fx/{prefabId}");
-        
+
         if (skillPrefab == null)
         {
             Debug.LogError($"{prefabId}가 엄서요");
             return;
         }
-        
+
         var skillFx = skillPrefab.GetComponent<SkillEffect>();
         if (skillFx == null)
         {
@@ -69,6 +70,5 @@ public class Skill : MonoBehaviour
 
         var publisherTarget = args.publisher.GetComponent<TargetDetector>().Target;
         skillFx.Initialized(_skillLevel, args.publisher, _skillData, publisherTarget);
-
     }
 }
