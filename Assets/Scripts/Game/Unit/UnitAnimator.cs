@@ -23,7 +23,7 @@ public class UnitAnimator : MonoBehaviour
 
     public void AttackEvent(AnimationEvent e)
     {
-        _owner.Target?.OnHit(_owner.Attack, _owner);
+        _owner.Target?.OnHit(_owner.Attack.Value, _owner);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent 
         { 

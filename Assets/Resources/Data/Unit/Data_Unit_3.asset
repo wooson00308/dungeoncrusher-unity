@@ -14,12 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Unit_3
   _prfId: Prf_Unit_3
-  _health: 300
-  _attack: 15
-  _defense: 0
-  _speed: 3
-  _attackSpeed: 1
-  _attackRange: 1
-  _criticalRate: 0
-  _stunRate: 0
-  _lifestealRate: 0
+  _health:
+    _value: 150
+  _attack:
+    _value: 15
+  _defense:
+    _value: 0
+  _speed:
+    _value: 3
+  _attackSpeed:
+    _value: 1
+  _attackRange:
+    _value: 1
+  _criticalRate:
+    _value: 0
+  _stunRate:
+    _value: 0
+  _lifestealRate:
+    _value: 0

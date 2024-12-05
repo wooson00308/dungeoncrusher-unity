@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public Team Team { get; set; }
 
-    private bool _isInitialized = false;
+    private bool _isFirstSetup = false;
     private float _stunDuration;
 
     private Dictionary<PartType, Item> _equipments = new();
@@ -26,7 +26,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Animator _animator;
     private FSM _fsm;
 
-    public bool IsIniailized => _isInitialized;
+    public bool IsIniailized => _isFirstSetup;
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
@@ -44,31 +44,48 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #region Stats
 
-    public int Health { get; private set; }
-    public int Attack { get; private set; }
-    public int Defense { get; private set; }
-    public float Speed { get; private set; }
-    public float AttackSpeed { get; private set; }
-    public float AttackRange { get; private set; }
-    public float CriticalRate { get; private set; }
-    public float AttackStunRate { get; private set; }
-    public float LifestealRate { get; private set; }
+    public IntStat Health { get; private set; }
+    public IntStat Attack { get; private set; }
+    public IntStat Defense { get; private set; }
+    public FloatStat Speed { get; private set; }
+    public FloatStat AttackSpeed { get; private set; }
+    public FloatStat AttackRange { get; private set; }
+    public FloatStat CriticalRate { get; private set; }
+    public FloatStat AttackStunRate { get; private set; }
+    public FloatStat LifestealRate { get; private set; }
 
     public void SetupStats(IStats stats)
     {
-        Health = stats.Health;
-        Attack = stats.Attack;
-        Defense = stats.Defense;
-        Speed = stats.Speed;
-        AttackSpeed = stats.AttackSpeed;
-        AttackRange = stats.AttackRange;
-        CriticalRate = stats.CriticalRate;
-        AttackStunRate = stats.AttackStunRate;
-        LifestealRate = stats.LifestealRate;
+        if(!_isFirstSetup)
+        {
+            _isFirstSetup = true;
+
+            Health = new(stats.Health.Value);
+            Attack = new(stats.Attack.Value);
+            Defense = new(stats.Defense.Value);
+            Speed = new(stats.Speed.Value);
+            AttackSpeed = new(stats.AttackSpeed.Value);
+            AttackRange = new(stats.AttackRange.Value);
+            CriticalRate = new(stats.CriticalRate.Value);
+            AttackStunRate = new(stats.AttackStunRate.Value);
+            LifestealRate = new(stats.LifestealRate.Value);
+        }
+        else
+        {
+            Health.Setup(stats.Health.Value);
+            Attack.Setup(stats.Attack.Value);
+            Defense.Setup(stats.Defense.Value);
+            Speed.Setup(stats.Speed.Value);
+            AttackSpeed.Setup(stats.AttackSpeed.Value);
+            AttackRange.Setup(stats.AttackRange.Value);
+            CriticalRate.Setup(stats.CriticalRate.Value);
+            AttackStunRate.Setup(stats.AttackStunRate.Value);
+            LifestealRate.Setup(stats.LifestealRate.Value);
+        }
 
         if (_agent != null)
         {
-            _agent.speed = Speed;
+            _agent.speed = Speed.Value;
         }
 
         if (_fsm != null)
@@ -80,30 +97,30 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = false;
     }
 
-    public void IncreaseStats(IStats stats)
+    public void UpdateStats(string key, IStats stats)
     {
-        Health += stats.Health;
-        Attack += stats.Attack;
-        Defense += stats.Defense;
-        Speed += stats.Speed;
-        AttackSpeed += stats.AttackSpeed;
-        AttackRange += stats.AttackRange;
-        CriticalRate += stats.CriticalRate;
-        AttackStunRate += stats.AttackStunRate;
-        LifestealRate += stats.LifestealRate;
+        Health.Update(key, stats.Health.Value);
+        Attack.Update(key, stats.Attack.Value);
+        Defense.Update(key, stats.Defense.Value);
+        Speed.Update(key, stats.Speed.Value);
+        AttackSpeed.Update(key, stats.AttackSpeed.Value);
+        AttackRange.Update(key, stats.AttackRange.Value);   
+        CriticalRate.Update(key, stats.CriticalRate.Value);
+        AttackStunRate.Update(key, stats.AttackStunRate.Value);
+        LifestealRate.Update(key, stats.LifestealRate.Value);
     }
 
-    public void DecreaseStats(IStats stats)
+    public void ResetStats(string key)
     {
-        Health -= stats.Health;
-        Attack -= stats.Attack;
-        Defense -= stats.Defense;
-        Speed -= stats.Speed;
-        AttackSpeed -= stats.AttackSpeed;
-        AttackRange -= stats.AttackRange;
-        CriticalRate -= stats.CriticalRate;
-        AttackStunRate -= stats.AttackStunRate;
-        LifestealRate -= stats.LifestealRate;
+        Health.Reset(key);
+        Attack.Reset(key);
+        Defense.Reset(key);
+        Speed.Reset(key);
+        AttackSpeed.Reset(key);
+        AttackRange.Reset(key);
+        CriticalRate.Reset(key);
+        AttackStunRate.Reset(key);
+        LifestealRate.Reset(key);
     }
 
     #endregion
@@ -126,7 +143,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private void OnDisable()
     {
-        _isInitialized = false;
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.SetActive.ToString(), SetActive);
     }
 
@@ -136,8 +152,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Team = team;
         SetupStats(data);
-
-        _isInitialized = true;
     }
 
     private void SetActive(GameEvent gameEvent)
@@ -156,6 +170,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         if(!isActive)
         {
+            ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
         }
     }
@@ -169,7 +184,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void MoveFromTarget(Transform target)
     {
         _agent.isStopped = false;
-        _agent.speed = Speed;
+        _agent.speed = Speed.Value;
         _agent.SetDestination(target.position);
         Rotation(target.position - transform.position);
     }
@@ -209,7 +224,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
-        Health -= damage;
+        Health.Update("Engage", -damage);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
         {
@@ -217,7 +232,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             args = new OnHitEventArgs { publisher = this, damageValue = damage }
         });
 
-        if (Health <= 0)
+        if (Health.Value <= 0)
         {
             OnDeath(attacker);
         }
@@ -293,7 +308,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
-            DecreaseStats(equipment.Data);
+            ResetStats("EquipItem");
             ResourceManager.Instance.Destroy(equipment.gameObject);
             _equipments[item.Data.PartType] = item;
         }
@@ -302,7 +317,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _equipments.Add(item.Data.PartType, item);
         }
 
-        IncreaseStats(item.Data);
+        UpdateStats("EquipItem", item.Data);
 
         spawnItem.transform.SetParent(_inventory);
     }
