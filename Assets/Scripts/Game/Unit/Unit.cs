@@ -151,6 +151,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             },
             eventType = UnitEvents.UnitEvent_SetActive.ToString()
         });
+
+        if(!isActive)
+        {
+            UnitFactory.Instance.GoToSpawnPoint(this);
+        }
     }
 
     #region Movement
