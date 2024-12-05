@@ -19,13 +19,22 @@ MonoBehaviour:
   _partType: 1
   _description: "\uB354\uBBF8\uC6A9 \uB9C8\uAC80\uC774\uB2E4 \uC5C4\uCCAD\uB098\uAC8C
     \uAC15\uD558\uB2E4."
-  _health: 600
-  _attack: 60
-  _defense: 0
-  _speed: 0
-  _attackSpeed: 0
-  _attackRange: 0
-  _criticalRate: 0
-  _stunRate: 0
-  _lifestealRate: 0
+  _health:
+    _value: 600
+  _attack:
+    _value: 30
+  _defense:
+    _value: 0
+  _speed:
+    _value: 0
+  _attackSpeed:
+    _value: 0
+  _attackRange:
+    _value: 0
+  _criticalRate:
+    _value: 0
+  _stunRate:
+    _value: 0
+  _lifestealRate:
+    _value: 0
   _skillDatas: []

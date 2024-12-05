@@ -34,7 +34,7 @@ public class ChaseState : StateBase, IState
 
         unit.MoveFromTarget(unit.Target.transform);
 
-        if (Vector2.Distance(unit.transform.position, unit.Target.transform.position) <= unit.AttackRange)
+        if (Vector2.Distance(unit.transform.position, unit.Target.transform.position) <= unit.AttackRange.Value)
         {
             _fsm.TransitionTo<AttackState>();
         }

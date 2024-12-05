@@ -24,7 +24,7 @@ public class HealthDetectData : DetectDataBase
             if (unit.IsDeath || unit == user)
                 continue;
 
-            float unitHealth = unit.Health;
+            float unitHealth = unit.Health.Value;
 
             bool isBetterTarget = _isLowestHealth ? unitHealth < bestHealth : unitHealth > bestHealth;
 
