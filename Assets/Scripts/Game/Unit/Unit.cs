@@ -17,7 +17,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private float _stunDuration;
 
     private Dictionary<PartType, Item> _equipments = new();
+    public Dictionary<PartType, Item> Equipment => _equipments;
     private Dictionary<string, Skill> _skillDic = new();
+    public Dictionary<string, Skill> SkillDic => _skillDic;
 
     private TargetDetector _targetDetector;
     private NavMeshAgent _agent;

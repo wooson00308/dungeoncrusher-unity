@@ -7,6 +7,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] protected string _unitId;
     [SerializeField] protected string _name;
     [SerializeField] protected string _iconId;
+    [SerializeField] protected Sprite _icon;
     [SerializeField] protected PartType _partType;
     [SerializeField] protected string _description;
 
@@ -26,6 +27,7 @@ public abstract class ItemData : ScriptableObject, IStats
     public string UnitId => _unitId;
     public PartType PartType => _partType;
     public string IconId => _iconId;
+    public Sprite Icon => _icon;
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;

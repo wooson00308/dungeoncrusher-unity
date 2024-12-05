@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ReadyProcess : Process
 {
-    [SerializeField] private UnitData _data;
+    [SerializeField] private List<UnitData> _datas = new();
 
     private bool _isSpawnPlayers = true; // 플레이어 스폰여부
 
@@ -31,9 +33,13 @@ public class ReadyProcess : Process
         if (_isSpawnPlayers)
         {
             _isSpawnPlayers = false;
-            var units = UnitFactory.Instance.Spawn(_data, Team.Friendly, 1);
-            units[0].AddSkill(Resources.Load<SkillData>("Data/Skill/Data_Skill_997"));
-            units[0].EquipItem(Resources.Load<Item>("Item/Prf_Item_990"));
+
+            foreach (var unitData in _datas)
+            {
+                var units = UnitFactory.Instance.Spawn(unitData, Team.Friendly, 1);
+                units[0].AddSkill(Resources.Load<SkillData>("Data/Skill/Data_Skill_997"));
+                units[0].EquipItem(Resources.Load<Item>("Item/Prf_Item_990"));
+            }
         }
 
         GameEventSystem.Instance.Publish(ProcessEvents.SetActive.ToString(), new GameEvent { args = false });

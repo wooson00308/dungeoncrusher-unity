@@ -9,24 +9,23 @@ public abstract class SkillData : ScriptableObject
     [SerializeField] protected string _unitId;
     [SerializeField] protected int _rarity;
     [SerializeField] protected string _iconId;
+    [SerializeField] protected Sprite _icon;
     [SerializeField] protected string _name;
     [SerializeField] protected string _description;
 
-    [Space]
-
-    [SerializeField] protected bool _isAreaAttack;
+    [Space] [SerializeField] protected bool _isAreaAttack;
     [SerializeField] protected bool _isPassiveSkill;
     [SerializeField] protected UnitEvents _skillEventType;
 
-    [Space]
-
-    [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
+    [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
 
     public string Id => _id;
     public string PrefId => _prefId;
     public string UnitId => _unitId;
     public int Rarity => _rarity;
     public string IconId => _iconId;
+    public Sprite Icon => _icon;
+
     public string Description(int level)
     {
         var skillLevelDetail = GetSkillLevelData(level);
@@ -41,13 +40,14 @@ public abstract class SkillData : ScriptableObject
 
         return description;
     }
+
     public bool IsAreaAttack => _isAreaAttack;
     public bool IsPassiveSkill => _isPassiveSkill;
     public UnitEvents SkillEventType => _skillEventType;
 
     public SkillLevelData GetSkillLevelData(int skillLevel)
     {
-        int skillIndex = skillLevel-1;
+        int skillIndex = skillLevel - 1;
         SkillLevelData defaultSkillLevelData = _skillLevelDatas[^1];
 
         if (defaultSkillLevelData == null)
@@ -57,7 +57,7 @@ public abstract class SkillData : ScriptableObject
             throw new SkillDataNotFoundException(errorMessage);
         }
 
-        if(_skillLevelDatas.Count-1 < skillIndex)
+        if (_skillLevelDatas.Count - 1 < skillIndex)
         {
             return defaultSkillLevelData;
         }
@@ -72,16 +72,14 @@ public abstract class SkillData : ScriptableObject
 [Serializable]
 public class SkillLevelData
 {
-    [Range(0f, 100f)]
-    public float activationChance;
+    [Range(0f, 100f)] public float activationChance;
     public float skillValue; // n%
-    public string prefabId; 
+    public string prefabId;
 }
 
 public class SkillDataNotFoundException : Exception
 {
-    public SkillDataNotFoundException(string message) : base(message) { }
+    public SkillDataNotFoundException(string message) : base(message)
+    {
+    }
 }
-
-
-

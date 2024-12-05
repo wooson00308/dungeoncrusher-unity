@@ -9,7 +9,7 @@ public class HpSliderUI : BaseView
 
     [SerializeField] private Vector2 _pivot;
 
-    private int _maxHealth;
+    private int _maxHealth = 0;
     [SerializeField] private Unit _unit;
     public Unit Unit => _unit;
 
@@ -33,7 +33,10 @@ public class HpSliderUI : BaseView
     {
         _unit = unit;
 
-        _maxHealth = _unit.Health.Value;
+        if (_maxHealth <= unit.Health.Value)
+        {
+            _maxHealth = _unit.Health.Value;
+        }
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
 
         Get<Slider>((int)Sliders.Hp_Slider).value = 1;
@@ -45,7 +48,9 @@ public class HpSliderUI : BaseView
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, _unit.transform.position) +
             _pivot;
 
-        Get<Slider>((int)Sliders.Hp_Slider).value = (float)_unit.Health.Value / _maxHealth;
+        var unitHealth = (float)_unit.Health.Value / _maxHealth;
+
+        Get<Slider>((int)Sliders.Hp_Slider).value = unitHealth;
 
         if (_unit.IsDeath)
         {
