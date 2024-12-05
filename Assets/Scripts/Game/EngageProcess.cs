@@ -45,7 +45,7 @@ public class EngageProcess : Process
 
         if (enemyCount <= 0)
         {
-            if (StageManager.Instance.isAllStageClear)
+            if (StageManager.Instance.IsAllStageClear)
             {
                 _processSystem.OnNextProcess<GameClearProcess>();
             }

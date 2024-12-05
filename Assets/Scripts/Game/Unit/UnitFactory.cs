@@ -62,27 +62,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
             Unit spawnUnit = spawnObj.GetComponent<Unit>();
             spawnUnit.OnInitialized(data, team);
 
-            Vector2 randomPosition;
-            if (teamSpawnPoint.spawnShape == SpawnShape.Circle)
-            {
-                randomPosition = Util.GetRandomSpawnPositionCircle(
-                    teamSpawnPoint.spawnPoints[spawnUnit.Line],
-                    teamSpawnPoint.radius
-                );
-            }
-            else if (teamSpawnPoint.spawnShape == SpawnShape.Box)
-            {
-                randomPosition = Util.GetRandomSpawnPositionBox(
-                    teamSpawnPoint.spawnPoints[spawnUnit.Line],
-                    teamSpawnPoint.boxSize
-                );
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException(nameof(teamSpawnPoint.spawnShape), "Invalid spawn shape");
-            }
-
-            spawnUnit.transform.position = randomPosition;
+            GoToSpawnPoint(spawnUnit);
             spawnedCount++;
 
             _unitList.Add(spawnUnit);
@@ -100,6 +80,33 @@ public class UnitFactory : SingletonMini<UnitFactory>
         }
 
         return spawnUnits;
+    }
+
+    public void GoToSpawnPoint(Unit unit)
+    {
+        var teamSpawnPoint = _teamSpawnPoints.Find(x => x.team == unit.Team);
+
+        Vector2 randomPosition = Vector2.zero;
+        if (teamSpawnPoint.spawnShape == SpawnShape.Circle)
+        {
+            randomPosition = Util.GetRandomSpawnPositionCircle(
+                teamSpawnPoint.spawnPoints[unit.Line],
+                teamSpawnPoint.radius
+            );
+        }
+        else if (teamSpawnPoint.spawnShape == SpawnShape.Box)
+        {
+            randomPosition = Util.GetRandomSpawnPositionBox(
+                teamSpawnPoint.spawnPoints[unit.Line],
+                teamSpawnPoint.boxSize
+            );
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException(nameof(teamSpawnPoint.spawnShape), "Invalid spawn shape");
+        }
+
+        unit.transform.position = randomPosition;
     }
 
 
