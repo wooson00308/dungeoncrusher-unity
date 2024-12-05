@@ -148,7 +148,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
 
         foreach (var unit in units)
         {
-            unit.OnHit(unit.Health);
+            unit.OnHit(unit.Health.Value);
         }
     }
 

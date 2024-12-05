@@ -2,16 +2,16 @@ using UnityEngine;
 
 public interface IStats
 {
-    public int Health { get; }
-    public int Attack { get; }
-    public int Defense { get; }
-    public float Speed { get; }
-    public float AttackSpeed { get; }
-    public float AttackRange { get; }
+    public IntStat Health { get; }
+    public IntStat Attack { get; }
+    public IntStat Defense { get; }
+    public FloatStat Speed { get; }
+    public FloatStat AttackSpeed { get; }
+    public FloatStat AttackRange { get; }
 
-    public float CriticalRate { get; }
-    public float AttackStunRate { get; }
-    public float LifestealRate { get; }
+    public FloatStat CriticalRate { get; }
+    public FloatStat AttackStunRate { get; }
+    public FloatStat LifestealRate { get; }
 }
 
 
@@ -22,6 +22,6 @@ public interface IStatSetable
 
 public interface IStatUpdatable
 {
-    public void IncreaseStats(IStats stats);
-    public void DecreaseStats(IStats stats);
+    public void UpdateStats(string key, IStats stats);
+    public void ResetStats(string key);
 }

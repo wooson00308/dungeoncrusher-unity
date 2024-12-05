@@ -8,28 +8,28 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private string _prfId;
 
     [Header("Stats")]
-    [SerializeField] private int _health;
-    [SerializeField] private int _attack;
-    [SerializeField] private int _defense;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _attackSpeed;
-    [SerializeField] private float _attackRange;
+    [SerializeField] private IntStat _health;
+    [SerializeField] private IntStat _attack;
+    [SerializeField] private IntStat _defense;
+    [SerializeField] private FloatStat _speed;
+    [SerializeField] private FloatStat _attackSpeed;
+    [SerializeField] private FloatStat _attackRange;
 
-    [SerializeField] private float _criticalRate;
-    [SerializeField] private float _stunRate;
-    [SerializeField] private float _lifestealRate;
+    [SerializeField] private FloatStat _criticalRate;
+    [SerializeField] private FloatStat _stunRate;
+    [SerializeField] private FloatStat _lifestealRate;
 
     public string Id => _id;
     public string PrfId => _prfId;
 
-    public int Health => _health;
-    public int Attack => _attack;
-    public int Defense => _defense;
-    public float Speed => _speed;
-    public float AttackSpeed => _attackSpeed;
-    public float AttackRange => _attackRange;
+    public IntStat Health => _health;
+    public IntStat Attack => _attack;
+    public IntStat Defense => _defense;
+    public FloatStat Speed => _speed;
+    public FloatStat AttackSpeed => _attackSpeed;
+    public FloatStat AttackRange => _attackRange;
 
-    public float CriticalRate => _criticalRate;
-    public float AttackStunRate => _stunRate;
-    public float LifestealRate => _lifestealRate;
+    public FloatStat CriticalRate => _criticalRate;
+    public FloatStat AttackStunRate => _stunRate;
+    public FloatStat LifestealRate => _lifestealRate;
 }
