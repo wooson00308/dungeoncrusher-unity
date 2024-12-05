@@ -48,10 +48,6 @@ public class UnitInfoUI : BaseView
         Bind<RectTransform>(typeof(RectTransforms));
     }
 
-    #region HpUI
-
-    private int _maxHealth = 0;
-
     private void Initialized(GameEvent gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
@@ -61,9 +57,14 @@ public class UnitInfoUI : BaseView
         _unit = unitEventArgs.publisher;
 
         ShowHpUI();
+        ShowMpUI();
         ShowItemUI();
         ShowSkillUI();
     }
+
+    #region HpUI
+
+    private int _maxHealth = 0;
 
     private void ShowHpUI()
     {
@@ -87,6 +88,36 @@ public class UnitInfoUI : BaseView
 
         var unitHealth = (float)_unit.Health / _maxHealth;
         Get<Scrollbar>((int)Scrollbars.Unit_Bar_Hp).size = unitHealth;
+    }
+
+    #endregion
+
+    #region MpUI
+
+    private float _maxSkillMp = 0;
+
+    private void ShowMpUI()
+    {
+        if (_unitId == null || String.IsNullOrEmpty(_unitId))
+        {
+            Debug.LogWarning("unitId가 안들어가 있어요");
+        }
+
+        if (_unitId != _unit.Id) return;
+
+        if (_maxSkillMp <= _unit.SkillMp)
+        {
+            _maxSkillMp = _unit.SkillMp;
+        }
+    }
+
+    private void UpdateMpUI(GameEvent gameEvent)
+    {
+        if (_unitId != _unit.Id) return;
+        if (_unit.Team == Team.Enemy) return;
+
+        var unitHealth = _unit.SkillMp / _maxSkillMp;
+        Get<Scrollbar>((int)Scrollbars.Unit_Bar_Mp).size = unitHealth;
     }
 
     #endregion

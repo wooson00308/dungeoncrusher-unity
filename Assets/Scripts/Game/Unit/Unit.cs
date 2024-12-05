@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private Dictionary<PartType, Item> _equipments = new();
     public Dictionary<PartType, Item> Equipment => _equipments;
+
     private Dictionary<string, Skill> _skillDic = new();
     public Dictionary<string, Skill> SkillDic => _skillDic;
 
@@ -25,6 +26,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private NavMeshAgent _agent;
     private Animator _animator;
     private FSM _fsm;
+
+    private float _skillMp = 100;
+
+    public float SkillMp => _skillMp;
 
     public bool IsIniailized => _isInitialized;
     public float StunDuration => _stunDuration;
@@ -154,7 +159,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             eventType = UnitEvents.UnitEvent_SetActive.ToString()
         });
 
-        if(!isActive)
+        if (!isActive)
         {
             UnitFactory.Instance.GoToSpawnPoint(this);
         }
