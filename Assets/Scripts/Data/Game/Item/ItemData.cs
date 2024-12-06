@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class ItemData : ScriptableObject, IStats
 {
     [SerializeField] protected string _id;
+    [SerializeField] protected string _prfId;
     [SerializeField] protected string _unitId;
     [SerializeField] protected string _name;
     [SerializeField] protected string _iconId;
@@ -26,6 +27,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] protected List<SkillData> _skillDatas;
 
     public string Id => _id;
+    public string PrefId => _prfId;
     public string UnitId => _unitId;
     public PartType PartType => _partType;
     public string IconId => _iconId;

@@ -86,6 +86,11 @@ public class ResourceManager : Singleton<ResourceManager>
         _objectPool[obj.name].Enqueue(obj);
     }
 
+    public Queue<GameObject> GetPoolObjects(string key)
+    {
+        return _objectPool[key];
+    }
+
     /// <summary>
     /// 오브젝트 상태 초기화
     /// </summary>

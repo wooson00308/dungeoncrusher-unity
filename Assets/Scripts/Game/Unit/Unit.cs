@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
+    public bool IsActive { get; private set; }
 
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
@@ -146,19 +147,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private void SetActive(GameEvent gameEvent)
     {
-        bool isActive = (bool)gameEvent.args;
-        _fsm.enabled = isActive;
+        IsActive = (bool)gameEvent.args;
+        _fsm.enabled = IsActive;
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new GameEvent
         {
-            args = new UnitEventArgs()
+            args = new SetActiveEventArgs()
             {
                 publisher = this,
+                isActive = IsActive
             },
             eventType = UnitEvents.UnitEvent_SetActive.ToString()
         });
 
-        if (!isActive)
+        if (!IsActive)
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
@@ -232,6 +234,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         if (IsDeath) return;
         IsDeath = true;
+        IsActive = false;
 
         // Debug.Log($"{killer}이(가) {_id}을(를) 처치하였습니다.");
 
@@ -312,7 +315,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
-            ResetStats("EquipItem");
+            ResetStats(item.Data.Id);
             ResourceManager.Instance.Destroy(equipment.gameObject);
             _equipments[item.Data.PartType] = item;
         }
@@ -321,7 +324,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _equipments.Add(item.Data.PartType, item);
         }
 
-        UpdateStats("EquipItem", item.Data);
+        UpdateStats(item.Data.Id, item.Data);
 
         spawnItem.transform.SetParent(_inventory);
     }
