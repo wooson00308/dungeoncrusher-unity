@@ -15,9 +15,9 @@ MonoBehaviour:
   _id: Unit_1
   _prfId: Prf_Unit_1
   _health:
-    _value: 500
+    _value: 10000
   _attack:
-    _value: 1
+    _value: 0
   _defense:
     _value: 0
   _mp:

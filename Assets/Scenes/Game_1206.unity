@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000008b40bd13
+  m_ApplyToSortingLayers: 000000008b40bd131b0b9463
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -959,9 +959,9 @@ MonoBehaviour:
     spawnShape: 1
     radius: 2
     boxSize: {x: 0.5, y: 3}
-    frontlinePoint: {x: 0.85, y: 3}
-    midlinePoint: {x: 1.27, y: 3}
-    backlinePoint: {x: 1.65, y: 3}
+    frontlinePoint: {x: 1.61, y: 3}
+    midlinePoint: {x: 1.93, y: 3}
+    backlinePoint: {x: 2.35, y: 3}
 --- !u!1 &1097033291
 GameObject:
   m_ObjectHideFlags: 0

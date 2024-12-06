@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Skill_997
   m_EditorClassIdentifier: 
   _id: Skill_997
-  _prefId: Prf_Skill_997
+  _prefId: Prf_Skill_998
   _unitId: Unit_3
   _rarity: 3
   _iconId: 'icon_Skill_200997 '
