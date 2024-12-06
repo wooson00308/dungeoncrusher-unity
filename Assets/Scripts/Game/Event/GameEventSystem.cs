@@ -12,7 +12,21 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         {
             _eventDictionary[eventType] = null;
         }
+
         _eventDictionary[eventType] += listener;
+    }
+
+    public void Subscribe(string eventType, params Action<GameEvent>[] listeners)
+    {
+        if (!_eventDictionary.ContainsKey(eventType))
+        {
+            _eventDictionary[eventType] = null;
+        }
+
+        foreach (var listener in listeners)
+        {
+            _eventDictionary[eventType] += listener;
+        }
     }
 
     public void Unsubscribe(string eventType, Action<GameEvent> listener)
@@ -20,6 +34,22 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         if (_eventDictionary.ContainsKey(eventType))
         {
             _eventDictionary[eventType] -= listener;
+            if (_eventDictionary[eventType] == null) // 리스너가 모두 제거되면 삭제
+            {
+                _eventDictionary.Remove(eventType);
+            }
+        }
+    }
+
+    public void Unsubscribe(string eventType, params Action<GameEvent>[] listeners)
+    {
+        if (_eventDictionary.ContainsKey(eventType))
+        {
+            foreach (var listener in listeners)
+            {
+                _eventDictionary[eventType] -= listener;
+            }
+
             if (_eventDictionary[eventType] == null) // 리스너가 모두 제거되면 삭제
             {
                 _eventDictionary.Remove(eventType);

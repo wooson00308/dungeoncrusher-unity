@@ -12,17 +12,17 @@ public class EngageView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
+        // GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowMpSlider);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), ShowDamageText);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_AddMp.ToString(), ShowMpSlider);
         BindUI();
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
+        // GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowMpSlider);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), ShowDamageText);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_AddMp.ToString(), ShowMpSlider);
     }
 
     private void ShowDamageText(GameEvent gameEvent)
@@ -34,16 +34,20 @@ public class EngageView : BaseView
 
     private void ShowHealthSlider(GameEvent gameEvent)
     {
-        var unitEventArgs = gameEvent.args as UnitEventArgs;
+        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        if(!setActiveEventArgs.isActive) return;
+
         var hpSlider = ResourceManager.Instance.SpawnFromPath("UI/HpSlider").GetComponent<HpSliderUI>();
-        hpSlider.Show(unitEventArgs.publisher);
+        hpSlider.Show(setActiveEventArgs.publisher);
     }
 
     private void ShowMpSlider(GameEvent gameEvent)
     {
-        var unitEventArgs = gameEvent.args as UnitEventArgs;
-        var hpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
-        hpSlider.Show(unitEventArgs.publisher);
+        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        if(!setActiveEventArgs.isActive) return;
+        
+        var mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+        mpSlider.Show(setActiveEventArgs.publisher);
     }
 
     public override void BindUI()

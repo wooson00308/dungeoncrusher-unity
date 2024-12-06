@@ -18,6 +18,7 @@ public class ReadyProcess : Process
 
     private void OnDisable()
     {
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.Engage.ToString(), AllReady);
         UIManager.Instance.CloseLayoutUI<ReadyUI>();
     }
 

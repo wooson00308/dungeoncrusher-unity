@@ -3,58 +3,24 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HpSliderUI : BaseView
+public class HpSliderUI : BaseSlider
 {
-    private RectTransform _rectTransform;
-
-    [SerializeField] private Vector2 _pivot;
-
     private int _maxHealth = 0;
-    [SerializeField] private Unit _unit;
-    public Unit Unit => _unit;
 
-    public enum Sliders
-    {
-        Hp_Slider
-    }
-
-    private void Awake()
-    {
-        BindUI();
-        _rectTransform = GetComponent<RectTransform>();
-    }
-
-    public override void BindUI()
-    {
-        Bind<Slider>(typeof(Sliders));
-    }
-
-    public void Show(Unit unit)
+    public override void Show(Unit unit)
     {
         _unit = unit;
 
-        if (_maxHealth <= unit.Health.Value)
-        {
-            _maxHealth = _unit.Health.Value;
-        }
+        _maxHealth = _unit.Health.Value;
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
-
-        Get<Slider>((int)Sliders.Hp_Slider).value = 1;
+        var slider = Get<Slider>((int)Sliders.Hp_Slider);
+        slider.value = 1;
     }
 
-    private void FixedUpdate()
+    protected override void UpdateSlider()
     {
-        _rectTransform.anchoredPosition =
-            (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, _unit.transform.position) +
-            _pivot;
+        var fillAmount = (float)_unit.Health.Value / _maxHealth;
 
-        var unitHealth = (float)_unit.Health.Value / _maxHealth;
-
-        Get<Slider>((int)Sliders.Hp_Slider).value = unitHealth;
-
-        if (_unit.IsDeath)
-        {
-            ResourceManager.Instance.Destroy(gameObject);
-        }
+        Get<Slider>((int)Sliders.Hp_Slider).value = fillAmount;
     }
 }

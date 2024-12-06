@@ -114,7 +114,6 @@ public class UnitInfoUI : BaseView
         if (_unit.Team == Team.Enemy) return;
 
         var fillAmount = _unit.Mp.Value / _maxMp;
-        Debug.Log($"{_unit.Mp.Value} / {_maxMp}");
         Get<Image>((int)Images.Unit_Bar_Mp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 

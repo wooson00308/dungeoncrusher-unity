@@ -18,6 +18,11 @@ public class UnitEventArgs
     public Unit publisher;
 }
 
+public class SetActiveEventArgs : UnitEventArgs
+{
+    public bool isActive;
+}
+
 public class OnHitEventArgs : UnitEventArgs
 {
     public int damageValue;
