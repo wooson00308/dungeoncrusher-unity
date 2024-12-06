@@ -15,6 +15,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
+    [SerializeField] private IntStat _maxMp;
     [SerializeField] private FloatStat _speed;
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
@@ -34,6 +35,7 @@ public abstract class ItemData : ScriptableObject, IStats
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
+    public IntStat MaxMp => _maxMp;
     public FloatStat Speed => _speed;
     public FloatStat AttackSpeed => _attackSpeed;
     public FloatStat AttackRange => _attackRange;

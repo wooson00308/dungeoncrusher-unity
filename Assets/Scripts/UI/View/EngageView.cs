@@ -14,6 +14,7 @@ public class EngageView : BaseView
     {
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), ShowDamageText);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_AddMp.ToString(), ShowMpSlider);
         BindUI();
     }
 
@@ -21,6 +22,7 @@ public class EngageView : BaseView
     {
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), ShowDamageText);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_AddMp.ToString(), ShowMpSlider);
     }
 
     private void ShowDamageText(GameEvent gameEvent)
@@ -34,6 +36,13 @@ public class EngageView : BaseView
     {
         var unitEventArgs = gameEvent.args as UnitEventArgs;
         var hpSlider = ResourceManager.Instance.SpawnFromPath("UI/HpSlider").GetComponent<HpSliderUI>();
+        hpSlider.Show(unitEventArgs.publisher);
+    }
+
+    private void ShowMpSlider(GameEvent gameEvent)
+    {
+        var unitEventArgs = gameEvent.args as UnitEventArgs;
+        var hpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
         hpSlider.Show(unitEventArgs.publisher);
     }
 

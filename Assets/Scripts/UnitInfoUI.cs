@@ -29,12 +29,14 @@ public class UnitInfoUI : BaseView
         BindUI();
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_AddMp.ToString(), UpdateMpUI);
     }
 
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_AddMp.ToString(), UpdateMpUI);
     }
 
     public override void BindUI()
@@ -89,7 +91,7 @@ public class UnitInfoUI : BaseView
 
     #region MpUI
 
-    private float _maxSkillMp = 0;
+    private float _maxMp = 0;
 
     private void ShowMpUI()
     {
@@ -100,9 +102,9 @@ public class UnitInfoUI : BaseView
 
         if (_unitId != _unit.Id) return;
 
-        if (_maxSkillMp <= _unit.Mp.Value)
+        if (_maxMp <= _unit.MaxMp.Value)
         {
-            _maxSkillMp = _unit.Mp.Value;
+            _maxMp = _unit.MaxMp.Value;
         }
     }
 
@@ -111,8 +113,9 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
-        var fillAmount = _unit.Mp.Value / _maxSkillMp;
-        Get<Image>((int)Images.Unit_Bar_Mp).rectTransform.localScale = Vector2.up + Vector2.right * fillAmount;
+        var fillAmount = _unit.Mp.Value / _maxMp;
+        Debug.Log($"{_unit.Mp.Value} / {_maxMp}");
+        Get<Image>((int)Images.Unit_Bar_Mp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 
     #endregion

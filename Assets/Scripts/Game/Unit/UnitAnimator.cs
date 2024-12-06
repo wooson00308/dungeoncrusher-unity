@@ -25,14 +25,15 @@ public class UnitAnimator : MonoBehaviour
     {
         _owner.Target?.OnHit(_owner.Attack.Value, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent 
-        { 
-            args = new UnitEventArgs 
-            { 
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent
+        {
+            args = new UnitEventArgs
+            {
                 publisher = _owner
             },
             eventType = UnitEvents.UnitEvent_Attack.ToString()
         });
+        _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
     }
 
     public void DeathEvent(AnimationEvent e)

@@ -6,6 +6,7 @@ public enum UnitEvents
     UnitEvent_UseSkill,
     UnitEvent_UseSkill_Ulti,
     UnitEvent_Attack,
+    UnitEvent_AddMp,
     UnitEvent_Attack_Critical,
     UnitEvent_OnHit,
     UnitEvent_OnHit_Critical,
