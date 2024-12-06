@@ -315,7 +315,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
-            ResetStats("EquipItem");
+            ResetStats(item.Data.Id);
             ResourceManager.Instance.Destroy(equipment.gameObject);
             _equipments[item.Data.PartType] = item;
         }
@@ -324,7 +324,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _equipments.Add(item.Data.PartType, item);
         }
 
-        UpdateStats("EquipItem", item.Data);
+        UpdateStats(item.Data.Id, item.Data);
 
         spawnItem.transform.SetParent(_inventory);
     }

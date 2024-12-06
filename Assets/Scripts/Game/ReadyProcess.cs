@@ -38,8 +38,6 @@ public class ReadyProcess : Process
             foreach (var unitData in _datas)
             {
                 var units = UnitFactory.Instance.Spawn(unitData, Team.Friendly, 1);
-                units[0].AddSkill(Resources.Load<SkillData>("Data/Skill/Data_Skill_997"));
-                units[0].EquipItem(Resources.Load<Item>("Item/Prf_Item_990"));
             }
         }
 
