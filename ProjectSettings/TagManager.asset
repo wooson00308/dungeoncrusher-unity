@@ -47,5 +47,8 @@ TagManager:
   - name: Unit
     uniqueID: 1990348393
     locked: 0
+  - name: Efx_Skill
+    uniqueID: 1670646555
+    locked: 0
   m_RenderingLayers:
   - Default
