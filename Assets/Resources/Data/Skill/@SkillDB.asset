@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 577fcee6ee239ed49a2b813167e0ab24, type: 3}
-  m_Name: SkillDB
+  m_Name: '@SkillDB'
   m_EditorClassIdentifier: 
-  _skillSavePath: Resources/Skill
-  _skillDatas: []
+  _skillSavePath: Assets/Resources/Data/Skill
+  _skillDatas:
+  - {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}

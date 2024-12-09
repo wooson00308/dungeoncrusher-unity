@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -6,15 +7,22 @@ using UnityEngine;
 [CustomEditor(typeof(SkillDB))]
 public class SkillDBEditor : Editor
 {
-    private SkillDB skillDatabase;
-    private string newSkillName = "NewSkill";
-    private System.Type selectedType;
-    private string[] availableTypes;
+    private SkillDB _skillDatabase;
+    private string _newSkillName = "NewSkill";
+    private Type _selectedType;
+    private string[] _availableTypes;
+
+    private Dictionary<SkillData, bool> _foldoutStates = new(); // 폴드아웃 상태 저장
+
+    private const string SKILL_BASE_PATH = "Assets/Resources/Skill";
+    private const string SKILL_PREFAB_PATH = SKILL_BASE_PATH + "/";
+    private const string SKILL_FX_PREFAB_PATH = SKILL_BASE_PATH + "/Fx/Base/Prf_Skill_Fx_Base.prefab";
+    private const string SKILL_FX_PATH = SKILL_BASE_PATH + "/Fx/";
 
     private void OnEnable()
     {
-        skillDatabase = (SkillDB)target;
-        availableTypes = GetSkillDataTypes();
+        _skillDatabase = (SkillDB)target;
+        _availableTypes = GetSkillDataTypes();
         RefreshSkillDatabase();
     }
 
@@ -22,59 +30,82 @@ public class SkillDBEditor : Editor
     {
         serializedObject.Update();
 
-        // 스킬 저장 경로 필드
         EditorGUILayout.LabelField("Skill Save Path", EditorStyles.boldLabel);
-        skillDatabase.SkillSavePath = EditorGUILayout.TextField("Path", skillDatabase.SkillSavePath);
+        _skillDatabase.SkillSavePath = EditorGUILayout.TextField("Path", _skillDatabase.SkillSavePath);
 
         if (GUILayout.Button("Refresh Database"))
         {
             RefreshSkillDatabase();
         }
 
-        // 스킬 생성 UI
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Add New Skill", EditorStyles.boldLabel);
 
-        newSkillName = EditorGUILayout.TextField("Skill Name", newSkillName);
+        _newSkillName = EditorGUILayout.TextField("Skill Name", _newSkillName);
 
-        // 상속받은 스킬 데이터 타입 선택
-        int selectedIndex = ArrayUtility.IndexOf(availableTypes, selectedType?.Name);
-        selectedIndex = EditorGUILayout.Popup("Skill Type", selectedIndex, availableTypes);
-        if (selectedIndex >= 0 && selectedIndex < availableTypes.Length)
+        int selectedIndex = ArrayUtility.IndexOf(_availableTypes, _selectedType?.Name);
+        selectedIndex = EditorGUILayout.Popup("Skill Type", selectedIndex, _availableTypes);
+        if (selectedIndex >= 0 && selectedIndex < _availableTypes.Length)
         {
-            selectedType = GetTypeByName(availableTypes[selectedIndex]);
+            _selectedType = GetTypeByName(_availableTypes[selectedIndex]);
         }
 
         if (GUILayout.Button("Create Skill"))
         {
-            CreateSkillData(newSkillName);
+            CreateSkillData(_newSkillName);
         }
 
         EditorGUILayout.Space();
 
-        // 스킬 데이터 리스트 표시 및 제거 버튼 추가
         EditorGUILayout.LabelField("Registered Skills", EditorStyles.boldLabel);
-        for (int i = 0; i < skillDatabase.SkillDatas.Count; i++)
-        {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.ObjectField($"Skill {i + 1}", skillDatabase.SkillDatas[i], typeof(SkillData), false);
 
-            if (GUILayout.Button("Remove", GUILayout.Width(70)))
+        foreach (var skillData in _skillDatabase.SkillDatas)
+        {
+            if (!_foldoutStates.ContainsKey(skillData))
+                _foldoutStates[skillData] = false;
+
+            _foldoutStates[skillData] = EditorGUILayout.Foldout(_foldoutStates[skillData], skillData.name, true);
+
+            if (_foldoutStates[skillData])
             {
-                RemoveSkillData(skillDatabase.SkillDatas[i]);
+                EditorGUI.indentLevel++;
+
+                // 스킬 데이터 표시
+                EditorGUILayout.ObjectField("Skill Data", skillData, typeof(SkillData), false);
+
+                // Skill Prefab 정보 표시
+                EditorGUILayout.ObjectField("Skill Prefab", skillData.Prefab, typeof(GameObject), false);
+
+                // Skill FX Prefab 정보 표시
+                if (skillData.SkillLevelDatas != null)
+                {
+                    for (int i = 0; i < skillData.SkillLevelDatas.Count; i++)
+                    {
+                        EditorGUILayout.ObjectField($"Skill FX Prefab (Level {i + 1})",
+                            skillData.SkillLevelDatas[i].skillFxPrefab, typeof(GameObject), false);
+                    }
+                }
+
+                // 제거 버튼
+                if (GUILayout.Button("Remove Skill"))
+                {
+                    RemoveSkillData(skillData);
+                    break; // 삭제 후 목록이 변경되므로 루프 종료
+                }
+
+                EditorGUI.indentLevel--;
             }
-            EditorGUILayout.EndHorizontal();
         }
 
         serializedObject.ApplyModifiedProperties();
     }
 
+
     private void RefreshSkillDatabase()
     {
-        skillDatabase.SkillDatas.Clear();
+        _skillDatabase.SkillDatas.Clear();
 
-        // 폴더의 스킬 데이터 파일 검색
-        string path = skillDatabase.SkillSavePath;
+        string path = _skillDatabase.SkillSavePath;
         if (!Directory.Exists(path))
         {
             Debug.LogWarning($"Path {path} does not exist.");
@@ -87,7 +118,7 @@ public class SkillDBEditor : Editor
             SkillData skillData = AssetDatabase.LoadAssetAtPath<SkillData>(file);
             if (skillData != null)
             {
-                skillDatabase.AddSkillData(skillData);
+                _skillDatabase.AddSkillData(skillData);
             }
         }
 
@@ -96,36 +127,103 @@ public class SkillDBEditor : Editor
 
     private void CreateSkillData(string skillName)
     {
-        if (selectedType == null || string.IsNullOrEmpty(skillName))
+        if (_selectedType == null || string.IsNullOrEmpty(skillName))
         {
             Debug.LogWarning("Skill Type or Name is invalid.");
             return;
         }
 
-        // 스킬 저장 경로와 파일 이름 구성
-        string directoryPath = skillDatabase.SkillSavePath;
+        // 중복 이름 체크
+        foreach (var skillData in _skillDatabase.SkillDatas)
+        {
+            if (skillData.name == skillName)
+            {
+                Debug.LogWarning($"Skill with the name '{skillName}' already exists in the database.");
+                return; // 중복 이름 방어
+            }
+        }
+
+        string directoryPath = _skillDatabase.SkillSavePath;
         string savePath = $"{directoryPath}/{skillName}.asset";
 
-        // 디렉토리 존재 여부 확인 및 생성
         if (!Directory.Exists(directoryPath))
         {
             Directory.CreateDirectory(directoryPath);
             Debug.Log($"Directory created at: {directoryPath}");
         }
 
-        // 새로운 스크립터블 오브젝트 생성
-        SkillData newSkill = (SkillData)ScriptableObject.CreateInstance(selectedType);
-        newSkill.name = skillName;
+        SkillData newSkillData = (SkillData)ScriptableObject.CreateInstance(_selectedType);
+        newSkillData.name = skillName;
 
-        // 지정된 경로에 저장
-        AssetDatabase.CreateAsset(newSkill, savePath);
+        AssetDatabase.CreateAsset(newSkillData, savePath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        // 데이터베이스에 추가
-        skillDatabase.AddSkillData(newSkill);
+        _skillDatabase.AddSkillData(newSkillData);
+
+        CreateSkillPrefab(skillName, newSkillData);
+        CreateSkillFxPrefabs(skillName, newSkillData);
 
         Debug.Log($"Skill {skillName} created and saved to {savePath}");
+    }
+
+
+    private GameObject CreateSkillPrefab(string skillName, SkillData skillData)
+    {
+        GameObject skillPrefab = new(skillName);
+        Skill skillComponent = skillPrefab.AddComponent<Skill>();
+        skillComponent.SetSkillData(skillData);
+
+        string prefabPath = SKILL_PREFAB_PATH + $"{skillName}.prefab";
+        string directoryPath = Path.GetDirectoryName(prefabPath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        skillData.Prefab = PrefabUtility.SaveAsPrefabAsset(skillPrefab, prefabPath);
+        GameObject.DestroyImmediate(skillPrefab);
+
+        Debug.Log($"Skill prefab created at: {prefabPath}");
+        return skillPrefab;
+    }
+
+    private void CreateSkillFxPrefabs(string skillName, SkillData skillData)
+    {
+        GameObject fxBase = AssetDatabase.LoadAssetAtPath<GameObject>(SKILL_FX_PREFAB_PATH);
+        if (fxBase == null)
+        {
+            Debug.LogError($"Base FX prefab not found at {SKILL_FX_PREFAB_PATH}");
+            return;
+        }
+
+        string fxPrefabName = $"Prf_Skill_Fx_{skillName}";
+        string fxPrefabPath = SKILL_FX_PATH + $"{fxPrefabName}.prefab";
+
+        GameObject fxPrefab = PrefabUtility.InstantiatePrefab(fxBase) as GameObject;
+        var skillFxPrefab = PrefabUtility.SaveAsPrefabAsset(fxPrefab, fxPrefabPath);
+
+        Debug.Log($"Skill FX prefab created at: {fxPrefabPath}");
+
+        skillData.SkillLevelDatas = new List<SkillLevelData>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            fxPrefab.name = fxPrefabName;
+
+            var skillLevelData = new SkillLevelData
+            {
+                activationChance = 50,
+                skillValue = 100,
+                skillFxPrefab = skillFxPrefab
+            };
+            skillData.SkillLevelDatas.Add(skillLevelData);
+        }
+
+        GameObject.DestroyImmediate(fxPrefab);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     private void RemoveSkillData(SkillData skillData)
@@ -136,28 +234,61 @@ public class SkillDBEditor : Editor
             return;
         }
 
-        // 데이터베이스에서 제거
-        skillDatabase.RemoveSkillData(skillData);
+        // 데이터베이스에서 스킬 데이터 제거
+        _skillDatabase.RemoveSkillData(skillData);
 
-        // 파일 삭제
+        // 스킬 데이터 파일 삭제
         string assetPath = AssetDatabase.GetAssetPath(skillData);
         if (!string.IsNullOrEmpty(assetPath))
         {
             AssetDatabase.DeleteAsset(assetPath);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            Debug.Log($"Skill {skillData.name} removed from database and deleted.");
+            Debug.Log($"Skill data asset removed: {assetPath}");
         }
         else
         {
-            Debug.LogWarning($"Could not find asset path for {skillData.name}.");
+            Debug.LogWarning($"Could not find asset path for skill data.");
+        }
+
+        // 스킬 데이터에 연결된 프리팹 삭제
+        RemovePrefabsFromSkillData(skillData);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    private void RemovePrefabsFromSkillData(SkillData skillData)
+    {
+        // Skill Prefab 삭제
+        if (skillData.Prefab != null)
+        {
+            string prefabPath = AssetDatabase.GetAssetPath(skillData.Prefab);
+            if (!string.IsNullOrEmpty(prefabPath))
+            {
+                AssetDatabase.DeleteAsset(prefabPath);
+                Debug.Log($"Skill prefab removed: {prefabPath}");
+            }
+        }
+
+        // Skill FX Prefab 삭제 (레벨 데이터에 연결된 프리팹들)
+        foreach (var levelData in skillData.SkillLevelDatas)
+        {
+            if (levelData.skillFxPrefab != null)
+            {
+                string fxPrefabPath = AssetDatabase.GetAssetPath(levelData.skillFxPrefab);
+                if (!string.IsNullOrEmpty(fxPrefabPath))
+                {
+                    AssetDatabase.DeleteAsset(fxPrefabPath);
+                    Debug.Log($"Skill FX prefab removed: {fxPrefabPath}");
+                }
+            }
         }
     }
+
 
     private string[] GetSkillDataTypes()
     {
         var skillDataType = typeof(SkillData);
-        var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         var types = new List<string>();
 
         foreach (var assembly in assemblies)
@@ -174,9 +305,9 @@ public class SkillDBEditor : Editor
         return types.ToArray();
     }
 
-    private System.Type GetTypeByName(string typeName)
+    private Type GetTypeByName(string typeName)
     {
-        var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         foreach (var assembly in assemblies)
         {
             var type = assembly.GetType(typeName);

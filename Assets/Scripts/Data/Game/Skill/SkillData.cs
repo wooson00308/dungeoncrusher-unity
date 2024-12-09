@@ -19,7 +19,11 @@ public abstract class SkillData : ScriptableObject
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
 
     public string Id => _id;
-    public GameObject Prefab => _prefab;
+    public GameObject Prefab 
+    {
+        get { return _prefab; }
+        set { _prefab = value; }
+    }
     public string UnitId => _unitId;
     public int Rarity => _rarity;
     public Sprite Icon => _icon;
@@ -42,6 +46,12 @@ public abstract class SkillData : ScriptableObject
     public bool IsAreaAttack => _isAreaAttack;
     public bool IsPassiveSkill => _isPassiveSkill;
     public UnitEvents SkillEventType => _skillEventType;
+
+    public List<SkillLevelData> SkillLevelDatas
+    {
+        get { return _skillLevelDatas; }
+        set { _skillLevelDatas = value; }
+    }
 
     public SkillLevelData GetSkillLevelData(int skillLevel)
     {

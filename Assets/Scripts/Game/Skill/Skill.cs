@@ -15,6 +15,11 @@ public class Skill : MonoBehaviour
         _isInitialized = true;
     }
 
+    public void SetSkillData(SkillData skillData)
+    {
+        _skillData = skillData;
+    }
+
     private void OnEnable()
     {
         GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TrySpawnSkillEffect);
