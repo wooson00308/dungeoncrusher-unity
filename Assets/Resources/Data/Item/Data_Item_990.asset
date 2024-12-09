@@ -23,24 +23,46 @@ MonoBehaviour:
     \uAC15\uD558\uB2E4."
   _health:
     _value: 600
+    _minValue: 0
+    _maxValue: 0
   _attack:
     _value: 50
+    _minValue: 0
+    _maxValue: 0
   _defense:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _mp:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _maxMp:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _speed:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _attackSpeed:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _attackRange:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _criticalRate:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _stunRate:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _lifestealRate:
     _value: 0
+    _minValue: 0
+    _maxValue: 0
   _skillDatas: []

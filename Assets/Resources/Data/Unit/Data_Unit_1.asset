@@ -20,6 +20,8 @@ MonoBehaviour:
     _value: 15
   _defense:
     _value: 0
+  _mp:
+    _value: 100
   _speed:
     _value: 3
   _attackSpeed:

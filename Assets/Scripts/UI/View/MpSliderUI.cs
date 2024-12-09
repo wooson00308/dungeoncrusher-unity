@@ -10,6 +10,7 @@ public class MpSliderUI : BaseSlider
     {
         _unit = unit;
 
+        _maxMp = _unit.Mp.Max;
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
 
         Get<Slider>((int)Sliders.Mp_Slider).value = 0;
