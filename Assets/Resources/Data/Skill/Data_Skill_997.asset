@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f87ddebf02be24ba83d8f4f0910a0a, type: 3}
   m_Name: Data_Skill_997
   m_EditorClassIdentifier: 
-  _id: Skill_997
+  _id: Skill_998
   _prefId: Prf_Skill_998
   _unitId: Unit_3
   _rarity: 3
@@ -27,10 +27,10 @@ MonoBehaviour:
   _skillLevelDatas:
   - activationChance: 25
     skillValue: 100
-    prefabId: Prf_Skill_Fx_997
+    prefabId: Prf_Skill_Fx_998
   - activationChance: 25
     skillValue: 150
-    prefabId: Prf_Skill_Fx_997
+    prefabId: Prf_Skill_Fx_998
   - activationChance: 25
     skillValue: 200
-    prefabId: Prf_Skill_Fx_997
+    prefabId: Prf_Skill_Fx_998
