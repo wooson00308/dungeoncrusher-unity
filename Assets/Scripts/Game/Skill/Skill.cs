@@ -50,23 +50,21 @@ public class Skill : MonoBehaviour
 
         if (random < skillLevelDetails.activationChance) return;
 
-        string prefabId = skillLevelDetails.prefabId;
-        var skillPrefab = ResourceManager.Instance.SpawnFromPath($"Skill/Fx/{prefabId}");
+        GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
+        var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
 
-        if (skillPrefab == null)
+        if (skillFxObject == null)
         {
-            Debug.LogError($"{prefabId}가 엄서요");
             return;
         }
 
-        var skillFx = skillPrefab.GetComponent<SkillEffect>();
+        var skillFx = skillFxObject.GetComponent<SkillEffect>();
         if (skillFx == null)
         {
-            Debug.LogError($"{prefabId}의 스킬 컴포넌트가 엄서요");
             return;
         }
 
-        skillPrefab.transform.position = args.publisher.Target.transform.position;
+        skillFxObject.transform.position = args.publisher.Target.transform.position;
 
         var publisherTarget = args.publisher.GetComponent<TargetDetector>().Target;
         skillFx.Initialized(_skillLevel, args.publisher, _skillData, publisherTarget);

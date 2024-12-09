@@ -5,10 +5,9 @@ using UnityEngine;
 public abstract class SkillData : ScriptableObject
 {
     [SerializeField] protected string _id;
-    [SerializeField] protected string _prefId;
+    [SerializeField] protected GameObject _prefab;
     [SerializeField] protected string _unitId;
     [SerializeField] protected int _rarity;
-    [SerializeField] protected string _iconId;
     [SerializeField] protected Sprite _icon;
     [SerializeField] protected string _name;
     [SerializeField] protected string _description;
@@ -20,10 +19,9 @@ public abstract class SkillData : ScriptableObject
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
 
     public string Id => _id;
-    public string PrefId => _prefId;
+    public GameObject Prefab => _prefab;
     public string UnitId => _unitId;
     public int Rarity => _rarity;
-    public string IconId => _iconId;
     public Sprite Icon => _icon;
 
     public string Description(int level)
@@ -74,7 +72,7 @@ public class SkillLevelData
 {
     [Range(0f, 100f)] public float activationChance;
     public float skillValue; // n%
-    public string prefabId;
+    public GameObject skillFxPrefab;
 }
 
 public class SkillDataNotFoundException : Exception

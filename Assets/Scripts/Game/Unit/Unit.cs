@@ -292,7 +292,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
-            var skillObj = ResourceManager.Instance.SpawnFromPath($"Skill/{skillData.PrefId}");
+            var skillObj = ResourceManager.Instance.Spawn(skillData.Prefab);
             var skillComponent = skillObj.GetComponent<Skill>();
             skillComponent.Setup(this);
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Unit_3
   m_EditorClassIdentifier: 
   _id: Unit_3
-  _prfId: Prf_Unit_3
+  _prefab: {fileID: 4602744156704204850, guid: e1d7b3b92fcd3442ba886ddb14e2231b, type: 3}
   _health:
     _value: 150
   _attack:
