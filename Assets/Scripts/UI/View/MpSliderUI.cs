@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MpSliderUI : BaseSlider
 {
-    private readonly int _maxMp = 100;
+    private int _maxMp = 100;
 
     public override void Show(Unit unit)
     {
