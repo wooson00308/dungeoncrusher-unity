@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d5c234ad8e1904e12b72761ec5a6b19e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 75733
+  packageName: 2D SD Monster Pack
+  packageVersion: 2.0
+  assetPath: Assets/2D SD Monster Pack/Animations/Skeleton/Skeleton.controller
+  uploadId: 412433

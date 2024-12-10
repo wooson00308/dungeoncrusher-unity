@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Fbody priest Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Body
+    m_Hash: 999990412
+    m_CategoryList:
+    - m_Name: body
+      m_Hash: 463997874
+      m_Sprite: {fileID: 21300000, guid: f0cca9c63668f4640a61573db3469b59, type: 3}
+    - m_Name: prop back
+      m_Hash: 55066996
+      m_Sprite: {fileID: 21300000, guid: d558634639ced441981c731086736103, type: 3}
+    - m_Name: prop hips
+      m_Hash: 275065196
+      m_Sprite: {fileID: 21300000, guid: d558634639ced441981c731086736103, type: 3}
+    - m_Name: prop chest
+      m_Hash: 352265501
+      m_Sprite: {fileID: 21300000, guid: 37b29d99b83fb4b0dbd2db2ecf7e47f0, type: 3}
+    - m_Name: prop shoulder
+      m_Hash: 14459612
+      m_Sprite: {fileID: 21300000, guid: ea64eb062a6034aceb8b2d96924ed58c, type: 3}
+  - m_Name: Left arm
+    m_Hash: 390908281
+    m_CategoryList:
+    - m_Name: arm1
+      m_Hash: 874964628
+      m_Sprite: {fileID: 21300000, guid: fb26af64730da46a7b7a00e2794acb1c, type: 3}
+    - m_Name: arm2
+      m_Hash: 758101806
+      m_Sprite: {fileID: 21300000, guid: d558634639ced441981c731086736103, type: 3}
+    - m_Name: weapon
+      m_Hash: 691251174
+      m_Sprite: {fileID: 21300000, guid: dfa2401ea56cc4e31a4ad4fe5bc3de3c, type: 3}
+  - m_Name: Right arm
+    m_Hash: 348157733
+    m_CategoryList:
+    - m_Name: arm1
+      m_Hash: 874964628
+      m_Sprite: {fileID: 21300000, guid: 659a5ed68bf484e11bcfefab659158cf, type: 3}
+    - m_Name: arm2
+      m_Hash: 758101806
+      m_Sprite: {fileID: 21300000, guid: d558634639ced441981c731086736103, type: 3}
+    - m_Name: weapon
+      m_Hash: 691251174
+      m_Sprite: {fileID: 21300000, guid: 9e58599d2cb2d476481a5b5ccb886ce1, type: 3}
+  - m_Name: Left leg
+    m_Hash: 985806754
+    m_CategoryList:
+    - m_Name: leg
+      m_Hash: 902856783
+      m_Sprite: {fileID: 21300000, guid: a1dd266c67fd045b895db8b1980ca733, type: 3}
+  - m_Name: Right leg
+    m_Hash: 961448446
+    m_CategoryList:
+    - m_Name: leg
+      m_Hash: 902856783
+      m_Sprite: {fileID: 21300000, guid: 1e64a16f82cab4ba69f090e1d1620997, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1

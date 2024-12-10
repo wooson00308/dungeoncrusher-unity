@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Elephant Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Elephant
+    m_Hash: -231487840
+    m_CategoryList:
+    - m_Name: body
+      m_Hash: -609743950
+      m_Sprite: {fileID: 21300000, guid: 870434a9e846a430a8e463ff892d4c5b, type: 3}
+    - m_Name: ear1
+      m_Hash: 679371380
+      m_Sprite: {fileID: 21300000, guid: cc29b9cf8eef54c09832518efdcc7516, type: 3}
+    - m_Name: ear2
+      m_Hash: -1317588018
+      m_Sprite: {fileID: 21300000, guid: 5fa176daa70e54071b3e043bf7aec60c, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 896fd3290e5fe4a929f447e552c70a96, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: 49bc2ba76f26e4d99914461122ebc2e1, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: 0a25717914b8744a0968ec91e6372e77, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: 4e5f06c9d7d5d47a4bb19ab59310d783, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: fae2fb798a10c497aaa341850934e94a, type: 3}
+    - m_Name: leg4
+      m_Hash: 362846137
+      m_Sprite: {fileID: 21300000, guid: a88bfb61f80cf40c8a9fbce0d98e0bac, type: 3}
+    - m_Name: leg5
+      m_Hash: 1655154479
+      m_Sprite: {fileID: 21300000, guid: a9eba52114cfe45e0a79b7e1afe78075, type: 3}
+    - m_Name: nose1
+      m_Hash: -1668902731
+      m_Sprite: {fileID: 21300000, guid: 8b4b66f8e6d474fc6930cc91baa8de37, type: 3}
+    - m_Name: nose2
+      m_Hash: 93307151
+      m_Sprite: {fileID: 21300000, guid: e9e8596f2e5374c72b3732854280ace5, type: 3}
+    - m_Name: nose3
+      m_Hash: 1921577369
+      m_Sprite: {fileID: 21300000, guid: 56cf59f404ae2499e866497087f4f66f, type: 3}
+    - m_Name: nose4
+      m_Hash: -320052166
+      m_Sprite: {fileID: 21300000, guid: 2d825cd9f856649288cf26270ead58ac, type: 3}
+    - m_Name: tail
+      m_Hash: 2084025437
+      m_Sprite: {fileID: 21300000, guid: 4fed2e48260ff4bcf8c050f9563ce200, type: 3}
+    - m_Name: tusk1
+      m_Hash: 401704419
+      m_Sprite: {fileID: 21300000, guid: 4009924a77e60423fbc6b35a739baebf, type: 3}
+    - m_Name: tusk2
+      m_Hash: -1896295335
+      m_Sprite: {fileID: 21300000, guid: 0c7a2fa4c07a8428292b0dcd7d068da6, type: 3}

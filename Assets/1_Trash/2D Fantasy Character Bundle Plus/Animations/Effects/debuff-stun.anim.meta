@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 114c254d5eb2d4aef806ab084ec8ba68
+timeCreated: 1499542956
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83349
+  packageName: 2D Fantasy Character Bundle Plus
+  packageVersion: 1.2
+  assetPath: Assets/2D Fantasy Character Bundle Plus/Animations/Effects/debuff-stun.anim
+  uploadId: 511096

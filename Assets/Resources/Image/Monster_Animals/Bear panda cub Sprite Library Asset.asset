@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Bear panda cub Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Bear cub
+    m_Hash: -1929821845
+    m_CategoryList:
+    - m_Name: ear1
+      m_Hash: 679371380
+      m_Sprite: {fileID: 21300000, guid: 85528c8b31e0c41e48fa20b9e88ed02b, type: 3}
+    - m_Name: ear2
+      m_Hash: -1317588018
+      m_Sprite: {fileID: 21300000, guid: 33072330356eb4a7388111a84a0fc6a6, type: 3}
+    - m_Name: body
+      m_Hash: -609743950
+      m_Sprite: {fileID: 21300000, guid: 63e654acb5d824f66b0bc955b275e71b, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 161304d883bab4455baeb65ee81d422c, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: 1f9e142cc980a466687a2e0d85e6e6f4, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: 724e11bf210cf4b8ea3b0c4f3f74c457, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: f3e4aba6e7dbf41e8b8709125fe834e9, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: 0bf9c4a0108a648d5adcebc64c1784d6, type: 3}
+    - m_Name: nose
+      m_Hash: -2130940717
+      m_Sprite: {fileID: 21300000, guid: 4d1734bac3e364bc882093dc58d90262, type: 3}

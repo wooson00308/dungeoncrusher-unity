@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Monster giantwrath Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: body
+    m_Hash: 463997874
+    m_CategoryList:
+    - m_Name: body
+      m_Hash: 463997874
+      m_Sprite: {fileID: 21300000, guid: 863441284ef2349af85ed648f731fc28, type: 3}
+    - m_Name: cloth
+      m_Hash: 586247102
+      m_Sprite: {fileID: 21300000, guid: e873f32eaefc74a6891ef7d0fa240f32, type: 3}
+  - m_Name: face
+    m_Hash: 85228391
+    m_CategoryList:
+    - m_Name: 1
+      m_Hash: 64810935
+      m_Sprite: {fileID: 21300000, guid: 751a9960062aa48fbae7480ec4168396, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: 21300000, guid: 66925f106386542b8bd916f733293249, type: 3}
+  - m_Name: arm
+    m_Hash: 408845972
+    m_CategoryList:
+    - m_Name: 1
+      m_Hash: 64810935
+      m_Sprite: {fileID: 21300000, guid: 54fe404c6b6f14d28ba3c2a6853a6ced, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: 21300000, guid: ee377b8a69de4453699c0a17347e3604, type: 3}
+  - m_Name: head
+    m_Hash: 670299804
+    m_CategoryList:
+    - m_Name: head
+      m_Hash: 670299804
+      m_Sprite: {fileID: 21300000, guid: 0d74d1f506f9740bd87307f41c08cf8c, type: 3}
+    - m_Name: jaw
+      m_Hash: 143010205
+      m_Sprite: {fileID: 21300000, guid: b8fdbaa0f7e87490dbf9118626adc109, type: 3}
+  - m_Name: leg
+    m_Hash: 902856783
+    m_CategoryList:
+    - m_Name: 1
+      m_Hash: 64810935
+      m_Sprite: {fileID: 21300000, guid: 218be19d7e85c47b58bbb4bf40631b8d, type: 3}
+  - m_Name: weapon
+    m_Hash: 691251174
+    m_CategoryList:
+    - m_Name: axe
+      m_Hash: 745152044
+      m_Sprite: {fileID: 21300000, guid: 9abf910f1935e4bdbb19e6940a68ea0e, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1

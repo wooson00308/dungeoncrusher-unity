@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Bird Turkey Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Turkey
+    m_Hash: -1559716271
+    m_CategoryList:
+    - m_Name: body
+      m_Hash: -609743950
+      m_Sprite: {fileID: 21300000, guid: 458b003c5485f4d1ab75ba1d92847b12, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: cfed0db4801094a30ad2262cb7d7cd71, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: f0d889d1fd7224c3385aed77dc526808, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: 1dc88fa0414a642078ff68968a904910, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: 2bbf6f3ad460c438fae10f9298d472b5, type: 3}
+    - m_Name: leg4
+      m_Hash: 362846137
+      m_Sprite: {fileID: 21300000, guid: c996ffb5d62fb4943bbd39d01f9521d3, type: 3}
+    - m_Name: neck
+      m_Hash: 538039891
+      m_Sprite: {fileID: 21300000, guid: 4b3b7712d92384881b0913859aac0467, type: 3}
+    - m_Name: tail
+      m_Hash: 2084025437
+      m_Sprite: {fileID: 21300000, guid: 358789bdc81a447979831e10e9c36d4d, type: 3}
+    - m_Name: wing
+      m_Hash: -1207827132
+      m_Sprite: {fileID: 21300000, guid: 85583894a756c42c88b8ca3cd5eaea32, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: 181477750387f47ee9bf32850522aeb5, type: 3}

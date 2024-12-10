@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Bird Peacock Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Turkey
+    m_Hash: -1559716271
+    m_CategoryList:
+    - m_Name: body
+      m_Hash: -609743950
+      m_Sprite: {fileID: 21300000, guid: f4e6b8a92cad94f3aac2e839e0cc80d0, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 92d349659499c468c8224aa708bbb162, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: ea97a8effc9dc42b5a5b94062fd72efe, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: 9d10480b45ea14559a7f31b0846d7c60, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: 5ee2eeb4254bf447d9bbe7474417ed79, type: 3}
+    - m_Name: leg4
+      m_Hash: 362846137
+      m_Sprite: {fileID: 21300000, guid: 85bb6a0b693ca4a5680f8c70ea3ef360, type: 3}
+    - m_Name: neck
+      m_Hash: 538039891
+      m_Sprite: {fileID: 21300000, guid: 238b4d92af4624139bf68e8bf297e584, type: 3}
+    - m_Name: tail
+      m_Hash: 2084025437
+      m_Sprite: {fileID: 21300000, guid: 45863c02dfaaf4e5d9cb1dba3bfd265c, type: 3}
+    - m_Name: wing
+      m_Hash: -1207827132
+      m_Sprite: {fileID: 21300000, guid: f85939dfea7e64a3e8b7768e9c5cf048, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: 50da8308ba2434fa58d5f7ca93e6049f, type: 3}
+    - m_Name: beak
+      m_Hash: 1492192105
+      m_Sprite: {fileID: 21300000, guid: 9d0d15c076fb1420893fa26ceb17cc45, type: 3}
+    - m_Name: hair
+      m_Hash: -1661509351
+      m_Sprite: {fileID: 21300000, guid: 1aedbb810604849a0a6b93618a7b9a36, type: 3}

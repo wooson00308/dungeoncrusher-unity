@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Bear white Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Bear
+    m_Hash: -1666708329
+    m_CategoryList:
+    - m_Name: ear1
+      m_Hash: 679371380
+      m_Sprite: {fileID: 21300000, guid: 3d0c17a5eadf14aae839cf14bd752a5e, type: 3}
+    - m_Name: ear2
+      m_Hash: -1317588018
+      m_Sprite: {fileID: 21300000, guid: 99465d877c30348dba6e5eaa4ec50cda, type: 3}
+    - m_Name: body idle
+      m_Hash: -232620439
+      m_Sprite: {fileID: 21300000, guid: f57c1715ae42746c6a79a68236fcde6a, type: 3}
+    - m_Name: body stand
+      m_Hash: 1025778538
+      m_Sprite: {fileID: 21300000, guid: f05de350c915c4e498d2ca8772752a9b, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 8a681a0bc860b42eabe3776d50a0d3f5, type: 3}
+    - m_Name: hand
+      m_Hash: 660750991
+      m_Sprite: {fileID: 21300000, guid: 48adb25f20d8b4b8695f5203dcd501f2, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: e7065cd2ff43a4ecaaded487367e7b3a, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: b389e5ae145c74dfca0b01375fb06d07, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: 174d6009581c6416899a13e347bc8d2a, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: 51dab0251544c4670997f4d01252d137, type: 3}
+    - m_Name: mouth angry
+      m_Hash: -82576658
+      m_Sprite: {fileID: 21300000, guid: 62932f51601d5405eb9d41810a13a139, type: 3}
+    - m_Name: mouth open
+      m_Hash: 411843716
+      m_Sprite: {fileID: 21300000, guid: e0a5caf9655074672839f793927b30e2, type: 3}
+    - m_Name: mouth idle
+      m_Hash: 1624771125
+      m_Sprite: {fileID: 21300000, guid: 94d4492d03a3c41729190d010b844907, type: 3}
+    - m_Name: neck idle
+      m_Hash: 242158763
+      m_Sprite: {fileID: 21300000, guid: aaabe54fb54a44569a22db466977fabb, type: 3}
+    - m_Name: neck stand
+      m_Hash: 1219677572
+      m_Sprite: {fileID: 21300000, guid: 00f33ae9404d1493e9bcc52c833afd8e, type: 3}
+    - m_Name: tail
+      m_Hash: 2084025437
+      m_Sprite: {fileID: 21300000, guid: 926e148444fea42309923e0d2563b3f0, type: 3}

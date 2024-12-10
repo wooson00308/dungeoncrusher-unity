@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b54359c9ed2db451f88ed40aa0c00f8c
+timeCreated: 1499270028
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83349
+  packageName: 2D Fantasy Character Bundle Plus
+  packageVersion: 1.2
+  assetPath: Assets/2D Fantasy Character Bundle Plus/Animations/Monsters/Minion/Minion.controller
+  uploadId: 511096
