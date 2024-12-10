@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Monkey Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Monkey
+    m_Hash: -1219581434
+    m_CategoryList:
+    - m_Name: arm1
+      m_Hash: 1948706452
+      m_Sprite: {fileID: 21300000, guid: 2c21b705358864d2cbcbbe80d0454942, type: 3}
+    - m_Name: arm2
+      m_Hash: -315640018
+      m_Sprite: {fileID: 21300000, guid: 0e395018194214a028ecce17db0d2a72, type: 3}
+    - m_Name: arm3
+      m_Hash: -1708619848
+      m_Sprite: {fileID: 21300000, guid: 5a260a1ac57294cd8b8c9cb5ce538fb8, type: 3}
+    - m_Name: ear1
+      m_Hash: 679371380
+      m_Sprite: {fileID: 21300000, guid: 930c7233ebef1419a95e24b991a02203, type: 3}
+    - m_Name: ear2
+      m_Hash: -1317588018
+      m_Sprite: {fileID: 21300000, guid: 837fed07e91e044fcaec815b4178ce8c, type: 3}
+    - m_Name: body
+      m_Hash: -609743950
+      m_Sprite: {fileID: 21300000, guid: fb9ab3e34bd82448a8b481baa5975003, type: 3}
+    - m_Name: cheek
+      m_Hash: 1792281493
+      m_Sprite: {fileID: 21300000, guid: 0a8266e9b10314a47be8621e325bec06, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 8aeef24a416314901b75e094f853e11b, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: c466c193ab2ae4f75975b08334125a48, type: 3}
+    - m_Name: leg1
+      m_Hash: 1707762486
+      m_Sprite: {fileID: 21300000, guid: a6a5d7f669d83437c937793117840aed, type: 3}
+    - m_Name: leg2
+      m_Hash: -54316404
+      m_Sprite: {fileID: 21300000, guid: 0eebe1511a6ef4909bbbdc4cf9cf3ef4, type: 3}
+    - m_Name: leg3
+      m_Hash: -1950088678
+      m_Sprite: {fileID: 21300000, guid: 7424ce988e14744e496f59cafe9e866d, type: 3}
+    - m_Name: mouth-idle
+      m_Hash: -1740059004
+      m_Sprite: {fileID: 21300000, guid: 8513edc534f524892835ba90cd952508, type: 3}
+    - m_Name: mouth-open
+      m_Hash: -534972363
+      m_Sprite: {fileID: 21300000, guid: 630d8119783c8400f82a5b2f487c9ed2, type: 3}
+    - m_Name: mouth-smile
+      m_Hash: -2050569050
+      m_Sprite: {fileID: 21300000, guid: 77bae53fccd314f5cab260f8161da8a3, type: 3}
+    - m_Name: nose
+      m_Hash: -2130940717
+      m_Sprite: {fileID: 21300000, guid: 9b4d47abb26974b82826fc6a7a97ebc8, type: 3}
+    - m_Name: tail
+      m_Hash: 2084025437
+      m_Sprite: {fileID: 21300000, guid: 3e72518471fea48da910451fc443b426, type: 3}

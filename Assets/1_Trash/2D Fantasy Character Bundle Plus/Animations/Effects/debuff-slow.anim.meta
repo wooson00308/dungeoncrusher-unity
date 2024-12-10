@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d8ab927f320d34e0f9bd477ba6e06a18
+timeCreated: 1499542948
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83349
+  packageName: 2D Fantasy Character Bundle Plus
+  packageVersion: 1.2
+  assetPath: Assets/2D Fantasy Character Bundle Plus/Animations/Effects/debuff-slow.anim
+  uploadId: 511096

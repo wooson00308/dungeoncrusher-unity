@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Hero head Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Head
+    m_Hash: 130111906
+    m_CategoryList:
+    - m_Name: empty
+      m_Hash: 684146116
+      m_Sprite: {fileID: 21300000, guid: 1ece70b788ce945269cc8f862ddfcc29, type: 3}
+    - m_Name: fm1
+      m_Hash: 848722768
+      m_Sprite: {fileID: 21300000, guid: 0fee43494a35d438e95442d99413037e, type: 3}
+    - m_Name: fm2
+      m_Hash: 731851498
+      m_Sprite: {fileID: 21300000, guid: 5b09f11b9b04346de9e83c9988dd14fe, type: 3}
+    - m_Name: fm3
+      m_Hash: 479730300
+      m_Sprite: {fileID: 21300000, guid: 6fa7e7d2af9b14f90ad8aab76e612bf1, type: 3}
+    - m_Name: fm4
+      m_Hash: 50106335
+      m_Sprite: {fileID: 21300000, guid: 09816b25381064fc4828f8b0940c2caa, type: 3}
+    - m_Name: fm5
+      m_Hash: 905690953
+      m_Sprite: {fileID: 21300000, guid: 4839795d72070425983bbadb0f6e4d1e, type: 3}
+    - m_Name: fm6
+      m_Hash: 754118387
+      m_Sprite: {fileID: 21300000, guid: 2ff1fc1bf5d5e433a843be9afbe0ce46, type: 3}
+    - m_Name: fm7
+      m_Hash: 469098085
+      m_Sprite: {fileID: 21300000, guid: e9bcda409f9cd411b9f574f12169684c, type: 3}
+    - m_Name: fm8
+      m_Hash: 189449204
+      m_Sprite: {fileID: 21300000, guid: e302839439bb84ff0a53e09d4c8aadc3, type: 3}
+    - m_Name: fm9
+      m_Hash: 1011741538
+      m_Sprite: {fileID: 21300000, guid: b95b96b3ae0614106999271e32c3df97, type: 3}
+    - m_Name: m1
+      m_Hash: 5506863
+      m_Sprite: {fileID: 21300000, guid: e21b60f280a704479b6404f53fba8968, type: 3}
+    - m_Name: m2
+      m_Hash: 425547413
+      m_Sprite: {fileID: 21300000, guid: defc605ebae8441d69cf0613cbabe71a, type: 3}
+    - m_Name: m3
+      m_Hash: 777676291
+      m_Sprite: {fileID: 21300000, guid: a92131393975544d9a5c1461a203bd19, type: 3}
+    - m_Name: m4
+      m_Hash: 809431968
+      m_Sprite: {fileID: 21300000, guid: 8e02c61c819b4470e9bc55fafb85eb9b, type: 3}
+    - m_Name: m5
+      m_Hash: 121226038
+      m_Sprite: {fileID: 21300000, guid: 3383d408bc9974e6185363c7ec51186c, type: 3}
+    - m_Name: m6
+      m_Hash: 506499724
+      m_Sprite: {fileID: 21300000, guid: 503810201c9e343c38335fcaf810f9de, type: 3}
+    - m_Name: m7
+      m_Hash: 691511834
+      m_Sprite: {fileID: 21300000, guid: 0899cb1bb97984d45aca6997347bf02a, type: 3}
+    - m_Name: m8
+      m_Hash: 965263243
+      m_Sprite: {fileID: 21300000, guid: 87fde93a8fd444c4daedbf0296d0f6f8, type: 3}
+  - m_Name: Hair back
+    m_Hash: 177045831
+    m_CategoryList:
+    - m_Name: empty
+      m_Hash: 684146116
+      m_Sprite: {fileID: 21300000, guid: 1ece70b788ce945269cc8f862ddfcc29, type: 3}
+    - m_Name: hb1
+      m_Hash: 1066420885
+      m_Sprite: {fileID: 21300000, guid: a92888750cb4345b88ec8b1286031cca, type: 3}
+    - m_Name: hb2
+      m_Hash: 647568175
+      m_Sprite: {fileID: 21300000, guid: ff652ffc48cf04e21856db2e772a53f0, type: 3}
+    - m_Name: hb3
+      m_Hash: 295578553
+      m_Sprite: {fileID: 21300000, guid: 2333f076af35341fd80e95a63eb03365, type: 3}
+    - m_Name: hb4
+      m_Hash: 268090906
+      m_Sprite: {fileID: 21300000, guid: b4fe8a26bf6a34e508517877e9c23e41, type: 3}
+    - m_Name: hb5
+      m_Hash: 956141196
+      m_Sprite: {fileID: 21300000, guid: c9bda04838262461f81b593818888f47, type: 3}
+    - m_Name: hb6
+      m_Hash: 569696054
+      m_Sprite: {fileID: 21300000, guid: c20c78bd306714ee18d4ffe828c5b436, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Snake Mamba Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Snake
+    m_Hash: -1867758438
+    m_CategoryList:
+    - m_Name: body1
+      m_Hash: -1503095524
+      m_Sprite: {fileID: 21300000, guid: 681914e5c4dc148a488298929de35588, type: 3}
+    - m_Name: body2
+      m_Hash: 1063371942
+      m_Sprite: {fileID: 21300000, guid: 5ce47f018c9c6475db39aca30e1585ad, type: 3}
+    - m_Name: eye
+      m_Hash: 1920501681
+      m_Sprite: {fileID: 21300000, guid: 5aa433b7e0fc248c5acaa596a9aefa42, type: 3}
+    - m_Name: head
+      m_Hash: -1477183844
+      m_Sprite: {fileID: 21300000, guid: 2b87bf21d2bef4a15b9735f7a645dc44, type: 3}
+    - m_Name: neck
+      m_Hash: 538039891
+      m_Sprite: {fileID: 21300000, guid: 70bae6452493049e59c97ccd63ab39e7, type: 3}
+    - m_Name: tail1
+      m_Hash: -1770326710
+      m_Sprite: {fileID: 21300000, guid: 0b801f0f0965a4c4daedf8027fa4fe9b, type: 3}
+    - m_Name: tail2
+      m_Hash: 259237104
+      m_Sprite: {fileID: 21300000, guid: 3b73ff37e3fed492697d5413aefb5a09, type: 3}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Monster temptress Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: body
+    m_Hash: 463997874
+    m_CategoryList:
+    - m_Name: arm1
+      m_Hash: 874964628
+      m_Sprite: {fileID: 21300000, guid: 7aac2198071e348b58e520647e49e395, type: 3}
+    - m_Name: arm2
+      m_Hash: 758101806
+      m_Sprite: {fileID: 21300000, guid: 2394cc069169d4fec8c17a289fda52d6, type: 3}
+    - m_Name: body
+      m_Hash: 463997874
+      m_Sprite: {fileID: 21300000, guid: edc61efd07b964628b3f9e1a6f039d22, type: 3}
+    - m_Name: head
+      m_Hash: 670299804
+      m_Sprite: {fileID: 21300000, guid: 4e4d256640d694a699864797c38a9038, type: 3}
+    - m_Name: leg1
+      m_Hash: 634020662
+      m_Sprite: {fileID: 21300000, guid: 50e86ca80a6354d9ba4b95ebc62508b9, type: 3}
+    - m_Name: leg2
+      m_Hash: 1019425420
+      m_Sprite: {fileID: 21300000, guid: f376675f0ff21471ca39c76e6c2637a7, type: 3}
+  - m_Name: face
+    m_Hash: 85228391
+    m_CategoryList:
+    - m_Name: 1
+      m_Hash: 64810935
+      m_Sprite: {fileID: 21300000, guid: d0bf14728a05f4befbf9f2ffdec4ba56, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: 21300000, guid: 77908f4546bc94f308f71107d42c8bbb, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1

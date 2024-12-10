@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Monster pride Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: body
+    m_Hash: 463997874
+    m_CategoryList:
+    - m_Name: arm
+      m_Hash: 408845972
+      m_Sprite: {fileID: 21300000, guid: cd352e71018e34722b9264fcfb7739f1, type: 3}
+    - m_Name: body
+      m_Hash: 463997874
+      m_Sprite: {fileID: 21300000, guid: 9430ffe8a8dd3496d965d2f3d3d2f3b6, type: 3}
+    - m_Name: halo
+      m_Hash: 42400133
+      m_Sprite: {fileID: 21300000, guid: 0e50d8a1e3d5542c49dc8d75fb7663dd, type: 3}
+    - m_Name: head
+      m_Hash: 670299804
+      m_Sprite: {fileID: 21300000, guid: 2f2dc57126d7745c291955d4f38f9240, type: 3}
+    - m_Name: wing
+      m_Hash: 939656516
+      m_Sprite: {fileID: 21300000, guid: 000fc3c641b8c4d2497ca6c8acdb1f0a, type: 3}
+  - m_Name: face
+    m_Hash: 85228391
+    m_CategoryList:
+    - m_Name: 1
+      m_Hash: 64810935
+      m_Sprite: {fileID: 21300000, guid: 3c27125131fa440b0834d59c05fefc28, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: 21300000, guid: 2455d4726582e41f98e59f9b9280dc9e, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1

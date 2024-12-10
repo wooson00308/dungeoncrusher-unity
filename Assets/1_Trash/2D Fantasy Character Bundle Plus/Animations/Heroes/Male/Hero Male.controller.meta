@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 98eb4f56752324872a6d0adda22526f4
+timeCreated: 1499084486
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83349
+  packageName: 2D Fantasy Character Bundle Plus
+  packageVersion: 1.2
+  assetPath: Assets/2D Fantasy Character Bundle Plus/Animations/Heroes/Male/Hero
+    Male.controller
+  uploadId: 511096

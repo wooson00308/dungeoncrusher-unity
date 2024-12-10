@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Hero Mface Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Face1
+    m_Hash: 298721331
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: cb395c78b1e3e48219905abf8c8a3e88, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: 319a1a6250dd74d928fc5c788bf544d9, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: 2a958c695042649539d2648ce607e3ca, type: 3}
+  - m_Name: Face2
+    m_Hash: 147288457
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: 4acf3d25d454343129881b9c74b5b249, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: 3de1d33a6748640c49a6006264a6ad69, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: b4fffd5a9c3cf49298187b1266d1b692, type: 3}
+  - m_Name: Face3
+    m_Hash: 1069564191
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: 5f2df4c71f47443be93a883ade5fe14a, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: c1ee2246be88d49b2ba5641c7a74192b, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: 06ca0ee8a470b4236b1f59a81ecdc051, type: 3}
+  - m_Name: Face4
+    m_Hash: 564450492
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: b300763e1f75145beb3ec314521427f6, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: 122e4346db64d4c91b7f4fe213b90b2d, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: 15e9d17c9b7d147f89e33f9abc8b9ea8, type: 3}
+  - m_Name: Face5
+    m_Hash: 379839530
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: 974e090dd475e42de8a13ae5a800fb45, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: d2457ec2476624507887eaf183bec4bc, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: d9e06d940c1dc4d5bb8dfa3a7367c6b2, type: 3}
+  - m_Name: Face6
+    m_Hash: 262845840
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: f6fc1df1031ef43e39aa03e4e5286eef, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: 75cfd0855cf4e42e19e8c1e3f9fc5421, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: 471325e6df034447e830abd47ad5b62b, type: 3}
+  - m_Name: Face7
+    m_Hash: 950895878
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: 493e089ca753d417dbd9468b40823ec9, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: ddf1408ec55c34128808ffb4224e1c6d, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: 176b78db4c96343bfac02c45182d80a8, type: 3}
+  - m_Name: Face8
+    m_Hash: 672307351
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: 25cc34c1e6dcf44b9a415fb0f85df0d7, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: d2143a947ccc049f885c96e56852c4fa, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: f324cd04542e0436f975b568d9d19126, type: 3}
+  - m_Name: Face9
+    m_Hash: 521512961
+    m_CategoryList:
+    - m_Name: normal
+      m_Hash: 562391268
+      m_Sprite: {fileID: 21300000, guid: cd507f578b31645b59b9e8d02deef380, type: 3}
+    - m_Name: happy
+      m_Hash: 1055753161
+      m_Sprite: {fileID: 21300000, guid: 952d2e5526c4b4b84b1e28b994043032, type: 3}
+    - m_Name: hurt
+      m_Hash: 126682138
+      m_Sprite: {fileID: 21300000, guid: a491b4457c8b440278fe9b170ef2f447, type: 3}
+  m_ModificationHash: 0
+  m_Version: 1
