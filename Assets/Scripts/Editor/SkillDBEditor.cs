@@ -234,6 +234,20 @@ public class SkillDBEditor : Editor
             return;
         }
 
+        // 확인 팝업 띄우기
+        bool confirmDelete = EditorUtility.DisplayDialog(
+            "Delete Skill",
+            $"Are you sure you want to delete the skill \"{skillData.name}\"? This action cannot be undone.",
+            "Yes",
+            "No"
+        );
+
+        if (!confirmDelete)
+        {
+            Debug.Log($"Deletion of skill \"{skillData.name}\" was canceled.");
+            return;
+        }
+
         // 데이터베이스에서 스킬 데이터 제거
         _skillDatabase.RemoveSkillData(skillData);
 
@@ -255,6 +269,7 @@ public class SkillDBEditor : Editor
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+
 
     private void RemovePrefabsFromSkillData(SkillData skillData)
     {
