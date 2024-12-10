@@ -10,12 +10,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3446151439322725959, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_Name
-      value: Prf_Skill_Fx_998
+      value: Prf_Skill_Fx_999
       objectReference: {fileID: 0}
-    - target: {fileID: 4202434334954744884, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 9e207e99ff46ee246a11e5c4c5a5730b, type: 2}
     - target: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
