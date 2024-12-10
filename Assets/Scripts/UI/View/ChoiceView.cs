@@ -48,7 +48,7 @@ public class ChoiceView : BaseView
             {
                 if(_data.choiceType == ChoiceType.Item)
                 {
-                    var item = ResourceManager.Instance.SpawnFromPath($"Item/{_data.itemData.PrefId}").GetComponent<Item>();
+                    var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
                     player.EquipItem(item);
                 }
                 else

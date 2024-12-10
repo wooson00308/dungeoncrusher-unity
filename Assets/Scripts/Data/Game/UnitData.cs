@@ -5,13 +5,12 @@ using UnityEngine.Serialization;
 public class UnitData : ScriptableObject, IStats
 {
     [Header("Config")] [SerializeField] private string _id;
-    [SerializeField] private string _prfId;
+    [SerializeField] private GameObject _prefab;
 
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
-    [SerializeField] private IntStat _maxMp;
     [SerializeField] private FloatStat _speed;
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
@@ -21,13 +20,12 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private FloatStat _lifestealRate;
 
     public string Id => _id;
-    public string PrfId => _prfId;
+    public GameObject Prefab => _prefab;
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
-    public IntStat MaxMp => _maxMp;
     public FloatStat Speed => _speed;
     public FloatStat AttackSpeed => _attackSpeed;
     public FloatStat AttackRange => _attackRange;

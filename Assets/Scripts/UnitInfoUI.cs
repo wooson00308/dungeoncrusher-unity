@@ -102,9 +102,9 @@ public class UnitInfoUI : BaseView
 
         if (_unitId != _unit.Id) return;
 
-        if (_maxMp <= _unit.MaxMp.Value)
+        if (_maxMp <= _unit.Mp.Max)
         {
-            _maxMp = _unit.MaxMp.Value;
+            _maxMp = _unit.Mp.Max;
         }
     }
 

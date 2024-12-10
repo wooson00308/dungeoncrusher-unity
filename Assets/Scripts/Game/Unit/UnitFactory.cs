@@ -58,7 +58,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
 
         while (spawnedCount < value)
         {
-            var spawnObj = ResourceManager.Instance.SpawnFromPath($"{UNIT_SPAWN_PATH}{data.PrfId}", _parent);
+            var spawnObj = ResourceManager.Instance.Spawn(data.Prefab, _parent);
             Unit spawnUnit = spawnObj.GetComponent<Unit>();
             spawnUnit.OnInitialized(data, team);
 

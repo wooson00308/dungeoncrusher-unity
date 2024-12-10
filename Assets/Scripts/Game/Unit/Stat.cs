@@ -3,13 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum StatValueType
+{
+    None,
+    Max,
+    Min,
+}
+
 public abstract class Stat<T>
 {
     [SerializeField] protected T _value;
 
-    protected Dictionary<string, T> _updateStats = new();
+    private bool _isUsedMinValue = false;
+    private bool _isUsedMaxValue = false;
+
+    private T _minValue;
+    private T _maxValue;
+
+    protected Dictionary<(string, StatValueType), T> _updateStats = new();
+
+    protected T Clamp(T value)
+    {
+        bool isLessThanMin = Comparer<T>.Default.Compare(value, _minValue) < 0 && _isUsedMinValue;
+        bool isGreaterThanMax = Comparer<T>.Default.Compare(value, _maxValue) > 0 && _isUsedMaxValue;
+
+        if(isLessThanMin)
+        {
+            return _minValue;
+        }
+        else if(isGreaterThanMax)
+        {
+            return _maxValue;
+        }
+        else
+        {
+            return value;
+        }
+    }
+
+    public event Action<T> OnValueChanged;
 
     public T Value => _value;
+
+    public T Max => _maxValue;
+    public T Min => _minValue;
 
     public Stat(T value)
     {
@@ -17,29 +54,50 @@ public abstract class Stat<T>
         _updateStats.Clear();
     }
 
-    public virtual void Reset(string key)
+    public void SetMaxValue(T value)
     {
-        if (!_updateStats.ContainsKey(key))
+        _maxValue = value;
+        _isUsedMaxValue = true;
+    }
+
+    public void SetMinValue(T value)
+    {
+        _minValue = value;
+        _isUsedMinValue = true;
+    }
+
+    protected void SetValue(T value)
+    {
+        _value = Clamp(value);
+        OnValueChanged?.Invoke(_value);
+    }
+
+    public virtual void Reset(string key, StatValueType type = StatValueType.None)
+    {
+        if (!_updateStats.ContainsKey((key, type)))
         {
             return;
         }
 
-        _value = Subtract(_value, _updateStats[key]);
-        _updateStats.Remove(key);
+        T subtract = Subtract(_value, _updateStats[(key, type)]);
+        SetValue(subtract);
+
+        _updateStats.Remove((key, type));
     }
 
-    public virtual void Update(string key, T value)
+    public virtual void Update(string key, T value, StatValueType type = StatValueType.None)
     {
-        if (_updateStats.ContainsKey(key))
+        if (_updateStats.ContainsKey((key, type)))
         {
-            _updateStats[key] = Add(_updateStats[key], value);
+            _updateStats[(key, type)] = Add(_updateStats[(key, type)], value);
         }
         else
         {
-            _updateStats.Add(key, value);
+            _updateStats.Add((key, type), value);
         }
 
-        _value = Add(_value, value);
+        T add = Add(_value, value);
+        SetValue(add);
     }
 
     protected abstract T Add(T a, T b);

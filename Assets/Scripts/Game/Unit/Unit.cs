@@ -46,8 +46,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public IntStat Attack { get; private set; }
     public IntStat Defense { get; private set; }
     public IntStat Mp { get; private set; }
-    public IntStat MaxMp { get; private set; }
-
     public FloatStat Speed { get; private set; }
     public FloatStat AttackSpeed { get; private set; }
     public FloatStat AttackRange { get; private set; }
@@ -59,8 +57,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         // 이거 굳이 Setup 메서드가 필요한가? new 해버려도 메모리 부하 없을거 같은데..
         Health = new(stats.Health.Value);
-        Mp = new(stats.Mp.Value);
-        MaxMp = new(stats.MaxMp.Value);
+        Mp = new(0);
+        Mp.SetMaxValue(stats.Mp.Value);
         Attack = new(stats.Attack.Value);
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
@@ -89,8 +87,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health.Update(key, stats.Health.Value);
         Attack.Update(key, stats.Attack.Value);
         Defense.Update(key, stats.Defense.Value);
-        Mp.Update(key, stats.Mp.Value);
-        MaxMp.Update(key, stats.MaxMp.Value);
+        Mp.Update(key, stats.Mp.Value, StatValueType.Max);
         Speed.Update(key, stats.Speed.Value);
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
         AttackRange.Update(key, stats.AttackRange.Value);
@@ -105,7 +102,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Attack.Reset(key);
         Defense.Reset(key);
         Mp.Reset(key);
-        MaxMp.Reset(key);
+        Mp.Reset(key, StatValueType.Max);
         Speed.Reset(key);
         AttackSpeed.Reset(key);
         AttackRange.Reset(key);
@@ -274,9 +271,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void AddSkillMp(int mpValue)
     {
-        if (MaxMp.Value < Mp.Value + mpValue) return;
+        if (Mp.Max < Mp.Value + mpValue) return;
 
-        Mp.Update("EngageMp", mpValue);
+        Mp.Update("Engage", mpValue);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_AddMp.ToString(),
             new GameEvent //따로 이벤트 나눈건 아군의 Mp를 추가 해 줄 수 있기 때문.
@@ -295,7 +292,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
-            var skillObj = ResourceManager.Instance.SpawnFromPath($"Skill/{skillData.PrefId}");
+            var skillObj = ResourceManager.Instance.Spawn(skillData.Prefab);
             var skillComponent = skillObj.GetComponent<Skill>();
             skillComponent.Setup(this);
 
