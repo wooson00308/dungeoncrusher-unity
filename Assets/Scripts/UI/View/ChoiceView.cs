@@ -44,17 +44,14 @@ public class ChoiceView : BaseView
         var players = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
         foreach (var player in players)
         {
-            if(player.Id == _data.UnitId)
+            if (_data.choiceType == ChoiceType.Item)
             {
-                if(_data.choiceType == ChoiceType.Item)
-                {
-                    var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
-                    player.EquipItem(item);
-                }
-                else
-                {
-                    player.AddSkill(_data.skillData);
-                }
+                var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
+                player.EquipItem(item);
+            }
+            else
+            {
+                player.AddSkill(_data.skillData);
             }
         }
 

@@ -70,21 +70,6 @@ public class ChoiceData
         return null;
     }
 
-    public string UnitId
-    {
-        get
-        {
-            if(choiceType == ChoiceType.Item)
-            {
-                return itemData.UnitId;
-            }
-            else
-            {
-                return skillData.UnitId;
-            }
-        }
-    }
-
     public ItemData itemData;
     public SkillData skillData;
 }
