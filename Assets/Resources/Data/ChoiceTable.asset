@@ -21,7 +21,7 @@ MonoBehaviour:
     skillData: {fileID: 0}
   - name: PowerStrike
     tier: 3
-    description: PowerStrikePowerStrikePowerStrikePowerStrike
+    description: PowerStrikeSkill
     choiceType: 1
     itemData: {fileID: 0}
     skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
@@ -37,9 +37,9 @@ MonoBehaviour:
     choiceType: 0
     itemData: {fileID: 11400000, guid: 45fd0eefa04454746b46f3631363a037, type: 2}
     skillData: {fileID: 0}
-  - name: Combo Attack
-    tier: 1
-    description: CACA
-    choiceType: 1
-    itemData: {fileID: 0}
-    skillData: {fileID: 11400000, guid: 62afe6beaa89b27498f087901d709521, type: 2}
+  - name: Thon's Helmet
+    tier: 0
+    description: Strong then John's Helmet
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 4ea91ab2bb19b4b04a5225cb27694eec, type: 2}
+    skillData: {fileID: 0}

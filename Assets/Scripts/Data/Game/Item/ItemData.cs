@@ -27,9 +27,11 @@ public abstract class ItemData : ScriptableObject, IStats
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
+    public string Name => _name;
     public PartType PartType => _partType;
     public string IconId => _iconId;
     public Sprite Icon => _icon;
+    public string Description => _description;
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;

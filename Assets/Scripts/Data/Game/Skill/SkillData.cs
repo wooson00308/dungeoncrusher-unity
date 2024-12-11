@@ -18,13 +18,17 @@ public abstract class SkillData : ScriptableObject
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
 
     public string Id => _id;
-    public GameObject Prefab 
+
+    public GameObject Prefab
     {
         get { return _prefab; }
         set { _prefab = value; }
     }
+
     public int Rarity => _rarity;
     public Sprite Icon => _icon;
+    
+    public string Name => _name;
 
     public string Description(int level)
     {
