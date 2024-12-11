@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/Prefabs_Monsters/Legacy.meta
 guid: 71f4d0c3732050543ab9ddc923002206
+========
+guid: a9d90a63dae57f94594a651ebb3f9bd2
+>>>>>>>> origin/main:Assets/Scenes/Legacy.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

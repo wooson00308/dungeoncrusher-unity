@@ -46,7 +46,6 @@ public class Skill : MonoBehaviour
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
         if (args == null) return;
-        if (args.publisher.Id != _skillData.UnitId) return;
         if (!args.publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
         if (gameEvent.eventType != _skillData.SkillEventType.ToString()) return;
         if (args.publisher.Target == null) return;

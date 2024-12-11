@@ -9,6 +9,11 @@ public class StateBase : MonoBehaviour
         return unit.IsUpdateState("Stun");
     }
 
+    protected bool IsAerial(Unit unit)
+    {
+        return unit.IsUpdateState("Aerial");
+    }
+
     protected virtual void Awake()
     {
         _fsm = GetComponent<FSM>();

@@ -5,7 +5,6 @@ public abstract class ItemData : ScriptableObject, IStats
 {
     [SerializeField] protected string _id;
     [SerializeField] protected GameObject _prefab;
-    [SerializeField] protected string _unitId;
     [SerializeField] protected string _name;
     [SerializeField] protected string _iconId;
     [SerializeField] protected Sprite _icon;
@@ -28,7 +27,6 @@ public abstract class ItemData : ScriptableObject, IStats
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
-    public string UnitId => _unitId;
     public PartType PartType => _partType;
     public string IconId => _iconId;
     public Sprite Icon => _icon;

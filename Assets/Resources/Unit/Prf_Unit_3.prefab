@@ -4853,6 +4853,10 @@ PrefabInstance:
       propertyPath: _model
       value: 
       objectReference: {fileID: 6078479162376686072}
+    - target: {fileID: 4974012002743024361, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: _isSuperArmor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4931,9 +4935,25 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4347582663961869591, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347582663961869591, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1670646555
+      objectReference: {fileID: 0}
     - target: {fileID: 5449272724780567705, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128827659859408063, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128827659859408063, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1670646555
       objectReference: {fileID: 0}
     - target: {fileID: 6759420828315269540, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4946,6 +4966,14 @@ PrefabInstance:
     - target: {fileID: 7061310089447117460, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: m_Name
       value: Prf_Unit_Model_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249013972539244901, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249013972539244901, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1670646555
       objectReference: {fileID: 0}
     - target: {fileID: 7637049554296803255, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -4994,6 +5022,14 @@ PrefabInstance:
     - target: {fileID: 8464242280754423920, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888459927446367225, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888459927446367225, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1670646555
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7713518514224114052, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}

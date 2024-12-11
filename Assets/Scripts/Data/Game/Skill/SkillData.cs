@@ -6,7 +6,6 @@ public abstract class SkillData : ScriptableObject
 {
     [SerializeField] protected string _id;
     [SerializeField] protected GameObject _prefab;
-    [SerializeField] protected string _unitId;
     [SerializeField] protected int _rarity;
     [SerializeField] protected Sprite _icon;
     [SerializeField] protected string _name;
@@ -24,7 +23,6 @@ public abstract class SkillData : ScriptableObject
         get { return _prefab; }
         set { _prefab = value; }
     }
-    public string UnitId => _unitId;
     public int Rarity => _rarity;
     public Sprite Icon => _icon;
 

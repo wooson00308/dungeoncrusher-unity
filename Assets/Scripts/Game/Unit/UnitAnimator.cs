@@ -13,7 +13,8 @@ public class UnitAnimator : MonoBehaviour
     {
         _owner = GetComponentInParent<Unit>();
         _animator = GetComponent<Animator>();
-        _sortingGroup = GetComponentInChildren<SortingGroup>();
+        _sortingGroup = GetComponentInChildren<SortingGroup>() ??
+                        transform.GetChild(2).gameObject.AddComponent<SortingGroup>();
     }
 
     private void FixedUpdate()
