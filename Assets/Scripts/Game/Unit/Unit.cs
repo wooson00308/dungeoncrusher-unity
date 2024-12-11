@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Animator _animator;
     private FSM _fsm;
     private bool _hasHitState;
+    private bool _hasAerialState;
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
@@ -64,10 +65,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
         AttackSpeed = new(stats.AttackSpeed.Value);
-        AttackSpeed.OnValueChanged += (value) =>
-        {
-            _animator.SetFloat("AttackSpeed", value);
-        };
+        AttackSpeed.OnValueChanged += (value) => { _animator.SetFloat("AttackSpeed", value); };
 
         AttackRange = new(stats.AttackRange.Value);
         CriticalRate = new(stats.CriticalRate.Value);
@@ -220,7 +218,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
-        if(_hasHitState)
+        if (_hasHitState)
         {
             _fsm.TransitionTo<HitState>();
         }
@@ -254,6 +252,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         if (IsDeath) return;
         _fsm.TransitionTo<StunState>();
+    }
+
+    public void OnAerial()
+    {
+        if (IsDeath) return;
+        _hasAerialState = true;
+        _fsm.TransitionTo<AerialState>();
     }
 
     #endregion
