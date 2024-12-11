@@ -37,9 +37,7 @@ public enum ChoiceType
 [Serializable]
 public class ChoiceData
 {
-    public string name;
     public int tier;
-    public string description;
     public string GetPrefabPath
     {
         get

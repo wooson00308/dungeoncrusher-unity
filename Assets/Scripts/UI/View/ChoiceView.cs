@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,12 @@ public class ChoiceView : BaseView
         Icon
     }
 
+    public enum GameObjects
+    {
+        Group_Stats,
+        Group_Stats_After
+    }
+
     private ChoiceData _data;
 
     private void OnEnable()
@@ -27,6 +34,7 @@ public class ChoiceView : BaseView
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        Bind<GameObject>(typeof(GameObjects));
     }
 
     public void SetupUI(ChoiceData data)
@@ -34,9 +42,113 @@ public class ChoiceView : BaseView
         _data = data;
 
         Get<TextMeshProUGUI>((int)Texts.Txt_Tier).SetText($"{data.tier}");
-        Get<TextMeshProUGUI>((int)Texts.Txt_Name).SetText($"{data.name}");
-        Get<TextMeshProUGUI>((int)Texts.Txt_Description).SetText($"{data.description}");
+        Get<TextMeshProUGUI>((int)Texts.Txt_Name).SetText($"{GetNameData(data)}");
+        Get<TextMeshProUGUI>((int)Texts.Txt_Description).SetText($"{GetDescriptionData(data)}");
         Get<Image>((int)Images.Icon).sprite = data.Icon();
+
+        ItemUI(data);
+    }
+
+    private void ItemUI(ChoiceData data)
+    {
+        TextMeshProUGUI[] texts = Get<GameObject>((int)GameObjects.Group_Stats)?
+            .GetComponentsInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI[] afterTexts = Get<GameObject>((int)GameObjects.Group_Stats_After)?
+            .GetComponentsInChildren<TextMeshProUGUI>();
+
+        if (texts != null)
+        {
+            texts[0].text = $"Health +{data.itemData.Health.Value}";
+            texts[1].text = $"Defense +{data.itemData.Defense.Value}";
+            texts[2].text = $"Attack +{data.itemData.Attack.Value}";
+        }
+
+        if (afterTexts != null)
+        {
+            var teamUnits = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
+
+            if (teamUnits == null)
+            {
+                afterTexts[0].text = $"Health +{data.itemData.Health.Value}";
+                afterTexts[1].text = $"Defense +{data.itemData.Defense.Value}";
+                afterTexts[2].text = $"Attack +{data.itemData.Attack.Value}";
+            }
+            else
+            {
+                var player = teamUnits.FirstOrDefault();
+
+                if (player.Equipment.TryGetValue(data.itemData.PartType, out var playerCurrentItem))
+                {
+                    playerCurrentItem = player.Equipment[data.itemData.PartType];
+
+                    afterTexts[0].text =
+                        $"Health {ResultText(data.itemData.Health.Value - playerCurrentItem.Data.Health.Value)}";
+                    afterTexts[1].text =
+                        $"Defense {ResultText(data.itemData.Defense.Value - playerCurrentItem.Data.Defense.Value)}";
+                    afterTexts[2].text =
+                        $"Attack {ResultText(data.itemData.Attack.Value - playerCurrentItem.Data.Attack.Value)}";
+                }
+                else
+                {
+                    afterTexts[0].text = $"Health +{data.itemData.Health.Value}";
+                    afterTexts[1].text = $"Defense +{data.itemData.Defense.Value}";
+                    afterTexts[2].text = $"Attack +{data.itemData.Attack.Value}";
+                }
+            }
+        }
+    }
+
+    private string GetNameData(ChoiceData data)
+    {
+        if (data.skillData != null)
+        {
+            return data.skillData.Name;
+        }
+        else if (data.itemData != null)
+        {
+            return data.itemData.Name;
+        }
+        else
+        {
+            Debug.Log("아이템 데이터와 스킬데이터가 둘다 없습니다.");
+            return null;
+        }
+    }
+
+    private string GetDescriptionData(ChoiceData data)
+    {
+        if (data.skillData != null)
+        {
+            return data.skillData.Description(1);
+        }
+        else if (data.itemData != null)
+        {
+            return data.itemData.Description;
+        }
+        else
+        {
+            Debug.Log("아이템 데이터와 스킬데이터가 둘다 없습니다.");
+            return null;
+        }
+    }
+
+    private string ResultText(float value)
+    {
+        string result;
+        if (value > 0)
+        {
+            result = $"+{value}";
+        }
+        else if (value == 0)
+        {
+            result = $"{value}"; //현재와 동일하다는 텍스트를 넣어도됨
+        }
+        else
+        {
+            result = $"{value}";
+        }
+
+        return result;
     }
 
     public void OnClick()

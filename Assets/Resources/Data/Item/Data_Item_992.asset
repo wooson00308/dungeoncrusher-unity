@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_992
   _prefab: {fileID: 5564285513405598355, guid: 62a0aa149b759437f95d676968d29d8f, type: 3}
-  _name: DummyHelmet
+  _name: John's Helmet
   _iconId: 
   _icon: {fileID: 21300000, guid: 27ef459012cfb4b4f90d9b1276c87d90, type: 3}
   _partType: 2

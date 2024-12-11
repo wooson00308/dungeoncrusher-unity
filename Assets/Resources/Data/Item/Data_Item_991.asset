@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_991
   _prefab: {fileID: 5564285513405598355, guid: 73275dff08f2646c9978c21edf5c5e23, type: 3}
-  _name: DummyArmor
+  _name: John'sArmor
   _iconId: 
   _icon: {fileID: 21300022, guid: d8060a3f1578843dc9cd55e61e533829, type: 3}
   _partType: 3
