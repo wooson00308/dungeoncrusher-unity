@@ -5,7 +5,8 @@ public class MainView : BaseView
 {
     public enum Texts
     {
-        Txt_Stage_Value
+        Txt_Stage_Value,
+        Txt_GameSpeed
     }
 
     private void OnEnable()
@@ -17,7 +18,6 @@ public class MainView : BaseView
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
-        
     }
 
     private void UpdateStageUI(GameEvent gameEvent)
@@ -28,5 +28,12 @@ public class MainView : BaseView
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
+    }
+
+    public void OnClickChangeGameSpeed()
+    {
+        GetComponent<MainUI>().ChangeGameSpeed();
+        Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
+            .SetText($"<size=45>x</size>{GetComponent<MainUI>().GetGameSpeed()}");
     }
 }
