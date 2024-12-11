@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb9b6db1f2a4d224b90222061bbfe491, type: 3}
-  m_Name: Data_Unit_3
+  m_Name: Data_Unit_401
   m_EditorClassIdentifier: 
-  _id: Unit_3
-  _prefab: {fileID: 4602744156704204850, guid: e1d7b3b92fcd3442ba886ddb14e2231b, type: 3}
+  _id: Unit_401
+  _prefab: {fileID: 1042312463165950002, guid: dde4af852618849acba1afba12097aea, type: 3}
   _health:
-    _value: 950000
+    _value: 150
   _attack:
-    _value: 15000
+    _value: 15
   _defense:
     _value: 0
   _mp:
