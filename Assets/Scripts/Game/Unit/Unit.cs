@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private NavMeshAgent _agent;
     private Animator _animator;
     private FSM _fsm;
+    private bool _hasHitState;
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
@@ -63,6 +64,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
         AttackSpeed = new(stats.AttackSpeed.Value);
+        AttackSpeed.OnValueChanged += (value) =>
+        {
+            _animator.SetFloat("AttackSpeed", value);
+        };
+
         AttackRange = new(stats.AttackRange.Value);
         CriticalRate = new(stats.CriticalRate.Value);
         AttackStunRate = new(stats.AttackStunRate.Value);
@@ -116,6 +122,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private void Awake()
     {
         _fsm = GetComponent<FSM>();
+        _hasHitState = GetComponent<HitState>();
         _agent = GetComponent<NavMeshAgent>();
         _targetDetector = GetComponent<TargetDetector>();
         _agent.updateRotation = false;
@@ -213,6 +220,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
+        if(_hasHitState)
+        {
+            _fsm.TransitionTo<HitState>();
+        }
+
         Health.Update("Engage", -damage);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent

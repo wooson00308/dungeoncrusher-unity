@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_990
   _prefab: {fileID: 5564285513405598355, guid: 8a49c2c5c113c4fda8790943b8ffa3a7, type: 3}
-  _unitId: Unit_3
   _name: DummyWeapon
   _iconId: 
   _icon: {fileID: 21300000, guid: 4330ba8551db422499f22cb78ac4d193, type: 3}
@@ -34,9 +33,9 @@ MonoBehaviour:
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 0
+    _value: 2
   _attackRange:
-    _value: 0
+    _value: 1
   _criticalRate:
     _value: 0
   _stunRate:

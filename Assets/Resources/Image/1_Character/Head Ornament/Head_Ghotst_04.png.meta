@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Head_Ghotst_04_0: 7657595487574523787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

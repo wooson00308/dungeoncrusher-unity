@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Data_Item_991
   m_EditorClassIdentifier: 
   _id: Item_991
-  _prfId: Prf_Item_991
-  _unitId: Unit_3
+  _prefab: {fileID: 5564285513405598355, guid: 73275dff08f2646c9978c21edf5c5e23, type: 3}
   _name: DummyArmor
   _iconId: 
   _icon: {fileID: 21300022, guid: d8060a3f1578843dc9cd55e61e533829, type: 3}
