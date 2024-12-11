@@ -21,9 +21,9 @@ MonoBehaviour:
   _description: "\uB354\uBBF8\uC6A9 \uB9C8\uAC80\uC774\uB2E4 \uC5C4\uCCAD\uB098\uAC8C
     \uAC15\uD558\uB2E4."
   _health:
-    _value: 600
+    _value: 0
   _attack:
-    _value: 50
+    _value: 10
   _defense:
     _value: 0
   _mp:
@@ -33,9 +33,9 @@ MonoBehaviour:
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 2
+    _value: 0.2
   _attackRange:
-    _value: 1
+    _value: 0
   _criticalRate:
     _value: 0
   _stunRate:

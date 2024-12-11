@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ReadyProcess : Process
 {
-    [SerializeField] private List<UnitData> _datas = new();
+    [SerializeField] private UnitData _playerData;
+    [SerializeField] private CinemachineCamera _camera;
 
     private bool _isSpawnPlayers = true; // 플레이어 스폰여부
 
@@ -34,11 +35,9 @@ public class ReadyProcess : Process
         if (_isSpawnPlayers)
         {
             _isSpawnPlayers = false;
-
-            foreach (var unitData in _datas)
-            {
-                var units = UnitFactory.Instance.Spawn(unitData, Team.Friendly, 1);
-            }
+            
+            var units = UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+            _camera.Follow = units[0].transform;
         }
 
         GameEventSystem.Instance.Publish(ProcessEvents.SetActive.ToString(), new GameEvent { args = false });
