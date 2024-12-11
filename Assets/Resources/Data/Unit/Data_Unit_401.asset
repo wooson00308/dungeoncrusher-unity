@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Data_Unit_401
   m_EditorClassIdentifier: 
   _id: Unit_401
-  _prefab: {fileID: 1042312463165950002, guid: dde4af852618849acba1afba12097aea, type: 3}
+  _prefab: {fileID: 4602744156704204850, guid: 2676d81d68d3f20419c7e49f525c8222, type: 3}
   _health:
-    _value: 150
+    _value: 150001
   _attack:
     _value: 15
   _defense:
