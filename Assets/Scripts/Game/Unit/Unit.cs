@@ -66,6 +66,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Speed = new(stats.Speed.Value);
         AttackSpeed = new(stats.AttackSpeed.Value);
         AttackSpeed.OnValueChanged += (value) => { _animator.SetFloat("AttackSpeed", value); };
+        _animator.SetFloat("AttackSpeed", AttackSpeed.Value);
 
         AttackRange = new(stats.AttackRange.Value);
         CriticalRate = new(stats.CriticalRate.Value);
