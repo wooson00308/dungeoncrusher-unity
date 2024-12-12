@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,6 +27,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private FSM _fsm;
     private bool _hasHitState;
     private bool _hasAerialState;
+
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
@@ -167,6 +169,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
+
+            foreach(var skill in _skillDic)
+            {
+                skill.Value.ResetCoolTime();
+            }
         }
     }
 
@@ -182,6 +189,22 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.speed = Speed.Value;
         _agent.SetDestination(target.position);
         Rotation(target.position - transform.position);
+    }
+
+    public void DashToTarget(DashData data, Action exitCallback = null)
+    {
+        if (Target == null) return;
+
+        if(TryGetComponent<DashState>(out var state))
+        {
+            var dashSpeed = data.DashSpeed;
+            state.OnDash(this, dashSpeed, exitCallback);
+        }
+    }
+
+    public void Warp(Vector3 position)
+    {
+        _agent.Warp(position);
     }
 
     /// <summary>

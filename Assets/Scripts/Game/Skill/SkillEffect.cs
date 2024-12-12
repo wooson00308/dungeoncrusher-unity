@@ -13,11 +13,11 @@ public class SkillEffect : MonoBehaviour
     private Unit _user;
     private SkillData _skillData;
     private Unit _target;
-    private int _level;
+    private Skill _skill;
 
-    public void Initialized(int level, Unit user, SkillData skillData, Unit target = null)
+    public void Initialized(Skill skill, Unit user, SkillData skillData, Unit target = null)
     {
-        _level = level;
+        _skill = skill;
         _user = user;
         _skillData = skillData;
 
@@ -29,17 +29,22 @@ public class SkillEffect : MonoBehaviour
         _isInitialized = true;
     }
 
-    public void OnAction(AnimationEvent e)
+    public async void OnAction(AnimationEvent e)
     {
+        while(!_isInitialized)
+        {
+            await Awaitable.EndOfFrameAsync();
+        }
+
         if (_skillData.IsAreaAttack)
         {
-            _skillData.OnAction(_level, _user, _units);
+            _skillData.OnAction(_skill, _user, _units);
         }
         else
         {
             
             var targets = new List<Unit>() { _target };
-            _skillData.OnAction(_level, _user, targets);
+            _skillData.OnAction(_skill, _user, targets);
         }
     }
 

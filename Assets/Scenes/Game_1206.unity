@@ -260,7 +260,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: -1.5, z: -10}
+  FollowOffset: {x: 0, y: -2.27, z: -10}
 --- !u!114 &242189867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 34
-    OrthographicSize: 4
+    OrthographicSize: 9.23
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -553,7 +553,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 9.23
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
