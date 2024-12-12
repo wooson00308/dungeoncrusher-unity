@@ -15,9 +15,13 @@ MonoBehaviour:
   stageInfos:
   - stageUnitDatas:
     - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 1
+      spawnCount: 3
     - stageUnits: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-      spawnCount: 5
+      spawnCount: 1
+    - stageUnits: {fileID: 11400000, guid: 93f22012bdd010f43885ff8094ead170, type: 2}
+      spawnCount: 3
+    - stageUnits: {fileID: 11400000, guid: bfd686ed1a8f2654984c1a21b05a3802, type: 2}
+      spawnCount: 3
   - stageUnitDatas:
     - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
       spawnCount: 2
