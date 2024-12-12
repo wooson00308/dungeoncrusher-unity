@@ -15,9 +15,9 @@ public class PowerStrikeData : SkillData
     /// <param name="level"></param>
     /// <param name="user"></param>
     /// <param name="targets"></param>
-    public override void OnAction(int level, Unit user, List<Unit> targets)
+    public override void OnAction(Skill skill, Unit user, List<Unit> targets)
     {
-        float skillValue = GetSkillLevelData(level).skillValue;
+        float skillValue = GetSkillLevelData(skill.Level).skillValue;
         int damage = (int)(user.Attack.Value * skillValue * 0.01f);
 
         foreach (var target in targets)

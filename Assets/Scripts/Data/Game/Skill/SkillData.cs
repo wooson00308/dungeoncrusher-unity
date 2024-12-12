@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public abstract class SkillData : ScriptableObject
@@ -76,7 +77,7 @@ public abstract class SkillData : ScriptableObject
     }
 
     public abstract bool IsValidTarget(Unit unit);
-    public abstract void OnAction(int level, Unit user, List<Unit> targets);
+    public abstract void OnAction(Skill skill, Unit user, List<Unit> targets);
 }
 
 [Serializable]
@@ -84,6 +85,7 @@ public class SkillLevelData
 {
     [Range(0f, 100f)] public float activationChance;
     public float skillValue; // n%
+    public float skillCooltime;
     public GameObject skillFxPrefab;
 }
 

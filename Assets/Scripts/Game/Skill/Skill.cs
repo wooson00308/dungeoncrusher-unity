@@ -4,15 +4,19 @@ public class Skill : MonoBehaviour
 {
     private Unit _owner;
     private int _skillLevel = 1;
+    private float _currentCooltime;
+
     [SerializeField] private SkillData _skillData;
     public SkillData SkillData => _skillData;
 
     private bool _isInitialized = false;
+    public int Level => _skillLevel;
 
     public void Setup(Unit owner)
     {
         _owner = owner;
         _isInitialized = true;
+        _currentCooltime = _skillData.GetSkillLevelData(_skillLevel).skillCooltime;
     }
 
     public void SetSkillData(SkillData skillData)
@@ -22,6 +26,7 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_skillData.SkillEventType == UnitEvents.None) return;
         GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TrySpawnSkillEffect);
     }
 
@@ -30,11 +35,15 @@ public class Skill : MonoBehaviour
         _skillLevel = 1;
         _isInitialized = false;
 
+        if (_skillData.SkillEventType == UnitEvents.None) return;
         GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TrySpawnSkillEffect);
     }
 
+    public void ResetCoolTime() => _currentCooltime = _skillData.GetSkillLevelData(_skillLevel).skillCooltime;
+
     public void LevelUp(int value = 1)
     {
+        if (_skillLevel >= _skillData.SkillLevelDatas.Count - 1) return;
         _skillLevel += value;
     }
 
@@ -51,10 +60,14 @@ public class Skill : MonoBehaviour
         if (args.publisher.Target == null) return;
 
         float random = Random.Range(0, 100f);
+        if (random > skillLevelDetails.activationChance) return;
 
-        if (random < skillLevelDetails.activationChance) return;
+        SpawnSkillEffect(args.publisher, skillLevelDetails);
+    }
 
-        GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
+    public async void SpawnSkillEffect(Unit user, SkillLevelData data)
+    {
+        GameObject skillFxPrefab = data.skillFxPrefab;
         var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
 
         if (skillFxObject == null)
@@ -68,9 +81,36 @@ public class Skill : MonoBehaviour
             return;
         }
 
-        skillFxObject.transform.position = args.publisher.Target.transform.position;
+        while(user.Target == null)
+        {
+            if (!_owner.IsActive) return;
+            await Awaitable.EndOfFrameAsync();
+        }
 
-        var publisherTarget = args.publisher.GetComponent<TargetDetector>().Target;
-        skillFx.Initialized(_skillLevel, args.publisher, _skillData, publisherTarget);
+        skillFxObject.transform.position = user.Target.transform.position;
+
+        var publisherTarget = user.GetComponent<TargetDetector>().Target;
+        skillFx.Initialized(this, user, _skillData, publisherTarget);
+    }
+
+    private void Update()
+    {
+        if (_skillData == null) return;
+        if (_skillData.SkillEventType != UnitEvents.None) return;
+        if (!_owner.IsActive) return;
+
+        float skillCooltime = _skillData.GetSkillLevelData(_skillLevel).skillCooltime;
+
+        if (_currentCooltime < skillCooltime)
+        {
+            _currentCooltime += Time.deltaTime;
+        }
+        else
+        {
+            _currentCooltime = 0;
+
+            var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
+            SpawnSkillEffect(_owner, skillLevelDetails);
+        }
     }
 }
