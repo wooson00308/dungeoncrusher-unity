@@ -49,6 +49,18 @@ public class UnitAnimator : MonoBehaviour
         });
     }
 
+    public void SpecialDeathEvent(AnimationEvent e)
+    {
+        ResourceManager.Instance.SpawnFromPath("SpecialDeath_Fx").transform.position = transform.position;
+        UnitFactory.Instance.Destroy(_owner.Id, _owner);
+
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnSpecialDeath.ToString(),
+            new GameEvent
+            {
+                args = new UnitEventArgs { publisher = _owner } //적 일러스트를 넣는다면 체크하는 용도로 유닛을 넘겨줌.
+            });
+    }
+
     private void OrderSprite()
     {
         _sortingGroup.sortingOrder = (int)(_owner.transform.position.y * -100);

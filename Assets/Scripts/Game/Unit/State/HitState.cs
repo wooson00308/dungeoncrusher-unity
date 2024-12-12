@@ -12,13 +12,6 @@ public class HitState : StateBase, IState
 
         unit.Stop();
 
-        int randomValue = Random.Range(0, 3);
-
-        if (randomValue == 2)
-        {
-            unit.OnAerial();
-        }
-
         _currentAttackStateCheckDelay = 0;
     }
 
