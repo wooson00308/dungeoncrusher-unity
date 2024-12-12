@@ -10,7 +10,8 @@ public enum UnitEvents
     UnitEvent_Attack_Critical,
     UnitEvent_OnHit,
     UnitEvent_OnHit_Critical,
-    UnitEvent_OnDeath
+    UnitEvent_OnDeath,
+    UnitEvent_OnSpecialDeath
 }
 
 public class UnitEventArgs
