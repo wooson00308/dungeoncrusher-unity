@@ -28,6 +28,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private FSM _fsm;
     private Rigidbody2D _rigidbody;
 
+    public Rigidbody2D Rigidbody => _rigidbody;
+
     private bool _hasHitState;
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
