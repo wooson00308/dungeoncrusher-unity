@@ -8,6 +8,7 @@ public class GameClearProcess : Process
         UIManager.Instance.ShowLayoutUI<GameClearUI>();
 
         GameEventSystem.Instance.Publish(ProcessEvents.AllStageClear.ToString());
+        SoundSystem.Instance.PlayBGM("GameClear");
     }
 
     public void OnDisable()

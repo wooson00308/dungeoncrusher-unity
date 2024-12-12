@@ -35,13 +35,14 @@ public class ReadyProcess : Process
         if (_isSpawnPlayers)
         {
             _isSpawnPlayers = false;
-            
+
             var units = UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
             _camera.Follow = units[0].transform;
         }
 
         GameEventSystem.Instance.Publish(ProcessEvents.SetActive.ToString(), new GameEvent { args = false });
         GameEventSystem.Instance.Publish(ProcessEvents.Ready.ToString());
+        SoundSystem.Instance.PlayBGM("EngageBGM");
     }
 
     private void AllReady(GameEvent gameEvent)

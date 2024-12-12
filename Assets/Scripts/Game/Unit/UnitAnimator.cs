@@ -25,6 +25,7 @@ public class UnitAnimator : MonoBehaviour
     public void AttackEvent(AnimationEvent e)
     {
         _owner.Target?.OnHit(_owner.Attack.Value, _owner);
+        SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent
         {

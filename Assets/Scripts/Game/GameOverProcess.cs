@@ -9,6 +9,7 @@ public class GameOverProcess : Process
         UIManager.Instance.ShowLayoutUI<GameOverUI>();
 
         GameEventSystem.Instance.Publish(ProcessEvents.GameOver.ToString());
+        SoundSystem.Instance.PlayBGM("GameOver");
     }
 
     public void OnDisable()
