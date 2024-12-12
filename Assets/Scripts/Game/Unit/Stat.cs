@@ -24,14 +24,14 @@ public abstract class Stat<T>
 
     protected T Clamp(T value)
     {
-        bool isLessThanMin = Comparer<T>.Default.Compare(value, _minValue) < 0 && _isUsedMinValue;
+        bool isLessThanMin = Comparer<T>.Default.Compare(value, _minValue) <= 0 && _isUsedMinValue;
         bool isGreaterThanMax = Comparer<T>.Default.Compare(value, _maxValue) > 0 && _isUsedMaxValue;
 
-        if(isLessThanMin)
+        if (isLessThanMin)
         {
             return _minValue;
         }
-        else if(isGreaterThanMax)
+        else if (isGreaterThanMax)
         {
             return _maxValue;
         }
@@ -107,7 +107,9 @@ public abstract class Stat<T>
 [Serializable]
 public class IntStat : Stat<int>
 {
-    public IntStat(int value) : base(value) { }
+    public IntStat(int value) : base(value)
+    {
+    }
 
     protected override int Add(int a, int b) => a + b;
     protected override int Subtract(int a, int b) => a - b;
@@ -116,7 +118,9 @@ public class IntStat : Stat<int>
 [Serializable]
 public class FloatStat : Stat<float>
 {
-    public FloatStat(float value) : base(value) { }
+    public FloatStat(float value) : base(value)
+    {
+    }
 
     protected override float Add(float a, float b) => a + b;
     protected override float Subtract(float a, float b) => a - b;
