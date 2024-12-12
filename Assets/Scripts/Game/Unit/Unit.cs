@@ -24,6 +24,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private NavMeshAgent _agent;
     private Animator _animator;
     private FSM _fsm;
+    private Rigidbody2D _rigidbody;
+
+    public Rigidbody2D Rigidbody => _rigidbody;
+
     private bool _hasHitState;
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
@@ -123,6 +127,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _fsm = GetComponent<FSM>();
         _hasHitState = GetComponent<HitState>();
         _agent = GetComponent<NavMeshAgent>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _targetDetector = GetComponent<TargetDetector>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -150,6 +155,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private void SetActive(GameEvent gameEvent)
     {
+        _agent.enabled = true;
         IsActive = (bool)gameEvent.args;
         _fsm.enabled = IsActive;
 
@@ -243,10 +249,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         IsDeath = true;
         IsActive = false;
-
+        _agent.enabled = false;
         // Debug.Log($"{killer}이(가) {_id}을(를) 처치하였습니다.");
 
-        _fsm.TransitionTo<DeathState>();
+        if (_id == "Unit_3")
+        {
+            _fsm.TransitionTo<DeathState>();
+        }
+        else
+        {
+            _fsm.TransitionTo<SpecialDeathState>();
+        }
     }
 
     public void OnStun(int stunDuration)
