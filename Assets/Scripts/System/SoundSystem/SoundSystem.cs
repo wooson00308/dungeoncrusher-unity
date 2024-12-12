@@ -21,4 +21,24 @@ public class SoundSystem : SingletonMini<SoundSystem>
         var fxClip = _soundData.GetFXSound(soundName);
         _fxAudioSource.PlayOneShot(fxClip);
     }
+
+    public void BGMVolume(float volume)
+    {
+        _bgmAudioSource.volume = volume;
+    }
+
+    public void FXVolume(float volume)
+    {
+        _fxAudioSource.volume = volume;
+    }
+
+    public void BGMMute(bool mute)
+    {
+        _bgmAudioSource.mute = mute;
+    }
+
+    public void FxMute(bool mute)
+    {
+        _fxAudioSource.mute = mute;
+    }
 }
