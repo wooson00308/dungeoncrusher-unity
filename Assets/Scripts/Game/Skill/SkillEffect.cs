@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SkillEffect : MonoBehaviour
 {
     [SerializeField] protected Animator _animator;
 
-   protected readonly List<Unit> _units = new();
+    protected readonly List<Unit> _units = new();
 
     protected bool _isInitialized = false;
+    protected bool _isMultiTargeting = false;
 
     private Unit _user;
     private SkillData _skillData;
     private Unit _target;
+    private List<Unit> _targets;
     private int _level;
 
     public void Initialized(int level, Unit user, SkillData skillData, Unit target = null)
@@ -28,9 +31,25 @@ public class SkillEffect : MonoBehaviour
 
         _isInitialized = true;
     }
+    public void Initialized(int level, Unit user, SkillData skillData, List<Unit> targets = null)
+    {
+        _level = level;
+        _user = user;
+        _skillData = skillData;
+        if (!_skillData.IsAreaAttack)
+        {
+            _target = targets[^1];
+        }
+        _targets = targets;
+        _isMultiTargeting = true;
+        _isInitialized = true;
+    }
 
     public void OnAction(AnimationEvent e)
     {
+        if (_isMultiTargeting)
+            _skillData.OnAction(_level, _user, _targets);
+
         if (_skillData.IsAreaAttack)
         {
             _skillData.OnAction(_level, _user, _units);
