@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4d1640ff159b2e6489ada95f2bd7577b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229714
+  packageName: Fast 2D Trails
+  packageVersion: 1.2
+  assetPath: Assets/INab Studio/Easy Trails 2D/Core/Scripts/Editor/Trails2DEditor.cs
+  uploadId: 696729

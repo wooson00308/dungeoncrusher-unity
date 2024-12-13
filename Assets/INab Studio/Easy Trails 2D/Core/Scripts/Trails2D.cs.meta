@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4c9749f751d166849b0ac6b5b616acea
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229714
+  packageName: Fast 2D Trails
+  packageVersion: 1.2
+  assetPath: Assets/INab Studio/Easy Trails 2D/Core/Scripts/Trails2D.cs
+  uploadId: 696729

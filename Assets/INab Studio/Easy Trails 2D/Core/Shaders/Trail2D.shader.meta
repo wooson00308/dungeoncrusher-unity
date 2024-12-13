@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17873a79f456d12409bdbea3c58580ad
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229714
+  packageName: Fast 2D Trails
+  packageVersion: 1.2
+  assetPath: Assets/INab Studio/Easy Trails 2D/Core/Shaders/Trail2D.shader
+  uploadId: 696729
