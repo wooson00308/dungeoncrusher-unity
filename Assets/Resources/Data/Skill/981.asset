@@ -24,15 +24,15 @@ MonoBehaviour:
   _skillEventType: 0
   _skillLevelDatas:
   - activationChance: 50
-    skillValue: 100
+    skillValue: 1
     skillCooltime: 3
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 50
-    skillValue: 145
+    skillValue: 1
     skillCooltime: 2
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 50
-    skillValue: 200
+    skillValue: 1
     skillCooltime: 1
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   _dashSpeed: 30
