@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cd93b75e07ecd7438c1591dbf1412e2, type: 3}
-  m_Name: 981
+  m_Name: 600
   m_EditorClassIdentifier: 
   _id: 981
   _prefab: {fileID: 7109323706280591704, guid: 03a2073776014fe4a8f37ed0cdc86931, type: 3}
@@ -25,11 +25,11 @@ MonoBehaviour:
   _skillLevelDatas:
   - activationChance: 50
     skillValue: 1
-    skillCooltime: 3
+    skillCooltime: 1
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 50
     skillValue: 1
-    skillCooltime: 2
+    skillCooltime: 1
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 50
     skillValue: 1
