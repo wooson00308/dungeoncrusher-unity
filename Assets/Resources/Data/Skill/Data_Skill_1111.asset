@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878a8a726ea760d42959ab94f0265846, type: 3}
+  m_Name: Data_Skill_1111
+  m_EditorClassIdentifier: 
+  _id: Skill_1111
+  _prefab: {fileID: 2331923126263427583, guid: 495daf80d4b75b44683b4807faf087da, type: 3}
+  _rarity: 2
+  _icon: {fileID: 21300000, guid: 04f15935351bf844e9c3d61d5f88ef3e, type: 3}
+  _name: CoolDownSkill Temp
+  _description: "\uC784\uC2DC\uC6A9 \uC2A4\uD0AC\uC785\uB2C8\uB2E4"
+  _isAreaAttack: 1
+  _isPassiveSkill: 0
+  _isSelfSkill: 1
+  _skillEventType: 3
+  _skillLevelDatas:
+  - activationChance: 0
+    skillValue: 100
+    coolTIme: 5
+    targetNum: 3
+    skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}
+  - activationChance: 0
+    skillValue: 200
+    coolTIme: 3
+    targetNum: 3
+    skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}
