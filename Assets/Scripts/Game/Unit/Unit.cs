@@ -198,7 +198,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if(TryGetComponent<DashState>(out var state))
         {
             var dashSpeed = data.DashSpeed;
-            state.OnDash(this, dashSpeed, exitCallback);
+            var additionalDistance = data.AdditionalDistance;
+            state.OnDash(this, dashSpeed, additionalDistance, exitCallback);
         }
     }
 
