@@ -8,6 +8,12 @@ public class MainModel : BaseModel
 {
     private int _gameTimeScale = 1;
 
+    private void Awake()
+    {
+        _gameTimeScale = 1;
+        Time.timeScale = _gameTimeScale;
+    }
+
     public override void Initialize()
     {
     }
