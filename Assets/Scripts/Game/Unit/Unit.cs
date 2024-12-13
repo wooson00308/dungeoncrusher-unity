@@ -26,8 +26,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private FSM _fsm;
     private Rigidbody2D _rigidbody;
 
-    public Rigidbody2D Rigidbody => _rigidbody;
-
     private bool _hasHitState;
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
@@ -40,6 +38,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     [SerializeField] private UnitAnimator _model;
     [SerializeField] private Transform _skillStorage;
     [SerializeField] private Transform _inventory;
+    public bool ActiveSpecialDeath { get; set; }
 
     public string Id => _id;
     public Line Line => _line;
@@ -150,6 +149,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _fsm.enabled = false;
 
         Team = team;
+
+        // TODO : 임시 테스트용 기능, 차후에 제거 예정
+        ActiveSpecialDeath = Team == Team.Enemy;
+
         SetupStats(data);
     }
 
@@ -219,6 +222,16 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
     }
 
+    public void AddForce(Unit killer)
+    {
+        var directionX = killer.transform.position.x - transform.position.x >= 0 ? -1 : 1;
+        var directionY = Random.Range(0, 2f);
+
+        Vector2 forceVec = new Vector2(directionX, directionY).normalized * 20;
+
+        _rigidbody.AddForce(forceVec, ForceMode2D.Impulse);
+    }
+
     #endregion
 
     #region FSM
@@ -240,24 +253,25 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         if (Health.Value <= 0)
         {
-            OnDeath(attacker);
+            OnDeath(attacker, ActiveSpecialDeath);
         }
     }
 
-    public void OnDeath(Unit killer = null)
+    public void OnDeath(Unit killer = null, bool isSpecialDeath = false)
     {
         if (IsDeath) return;
+        Health.Update("Engage", 0);
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
-        // Debug.Log($"{killer}이(가) {_id}을(를) 처치하였습니다.");
 
-        if (_id == "Unit_3")
+        if (!isSpecialDeath)
         {
             _fsm.TransitionTo<DeathState>();
         }
         else
         {
+            AddForce(killer);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }
