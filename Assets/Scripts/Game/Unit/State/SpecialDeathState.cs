@@ -10,10 +10,9 @@ public class SpecialDeathState : StateBase, IState
         unit.CrossFade("SpecialDeath", 0f);
         Unit playerUnit = UnitFactory.Instance.GetTeamUnits(Team.Friendly).FirstOrDefault();
 
-        float randomYForce = Random.Range(0f, 1f);
+        int randomYForce = Random.Range(-1, 1);
         var positionX = playerUnit.transform.position.x - transform.position.x >= 0 ? 1 : -1;
         Vector2 forceVec = new Vector2(positionX * forceSpeed, randomYForce);
-        Debug.Log(forceVec);
         unit.Rigidbody.AddForce(forceVec, ForceMode2D.Impulse);
     }
 
