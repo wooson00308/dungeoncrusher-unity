@@ -25,6 +25,7 @@ public class UnitAnimator : MonoBehaviour
     public void AttackEvent(AnimationEvent e)
     {
         _owner.Target?.OnHit(_owner.Attack.Value, _owner);
+        SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent
         {
@@ -46,6 +47,18 @@ public class UnitAnimator : MonoBehaviour
             eventType = UnitEvents.UnitEvent_OnDeath.ToString(),
             args = new UnitEventArgs { publisher = _owner }
         });
+    }
+
+    public void SpecialDeathEvent(AnimationEvent e)
+    {
+        ResourceManager.Instance.SpawnFromPath("SpecialDeath_Fx").transform.position = transform.position;
+        UnitFactory.Instance.Destroy(_owner.Id, _owner);
+
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath.ToString(),
+            new GameEvent
+            {
+                args = new UnitEventArgs { publisher = _owner } //적 일러스트를 넣는다면 체크하는 용도로 유닛을 넘겨줌.
+            });
     }
 
     private void OrderSprite()

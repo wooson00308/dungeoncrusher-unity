@@ -29,7 +29,7 @@ public class DashData : SkillData
                 if (target.IsDeath)
                 {
                     // 쿨타임 초기화
-                    skill.ResetCoolTime();
+                    skill.ResetCooltime();
                 }
 
                 if(skill.Level > 2)

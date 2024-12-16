@@ -14,10 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _choiceDatas:
   - tier: 3
-    choiceType: 0
-    itemData: {fileID: 11400000, guid: 4a76854baa95245abab4d78266c6ca60, type: 2}
-    skillData: {fileID: 0}
-  - tier: 3
     choiceType: 1
     itemData: {fileID: 0}
     skillData: {fileID: 11400000, guid: c77efe0016ed2cd4db26eec6c17bb258, type: 2}

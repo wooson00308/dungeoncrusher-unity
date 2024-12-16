@@ -21,19 +21,23 @@ MonoBehaviour:
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
   _isAreaAttack: 0
   _isPassiveSkill: 0
+  _isSelfSkill: 1
   _skillEventType: 0
   _skillLevelDatas:
-  - activationChance: 50
-    skillValue: 1
-    skillCooltime: 1
+  - activationChance: 100
+    skillValue: 30
+    coolTime: 3
+    targetNum: 0
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
-  - activationChance: 50
-    skillValue: 1
-    skillCooltime: 1
+  - activationChance: 100
+    skillValue: 30
+    coolTime: 3
+    targetNum: 0
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
-  - activationChance: 50
-    skillValue: 1
-    skillCooltime: 1
+  - activationChance: 100
+    skillValue: 30
+    coolTime: 3
+    targetNum: 0
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   _dashSpeed: 30
   _additionalDistance: 1.2

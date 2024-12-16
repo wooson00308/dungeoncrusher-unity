@@ -28,4 +28,3 @@ public class OnHitEventArgs : UnitEventArgs
 {
     public int damageValue;
 }
-

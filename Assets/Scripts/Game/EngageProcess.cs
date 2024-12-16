@@ -28,7 +28,7 @@ public class EngageProcess : Process
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
         Unit unit = unitEventArgs.publisher;
-        
+
         if (unit.Team == Team.Friendly)
         {
             int friendlyCount = UnitFactory.Instance.GetTeamUnits(unit.Team).Count;
