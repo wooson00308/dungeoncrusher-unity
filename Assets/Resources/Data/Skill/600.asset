@@ -36,4 +36,4 @@ MonoBehaviour:
     skillCooltime: 1
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   _dashSpeed: 30
-  _additionalDistance: 1.6
+  _additionalDistance: 1.2
