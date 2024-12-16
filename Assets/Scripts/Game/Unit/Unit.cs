@@ -239,7 +239,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void AddForce(Unit killer)
     {
         var directionX = killer.transform.position.x - transform.position.x >= 0 ? -1 : 1;
-        var directionY = Random.Range(0, 2f);
+        var directionY = UnityEngine.Random.Range(0, 2f);
 
         Vector2 forceVec = new Vector2(directionX, directionY).normalized * 20;
 
