@@ -48,6 +48,7 @@ public class SkillEffect : MonoBehaviour
     public void OnAction(AnimationEvent e)
     {
         if (!_isInitialized) return;
+        
         if (_isMultiTargeting)
             _skillData.OnAction(_skill, _user, _targets);
 
