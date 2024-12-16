@@ -11,11 +11,6 @@ public class DestroyTimer : MonoBehaviour
         
     }
 
-    private void OnDisable()
-    {
-        
-    }
-
     IEnumerator DestroyTime()
     {
         WaitForSeconds destroyWait = new(destroyTime);

@@ -14,14 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageInfos:
   - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 10
+    - stageUnits: {fileID: 11400000, guid: d6a04bbc9a58d40d69596b295c73cf9e, type: 2}
+      spawnCount: 1
   - stageUnitDatas:
     - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 2
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 4
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 6
+      spawnCount: 3

@@ -38,6 +38,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     [SerializeField] private UnitAnimator _model;
     [SerializeField] private Transform _skillStorage;
     [SerializeField] private Transform _inventory;
+
+    [SerializeField] private bool _isBoss;
+    public bool IsBoss => _isBoss;
+
     public bool ActiveSpecialDeath { get; set; }
 
     public string Id => _id;
@@ -264,6 +268,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
+        
+        if (_isBoss)
+        {
+            TimeManager.Instance.SlowMotion();
+        }
 
         if (!isSpecialDeath)
         {
