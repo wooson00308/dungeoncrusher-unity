@@ -131,11 +131,16 @@ public class Skill : MonoBehaviour
     {
         if (!_isInitialized) // 초기화 되었는지 체크
             return false;
+        
         if (!_owner.IsActive) // 스킬을 사용하는 유닛이 비활성화 되었는지 확인. 비활성화 조건 -> 게임이 준비 단계로 넘어가면 비활성화 됨.
         {
             ResetCooltime();
             return false;
         }
+
+        if (!_skillData.IsValidTarget(_owner)) 
+            return false;
+
         if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // 쿨타임 지났는지 체크 
             return false;
 

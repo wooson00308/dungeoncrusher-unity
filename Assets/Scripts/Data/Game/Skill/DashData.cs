@@ -5,13 +5,23 @@ using UnityEngine;
 public class DashData : SkillData
 {
     [Header("Dash Config")]
+    [SerializeField] private float _dashRange;
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _additionalDistance;
+    public float DashRange => _dashRange;
     public float DashSpeed => _dashSpeed;
     public float AdditionalDistance => _additionalDistance;
 
     public override bool IsValidTarget(Unit unit)
     {
+        if (unit.Target == null) 
+            return false;
+        
+        if(Vector3.Distance(unit.transform.position, unit.Target.transform.position) > _dashRange)
+        {
+            return false;
+        }
+
         return true;
     }
 
