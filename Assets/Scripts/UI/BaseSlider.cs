@@ -46,6 +46,12 @@ public abstract class BaseSlider : BaseView
 
     private void MoveSlider()
     {
+        if (_unit.IsBoss)
+        {
+            _rectTransform.anchoredPosition = Vector2.zero + _pivot;
+            return;
+        }
+
         _rectTransform.anchoredPosition =
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, _unit.transform.position) +
             _pivot;

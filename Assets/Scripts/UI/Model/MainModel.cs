@@ -6,12 +6,8 @@ using UnityEngine;
 
 public class MainModel : BaseModel
 {
-    private int _gameTimeScale = 1;
-
     private void Awake()
     {
-        _gameTimeScale = 1;
-        Time.timeScale = _gameTimeScale;
     }
 
     public override void Initialize()
@@ -20,13 +16,11 @@ public class MainModel : BaseModel
 
     public void ChangeGameSpeed()
     {
-        _gameTimeScale = _gameTimeScale == 1 ? 2 : 1;
-        Debug.Log(_gameTimeScale);
-        Time.timeScale = _gameTimeScale;
+        TimeManager.Instance.ChangeTimeScale();
     }
 
     public int GetGameSpeed()
     {
-        return _gameTimeScale;
+        return TimeManager.Instance.GetGameSpeed();
     }
 }
