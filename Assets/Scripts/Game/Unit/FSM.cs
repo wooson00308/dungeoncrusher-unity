@@ -11,7 +11,9 @@ public class FSM : MonoBehaviour
 
     private string _currentStateName;
     public string CurrentStateName => _currentStateName;
-
+    private bool _isLocked = false;
+    public void LockState() => _isLocked = true;
+    public void UnlockState() => _isLocked = false;
     private void Awake()
     {
         _unit = GetComponent<Unit>();
@@ -19,6 +21,8 @@ public class FSM : MonoBehaviour
 
     public void TransitionTo<T>() where T : MonoBehaviour, IState
     {
+        if (_isLocked)
+            return;
         _currentState?.OnExit(_unit);
 
         if (!TryGetComponent<T>(out var nextState))

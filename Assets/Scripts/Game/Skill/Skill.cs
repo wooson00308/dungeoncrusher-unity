@@ -105,11 +105,15 @@ public class Skill : MonoBehaviour
             // 3. 범위 공격 피격
 
             // BEFORE
-            List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
+            //List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
 
             //AFTER
             // ...
-
+            List<Unit> targets = enemies
+            .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <= _skillData.GetSkillLevelData(_skillLevel).range)
+            .OrderBy(x => Random.value)
+            .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
+            .ToList();
             skillFx.Initialized(this, user, _skillData, targets);
         }
         else

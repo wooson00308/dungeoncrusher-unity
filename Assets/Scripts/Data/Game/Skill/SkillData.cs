@@ -88,6 +88,7 @@ public class SkillLevelData
     public float skillValue; // n%
     public float coolTime; //쿨타임 입력
     public int targetNum; //타켓수 지정방식
+    public float range; //공격 범위 크기?
     public GameObject skillFxPrefab;
 }
 
