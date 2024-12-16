@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ public class DestroyTimer : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(DestroyTime());
-        
     }
 
     IEnumerator DestroyTime()
@@ -17,7 +17,7 @@ public class DestroyTimer : MonoBehaviour
         yield return destroyWait;
         DestroyThis();
     }
-    
+
     private void DestroyThis()
     {
         ResourceManager.Instance.Destroy(gameObject);

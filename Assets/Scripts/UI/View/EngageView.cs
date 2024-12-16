@@ -60,7 +60,6 @@ public class EngageView : BaseView
 
         if (setActiveEventArgs.publisher.IsBoss)
         {
-            Debug.Log("boss");
             hpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossHpSlider").GetComponent<HpSliderUI>();
         }
         else
@@ -76,7 +75,17 @@ public class EngageView : BaseView
         var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
-        var mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+        MpSliderUI mpSlider;
+        
+        if (setActiveEventArgs.publisher.IsBoss)
+        {
+            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider").GetComponent<MpSliderUI>();
+        }
+        else
+        {
+            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+        }
+        
         mpSlider.Show(setActiveEventArgs.publisher);
     }
 
