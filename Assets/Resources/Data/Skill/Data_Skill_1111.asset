@@ -23,13 +23,15 @@ MonoBehaviour:
   _isSelfSkill: 1
   _skillEventType: 0
   _skillLevelDatas:
-  - activationChance: 0
+  - activationChance: 100
     skillValue: 100
-    coolTIme: 1
+    coolTime: 3
     targetNum: 3
+    range: 0.7
     skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}
-  - activationChance: 0
+  - activationChance: 100
     skillValue: 200
-    coolTIme: 1
+    coolTime: 3
     targetNum: 3
+    range: 0.9
     skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}
