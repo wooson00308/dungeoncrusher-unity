@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum UnitEvents
 {
+    None,
     UnitEvent_SetActive,
     UnitEvent_UseSkill,
     UnitEvent_UseSkill_Ulti,

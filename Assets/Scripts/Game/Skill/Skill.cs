@@ -1,9 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class Skill : MonoBehaviour
 {
@@ -13,7 +10,6 @@ public class Skill : MonoBehaviour
     public SkillData SkillData => _skillData;
     private float _timeMarker;
     private bool _isInitialized = false;
-    private bool OnOff = false;
 
     public void Setup(Unit owner)
     {
@@ -28,26 +24,21 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_skillData.IsSelfSkill)
-        {
-            GameEventSystem.Instance.Subscribe(ProcessEvents.Engage.ToString(), On);
-            GameEventSystem.Instance.Subscribe(ProcessEvents.Ready.ToString(), Off);
-            return;
+        if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
+        { 
+            GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
-        GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TrySpawnSkillEffect);
     }
 
     private void OnDisable()
     {
         _skillLevel = 1;
         _isInitialized = false;
-        if (_skillData.IsSelfSkill)
+
+        if (!_skillData.IsSelfSkill) 
         {
-            GameEventSystem.Instance.Unsubscribe(ProcessEvents.Engage.ToString(), On);
-            GameEventSystem.Instance.Unsubscribe(ProcessEvents.Ready.ToString(), Off);
-            return;
+            GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
-        GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TrySpawnSkillEffect);
     }
 
     public void LevelUp(int value = 1)
@@ -55,97 +46,105 @@ public class Skill : MonoBehaviour
         _skillLevel += value;
     }
 
-    public void TrySpawnSkillEffect(GameEvent gameEvent)
+    public void TryUseEventSkill(GameEvent gameEvent)
     {
-        if (!_isInitialized) return;
-
         UnitEventArgs args = (UnitEventArgs)gameEvent.args;
-        var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
         if (args == null) return;
         if (!args.publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
         if (gameEvent.eventType != _skillData.SkillEventType.ToString()) return;
         if (args.publisher.Target == null) return;
 
-        float random = Random.Range(0, 100f);
-
-        if (random < skillLevelDetails.activationChance) return;
-
-        GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
-        if (skillFxPrefab == null)
-            return;
-        var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
-
-        if (skillFxObject == null)
-        {
-            return;
-        }
-
-        var skillFx = skillFxObject.GetComponent<SkillEffect>();
-        if (skillFx == null)
-        {
-            return;
-        }
-
-        skillFxObject.transform.position = args.publisher.Target.transform.position;
-
-        var publisherTarget = args.publisher.GetComponent<TargetDetector>().Target;
-        skillFx.Initialized(_skillLevel, args.publisher, _skillData, publisherTarget);
+        UseSkill(args.publisher);
     }
-    public void TrySpawnSkillEffect()
+
+    public void TryUseSkillWheenCoolTimeReady()
     {
+        if (!_skillData.IsSelfSkill) return; // 스킬이 특정 조건이 아닌 자가발동 스킬인지 체크 
+        UseSkill(_owner);
+    }
+
+    /// <summary>
+    /// 스킬 사용 중복 코드 메서드화
+    /// </summary>
+    /// <param name="user"></param>
+    private void UseSkill(Unit user)
+    {
+        if (!IsUseableSkill()) return;
+
+        if (user.Target == null) return;
+
+        #region 스킬 프리팹 무결성 검사
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
         GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
-        if (skillFxPrefab == null)
-            return;
-        var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
-        if (skillFxObject == null)
-            return;
-        float random = Random.Range(0, 100f);
-        if (random < skillLevelDetails.activationChance) return;
-        
+        if (skillFxPrefab == null) return;
 
-        var skillFx = skillFxObject.GetComponent<SkillEffect>();
-        if (skillFx == null)
-        {
+        var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
+        if (skillFxObject == null) {
+            ResourceManager.Instance.Destroy(skillFxPrefab);
             return;
         }
-        skillFx.transform.position = _owner.transform.position;  
+        if (!skillFxObject.TryGetComponent<SkillEffect>(out var skillFx)) return;
+        #endregion
+
+        float random = Random.Range(0, 100f);
+        if (random < skillLevelDetails.activationChance) return;
+
+        skillFxObject.transform.position = user.Target.transform.position;
         if (_skillData.IsAreaAttack)
         {
-            HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(_owner.Team);
-            List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList(); // 랜덤으로 지정 수만큼 타겟을 지정
-            //enemies
-            //.OrderBy(enemy => Vector3.Distance(enemy.transform.position, _owner.transform.position)) // 거리 기준으로 정렬
-            //.Take(_skillData.GetSkillLevelData(_skillLevel).targetNum) // 가까운 적을 필요한 수만큼 가져오기
-            //.ToList();
-            skillFx.Initialized(_skillLevel, _owner, _skillData, targets);
+            HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
+
+            // TODO : 수정 필요 -> 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시켜야 함.
+            // 1. 타겟을 찾고
+            // 2. 적들 중 타겟과 거리가 일정거리 가까운 애들을 선별하여
+            // 3. 범위 공격 피격
+
+            // BEFORE
+            List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
+
+            //AFTER
+            // ...
+
+            skillFx.Initialized(_skillLevel, user, _skillData, targets);
         }
         else
         {
-            skillFx.Initialized(_skillLevel, _owner, _skillData, _owner.GetComponent<TargetDetector>().Target);
+            skillFx.Initialized(_skillLevel, user, _skillData, user.Target);
         }
-        _timeMarker = Time.time;
+        _timeMarker = Time.time; // 스킬 쿨타임 초기화
     }
 
     private void Update()
     {
-        if (!OnOff)
-            return;
-        if (!_skillData.IsSelfSkill)
-            return;
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTIme)
-            return;
-        TrySpawnSkillEffect();
+        TryUseSkillWheenCoolTimeReady();
     }
-    private void Off(GameEvent e)
+
+    /// <summary>
+    /// 스킬 사용 여부 판단
+    /// </summary>
+    /// <returns></returns>
+    private bool IsUseableSkill()
     {
-        OnOff = false;
+        if (!_isInitialized) // 초기화 되었는지 체크
+            return false;
+        if (!_owner.IsActive) // 스킬을 사용하는 유닛이 비활성화 되었는지 확인. 비활성화 조건 -> 게임이 준비 단계로 넘어가면 비활성화 됨.
+            return false;
+        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTIme) // 쿨타임 지났는지 체크 
+            return false;
+
+        return true;
     }
-    private void On(GameEvent e)
-    {
-        _timeMarker = Time.time;
-        OnOff = true;
-    }
+
+    // 기존 기능 중에 전투 중인지 전투중이 아닌지 체크하는 기능이 존재하여 해당 기능을 비활성화하였습니다.
+    //private void Off(GameEvent e)
+    //{
+    //    OnOff = false;
+    //}
+    //private void On(GameEvent e)
+    //{
+    //    _timeMarker = Time.time;
+    //    OnOff = true;
+    //}
 }
