@@ -74,7 +74,7 @@ public class DashState : StateBase, IState
 
         if (NavMesh.SamplePosition(newPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
         {
-            //unit.Warp(hit.position);
+            unit.Warp(hit.position);
         }
 
         if (Vector2.Distance(unit.transform.position, unit.Target.transform.position) < 0.1f)
@@ -93,7 +93,7 @@ public class DashState : StateBase, IState
 
         if (NavMesh.SamplePosition(additionalPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
         {
-            //unit.Warp(hit.position);
+            unit.Warp(hit.position);
         }
 
         if (_remainingDistance <= 0f)

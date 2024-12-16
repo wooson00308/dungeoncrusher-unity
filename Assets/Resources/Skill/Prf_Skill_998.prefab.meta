@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Skill/Prf_Skill_998.prefab.meta
 guid: a862e0e8f20180d4d9101bf0c5a4d81e
+========
+guid: 67312562c484b624f84724f7695508d1
+>>>>>>>> origin/main:Assets/Resources/Skill/Fx/Prf_Skill_Fx_998.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

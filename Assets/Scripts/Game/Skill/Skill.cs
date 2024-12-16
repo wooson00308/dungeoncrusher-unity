@@ -7,9 +7,10 @@ public class Skill : MonoBehaviour
     private Unit _owner;
     private int _skillLevel = 1;
     [SerializeField] private SkillData _skillData;
-    public SkillData SkillData => _skillData;
     private float _timeMarker;
     private bool _isInitialized = false;
+    public SkillData SkillData => _skillData;
+    public int Level => _skillLevel;
 
     public void Setup(Unit owner)
     {
@@ -72,6 +73,8 @@ public class Skill : MonoBehaviour
     {
         if (!IsUseableSkill()) return;
 
+        _timeMarker = Time.time; // 스킬 쿨타임 초기화
+
         if (user.Target == null) return;
 
         #region 스킬 프리팹 무결성 검사
@@ -89,7 +92,7 @@ public class Skill : MonoBehaviour
         #endregion
 
         float random = Random.Range(0, 100f);
-        if (random < skillLevelDetails.activationChance) return;
+        if (random > skillLevelDetails.activationChance) return;
 
         skillFxObject.transform.position = user.Target.transform.position;
         if (_skillData.IsAreaAttack)
@@ -107,13 +110,12 @@ public class Skill : MonoBehaviour
             //AFTER
             // ...
 
-            skillFx.Initialized(_skillLevel, user, _skillData, targets);
+            skillFx.Initialized(this, user, _skillData, targets);
         }
         else
         {
-            skillFx.Initialized(_skillLevel, user, _skillData, user.Target);
+            skillFx.Initialized(this, user, _skillData, user.Target);
         }
-        _timeMarker = Time.time; // 스킬 쿨타임 초기화
     }
 
     private void Update()
@@ -130,11 +132,22 @@ public class Skill : MonoBehaviour
         if (!_isInitialized) // 초기화 되었는지 체크
             return false;
         if (!_owner.IsActive) // 스킬을 사용하는 유닛이 비활성화 되었는지 확인. 비활성화 조건 -> 게임이 준비 단계로 넘어가면 비활성화 됨.
+        {
+            ResetCooltime();
             return false;
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTIme) // 쿨타임 지났는지 체크 
+        }
+        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // 쿨타임 지났는지 체크 
             return false;
 
         return true;
+    }
+
+    public void ResetCooltime()
+    {
+        var cooltime = _skillData.GetSkillLevelData(_skillLevel).coolTime;
+
+        if (Time.time - _timeMarker > cooltime) return;
+        _timeMarker -= cooltime;
     }
 
     // 기존 기능 중에 전투 중인지 전투중이 아닌지 체크하는 기능이 존재하여 해당 기능을 비활성화하였습니다.

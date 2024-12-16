@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.Mesh;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(FSM))]
@@ -27,8 +26,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Animator _animator;
     private FSM _fsm;
     private Rigidbody2D _rigidbody;
-
-    public Rigidbody2D Rigidbody => _rigidbody;
 
     private bool _hasHitState;
     private bool _hasAerialState;
@@ -197,17 +194,21 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Rotation(target.position - transform.position);
     }
 
-    //public void DashToTarget(DashData data, Action exitCallback = null)
-    //{
-    //    if (Target == null) return;
+    public void Warp(Vector3 pos)
+    {
+        _agent.Warp(pos);
+    }
 
-    //    if (TryGetComponent<DashState>(out var state))
-    //    {
-    //        var dashSpeed = data.DashSpeed;
-    //        var additionalDistance = data.AdditionalDistance;
-    //        state.OnDash(this, dashSpeed, additionalDistance, exitCallback);
-    //    }
-    //}
+    public void DashToTarget(DashData data, Action callback = null)
+    {
+        if (!IsActive) return;
+        if (TryGetComponent<DashState>(out var state))
+        {
+            var speed = data.DashSpeed;
+            var distance = data.AdditionalDistance;
+            state.OnDash(this, speed, distance, callback);
+        }
+    }
 
     /// <summary>
     /// 이동 일시중지
@@ -254,9 +255,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
-        if (!IsActive) return;
-        if (IsDeath) return;
-
         if (_hasHitState)
         {
             _fsm.TransitionTo<HitState>();

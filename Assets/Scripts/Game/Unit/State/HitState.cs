@@ -9,7 +9,6 @@ public class HitState : StateBase, IState
         if (IsAerial(unit)) return;
 
         unit.CrossFade("Hit", 0f);
-
         unit.Stop();
 
         _currentAttackStateCheckDelay = 0;

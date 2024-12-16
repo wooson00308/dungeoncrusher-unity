@@ -78,7 +78,7 @@ public abstract class SkillData : ScriptableObject
     }
 
     public abstract bool IsValidTarget(Unit unit);
-    public abstract void OnAction(int level, Unit user, List<Unit> targets);
+    public abstract void OnAction(Skill skill, Unit user, List<Unit> targets);
 }
 
 [Serializable]
@@ -86,7 +86,7 @@ public class SkillLevelData
 {
     [Range(0f, 100f)] public float activationChance;
     public float skillValue; // n%
-    public float coolTIme; //쿨타임 입력
+    public float coolTime; //쿨타임 입력
     public int targetNum; //타켓수 지정방식
     public GameObject skillFxPrefab;
 }

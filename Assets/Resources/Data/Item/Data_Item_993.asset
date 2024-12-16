@@ -33,7 +33,7 @@ MonoBehaviour:
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 0
+    _value: 1
   _attackRange:
     _value: 0
   _criticalRate:

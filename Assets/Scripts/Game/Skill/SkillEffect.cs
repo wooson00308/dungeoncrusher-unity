@@ -16,11 +16,11 @@ public class SkillEffect : MonoBehaviour
     private SkillData _skillData;
     private Unit _target;
     private List<Unit> _targets;
-    private int _level;
+    private Skill _skill;
 
-    public void Initialized(int level, Unit user, SkillData skillData, Unit target = null)
+    public void Initialized(Skill skill, Unit user, SkillData skillData, Unit target = null)
     {
-        _level = level;
+        _skill = skill;
         _user = user;
         _skillData = skillData;
 
@@ -31,9 +31,9 @@ public class SkillEffect : MonoBehaviour
 
         _isInitialized = true;
     }
-    public void Initialized(int level, Unit user, SkillData skillData, List<Unit> targets = null)
+    public void Initialized(Skill skill, Unit user, SkillData skillData, List<Unit> targets = null)
     {
-        _level = level;
+        _skill = skill;
         _user = user;
         _skillData = skillData;
         if (!_skillData.IsAreaAttack)
@@ -47,23 +47,25 @@ public class SkillEffect : MonoBehaviour
 
     public void OnAction(AnimationEvent e)
     {
+        if (!_isInitialized) return;
         if (_isMultiTargeting)
-            _skillData.OnAction(_level, _user, _targets);
+            _skillData.OnAction(_skill, _user, _targets);
 
         if (_skillData.IsAreaAttack)
         {
-            _skillData.OnAction(_level, _user, _units);
+            _skillData.OnAction(_skill, _user, _units);
         }
         else
         {
             
             var targets = new List<Unit>() { _target };
-            _skillData.OnAction(_level, _user, targets);
+            _skillData.OnAction(_skill, _user, targets);
         }
     }
 
     public void Destroy(AnimationEvent e)
     {
+        if (!_isInitialized) return;
         _units.Clear();
         _isInitialized = false;
         ResourceManager.Instance.Destroy(gameObject);
@@ -71,6 +73,7 @@ public class SkillEffect : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!_isInitialized) return;
         if (!_skillData.IsAreaAttack) return;
         if (collision.TryGetComponent<Unit>(out var unit))
         {
@@ -80,6 +83,7 @@ public class SkillEffect : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if (!_isInitialized) return;
         if (!_skillData.IsAreaAttack) return;
         if (collision.TryGetComponent<Unit>(out var unit))
         {

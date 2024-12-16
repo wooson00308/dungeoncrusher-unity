@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Game_Mk.unity.meta
 guid: 652be2c9ecc488c429ad782ae8f5a37b
 DefaultImporter:
+========
+guid: a862e0e8f20180d4d9101bf0c5a4d81e
+PrefabImporter:
+>>>>>>>> origin/main:Assets/Resources/Skill/Prf_Skill_998.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
