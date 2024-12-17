@@ -7,6 +7,17 @@ public class HpSliderUI : BaseSlider
 {
     private int _maxHealth = 0;
 
+    public enum Sliders
+    {
+        Hp_Slider
+    }
+    
+    public override void BindUI()
+    {
+        base.BindUI();
+        Bind<Slider>(typeof(Sliders));
+    }
+
     public override void Show(Unit unit)
     {
         _unit = unit;

@@ -12,7 +12,7 @@ public class SkillDBEditor : Editor
     private Type _selectedType;
     private string[] _availableTypes;
 
-    private Dictionary<SkillData, bool> _foldoutStates = new(); // Æúµå¾Æ¿ô »óÅÂ ÀúÀå
+    private Dictionary<SkillData, bool> _foldoutStates = new(); // ï¿½ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private const string SKILL_BASE_PATH = "Assets/Resources/Skill";
     private const string SKILL_PREFAB_PATH = SKILL_BASE_PATH + "/";
@@ -70,13 +70,13 @@ public class SkillDBEditor : Editor
             {
                 EditorGUI.indentLevel++;
 
-                // ½ºÅ³ µ¥ÀÌÅÍ Ç¥½Ã
+                // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
                 EditorGUILayout.ObjectField("Skill Data", skillData, typeof(SkillData), false);
 
-                // Skill Prefab Á¤º¸ Ç¥½Ã
+                // Skill Prefab ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
                 EditorGUILayout.ObjectField("Skill Prefab", skillData.Prefab, typeof(GameObject), false);
 
-                // Skill FX Prefab Á¤º¸ Ç¥½Ã
+                // Skill FX Prefab ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
                 if (skillData.SkillLevelDatas != null)
                 {
                     for (int i = 0; i < skillData.SkillLevelDatas.Count; i++)
@@ -86,11 +86,11 @@ public class SkillDBEditor : Editor
                     }
                 }
 
-                // Á¦°Å ¹öÆ°
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
                 if (GUILayout.Button("Remove Skill"))
                 {
                     RemoveSkillData(skillData);
-                    break; // »èÁ¦ ÈÄ ¸ñ·ÏÀÌ º¯°æµÇ¹Ç·Î ·çÇÁ Á¾·á
+                    break; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
 
                 EditorGUI.indentLevel--;
@@ -133,13 +133,13 @@ public class SkillDBEditor : Editor
             return;
         }
 
-        // Áßº¹ ÀÌ¸§ Ã¼Å©
+        // ï¿½ßºï¿½ ï¿½Ì¸ï¿½ Ã¼Å©
         foreach (var skillData in _skillDatabase.SkillDatas)
         {
             if (skillData.name == skillName)
             {
                 Debug.LogWarning($"Skill with the name '{skillName}' already exists in the database.");
-                return; // Áßº¹ ÀÌ¸§ ¹æ¾î
+                return; // ï¿½ßºï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½
             }
         }
 
@@ -172,7 +172,7 @@ public class SkillDBEditor : Editor
     {
         GameObject skillPrefab = new(skillName);
         Skill skillComponent = skillPrefab.AddComponent<Skill>();
-        skillComponent.SetSkillData(skillData);
+        //skillComponent.SetSkillData(skillData);
 
         string prefabPath = SKILL_PREFAB_PATH + $"{skillName}.prefab";
         string directoryPath = Path.GetDirectoryName(prefabPath);
@@ -234,7 +234,7 @@ public class SkillDBEditor : Editor
             return;
         }
 
-        // È®ÀÎ ÆË¾÷ ¶ç¿ì±â
+        // È®ï¿½ï¿½ ï¿½Ë¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         bool confirmDelete = EditorUtility.DisplayDialog(
             "Delete Skill",
             $"Are you sure you want to delete the skill \"{skillData.name}\"? This action cannot be undone.",
@@ -248,10 +248,10 @@ public class SkillDBEditor : Editor
             return;
         }
 
-        // µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ½ºÅ³ µ¥ÀÌÅÍ Á¦°Å
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _skillDatabase.RemoveSkillData(skillData);
 
-        // ½ºÅ³ µ¥ÀÌÅÍ ÆÄÀÏ »èÁ¦
+        // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string assetPath = AssetDatabase.GetAssetPath(skillData);
         if (!string.IsNullOrEmpty(assetPath))
         {
@@ -263,7 +263,7 @@ public class SkillDBEditor : Editor
             Debug.LogWarning($"Could not find asset path for skill data.");
         }
 
-        // ½ºÅ³ µ¥ÀÌÅÍ¿¡ ¿¬°áµÈ ÇÁ¸®ÆÕ »èÁ¦
+        // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         RemovePrefabsFromSkillData(skillData);
 
         AssetDatabase.SaveAssets();
@@ -273,7 +273,7 @@ public class SkillDBEditor : Editor
 
     private void RemovePrefabsFromSkillData(SkillData skillData)
     {
-        // Skill Prefab »èÁ¦
+        // Skill Prefab ï¿½ï¿½ï¿½ï¿½
         if (skillData.Prefab != null)
         {
             string prefabPath = AssetDatabase.GetAssetPath(skillData.Prefab);
@@ -284,7 +284,7 @@ public class SkillDBEditor : Editor
             }
         }
 
-        // Skill FX Prefab »èÁ¦ (·¹º§ µ¥ÀÌÅÍ¿¡ ¿¬°áµÈ ÇÁ¸®ÆÕµé)
+        // Skill FX Prefab ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½)
         foreach (var levelData in skillData.SkillLevelDatas)
         {
             if (levelData.skillFxPrefab != null)

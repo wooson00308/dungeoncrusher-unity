@@ -13,7 +13,7 @@ public class GameOverView : BaseView
         GameOverPanel,
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }

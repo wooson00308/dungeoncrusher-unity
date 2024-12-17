@@ -14,7 +14,7 @@ public class GameClearView : BaseView
         GameClearPanel,
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }

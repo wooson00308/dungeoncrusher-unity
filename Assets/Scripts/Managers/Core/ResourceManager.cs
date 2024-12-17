@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
@@ -85,6 +87,53 @@ public class ResourceManager : Singleton<ResourceManager>
         // 큐에 추가
         _objectPool[obj.name].Enqueue(obj);
     }
+
+    /// <summary>
+    /// UI 오브젝트를 풀에 반환시키고, 자식에 새로운 Canvas를 생성한 뒤 부모로 할당함
+    /// </summary>
+    /// <param name="uiObject"></param>
+    public void DestroyUI(GameObject uiObject)
+    {
+        if (!uiObject.activeInHierarchy)
+        {
+            Debug.LogWarning("이미 풀에 반환된 UI 오브젝트입니다.");
+            return;
+        }
+
+        var canvasChild = transform.Find("UI_Canvas");
+        GameObject canvasObject = canvasChild?.gameObject;
+
+        if (canvasObject == null)
+        {
+            canvasObject = new GameObject("UI_Canvas");
+
+            Canvas canvas = canvasObject.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            var scaler = canvasObject.AddComponent<CanvasScaler>(); // UI 스케일 조절
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1080, 1920);
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+
+            canvasObject.AddComponent<GraphicRaycaster>(); // UI 클릭 이벤트 처리
+
+            canvasObject.transform.SetParent(transform, false);
+        }
+        
+        // UI 부모를 ResourceManager로 설정
+        uiObject.transform.SetParent(canvasObject.transform, false);
+
+        // UI 오브젝트를 비활성화하고 풀에 추가
+        uiObject.SetActive(false);
+
+        if (!_objectPool.ContainsKey(uiObject.name))
+        {
+            _objectPool[uiObject.name] = new Queue<GameObject>();
+        }
+
+        _objectPool[uiObject.name].Enqueue(uiObject);
+    }
+
 
     public Queue<GameObject> GetPoolObjects(string key)
     {

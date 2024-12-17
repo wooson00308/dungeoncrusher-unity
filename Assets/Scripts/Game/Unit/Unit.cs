@@ -266,6 +266,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _fsm.TransitionTo<HitState>();
         }
 
+        var realDamage = damage - Defense.Value;
+
+        damage = realDamage <= 0 ? 1 : realDamage;
+
         Health.Update("Engage", -damage);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
@@ -287,7 +291,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
-        
+
         if (_isBoss)
         {
             TimeManager.Instance.SlowMotion();
@@ -300,6 +304,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         else
         {
             AddForce(killer);
+            TimeManager.Instance.FreezeTime(500);
+            CameraShake.Instance.Shake(8, 0.05f);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }

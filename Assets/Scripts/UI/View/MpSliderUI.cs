@@ -6,6 +6,17 @@ public class MpSliderUI : BaseSlider
 {
     private int _maxMp = 100;
 
+    public enum Sliders
+    {
+        Mp_Slider
+    }
+
+    public override void BindUI()
+    {
+        base.BindUI();
+        Bind<Slider>(typeof(Sliders));
+    }
+
     public override void Show(Unit unit)
     {
         _unit = unit;

@@ -10,12 +10,6 @@ public abstract class BaseSlider : BaseView
     [SerializeField] protected Unit _unit;
     public Unit Unit => _unit;
 
-    protected enum Sliders
-    {
-        Hp_Slider,
-        Mp_Slider
-    }
-
     protected virtual void Awake()
     {
         BindUI();
@@ -24,7 +18,6 @@ public abstract class BaseSlider : BaseView
 
     public override void BindUI()
     {
-        Bind<Slider>(typeof(Sliders));
     }
 
     public abstract void Show(Unit unit);

@@ -7,7 +7,7 @@ public class LobbyView : BaseView
         PressEnterText
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }

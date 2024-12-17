@@ -11,11 +11,15 @@ public class EngageView : BaseView
     private Queue<OnHitEventArgs> _damageEventQueue = new Queue<OnHitEventArgs>();
     private bool _isProcessingDamageQueue = false;
 
+    private void Awake()
+    {
+        BindUI();
+    }
+
     private void OnEnable()
     {
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
-        BindUI();
     }
 
     private void OnDisable()
@@ -60,7 +64,6 @@ public class EngageView : BaseView
 
         if (setActiveEventArgs.publisher.IsBoss)
         {
-            Debug.Log("boss");
             hpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossHpSlider").GetComponent<HpSliderUI>();
         }
         else
@@ -76,7 +79,17 @@ public class EngageView : BaseView
         var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
-        var mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+        MpSliderUI mpSlider;
+        
+        if (setActiveEventArgs.publisher.IsBoss)
+        {
+            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider").GetComponent<MpSliderUI>();
+        }
+        else
+        {
+            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+        }
+        
         mpSlider.Show(setActiveEventArgs.publisher);
     }
 

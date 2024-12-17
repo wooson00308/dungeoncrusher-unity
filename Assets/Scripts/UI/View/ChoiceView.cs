@@ -25,7 +25,7 @@ public class ChoiceView : BaseView
 
     private ChoiceData _data;
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }
