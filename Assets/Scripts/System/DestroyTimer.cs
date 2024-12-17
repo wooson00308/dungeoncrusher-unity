@@ -8,13 +8,12 @@ public class DestroyTimer : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(DestroyTime());
+        DestroyTime();
     }
 
-    IEnumerator DestroyTime()
+    private async void DestroyTime()
     {
-        WaitForSeconds destroyWait = new(destroyTime);
-        yield return destroyWait;
+        await Awaitable.WaitForSecondsAsync(destroyTime);
         DestroyThis();
     }
 

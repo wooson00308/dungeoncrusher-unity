@@ -6,7 +6,7 @@ public class LogSystem : MonoBehaviour
 {
     [SerializeField] private int _logCount = 4;
     [SerializeField] private Transform _parent;
-    private List<GameObject> _logImages = new();
+    private Queue<GameObject> _logImages = new();
 
     private int _currentLogCount = 0;
 
@@ -18,8 +18,6 @@ public class LogSystem : MonoBehaviour
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
-
-        _logImages.Clear();
     }
 
     public void Log(GameEvent gameEvent)
@@ -29,13 +27,26 @@ public class LogSystem : MonoBehaviour
         if (unitEventArgs != null)
         {
             Unit unit = unitEventArgs.publisher;
-            Debug.Log(unit.name);
 
-            GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
-            _logImages.Add(logImageView);
-            logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-            logImageView.transform.SetAsFirstSibling();
-            logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
+            if (_logImages.Count > _logCount)
+            {
+                while (_logImages.Count >= _logCount)
+                {
+                    ResourceManager.Instance.Destroy(_logImages.Dequeue());
+                }
+
+                Debug.Log("Log 최대 갯수보다 많습니다.");
+            }
+            else
+            {
+                Debug.Log("LogSpawn");
+                GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
+
+                _logImages.Enqueue(logImageView);
+                logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
+                logImageView.transform.SetAsFirstSibling();
+                logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
+            }
         }
     }
 }

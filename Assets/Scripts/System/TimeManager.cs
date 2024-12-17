@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TimeManager : Singleton<TimeManager>
@@ -6,8 +7,9 @@ public class TimeManager : Singleton<TimeManager>
     private int _gameTimeScale = 1;
     private bool isBossDead = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _gameTimeScale = 1;
         Time.timeScale = _gameTimeScale;
     }
@@ -26,6 +28,13 @@ public class TimeManager : Singleton<TimeManager>
         await Awaitable.WaitForSecondsAsync(0.5f);
         Time.timeScale = _gameTimeScale;
         isBossDead = false;
+    }
+
+    public async Task FreezeTime(int time)
+    {
+        Time.timeScale = 0.01f;
+        await Task.Delay(time);
+        Time.timeScale = _gameTimeScale;
     }
 
     public int GetGameSpeed()

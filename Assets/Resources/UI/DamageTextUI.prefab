@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pivot: {x: 0, y: 200}
+  randomValue: 0.2
 --- !u!95 &1775614386550940562
 Animator:
   serializedVersion: 7

@@ -1,7 +1,13 @@
+using System;
 using UnityEngine;
 
 public class MainUI : BasePresenter<MainView, MainModel>
 {
+    // private void OnDisable()
+    // {
+    //     Debug.Log("Main Disable");
+    // }
+
     public void ChangeGameSpeed()
     {
         _model.ChangeGameSpeed();

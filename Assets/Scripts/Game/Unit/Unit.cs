@@ -285,7 +285,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
-        
+
         if (_isBoss)
         {
             TimeManager.Instance.SlowMotion();
@@ -298,6 +298,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         else
         {
             AddForce(killer);
+            TimeManager.Instance.FreezeTime(1000);
+            CameraShake.Instance.Shake(3, 1);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7113131772224095792}
   - component: {fileID: 5246380773477009516}
   - component: {fileID: 8520196622827189788}
-  - component: {fileID: 5910408420374990658}
+  - component: {fileID: 5193377052051562910}
   m_Layer: 5
   m_Name: LogLayout
   m_TagString: Untagged
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &5910408420374990658
+--- !u!114 &5193377052051562910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
