@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: Unit_402
   _prefab: {fileID: 4602744156704204850, guid: b926655cc0f043b4caf6fe19465249e8, type: 3}
   _health:
-    _value: 5
+    _value: 1
   _attack:
     _value: 1
   _defense:
