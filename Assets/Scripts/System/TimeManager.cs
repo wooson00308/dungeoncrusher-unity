@@ -14,6 +14,16 @@ public class TimeManager : Singleton<TimeManager>
         Time.timeScale = _gameTimeScale;
     }
 
+    public void StopTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void PlayTime()
+    {
+        Time.timeScale = _gameTimeScale;
+    }
+
     public void ChangeTimeScale()
     {
         if (isBossDead) return;
