@@ -264,6 +264,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _fsm.TransitionTo<HitState>();
         }
 
+        var realDamage = damage - Defense.Value;
+
+        damage = realDamage <= 0 ? 1 : realDamage;
+
         Health.Update("Engage", -damage);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
