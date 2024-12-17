@@ -21,14 +21,25 @@ MonoBehaviour:
     {a}%\uB85C \uCD94\uAC00 \uACF5\uACA9\uC744 \uAC00\uD55C\uB2E4. "
   _isAreaAttack: 0
   _isPassiveSkill: 0
-  _skillEventType: 3
+  _isSelfSkill: 0
+  _isUltSkill: 0
+  _skillEventType: 4
   _skillLevelDatas:
   - activationChance: 25
-    skillValue: 100
+    skillValue: 5000
+    coolTime: 0
+    targetNum: 0
+    range: 0
     skillFxPrefab: {fileID: 2632797732036671992, guid: 24cdb9758967b4645b5f3eaa0f3a0750, type: 3}
   - activationChance: 25
-    skillValue: 150
+    skillValue: 5000
+    coolTime: 0
+    targetNum: 0
+    range: 0
     skillFxPrefab: {fileID: 2632797732036671992, guid: 24cdb9758967b4645b5f3eaa0f3a0750, type: 3}
   - activationChance: 25
-    skillValue: 200
+    skillValue: 5000
+    coolTime: 0
+    targetNum: 0
+    range: 0
     skillFxPrefab: {fileID: 2632797732036671992, guid: 24cdb9758967b4645b5f3eaa0f3a0750, type: 3}

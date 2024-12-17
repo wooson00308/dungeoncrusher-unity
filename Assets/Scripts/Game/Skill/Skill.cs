@@ -25,6 +25,10 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_skillData.IsUltSkill)
+        {
+            //필살기 스킬이면 이벤트에 등록하기
+        }
         if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
         { 
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
@@ -118,7 +122,7 @@ public class Skill : MonoBehaviour
         }
         else
         {
-            skillFx.Initialized(this, user, _skillData, user.Target);
+            skillFx.Initialized(this, user, _skillData, new List<Unit> { user.Target });
         }
     }
 

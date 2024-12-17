@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba908e9cfdc37314392ba0c704528002, type: 3}
+  m_Name: Data_Skill_1113
+  m_EditorClassIdentifier: 
+  _id: 
+  _prefab: {fileID: 4967718262842320428, guid: 65f188068da41e344b6a12e3346cabe8, type: 3}
+  _rarity: 0
+  _icon: {fileID: 0}
+  _name: 
+  _description: 
+  _isAreaAttack: 0
+  _isPassiveSkill: 0
+  _isSelfSkill: 1
+  _isUltSkill: 0
+  _skillEventType: 4
+  _skillLevelDatas:
+  - activationChance: 100
+    skillValue: 7200
+    coolTime: 1
+    targetNum: 0
+    range: 0
+    skillFxPrefab: {fileID: 8195431620923900372, guid: b818a2a122e39da4eb2400da439eba3d, type: 3}

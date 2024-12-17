@@ -69,6 +69,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health = new(stats.Health.Value);
         Mp = new(0);
         Mp.SetMaxValue(stats.Mp.Value);
+        Health.SetMaxValue(stats.Health.Value);
         Attack = new(stats.Attack.Value);
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
@@ -141,6 +142,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private void OnEnable()
     {
+        _fsm.UnlockState();
         GameEventSystem.Instance.Subscribe(ProcessEvents.SetActive.ToString(), SetActive);
     }
 

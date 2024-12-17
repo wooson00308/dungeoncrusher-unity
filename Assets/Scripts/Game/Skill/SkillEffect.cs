@@ -49,10 +49,11 @@ public class SkillEffect : MonoBehaviour
     {
         if (!_isInitialized) return;
         
-        if (_isMultiTargeting)
-            _skillData.OnAction(_skill, _user, _targets);
-
-        if (_skillData.IsAreaAttack)
+        if (_isMultiTargeting) { 
+            _skillData.OnAction(_skill, _user, _targets); 
+            return;
+        }
+        if (!_skillData.IsAreaAttack)
         {
             _skillData.OnAction(_skill, _user, _units);
         }

@@ -14,6 +14,7 @@ public abstract class SkillData : ScriptableObject
     [Space] [SerializeField] protected bool _isAreaAttack;
     [SerializeField] protected bool _isPassiveSkill;
     [SerializeField] protected bool _isSelfSkill; //자가 구동을 위한 bool 값 
+    [SerializeField] protected bool _isUltSkill; //필살기 체크 값 
     [SerializeField] protected UnitEvents _skillEventType;
 
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
@@ -49,6 +50,7 @@ public abstract class SkillData : ScriptableObject
     public bool IsAreaAttack => _isAreaAttack;
     public bool IsPassiveSkill => _isPassiveSkill;
     public bool IsSelfSkill => _isSelfSkill; //자가 구동을 위한 bool 값 입력부
+    public bool IsUltSkill => _isUltSkill; //자가 구동을 위한 bool 값 입력부
     public UnitEvents SkillEventType => _skillEventType;
 
     public List<SkillLevelData> SkillLevelDatas
