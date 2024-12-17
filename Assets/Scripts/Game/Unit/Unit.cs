@@ -198,6 +198,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
         }
+        else
+        {
+            _fsm.UnlockState();
+        }
     }
 
     #region Movement
