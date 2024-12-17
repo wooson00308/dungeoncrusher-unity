@@ -27259,6 +27259,14 @@ PrefabInstance:
       value: Prf_Unit_Model_3
       objectReference: {fileID: 0}
     - target: {fileID: 2042403983631622033, guid: 4c54b7ad71d47f0479bf965a1dd9860d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042403983631622033, guid: 4c54b7ad71d47f0479bf965a1dd9860d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042403983631622033, guid: 4c54b7ad71d47f0479bf965a1dd9860d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
