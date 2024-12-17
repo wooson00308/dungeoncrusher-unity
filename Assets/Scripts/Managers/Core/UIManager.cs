@@ -51,7 +51,7 @@ public class UIManager : Singleton<UIManager>
 
         _layoutPresenters.Remove(name);
         var layout = (T)presenter;
-        Destroy(layout.Tr.gameObject);
+        ResourceManager.Instance.DestroyUI(layout.gameObject);
     }
 
     private void Configure<T>(T presenter) where T : IBasePresenter<BaseView, BaseModel>
@@ -81,7 +81,7 @@ public class UIManager : Singleton<UIManager>
 
         var popup = _popupStack.Pop() as T;
         _order--;
-        Destroy(popup.tr.gameObject);
+        ResourceManager.Instance.DestroyUI(popup.gameObject);
     }
 
     private (Canvas canvas, CanvasScaler scaler, GraphicRaycaster raycaster) CreateUIRoot()

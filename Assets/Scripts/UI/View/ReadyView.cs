@@ -5,13 +5,22 @@ public class ReadyView : BaseView
 {
     [SerializeField] private List<Transform> _slots;
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }
 
     public void UpdateChoiceView(List<ChoiceData> tripleChoices)
     {
+        foreach (var slot in _slots)
+        {
+            var views = slot.GetComponentsInChildren<ChoiceView>();
+            foreach (var view in views)
+            {
+                ResourceManager.Instance.Destroy(view.gameObject);
+            }
+        }
+
         int index = 0;
         foreach (var choice in tripleChoices)
         {

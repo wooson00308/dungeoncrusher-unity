@@ -11,11 +11,15 @@ public class EngageView : BaseView
     private Queue<OnHitEventArgs> _damageEventQueue = new Queue<OnHitEventArgs>();
     private bool _isProcessingDamageQueue = false;
 
+    private void Awake()
+    {
+        BindUI();
+    }
+
     private void OnEnable()
     {
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
-        BindUI();
     }
 
     private void OnDisable()
