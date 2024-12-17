@@ -302,8 +302,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         else
         {
             AddForce(killer);
-            TimeManager.Instance.FreezeTime(1000);
-            CameraShake.Instance.Shake(3, 1);
+            TimeManager.Instance.FreezeTime(500);
+            CameraShake.Instance.Shake(8, 0.05f);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }
