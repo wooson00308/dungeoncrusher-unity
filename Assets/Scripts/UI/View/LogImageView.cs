@@ -15,7 +15,7 @@ public class LogImageView : BaseView
         DescriptionText
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
     }

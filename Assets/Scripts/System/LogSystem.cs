@@ -28,24 +28,21 @@ public class LogSystem : MonoBehaviour
         {
             Unit unit = unitEventArgs.publisher;
 
+            GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
+
+            _logImages.Enqueue(logImageView);
+            logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
+            logImageView.transform.SetAsFirstSibling();
+            logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
+
             if (_logImages.Count > _logCount)
             {
-                while (_logImages.Count >= _logCount)
+                while (_logImages.Count > _logCount)
                 {
-                    ResourceManager.Instance.Destroy(_logImages.Dequeue());
+                    ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
                 }
 
                 Debug.Log("Log 최대 갯수보다 많습니다.");
-            }
-            else
-            {
-                Debug.Log("LogSpawn");
-                GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
-
-                _logImages.Enqueue(logImageView);
-                logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-                logImageView.transform.SetAsFirstSibling();
-                logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
             }
         }
     }

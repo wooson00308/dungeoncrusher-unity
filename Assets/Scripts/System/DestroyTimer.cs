@@ -19,6 +19,6 @@ public class DestroyTimer : MonoBehaviour
 
     private void DestroyThis()
     {
-        ResourceManager.Instance.Destroy(gameObject);
+        ResourceManager.Instance.DestroyUI(gameObject);
     }
 }
