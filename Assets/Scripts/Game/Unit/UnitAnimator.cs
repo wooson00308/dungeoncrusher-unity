@@ -23,6 +23,12 @@ public class UnitAnimator : MonoBehaviour
         OrderSprite();
     }
 
+    public void ChargeAttackEvent(AnimationEvent e)
+    {
+        _owner.Target?.OnStun();
+        AttackEvent(e);
+    }
+
     public void AttackEvent(AnimationEvent e)                       
     {
         var realDamage = _owner.Attack.Value;

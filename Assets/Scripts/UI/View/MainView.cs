@@ -9,9 +9,13 @@ public class MainView : BaseView
         Txt_GameSpeed
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         BindUI();
+    }
+
+    private void OnEnable()
+    {
         GameEventSystem.Instance.Subscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
     }
 

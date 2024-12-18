@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class StunState : StateBase, IState
 {
-    private float _currentTime;
+    private float _currentCheckDelay = 0;
 
     public void OnEnter(Unit unit)
     {
         unit.CrossFade("Stun", 0f);
+
+        _currentCheckDelay = 0;
     }
 
     public void OnExit(Unit unit)
@@ -16,11 +18,14 @@ public class StunState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
-        _currentTime += Time.deltaTime;
-
-        if (_currentTime >= unit.StunDuration)
+        if (_currentCheckDelay <= 0.1f)
         {
-            _currentTime = 0f;
+            _currentCheckDelay += Time.deltaTime;
+            return;
+        }
+
+        if (!unit.IsUpdateState("Stun"))
+        {
             _fsm.TransitionTo<ChaseState>();
         }
     }
