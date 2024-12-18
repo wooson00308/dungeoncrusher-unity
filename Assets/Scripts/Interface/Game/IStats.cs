@@ -11,8 +11,10 @@ public interface IStats
     public FloatStat AttackRange { get; }
 
     public FloatStat CriticalRate { get; }
+    public FloatStat CriticalPercent { get; }
     public FloatStat AttackStunRate { get; }
     public FloatStat LifestealRate { get; }
+    public FloatStat LifestealPercent { get; }
 }
 
 

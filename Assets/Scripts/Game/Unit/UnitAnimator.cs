@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Animator))]
 public class UnitAnimator : MonoBehaviour
@@ -24,7 +25,15 @@ public class UnitAnimator : MonoBehaviour
 
     public void AttackEvent(AnimationEvent e)
     {
-        _owner.Target?.OnHit(_owner.Attack.Value, _owner);
+        var realDamage = _owner.Attack.Value;
+
+        if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))
+        {
+            realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
+        }
+
+        _owner.Target?.OnHit(realDamage, _owner);
+
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent
@@ -35,7 +44,17 @@ public class UnitAnimator : MonoBehaviour
             },
             eventType = UnitEvents.UnitEvent_Attack.ToString()
         });
+
         _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
+
+        var realHealValue = 0;
+
+        if (LifeStealOperator.IsLifeSteal(_owner.LifestealRate.Value))
+        {
+            // realHealValue =  LifeStealOperator.LifeStealForHealth(_owner.Target.Health.Value, _owner.LifestealPercent.Value);
+            realHealValue = LifeStealOperator.LifeStealForDamage(realDamage, _owner.LifestealPercent.Value);
+            _owner.OnHeal(realHealValue);
+        }
     }
 
     public void DeathEvent(AnimationEvent e)

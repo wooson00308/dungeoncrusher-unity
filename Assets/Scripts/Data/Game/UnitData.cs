@@ -15,9 +15,11 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
 
-    [SerializeField] private FloatStat _criticalRate;
+    [Tooltip("발생확률")][SerializeField] private FloatStat _criticalRate;
+    [Tooltip("데미지 퍼센트")][SerializeField] private FloatStat _criticalPercent;
     [SerializeField] private FloatStat _stunRate;
-    [SerializeField] private FloatStat _lifestealRate;
+    [Tooltip("발생확률")][SerializeField] private FloatStat _lifestealRate;
+    [Tooltip("흡혈 퍼센트")][SerializeField] private FloatStat _lifestealPercent;
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
@@ -31,6 +33,8 @@ public class UnitData : ScriptableObject, IStats
     public FloatStat AttackRange => _attackRange;
 
     public FloatStat CriticalRate => _criticalRate;
+    public FloatStat CriticalPercent => _criticalPercent;
     public FloatStat AttackStunRate => _stunRate;
     public FloatStat LifestealRate => _lifestealRate;
+    public FloatStat LifestealPercent => _lifestealPercent;
 }

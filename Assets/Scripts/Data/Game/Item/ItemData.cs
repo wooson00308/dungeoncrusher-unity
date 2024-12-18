@@ -21,8 +21,10 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private FloatStat _attackRange;
 
     [SerializeField] private FloatStat _criticalRate;
+    [SerializeField] private FloatStat _criticalDamage;
     [SerializeField] private FloatStat _stunRate;
     [SerializeField] private FloatStat _lifestealRate;
+    [SerializeField] private FloatStat _lifestealPercent;
     [SerializeField] protected List<SkillData> _skillDatas;
 
     public string Id => _id;
@@ -43,8 +45,10 @@ public abstract class ItemData : ScriptableObject, IStats
     public FloatStat AttackRange => _attackRange;
 
     public FloatStat CriticalRate => _criticalRate;
+    public FloatStat CriticalPercent => _criticalDamage;
     public FloatStat AttackStunRate => _stunRate;
     public FloatStat LifestealRate => _lifestealRate;
+    public FloatStat LifestealPercent => _lifestealPercent;
 }
 
 public enum PartType

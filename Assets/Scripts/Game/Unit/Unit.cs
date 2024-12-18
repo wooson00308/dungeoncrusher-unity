@@ -60,8 +60,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public FloatStat AttackSpeed { get; private set; }
     public FloatStat AttackRange { get; private set; }
     public FloatStat CriticalRate { get; private set; }
+
+    public FloatStat CriticalPercent { get; private set; }
     public FloatStat AttackStunRate { get; private set; }
     public FloatStat LifestealRate { get; private set; }
+    public FloatStat LifestealPercent { get; private set; }
 
     public void SetupStats(IStats stats)
     {
@@ -79,8 +82,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         AttackRange = new(stats.AttackRange.Value);
         CriticalRate = new(stats.CriticalRate.Value);
+        CriticalPercent = new(stats.CriticalPercent.Value);
         AttackStunRate = new(stats.AttackStunRate.Value);
         LifestealRate = new(stats.LifestealRate.Value);
+        LifestealPercent = new(stats.LifestealPercent.Value);
 
         if (_agent != null)
         {
@@ -106,8 +111,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
         AttackRange.Update(key, stats.AttackRange.Value);
         CriticalRate.Update(key, stats.CriticalRate.Value);
+        CriticalPercent.Update(key, stats.CriticalPercent.Value);
         AttackStunRate.Update(key, stats.AttackStunRate.Value);
         LifestealRate.Update(key, stats.LifestealRate.Value);
+        LifestealPercent.Update(key, stats.LifestealPercent.Value);
     }
 
     public void ResetStats(string key)
@@ -121,8 +128,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         AttackSpeed.Reset(key);
         AttackRange.Reset(key);
         CriticalRate.Reset(key);
+        CriticalPercent.Reset(key);
         AttackStunRate.Reset(key);
         LifestealRate.Reset(key);
+        LifestealPercent.Reset(key);
     }
 
     #endregion
@@ -282,6 +291,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             OnDeath(attacker, ActiveSpecialDeath);
         }
+    }
+
+    public void OnHeal(int healValue, Unit healer = null)
+    {
+        Debug.Log(healValue);
+        Health.Update("Engage", healValue);
     }
 
     public void OnDeath(Unit killer = null, bool isSpecialDeath = false)

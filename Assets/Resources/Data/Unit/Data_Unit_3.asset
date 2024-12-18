@@ -29,8 +29,12 @@ MonoBehaviour:
   _attackRange:
     _value: 0.6
   _criticalRate:
-    _value: 0
+    _value: 100
+  _criticalPercent:
+    _value: 10000
   _stunRate:
     _value: 0
   _lifestealRate:
-    _value: 0
+    _value: 100
+  _lifestealPercent:
+    _value: 1

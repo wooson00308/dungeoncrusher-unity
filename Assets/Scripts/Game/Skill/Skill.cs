@@ -27,10 +27,11 @@ public class Skill : MonoBehaviour
     {
         if (_skillData.IsUltSkill)
         {
-            //ÇÊ»ì±â ½ºÅ³ÀÌ¸é ÀÌº¥Æ®¿¡ µî·ÏÇÏ±â
+            //ï¿½Ê»ï¿½ï¿½ ï¿½ï¿½Å³ï¿½Ì¸ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         }
-        if (!_skillData.IsSelfSkill) // ÀÚ°¡ ¹ßµ¿ ½ºÅ³ÀÌ¸é ÀÌº¥Æ® µî·Ï ÇÊ¿ä ¾øÀ½
-        { 
+
+        if (!_skillData.IsSelfSkill) // ï¿½Ú°ï¿½ ï¿½ßµï¿½ ï¿½ï¿½Å³ï¿½Ì¸ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+        {
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
     }
@@ -40,7 +41,7 @@ public class Skill : MonoBehaviour
         _skillLevel = 1;
         _isInitialized = false;
 
-        if (!_skillData.IsSelfSkill) 
+        if (!_skillData.IsSelfSkill)
         {
             GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
@@ -65,48 +66,51 @@ public class Skill : MonoBehaviour
 
     public void TryUseSkillWheenCoolTimeReady()
     {
-        if (!_skillData.IsSelfSkill) return; // ½ºÅ³ÀÌ Æ¯Á¤ Á¶°ÇÀÌ ¾Æ´Ñ ÀÚ°¡¹ßµ¿ ½ºÅ³ÀÎÁö Ã¼Å© 
+        if (!_skillData.IsSelfSkill) return; // ï¿½ï¿½Å³ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½Ú°ï¿½ï¿½ßµï¿½ ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ Ã¼Å© 
         UseSkill(_owner);
     }
 
     /// <summary>
-    /// ½ºÅ³ »ç¿ë Áßº¹ ÄÚµå ¸Þ¼­µåÈ­
+    /// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ ï¿½ßºï¿½ ï¿½Úµï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½È­
     /// </summary>
     /// <param name="user"></param>
     private void UseSkill(Unit user)
     {
         if (!IsUseableSkill()) return;
 
-        _timeMarker = Time.time; // ½ºÅ³ ÄðÅ¸ÀÓ ÃÊ±âÈ­
+        _timeMarker = Time.time; // ï¿½ï¿½Å³ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
         if (user.Target == null) return;
 
-        #region ½ºÅ³ ÇÁ¸®ÆÕ ¹«°á¼º °Ë»ç
+        #region ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¼º ï¿½Ë»ï¿½
+
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
         GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
         if (skillFxPrefab == null) return;
 
         var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
-        if (skillFxObject == null) {
+        if (skillFxObject == null)
+        {
             ResourceManager.Instance.Destroy(skillFxPrefab);
             return;
         }
+
         if (!skillFxObject.TryGetComponent<SkillEffect>(out var skillFx)) return;
+
         #endregion
 
-        float random = Random.Range(0, 100f);
-        if (random > skillLevelDetails.activationChance) return;
+        if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
 
         skillFxObject.transform.position = user.Target.transform.position;
         if (_skillData.IsAreaAttack)
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
 
-            // TODO : ¼öÁ¤ ÇÊ¿ä -> ÇöÀç Å¸°Ù ÁÖº¯ÀÇ ÀÏÁ¤ °Å¸®ÀÇ Á¸ÀçÇÏ´Â À¯´ÖµéÀ» ¹üÀ§ °ø°ÝÀ¸·Î ÇÇ°Ý ½ÃÄÑ¾ß ÇÔ.
-            // 1. Å¸°ÙÀ» Ã£°í
-            // 2. Àûµé Áß Å¸°Ù°ú °Å¸®°¡ ÀÏÁ¤°Å¸® °¡±î¿î ¾ÖµéÀ» ¼±º°ÇÏ¿©
-            // 3. ¹üÀ§ °ø°Ý ÇÇ°Ý
+            // TODO : ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ -> ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Öºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½Ñ¾ï¿½ ï¿½ï¿½.
+            // 1. Å¸ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+            // 2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å¸ï¿½Ù°ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½
+            // 3. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½
 
             // BEFORE
             //List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
@@ -114,10 +118,11 @@ public class Skill : MonoBehaviour
             //AFTER
             // ...
             List<Unit> targets = enemies
-            .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <= _skillData.GetSkillLevelData(_skillLevel).range)
-            .OrderBy(x => Random.value)
-            .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
-            .ToList();
+                .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <=
+                                _skillData.GetSkillLevelData(_skillLevel).range)
+                .OrderBy(x => Random.value)
+                .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
+                .ToList();
             skillFx.Initialized(this, user, _skillData, targets);
         }
         else
@@ -132,24 +137,24 @@ public class Skill : MonoBehaviour
     }
 
     /// <summary>
-    /// ½ºÅ³ »ç¿ë ¿©ºÎ ÆÇ´Ü
+    /// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
     /// </summary>
     /// <returns></returns>
     private bool IsUseableSkill()
     {
-        if (!_isInitialized) // ÃÊ±âÈ­ µÇ¾ú´ÂÁö Ã¼Å©
+        if (!_isInitialized) // ï¿½Ê±ï¿½È­ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
             return false;
-        
-        if (!_owner.IsActive) // ½ºÅ³À» »ç¿ëÇÏ´Â À¯´ÖÀÌ ºñÈ°¼ºÈ­ µÇ¾ú´ÂÁö È®ÀÎ. ºñÈ°¼ºÈ­ Á¶°Ç -> °ÔÀÓÀÌ ÁØºñ ´Ü°è·Î ³Ñ¾î°¡¸é ºñÈ°¼ºÈ­ µÊ.
+
+        if (!_owner.IsActive) // ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½. ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½Ü°ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½.
         {
             ResetCooltime();
             return false;
         }
 
-        if (!_skillData.IsValidTarget(_owner)) 
+        if (!_skillData.IsValidTarget(_owner))
             return false;
 
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // ÄðÅ¸ÀÓ Áö³µ´ÂÁö Ã¼Å© 
+        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© 
             return false;
 
         return true;
@@ -163,7 +168,7 @@ public class Skill : MonoBehaviour
         _timeMarker -= cooltime;
     }
 
-    // ±âÁ¸ ±â´É Áß¿¡ ÀüÅõ ÁßÀÎÁö ÀüÅõÁßÀÌ ¾Æ´ÑÁö Ã¼Å©ÇÏ´Â ±â´ÉÀÌ Á¸ÀçÇÏ¿© ÇØ´ç ±â´ÉÀ» ºñÈ°¼ºÈ­ÇÏ¿´½À´Ï´Ù.
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
     //private void Off(GameEvent e)
     //{
     //    OnOff = false;
