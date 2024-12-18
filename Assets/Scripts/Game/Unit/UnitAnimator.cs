@@ -23,7 +23,7 @@ public class UnitAnimator : MonoBehaviour
         OrderSprite();
     }
 
-    public void AttackEvent(AnimationEvent e)
+    public void AttackEvent(AnimationEvent e)                       
     {
         var realDamage = _owner.Attack.Value;
 
@@ -46,15 +46,6 @@ public class UnitAnimator : MonoBehaviour
         });
 
         _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
-
-        var realHealValue = 0;
-
-        if (LifeStealOperator.IsLifeSteal(_owner.LifestealRate.Value))
-        {
-            // realHealValue =  LifeStealOperator.LifeStealForHealth(_owner.Target.Health.Value, _owner.LifestealPercent.Value);
-            realHealValue = LifeStealOperator.LifeStealForDamage(realDamage, _owner.LifestealPercent.Value);
-            _owner.OnHeal(realHealValue);
-        }
     }
 
     public void DeathEvent(AnimationEvent e)

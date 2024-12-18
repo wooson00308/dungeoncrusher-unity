@@ -284,6 +284,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         damage = realDamage <= 0 ? 1 : realDamage;
 
+        attacker.TryLifeSteal(damage);
+
+
         Health.Update("Engage", -damage);
 
         if (_hitPrefab != null)
@@ -307,8 +310,18 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
     }
 
+    public void TryLifeSteal(int damage, Unit healer = null)
+    {
+        if (LifeStealOperator.IsLifeSteal(LifestealRate.Value))
+        {
+            var realHealValue = LifeStealOperator.LifeStealForDamage(damage, LifestealPercent.Value);
+            OnHeal(realHealValue);
+        }
+    }
+
     public void OnHeal(int healValue, Unit healer = null)
     {
+        Debug.Log("heal" + healValue);
         Health.Update("Engage", healValue);
     }
 
