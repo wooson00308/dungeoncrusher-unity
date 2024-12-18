@@ -336,13 +336,18 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHeal(int healValue, Unit healer = null)
     {
+        if (healValue > Health.Max - Health.Value)
+        {
+            healValue = Health.Max - Health.Value;
+        }
+        
         Health.Update("Engage", healValue);
     }
 
     public void OnDeath(Unit killer = null, bool isSpecialDeath = false)
     {
         if (IsDeath) return;
-        Health.Update("Engage", 0);
+        Health.Update("Engage", -Health.Value);
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
