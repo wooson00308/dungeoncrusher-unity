@@ -18,6 +18,26 @@ public class SkillEffect : MonoBehaviour
     private List<Unit> _targets;
     private Skill _skill;
 
+    private void OnEnable()
+    {
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
+    }
+
+    private void OnDisable()
+    {
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
+    }
+
+    private void OnStunEvent(GameEvent e)
+    {
+        if (!_isInitialized) return;
+
+        var args = e.args as UnitEventArgs;
+        if (!args.publisher.GetInstanceID().Equals(_user.GetInstanceID())) return;
+
+        Destroy(null);
+    }
+
     public void Initialized(Skill skill, Unit user, SkillData skillData, Unit target = null)
     {
         _skill = skill;

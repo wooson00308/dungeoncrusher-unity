@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public Unit Target => _targetDetector.Target;
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
+    public bool IsSuperArmor { get; set; }
 
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
@@ -169,9 +170,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Team = team;
 
-        // TODO : 임시 테스트용 기능, 차후에 제거 예정
-        ActiveSpecialDeath = Team == Team.Enemy;
-
         _hitPrefab ??= data.HitPrefab;
 
         SetupStats(data);
@@ -197,6 +195,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
+        }
+        else
+        {
+            _fsm.UnlockState();
         }
     }
 
@@ -273,6 +275,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #region FSM
 
+    public void OnStun()
+    {
+        if (IsSuperArmor) return;
+
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
+        {
+            eventType = UnitEvents.UnitEvent_OnStun.ToString(),
+            args = new UnitEventArgs { publisher = this }
+        });
+
+        _fsm.TransitionTo<StunState>();
+    }
+
     public void OnHit(int damage, Unit attacker = null)
     {
         if (_hasHitState)
@@ -285,7 +300,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         damage = realDamage <= 0 ? 1 : realDamage;
 
         attacker.TryLifeSteal(damage);
-
 
         Health.Update("Engage", -damage);
 
