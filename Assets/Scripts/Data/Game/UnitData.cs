@@ -6,6 +6,7 @@ public class UnitData : ScriptableObject, IStats
 {
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private GameObject _prefab;
+    [SerializeField] private GameObject _hitPrefab;
 
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
@@ -15,14 +16,15 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
 
-    [Tooltip("발생확률")][SerializeField] private FloatStat _criticalRate;
-    [Tooltip("데미지 퍼센트")][SerializeField] private FloatStat _criticalPercent;
+    [Tooltip("발생확률")] [SerializeField] private FloatStat _criticalRate;
+    [Tooltip("데미지 퍼센트")] [SerializeField] private FloatStat _criticalPercent;
     [SerializeField] private FloatStat _stunRate;
-    [Tooltip("발생확률")][SerializeField] private FloatStat _lifestealRate;
-    [Tooltip("흡혈 퍼센트")][SerializeField] private FloatStat _lifestealPercent;
+    [Tooltip("발생확률")] [SerializeField] private FloatStat _lifestealRate;
+    [Tooltip("흡혈 퍼센트")] [SerializeField] private FloatStat _lifestealPercent;
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
+    public GameObject HitPrefab => _hitPrefab;
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;

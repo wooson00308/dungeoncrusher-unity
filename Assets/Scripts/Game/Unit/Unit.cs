@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Animator _animator;
     private FSM _fsm;
     private Rigidbody2D _rigidbody;
+
+    private GameObject _hitPrefab;
 
     private bool _hasHitState;
     private bool _hasAerialState;
@@ -160,7 +163,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.SetActive.ToString(), SetActive);
     }
 
-    public void OnInitialized(IStats data, Team team)
+    public void OnInitialized(UnitData data, Team team)
     {
         _fsm.enabled = false;
 
@@ -168,6 +171,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         // TODO : 임시 테스트용 기능, 차후에 제거 예정
         ActiveSpecialDeath = Team == Team.Enemy;
+
+        _hitPrefab ??= data.HitPrefab;
 
         SetupStats(data);
     }
@@ -281,6 +286,15 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Health.Update("Engage", -damage);
 
+        if (_hitPrefab != null)
+        {
+            ResourceManager.Instance.Spawn(_hitPrefab, transform);
+        }
+        else
+        {
+            Debug.Log("hitPrefab이 없습니다");
+        }
+
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
         {
             eventType = UnitEvents.UnitEvent_OnHit.ToString(),
@@ -295,7 +309,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHeal(int healValue, Unit healer = null)
     {
-        Debug.Log(healValue);
         Health.Update("Engage", healValue);
     }
 
