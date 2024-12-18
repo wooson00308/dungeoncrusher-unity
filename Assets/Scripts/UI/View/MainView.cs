@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class MainView : BaseView
@@ -13,11 +14,13 @@ public class MainView : BaseView
     {
         BindUI();
         GameEventSystem.Instance.Subscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnSpecialDeath.ToString(), SpecialDeathEffect);
     }
 
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnSpecialDeath.ToString(), SpecialDeathEffect);
     }
 
     private void UpdateStageUI(GameEvent gameEvent)
@@ -28,6 +31,23 @@ public class MainView : BaseView
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
+    }
+
+    private void SpecialDeathEffect(GameEvent gameEvent)
+    {
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+
+        Unit unit = unitEventArgs.publisher;
+
+        var worldToViewportPoint = Camera.main.WorldToViewportPoint(unit.transform.position);
+        worldToViewportPoint.x = Mathf.Clamp(worldToViewportPoint.x, 0, 1);
+        worldToViewportPoint.y = Mathf.Clamp(worldToViewportPoint.y, 0, 1);
+
+        var viewportToScreenPoint = Camera.main.ViewportToScreenPoint(worldToViewportPoint);
+
+        var spawnPos = new Vector3(viewportToScreenPoint.x, viewportToScreenPoint.y, 0);
+        ResourceManager.Instance.SpawnFromPath("UI/SpecialDeath_Fx", transform).transform.position =
+            spawnPos;
     }
 
     public void OnClickChangeGameSpeed()

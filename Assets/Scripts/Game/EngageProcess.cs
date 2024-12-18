@@ -6,6 +6,7 @@ public class EngageProcess : Process
     private void OnEnable()
     {
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), TryNextProcess);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnSpecialDeath.ToString(), TryNextProcess);
 
         UIManager.Instance.ShowLayoutUI<EngageUI>();
         EngageStart();
@@ -20,6 +21,7 @@ public class EngageProcess : Process
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), TryNextProcess);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnSpecialDeath.ToString(), TryNextProcess);
 
         UIManager.Instance.CloseLayoutUI<EngageUI>();
     }

@@ -23,7 +23,7 @@ public class UnitAnimator : MonoBehaviour
         OrderSprite();
     }
 
-    public void AttackEvent(AnimationEvent e)                       
+    public void AttackEvent(AnimationEvent e)
     {
         var realDamage = _owner.Attack.Value;
 
@@ -58,13 +58,12 @@ public class UnitAnimator : MonoBehaviour
             args = new UnitEventArgs { publisher = _owner }
         });
     }
-
+                                                                                         
     public void SpecialDeathEvent(AnimationEvent e)
     {
-        ResourceManager.Instance.SpawnFromPath("SpecialDeath_Fx").transform.position = transform.position;
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath.ToString(),
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnSpecialDeath.ToString(),
             new GameEvent
             {
                 args = new UnitEventArgs { publisher = _owner } //적 일러스트를 넣는다면 체크하는 용도로 유닛을 넘겨줌.

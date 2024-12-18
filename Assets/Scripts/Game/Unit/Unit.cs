@@ -291,7 +291,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         if (_hitPrefab != null)
         {
-            ResourceManager.Instance.Spawn(_hitPrefab, transform);
+            GameObject hitEffect = ResourceManager.Instance.Spawn(_hitPrefab);
+            hitEffect.transform.position = transform.position;
         }
         else
         {
@@ -321,7 +322,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHeal(int healValue, Unit healer = null)
     {
-        Debug.Log("heal" + healValue);
         Health.Update("Engage", healValue);
     }
 
