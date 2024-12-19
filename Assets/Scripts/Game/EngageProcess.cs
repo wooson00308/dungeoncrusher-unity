@@ -14,6 +14,7 @@ public class EngageProcess : Process
 
     private async void EngageStart()
     {
+        StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
         GameEventSystem.Instance.Publish(ProcessEvents.SetActive.ToString(), new GameEvent { args = true });
     }
@@ -41,21 +42,6 @@ public class EngageProcess : Process
             }
 
             return;
-        }
-
-        int enemyCount = UnitFactory.Instance.GetTeamUnits(unit.Team).Count;
-
-        if (enemyCount <= 0)
-        {
-            if (StageManager.Instance.IsAllStageClear)
-            {
-                _processSystem.OnNextProcess<GameClearProcess>();
-            }
-            else
-            {
-                StageManager.Instance.ClearStage();
-                _processSystem.OnNextProcess<ReadyProcess>();
-            }
         }
     }
 }

@@ -13,21 +13,20 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   stageInfos:
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: dd8f496a2efbf49cf91f786b8fc5380a, type: 2}
-      spawnCount: 10
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 10
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 10
+  - durationTime: 30
+    spawnCount: 10
+    firstSpawnTime: 15
+    additionalSpawnCycle: 8
+    additionalSpawnCount: 5
+    underX2Threshold: 5
+    underX4Threshold: 3
+    minimumSpawnCycle: 5
+    maxAdditionalSpawns: -1
+    reductionFormula:
+      underX2Factor: 0.5
+      underX4Factor: 0.25
+    stageUnitDatas:
+    - stageUnit: {fileID: 11400000, guid: 1beb0b53ed6c28641a142cddd4e0011d, type: 2}
+      spawnRate: 70.2
+    - stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
+      spawnRate: 32.6
