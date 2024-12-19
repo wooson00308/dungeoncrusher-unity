@@ -18,7 +18,14 @@ public class ExtraAttackSkillData : SkillData
         {
             if (target.Health.Max * 0.3f > target.Health.Value)
             {
+                target?.OnDeath(user, true);
                 target?.OnHit(target.Health.Value, user);
+                skill.ResetCooltime();
+                return;
+            }
+            if (damage >= target.Health.Value)
+            {
+                target?.OnDeath(user, true);
                 skill.ResetCooltime();
             }
             target?.OnHit(damage, user);

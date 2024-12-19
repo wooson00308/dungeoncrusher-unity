@@ -1,6 +1,8 @@
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainView : BaseView
 {
@@ -8,6 +10,10 @@ public class MainView : BaseView
     {
         Txt_Stage_Value,
         Txt_GameSpeed
+    }
+    public enum Images
+    {
+        SUPER_ARMOR_IMAGE
     }
 
     private void Awake()
@@ -35,6 +41,7 @@ public class MainView : BaseView
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
+        Bind<Image>(typeof(Images));
     }
 
     private void SpecialDeathEffect(GameEvent gameEvent)
@@ -59,5 +66,16 @@ public class MainView : BaseView
         GetComponent<MainUI>().ChangeGameSpeed();
         Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
             .SetText($"<size=45>x</size>{GetComponent<MainUI>().GetGameSpeed()}");
+    }
+
+    public void OnClickSuperArmor()
+    {
+        var image = Get<Image>((int)Images.SUPER_ARMOR_IMAGE);
+        image.enabled = !image.enabled;
+        var friendlys = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
+        if (friendlys == null) return;
+        var player = friendlys.ToArray()[0];
+
+        player.IsSuperArmor = !player.IsSuperArmor;
     }
 }
