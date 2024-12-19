@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProcessSystem : MonoBehaviour
+public class ProcessSystem : SingletonMini<ProcessSystem>
 {
     public List<Process> _processList = new();
 

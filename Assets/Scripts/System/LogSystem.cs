@@ -37,7 +37,7 @@ public class LogSystem : MonoBehaviour
                     ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
                 }
 
-                Debug.Log("Log 최대 갯수보다 많습니다.");
+                //Debug.Log("Log 최대 갯수보다 많습니다.");
             }
             
             LogSpawn();

@@ -14,6 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _choiceDatas:
   - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 4a76854baa95245abab4d78266c6ca60, type: 2}
+    skillData: {fileID: 0}
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: a30a45598754c4ec4b121267d8eb911f, type: 2}
+    skillData: {fileID: 0}
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 45fd0eefa04454746b46f3631363a037, type: 2}
+    skillData: {fileID: 0}
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 4ea91ab2bb19b4b04a5225cb27694eec, type: 2}
+    skillData: {fileID: 0}
+  - tier: 3
     choiceType: 1
     itemData: {fileID: 0}
-    skillData: {fileID: 11400000, guid: 407d07a9dab925944ba08721e82b4590, type: 2}
+    skillData: {fileID: 11400000, guid: c77efe0016ed2cd4db26eec6c17bb258, type: 2}
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
