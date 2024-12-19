@@ -12,6 +12,13 @@ public class StageData : ScriptableObject
 [Serializable]
 public class StageInfo
 {
+    [Header("스테이지 유닛 데이터 리스트")]
+    public List<StageUnitData> stageUnitDatas = new();
+}
+
+[Serializable]
+public class StageUnitData
+{
     [Header("스테이지 지속 시간 (초)")]
     public int durationTime;
 
@@ -42,19 +49,8 @@ public class StageInfo
     [Header("스폰 주기 감소 공식 (Under_x2 및 Under_x4 감소 비율)")]
     public SpawnCycleReductionFormula reductionFormula;
 
-    [Header("스테이지 유닛 데이터 리스트")]
-    public List<StageUnitData> stageUnitDatas = new();
-}
-
-[Serializable]
-public class StageUnitData
-{
     [Header("생성될 유닛 데이터")]
     public UnitData stageUnit;
-
-    [Header("몬스터 스폰 비율 가중치")]
-    [Range(0f, 100)]
-    public float spawnRate;
 }
 
 [Serializable]
