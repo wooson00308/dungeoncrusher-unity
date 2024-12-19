@@ -27,10 +27,10 @@ public class Skill : MonoBehaviour
     {
         if (_skillData.IsUltSkill)
         {
-            //�ʻ�� ��ų�̸� �̺�Ʈ�� ����ϱ�
+            // 필살기로 지정될 이벤트 등록 필요
         }
 
-        if (!_skillData.IsSelfSkill) // �ڰ� �ߵ� ��ų�̸� �̺�Ʈ ��� �ʿ� ����
+        if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
         {
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
@@ -66,19 +66,19 @@ public class Skill : MonoBehaviour
 
     public void TryUseSkillWheenCoolTimeReady()
     {
-        if (!_skillData.IsSelfSkill) return; // ��ų�� Ư�� ������ �ƴ� �ڰ��ߵ� ��ų���� üũ 
+        if (!_skillData.IsSelfSkill) return; // 스킬이 특정 조건이 아닌 자가발동 스킬인지 체크 
         UseSkill(_owner);
     }
 
     /// <summary>
-    /// ��ų ��� �ߺ� �ڵ� �޼���ȭ
+    /// 스킬 사용 중복 코드 메서드화
     /// </summary>
     /// <param name="user"></param>
     private void UseSkill(Unit user)
     {
         if (!IsUseableSkill()) return;
 
-        _timeMarker = Time.time; // ��ų ��Ÿ�� �ʱ�ȭ
+        _timeMarker = Time.time; // 스킬 쿨타임 초기화
 
         if (user.Target == null) return;
 
@@ -107,10 +107,10 @@ public class Skill : MonoBehaviour
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
 
-            // TODO : ���� �ʿ� -> ���� Ÿ�� �ֺ��� ���� �Ÿ��� �����ϴ� ���ֵ��� ���� �������� �ǰ� ���Ѿ� ��.
-            // 1. Ÿ���� ã��
-            // 2. ���� �� Ÿ�ٰ� �Ÿ��� �����Ÿ� ����� �ֵ��� �����Ͽ�
-            // 3. ���� ���� �ǰ�
+            // TODO : 수정 필요 -> 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시켜야 함.
+            // 1. 타겟을 찾고
+            // 2. 적들 중 타겟과 거리가 일정거리 가까운 애들을 선별하여
+            // 3. 범위 공격 피격
 
             // BEFORE
             //List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
@@ -137,15 +137,15 @@ public class Skill : MonoBehaviour
     }
 
     /// <summary>
-    /// ��ų ��� ���� �Ǵ�
+    /// 스킬 사용 여부 판단
     /// </summary>
     /// <returns></returns>
     private bool IsUseableSkill()
     {
-        if (!_isInitialized) // �ʱ�ȭ �Ǿ����� üũ
+        if (!_isInitialized) // 초기화 되었는지 체크
             return false;
 
-        if (!_owner.IsActive) // ��ų�� ����ϴ� ������ ��Ȱ��ȭ �Ǿ����� Ȯ��. ��Ȱ��ȭ ���� -> ������ �غ� �ܰ�� �Ѿ�� ��Ȱ��ȭ ��.
+        if (!_owner.IsActive) // 스킬을 사용하는 유닛이 비활성화 되었는지 확인. 비활성화 조건 -> 게임이 준비 단계로 넘어가면 비활성화 됨.
         {
             ResetCooltime();
             return false;
@@ -154,7 +154,7 @@ public class Skill : MonoBehaviour
         if (!_skillData.IsValidTarget(_owner))
             return false;
 
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // ��Ÿ�� �������� üũ 
+        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // 쿨타임 지났는지 체크 
             return false;
 
         return true;
@@ -168,7 +168,7 @@ public class Skill : MonoBehaviour
         _timeMarker -= cooltime;
     }
 
-    // ���� ��� �߿� ���� ������ �������� �ƴ��� üũ�ϴ� ����� �����Ͽ� �ش� ����� ��Ȱ��ȭ�Ͽ����ϴ�.
+    // 기존 기능 중에 전투 중인지 전투중이 아닌지 체크하는 기능이 존재하여 해당 기능을 비활성화하였습니다.
     //private void Off(GameEvent e)
     //{
     //    OnOff = false;
