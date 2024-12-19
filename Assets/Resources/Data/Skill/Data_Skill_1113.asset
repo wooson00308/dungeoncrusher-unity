@@ -25,8 +25,8 @@ MonoBehaviour:
   _skillEventType: 4
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 7200
-    coolTime: 1
+    skillValue: 10000
+    coolTime: 3
     targetNum: 0
     range: 0
     skillFxPrefab: {fileID: 8195431620923900372, guid: b818a2a122e39da4eb2400da439eba3d, type: 3}
