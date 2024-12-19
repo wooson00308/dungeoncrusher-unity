@@ -25,6 +25,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5078053932428903324}
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -124,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96530d03fb0ea4ec58376dbc3a39bc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceSpeed: 10
 --- !u!4 &4937252866342536607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
