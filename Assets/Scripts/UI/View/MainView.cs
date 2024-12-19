@@ -50,7 +50,7 @@ public class MainView : BaseView
         var viewportToScreenPoint = Camera.main.ViewportToScreenPoint(worldToViewportPoint);
 
         var spawnPos = new Vector3(viewportToScreenPoint.x, viewportToScreenPoint.y, 0);
-        ResourceManager.Instance.SpawnFromPath("UI/SpecialDeath_Fx", transform).transform.position =
+        ResourceManager.Instance.SpawnFromPath("UI/Efx_UI_SpecialDeath", transform).transform.position =
             spawnPos;
     }
 

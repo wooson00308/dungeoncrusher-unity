@@ -15,7 +15,7 @@ MonoBehaviour:
   stageInfos:
   - stageUnitDatas:
     - stageUnits: {fileID: 11400000, guid: 1beb0b53ed6c28641a142cddd4e0011d, type: 2}
-      spawnCount: 1
+      spawnCount: 20
   - stageUnitDatas:
     - stageUnits: {fileID: 11400000, guid: 1beb0b53ed6c28641a142cddd4e0011d, type: 2}
       spawnCount: 1
