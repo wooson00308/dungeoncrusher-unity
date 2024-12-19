@@ -144,7 +144,7 @@ public class StageManager : SingletonMini<StageManager>
             if (spawnCount > 0)
             {
                 UnitFactory.Instance.Spawn(data.stageUnit, Team.Enemy, spawnCount);
-                Debug.Log($"{spawnCount} monsters spawned of type: {data.stageUnit.name}");
+                //Debug.Log($"{spawnCount} monsters spawned of type: {data.stageUnit.name}");
             }
         }
     }
@@ -152,7 +152,7 @@ public class StageManager : SingletonMini<StageManager>
     private void ClearAllMonsters()
     {
         UnitFactory.Instance.KillTeamUnits(Team.Enemy);
-        Debug.Log("All monsters cleared from the field.");
+        //Debug.Log("All monsters cleared from the field.");
     }
 
     private bool HasBossOnField()

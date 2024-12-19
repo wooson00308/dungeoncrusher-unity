@@ -49,7 +49,7 @@ public class EngageView : BaseView
             var onHitArgs = _damageEventQueue.Dequeue();
             var damageText = ResourceManager.Instance.SpawnFromPath("UI/DamageTextUI").GetComponent<DamageTextUI>();
             damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position);
-            await Awaitable.WaitForSecondsAsync(0.1f);
+            await Awaitable.EndOfFrameAsync();
         }
 
         _isProcessingDamageQueue = false;
