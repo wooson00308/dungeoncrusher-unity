@@ -277,6 +277,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnStun()
     {
+        if (!IsActive) return;
+        if (IsDeath) return;
         if (IsSuperArmor) return;
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
