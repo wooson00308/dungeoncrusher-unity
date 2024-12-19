@@ -10,7 +10,7 @@ public class StageManager : SingletonMini<StageManager>
 
     public bool IsAllStageClear => _stageDatas.stageInfos.Count <= _currentStage;
 
-    private Coroutine _spawnCoroutine;
+    private List<Coroutine> _spawnCoroutines = new List<Coroutine>();
     private Coroutine _stageTimerCoroutine;
     private bool _isStageCleared = false;
 
@@ -18,10 +18,12 @@ public class StageManager : SingletonMini<StageManager>
     {
         _currentStage++;
         _isStageCleared = true;
-        if (_spawnCoroutine != null)
+
+        foreach (var coroutine in _spawnCoroutines)
         {
-            StopCoroutine(_spawnCoroutine);
+            StopCoroutine(coroutine);
         }
+        _spawnCoroutines.Clear();
 
         if (_stageTimerCoroutine != null)
         {
@@ -42,10 +44,11 @@ public class StageManager : SingletonMini<StageManager>
 
     public void StartStage()
     {
-        if (_spawnCoroutine != null)
+        foreach (var coroutine in _spawnCoroutines)
         {
-            StopCoroutine(_spawnCoroutine);
+            StopCoroutine(coroutine);
         }
+        _spawnCoroutines.Clear();
 
         if (_stageTimerCoroutine != null)
         {
@@ -53,40 +56,44 @@ public class StageManager : SingletonMini<StageManager>
         }
 
         _isStageCleared = false;
-        _spawnCoroutine = StartCoroutine(MonsterSpawnRoutine());
-        _stageTimerCoroutine = StartCoroutine(StageTimerRoutine());
+
+        StageInfo currentStageInfo = GetStageData();
+        if (currentStageInfo != null)
+        {
+            foreach (var unitData in currentStageInfo.stageUnitDatas)
+            {
+                var spawnCoroutine = StartCoroutine(MonsterSpawnRoutine(unitData));
+                _spawnCoroutines.Add(spawnCoroutine);
+            }
+
+            _stageTimerCoroutine = StartCoroutine(StageTimerRoutine());
+        }
     }
 
-    private IEnumerator MonsterSpawnRoutine()
+    private IEnumerator MonsterSpawnRoutine(StageUnitData unitData)
     {
-        StageInfo currentStageInfo = GetStageData();
-        if (currentStageInfo == null)
-            yield break;
-
-        // 첫 스폰
-        yield return new WaitForSeconds(currentStageInfo.firstSpawnTime / 1000f);
-        SpawnMonsters(currentStageInfo.spawnCount, currentStageInfo.stageUnitDatas);
+        yield return new WaitForSeconds(unitData.firstSpawnTime / 1000f);
+        SpawnMonsters(unitData.spawnCount, unitData);
 
         int additionalSpawns = 0;
-        float spawnCycle = currentStageInfo.additionalSpawnCycle;
+        float spawnCycle = unitData.additionalSpawnCycle;
 
-        while (!_isStageCleared && (currentStageInfo.maxAdditionalSpawns == -1 || additionalSpawns < currentStageInfo.maxAdditionalSpawns))
+        while (!_isStageCleared && (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
         {
             int currentMonsterCount = GetCurrentMonsterCount();
 
-            // 스폰 주기 감소 계산
-            if (currentMonsterCount < currentStageInfo.underX4Threshold)
+            if (currentMonsterCount < unitData.underX4Threshold)
             {
-                spawnCycle = Mathf.Max(currentStageInfo.minimumSpawnCycle, spawnCycle * currentStageInfo.reductionFormula.underX4Factor);
+                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
             }
-            else if (currentMonsterCount < currentStageInfo.underX2Threshold)
+            else if (currentMonsterCount < unitData.underX2Threshold)
             {
-                spawnCycle = Mathf.Max(currentStageInfo.minimumSpawnCycle, spawnCycle * currentStageInfo.reductionFormula.underX2Factor);
+                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
             }
 
             yield return new WaitForSeconds(spawnCycle);
 
-            SpawnMonsters(currentStageInfo.additionalSpawnCount, currentStageInfo.stageUnitDatas);
+            SpawnMonsters(unitData.additionalSpawnCount, unitData);
             additionalSpawns++;
         }
     }
@@ -97,7 +104,9 @@ public class StageManager : SingletonMini<StageManager>
         if (currentStageInfo == null)
             yield break;
 
-        float remainingTime = currentStageInfo.durationTime;
+        int maxDuration = currentStageInfo.durationTime;
+
+        float remainingTime = maxDuration;
         while (remainingTime > 0 && !_isStageCleared)
         {
             yield return new WaitForSeconds(1f);
@@ -114,45 +123,31 @@ public class StageManager : SingletonMini<StageManager>
             }
 
             ClearAllMonsters();
-
+            ClearStage();
             if (IsAllStageClear)
             {
                 ProcessSystem.Instance.OnNextProcess<GameClearProcess>();
             }
             else
             {
-                ClearStage();
                 ProcessSystem.Instance.OnNextProcess<ReadyProcess>();
             }
         }
     }
 
-    private void SpawnMonsters(int count, List<StageUnitData> unitDatas)
+    private void SpawnMonsters(int count, StageUnitData unitData)
     {
-        if (unitDatas == null || unitDatas.Count == 0)
+        if (unitData == null)
             return;
 
-        float totalWeight = 0f;
-        foreach (var data in unitDatas)
-        {
-            totalWeight += data.spawnRate;
-        }
-
-        foreach (var data in unitDatas)
-        {
-            int spawnCount = Mathf.FloorToInt((data.spawnRate / totalWeight) * count);
-            if (spawnCount > 0)
-            {
-                UnitFactory.Instance.Spawn(data.stageUnit, Team.Enemy, spawnCount);
-                //Debug.Log($"{spawnCount} monsters spawned of type: {data.stageUnit.name}");
-            }
-        }
+        UnitFactory.Instance.Spawn(unitData.stageUnit, Team.Enemy, count);
+        Debug.Log($"{count} monsters spawned of type: {unitData.stageUnit.name}");
     }
 
     private void ClearAllMonsters()
     {
         UnitFactory.Instance.KillTeamUnits(Team.Enemy);
-        //Debug.Log("All monsters cleared from the field.");
+        Debug.Log("All monsters cleared from the field.");
     }
 
     private bool HasBossOnField()

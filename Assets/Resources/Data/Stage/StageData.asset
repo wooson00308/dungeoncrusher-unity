@@ -14,19 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageInfos:
   - durationTime: 30
-    spawnCount: 16
-    firstSpawnTime: 1
-    additionalSpawnCycle: 7
-    additionalSpawnCount: 1
-    underX2Threshold: 15
-    underX4Threshold: 10
-    minimumSpawnCycle: 3
-    maxAdditionalSpawns: -1
-    reductionFormula:
-      underX2Factor: 0.5
-      underX4Factor: 0.25
     stageUnitDatas:
-    - stageUnit: {fileID: 11400000, guid: f9285f1bb76ce34459e0637ac6d2edfc, type: 2}
-      spawnRate: 80
-    - stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
-      spawnRate: 20
+    - spawnCount: 5
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 8
+      underX2Threshold: 8
+      underX4Threshold: 5
+      minimumSpawnCycle: 3
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: f9285f1bb76ce34459e0637ac6d2edfc, type: 2}
+    - spawnCount: 8
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 10
+      underX2Threshold: 8
+      underX4Threshold: 5
+      minimumSpawnCycle: 3
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
