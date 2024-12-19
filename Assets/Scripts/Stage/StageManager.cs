@@ -104,11 +104,7 @@ public class StageManager : SingletonMini<StageManager>
         if (currentStageInfo == null)
             yield break;
 
-        int maxDuration = 0;
-        foreach (var unitData in currentStageInfo.stageUnitDatas)
-        {
-            maxDuration = Mathf.Max(maxDuration, unitData.durationTime);
-        }
+        int maxDuration = currentStageInfo.durationTime;
 
         float remainingTime = maxDuration;
         while (remainingTime > 0 && !_isStageCleared)
@@ -127,8 +123,15 @@ public class StageManager : SingletonMini<StageManager>
             }
 
             ClearAllMonsters();
-            Debug.Log("Stage timer ended, clearing stage.");
             ClearStage();
+            if (IsAllStageClear)
+            {
+                ProcessSystem.Instance.OnNextProcess<GameClearProcess>();
+            }
+            else
+            {
+                ProcessSystem.Instance.OnNextProcess<ReadyProcess>();
+            }
         }
     }
 

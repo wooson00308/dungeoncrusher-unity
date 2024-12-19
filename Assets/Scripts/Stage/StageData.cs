@@ -12,6 +12,9 @@ public class StageData : ScriptableObject
 [Serializable]
 public class StageInfo
 {
+    [Header("스테이지 지속 시간 (초)")]
+    public int durationTime;
+
     [Header("스테이지 유닛 데이터 리스트")]
     public List<StageUnitData> stageUnitDatas = new();
 }
@@ -19,9 +22,6 @@ public class StageInfo
 [Serializable]
 public class StageUnitData
 {
-    [Header("스테이지 지속 시간 (초)")]
-    public int durationTime;
-
     [Header("스폰 시 생성되는 기본 몬스터 수")]
     public int spawnCount;
 
