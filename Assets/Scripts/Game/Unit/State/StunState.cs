@@ -7,6 +7,7 @@ public class StunState : StateBase, IState
     public void OnEnter(Unit unit)
     {
         unit.CrossFade("Stun", 0f);
+        unit.Stop();
 
         _currentCheckDelay = 0;
     }
