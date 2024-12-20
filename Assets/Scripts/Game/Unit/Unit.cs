@@ -29,13 +29,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Rigidbody2D _rigidbody;
 
     private GameObject _hitPrefab;
+    private Projectile _projectilePrefab;
+    private Warning _warningPrefab;
 
     private bool _hasHitState;
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
-    public Unit Target => _targetDetector.Target;
 
+    public Unit Target => _targetDetector.Target;
     public bool IsStun { get; private set; }
+    public Projectile ProjectilePrefab => _projectilePrefab;
+    public Warning WarningPrefab => _warningPrefab;
+
+    public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
     public bool IsSuperArmor { get; set; }
@@ -151,7 +157,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _targetDetector = GetComponent<TargetDetector>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
-
         _animator = _model.GetComponent<Animator>();
     }
 
@@ -175,6 +180,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Team = team;
 
         _hitPrefab ??= data.HitPrefab;
+        _projectilePrefab ??= data.ProjectilePrefab;
+        _warningPrefab ??= data.WarningPrefab;
 
         SetupStats(data);
 
@@ -228,6 +235,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     /// <param name="target"></param>
     public void MoveFromTarget(Transform target)
     {
+        IsHit = false;
         _agent.isStopped = false;
         _agent.speed = Speed.Value;
         _agent.SetDestination(target.position);
@@ -315,10 +323,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _fsm.TransitionTo<HitState>();
         }
 
+        IsHit = true;
+
         var realDamage = damage - Defense.Value;
 
         damage = realDamage <= 0 ? 1 : realDamage;
-
+        
         attacker?.TryLifeSteal(damage);
 
         Health.Update("Engage", -damage);
@@ -362,7 +372,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             healValue = Health.Max - Health.Value;
         }
-        
+
         Health.Update("Engage", healValue);
     }
 

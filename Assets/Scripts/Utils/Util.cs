@@ -13,7 +13,6 @@ public class Util
             component = go.AddComponent<T>();
 
         return component;
-
     }
 
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
@@ -51,10 +50,12 @@ public class Util
                     return component;
             }
         }
+
         return null;
     }
 
-    public static T[] FindChildren<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
+    public static T[] FindChildren<T>(GameObject go, string name = null, bool recursive = false)
+        where T : UnityEngine.Object
     {
         if (go == null)
             return null;
@@ -79,9 +80,9 @@ public class Util
             {
                 if (string.IsNullOrEmpty(name) || component.name == name)
                     result.Add(component);
-
             }
         }
+
         return result.ToArray();
     }
 
@@ -92,7 +93,6 @@ public class Util
 
     public static string GetStringWithinSection(string str, string begin, string end)
     {
-
         if (string.IsNullOrEmpty(str))
         {
             return null;
@@ -105,6 +105,7 @@ public class Util
             if (str.IndexOf(end) > -1) result = str.Substring(0, str.IndexOf(end));
             else result = str;
         }
+
         return result;
     }
 
@@ -121,7 +122,6 @@ public class Util
 
 
         return result;
-
     }
 
     /// <summary>
@@ -140,5 +140,24 @@ public class Util
         float x = UnityEngine.Random.Range(-boxSize.x / 2, boxSize.x / 2);
         float y = UnityEngine.Random.Range(-boxSize.y / 2, boxSize.y / 2);
         return spawnPosition + new Vector2(x, y);
+    }
+
+    /// <summary>
+    /// LookAt 2D버전 바라보는 각도 반환
+    /// </summary>
+    public static Vector3 LookAt2D(Transform transform, Transform targetPos)
+    {
+        Vector3 dir = targetPos.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Vector3 lookDir = new Vector3(0, 0, angle);
+        return lookDir;
+    }
+
+    public static Vector3 LookAt2D(Vector2 transform, Vector2 targetPos)
+    {
+        Vector3 dir = targetPos - transform;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Vector3 lookDir = new Vector3(0, 0, angle);
+        return lookDir;
     }
 }
