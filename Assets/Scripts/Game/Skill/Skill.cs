@@ -108,7 +108,7 @@ public class Skill : MonoBehaviour
         {
             skillFxObject.transform.position = user.transform.position;
             Vector3 temp = skillFxObject.transform.localScale;
-            temp.x = (user.transform.position.x - user.Target.transform.position.x) >= 0 ? 1f : -1f  ;
+            temp.x = (user.transform.position.x - user.Target.transform.position.x) >= 0 ? -1f : 1f  ;
             skillFxObject.transform.localScale = temp;
         }
 

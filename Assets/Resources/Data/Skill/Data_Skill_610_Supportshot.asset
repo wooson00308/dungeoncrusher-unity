@@ -19,7 +19,7 @@ MonoBehaviour:
   _name: "\uC11C\uD3EC\uD2B8\uC0F7"
   _description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E4"
   _isAreaAttack: 0
-  _isPassiveSkill: 0
+  _isPassiveSkill: 1
   _isSelfSkill: 1
   _isUltSkill: 0
   _skillEventType: 0

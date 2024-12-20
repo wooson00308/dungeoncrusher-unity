@@ -394,6 +394,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnStun(int stunDuration)
     {
+        if (IsStun) return;
         if (IsDeath) return;
         if (IsSuperArmor) return;
         IsStun = true;
