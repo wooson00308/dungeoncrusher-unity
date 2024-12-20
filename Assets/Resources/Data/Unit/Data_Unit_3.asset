@@ -15,6 +15,9 @@ MonoBehaviour:
   _id: Unit_3
   _prefab: {fileID: 4602744156704204850, guid: e1d7b3b92fcd3442ba886ddb14e2231b, type: 3}
   _hitPrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 0}
+  _warningPrefab: {fileID: 0}
+  _dropExp: 0
   _health:
     _value: 99999
   _attack:
@@ -23,6 +26,10 @@ MonoBehaviour:
     _value: 999
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 1
   _speed:
     _value: 2
   _attackSpeed:

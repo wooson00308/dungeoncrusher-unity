@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private GameObject _hitPrefab;
     private Projectile _projectilePrefab;
     private Warning _warningPrefab;
+    private int _dropExp;
 
     private bool _hasHitState;
     private bool _hasAerialState;
@@ -40,6 +41,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public bool IsStun { get; private set; }
     public Projectile ProjectilePrefab => _projectilePrefab;
     public Warning WarningPrefab => _warningPrefab;
+    public int DropExp => _dropExp;
 
     public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
@@ -68,6 +70,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public IntStat Attack { get; private set; }
     public IntStat Defense { get; private set; }
     public IntStat Mp { get; private set; }
+    public IntStat Exp { get; private set; }
+    public IntStat Level { get; private set; }
     public FloatStat Speed { get; private set; }
     public FloatStat AttackSpeed { get; private set; }
     public FloatStat AttackRange { get; private set; }
@@ -89,6 +93,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
         AttackSpeed = new(stats.AttackSpeed.Value);
+        Exp = new(stats.Exp.Value);
+        Exp.SetMaxValue(100);
+        Level = new(stats.Level.Value);
         AttackSpeed.OnValueChanged += (value) => { _animator.SetFloat("AttackSpeed", value); };
         _animator.SetFloat("AttackSpeed", AttackSpeed.Value);
 
@@ -103,6 +110,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             _agent.speed = Speed.Value;
         }
+
         _stunDuration = 0;
 
         IsDeath = false;
@@ -115,6 +123,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Defense.Update(key, stats.Defense.Value);
         Mp.Update(key, stats.Mp.Value, StatValueType.Max);
         Speed.Update(key, stats.Speed.Value);
+        Exp.Update(key, stats.Exp.Value, StatValueType.Max);
+        Level.Update(key, stats.Level.Value);
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
         AttackRange.Update(key, stats.AttackRange.Value);
         CriticalRate.Update(key, stats.CriticalRate.Value);
@@ -132,6 +142,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Mp.Reset(key);
         Mp.Reset(key, StatValueType.Max);
         Speed.Reset(key);
+        Exp.Reset(key);
+        Level.Reset(key);
         AttackSpeed.Reset(key);
         AttackRange.Reset(key);
         CriticalRate.Reset(key);
@@ -153,12 +165,15 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _animator = _model.GetComponent<Animator>();
+
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
     }
 
     private void OnDisable()
     {
         if (Team == Team.Enemy) return;
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
     }
 
     public void OnInitialized(UnitData data, Team team)
@@ -175,6 +190,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _hitPrefab ??= data.HitPrefab;
         _projectilePrefab ??= data.ProjectilePrefab;
         _warningPrefab ??= data.WarningPrefab;
+        _dropExp = data.dropExp;
         _fsm.enabled = false;
         Team = team;
 
@@ -326,7 +342,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         var realDamage = damage - Defense.Value;
 
         damage = realDamage <= 0 ? 1 : realDamage;
-        
+
         attacker?.TryLifeSteal(damage);
 
         Health.Update("Engage", -damage);
@@ -410,11 +426,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _fsm.LockState();
         Invoke("Melt", stunDuration);
     }
+
     public void Melt()
     {
         _fsm.UnlockState();
         IsStun = false;
     }
+
     public void OnAerial()
     {
         if (IsDeath) return;
@@ -478,13 +496,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
             skillObj.transform.SetParent(_skillStorage);
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(), 
+            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(),
                 new GameEvent
                 {
                     eventType = UnitEvents.UnitEvent_RootSkill.ToString(),
                     args = skillData
                 });
-
         }
     }
 
@@ -510,6 +527,32 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         UpdateStats(item.Data.Id, item.Data);
 
         spawnItem.transform.SetParent(_inventory);
+    }
+
+    #endregion
+
+    #region Level
+
+    public void LevelUp(int value)
+    {
+        Exp.SetMaxValue(Exp.Value * 2);
+        Exp.Update("Engage", -Exp.Value);
+        Level.Update("Engage", value);
+    }
+
+    public void ExpUp(GameEvent gameEvent)
+    {
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        Unit unit = unitEventArgs.publisher;
+        Exp.Update("Engage", unit.DropExp); //Levelup 하고나면 0
+
+        if (Exp.Value < Exp.Max) return;
+        
+        int levelUp = Exp.Value / Exp.Max;
+        if (levelUp > 0)
+        {
+            LevelUp(levelUp);
+        }
     }
 
     #endregion

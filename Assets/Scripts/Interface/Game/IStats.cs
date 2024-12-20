@@ -6,6 +6,8 @@ public interface IStats
     public IntStat Attack { get; }
     public IntStat Defense { get; }
     public IntStat Mp { get; }
+    public IntStat Exp { get; }
+    public IntStat Level { get; }
     public FloatStat Speed { get; }
     public FloatStat AttackSpeed { get; }
     public FloatStat AttackRange { get; }
