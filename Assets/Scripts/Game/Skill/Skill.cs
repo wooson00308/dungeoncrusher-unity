@@ -81,6 +81,7 @@ public class Skill : MonoBehaviour
     {
         var args = (SkillEventArgs)e.args;
         if (args.data.Id != _skillData.Id) return;
+        if (_skillData.IsUltSkill && _owner.Mp.Value < _owner.Mp.Max) return;
         UseSkill(_owner);
     }
 
@@ -97,6 +98,11 @@ public class Skill : MonoBehaviour
     private void UseSkill(Unit user)
     {
         if (!IsUseableSkill()) return;
+
+        if(_skillData.IsUltSkill)
+        {
+            _owner.Mp.Update("Ult", -_owner.Mp.Value);
+        }
 
         _timeMarker = Time.time; // 스킬 쿨타임 초기화
 
