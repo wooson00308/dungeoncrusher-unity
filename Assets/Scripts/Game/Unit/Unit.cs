@@ -103,13 +103,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             _agent.speed = Speed.Value;
         }
-
-        if (_fsm != null)
-        {
-            _fsm.StartState<IdleState>();
-        }
-
         _stunDuration = 0;
+
         IsDeath = false;
     }
 
@@ -168,20 +163,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnInitialized(UnitData data, Team team)
     {
-        if(IsDeath)
+        if (IsDeath)
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
             _fsm.UnlockState();
         }
 
-        _fsm.enabled = false;
-
-        Team = team;
+        _fsm?.StartState<IdleState>();
 
         _hitPrefab ??= data.HitPrefab;
         _projectilePrefab ??= data.ProjectilePrefab;
         _warningPrefab ??= data.WarningPrefab;
+        _fsm.enabled = false;
+        Team = team;
 
         SetupStats(data);
 
@@ -206,14 +201,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.enabled = true;
         _fsm.enabled = IsActive;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.SetActive.ToString(), new GameEvent
         {
             args = new SetActiveEventArgs()
             {
                 publisher = this,
                 isActive = IsActive
             },
-            eventType = UnitEvents.UnitEvent_SetActive.ToString()
+            eventType = UnitEvents.SetActive.ToString()
         });
 
         if (!IsActive)
@@ -307,9 +302,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         if (IsSuperArmor) return;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.OnStun.ToString(), new GameEvent
         {
-            eventType = UnitEvents.UnitEvent_OnStun.ToString(),
+            eventType = UnitEvents.OnStun.ToString(),
             args = new UnitEventArgs { publisher = this }
         });
 
@@ -318,6 +313,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
+        if (!IsActive) return;
+        if (IsDeath) return;
+
         if (_hasHitState)
         {
             _fsm.TransitionTo<HitState>();
@@ -343,9 +341,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             //Debug.Log("hitPrefab이 없습니다");
         }
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.OnHit.ToString(), new GameEvent
         {
-            eventType = UnitEvents.UnitEvent_OnHit.ToString(),
+            eventType = UnitEvents.OnHit.ToString(),
             args = new OnHitEventArgs { publisher = this, damageValue = damage }
         });
 
@@ -455,10 +453,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Mp.Update("Engage", mpValue);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_AddMp.ToString(),
+        GameEventSystem.Instance.Publish(UnitEvents.Mana_Regen.ToString(),
             new GameEvent //따로 이벤트 나눈건 아군의 Mp를 추가 해 줄 수 있기 때문.
             {
-                eventType = UnitEvents.UnitEvent_AddMp.ToString(),
+                eventType = UnitEvents.Mana_Regen.ToString(),
                 args = new UnitEventArgs() { publisher = this }
             });
     }
@@ -479,6 +477,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _skillDic.Add(skillData.Id, skillComponent);
 
             skillObj.transform.SetParent(_skillStorage);
+
+            GameEventSystem.Instance.Publish(UnitEvents.RootSkill.ToString(), 
+                new GameEvent
+                {
+                    eventType = UnitEvents.RootSkill.ToString(),
+                    args = skillData
+                });
+
         }
     }
 

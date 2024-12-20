@@ -18,14 +18,14 @@ public class EngageView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
+        GameEventSystem.Instance.Subscribe(UnitEvents.SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
+        GameEventSystem.Instance.Subscribe(UnitEvents.OnHit.ToString(), EnqueueDamageText);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.OnHit.ToString(), EnqueueDamageText);
     }
 
     private void EnqueueDamageText(GameEvent gameEvent)

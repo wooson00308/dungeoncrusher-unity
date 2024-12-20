@@ -9,6 +9,9 @@ public class Skill : MonoBehaviour
     [SerializeField] private SkillData _skillData;
     private float _timeMarker;
     private bool _isInitialized = false;
+    private bool _isCooldown;
+    public float TimeMarker => _timeMarker;
+    public bool IsCooldown => _isCooldown;
     public SkillData SkillData => _skillData;
     public int Level => _skillLevel;
 
@@ -28,6 +31,7 @@ public class Skill : MonoBehaviour
         if (_skillData.IsUltSkill)
         {
             // 필살기로 지정될 이벤트 등록 필요
+            GameEventSystem.Instance.Subscribe(UnitEvents.UseSkill_Publish_UI_Ulti.ToString(), TryUseSkillFromUI);
         }
 
         if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
@@ -40,6 +44,12 @@ public class Skill : MonoBehaviour
     {
         _skillLevel = 1;
         _isInitialized = false;
+
+        if (_skillData.IsUltSkill)
+        {
+            // 필살기로 지정될 이벤트 등록 필요
+            GameEventSystem.Instance.Unsubscribe(UnitEvents.UseSkill_Publish_UI_Ulti.ToString(), TryUseSkillFromUI);
+        }
 
         if (!_skillData.IsSelfSkill)
         {
@@ -62,6 +72,12 @@ public class Skill : MonoBehaviour
         if (args.publisher.Target == null) return;
 
         UseSkill(args.publisher);
+    }
+
+    public void TryUseSkillFromUI(GameEvent e)
+    {
+        if (((SkillData)e.args).Id != _skillData.Id) return;
+        UseSkill(_owner);
     }
 
     public void TryUseSkillWheenCoolTimeReady()
@@ -116,16 +132,7 @@ public class Skill : MonoBehaviour
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
 
-            // TODO : 수정 필요 -> 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시켜야 함.
-            // 1. 타겟을 찾고
-            // 2. 적들 중 타겟과 거리가 일정거리 가까운 애들을 선별하여
-            // 3. 범위 공격 피격
-
-            // BEFORE
-            //List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
-
-            //AFTER
-            // ...
+            // 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시킴.
             List<Unit> targets = enemies
                 .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <=
                                 _skillData.GetSkillLevelData(_skillLevel).range)
@@ -138,11 +145,6 @@ public class Skill : MonoBehaviour
         {
             skillFx.Initialized(this, user, _skillData, new List<Unit> { user.Target });
         }
-    }
-
-    private void Update()
-    {
-        TryUseSkillWheenCoolTimeReady();
     }
 
     /// <summary>
@@ -166,7 +168,9 @@ public class Skill : MonoBehaviour
         if (!_skillData.IsValidTarget(_owner))
             return false;
 
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // 쿨타임 지났는지 체크 
+        _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
+
+        if (_isCooldown) // 쿨타임 지났는지 체크 
             return false;
 
         return true;
@@ -175,7 +179,6 @@ public class Skill : MonoBehaviour
     public void ResetCooltime()
     {
         var cooltime = _skillData.GetSkillLevelData(_skillLevel).coolTime;
-
         if (Time.time - _timeMarker > cooltime) return;
         _timeMarker -= cooltime;
     }
