@@ -29,6 +29,38 @@ public class UnitAnimator : MonoBehaviour
         AttackEvent(e);
     }
 
+    private GameObject warningPrefab;
+    private Vector2 targetPos;
+
+    public void WarningEvent(AnimationEvent e)
+    {
+        warningPrefab = ResourceManager.Instance.Spawn(_owner.WarningPrefab.gameObject);
+
+        if (warningPrefab == null) return;
+
+        targetPos = _owner.Target.transform.position;
+        warningPrefab.GetComponent<Warning>().Initialize(_owner, targetPos);
+    }
+
+    private Projectile _projectilePrefab;
+
+    public void RangeAttackEvent(AnimationEvent e)
+    {
+        ResourceManager.Instance.Destroy(warningPrefab);
+        var projectilePrefab = _owner.ProjectilePrefab;
+
+        if (projectilePrefab == null) return;
+
+        _projectilePrefab =
+            ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile>();
+        _projectilePrefab.transform.position = transform.position;
+
+        var target = _owner.Target;
+        _projectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
+
+        // WarningEvent(e);
+    }
+
     public void AttackEvent(AnimationEvent e)
     {
         var realDamage = _owner.Attack.Value;
@@ -64,7 +96,7 @@ public class UnitAnimator : MonoBehaviour
             args = new UnitEventArgs { publisher = _owner }
         });
     }
-                                                                                         
+
     public void SpecialDeathEvent(AnimationEvent e)
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);

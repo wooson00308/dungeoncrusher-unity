@@ -8,6 +8,9 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private GameObject _prefab;
     [SerializeField] private GameObject _hitPrefab;
 
+    [Header("원거리")] [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private Warning _warningPrefab;
+
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
@@ -26,6 +29,8 @@ public class UnitData : ScriptableObject, IStats
     public GameObject Prefab => _prefab;
     public GameObject HitPrefab => _hitPrefab;
 
+    public Projectile ProjectilePrefab => _projectilePrefab;
+    public Warning WarningPrefab => _warningPrefab;
     public IntStat Health => _health;
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
