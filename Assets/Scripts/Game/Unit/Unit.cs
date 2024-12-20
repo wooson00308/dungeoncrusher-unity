@@ -29,11 +29,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private Rigidbody2D _rigidbody;
 
     private GameObject _hitPrefab;
+    private Projectile _projectilePrefab;
+    private Warning _warningPrefab;
 
     private bool _hasHitState;
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
+
     public Unit Target => _targetDetector.Target;
+    public bool IsStun { get; private set; }
+    public Projectile ProjectilePrefab => _projectilePrefab;
+    public Warning WarningPrefab => _warningPrefab;
+
+    public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
     public bool IsSuperArmor { get; set; }
@@ -95,13 +103,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             _agent.speed = Speed.Value;
         }
-
-        if (_fsm != null)
-        {
-            _fsm.StartState<IdleState>();
-        }
-
         _stunDuration = 0;
+
         IsDeath = false;
     }
 
@@ -149,36 +152,37 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _targetDetector = GetComponent<TargetDetector>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
-
         _animator = _model.GetComponent<Animator>();
     }
 
     private void OnDisable()
     {
         if (Team == Team.Enemy) return;
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.SetActive.ToString(), SetActiveEvent);
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
     }
 
     public void OnInitialized(UnitData data, Team team)
     {
-        if(IsDeath)
+        if (IsDeath)
         {
             ResetStats("Engage");
             UnitFactory.Instance.GoToSpawnPoint(this);
             _fsm.UnlockState();
         }
 
-        _fsm.enabled = false;
-
-        Team = team;
+        _fsm?.StartState<IdleState>();
 
         _hitPrefab ??= data.HitPrefab;
+        _projectilePrefab ??= data.ProjectilePrefab;
+        _warningPrefab ??= data.WarningPrefab;
+        _fsm.enabled = false;
+        Team = team;
 
         SetupStats(data);
 
         if (team == Team.Friendly)
         {
-            GameEventSystem.Instance.Subscribe(ProcessEvents.SetActive.ToString(), SetActiveEvent);
+            GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
         }
         else
         {
@@ -226,6 +230,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     /// <param name="target"></param>
     public void MoveFromTarget(Transform target)
     {
+        IsHit = false;
         _agent.isStopped = false;
         _agent.speed = Speed.Value;
         _agent.SetDestination(target.position);
@@ -308,15 +313,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnHit(int damage, Unit attacker = null)
     {
+        if (!IsActive) return;
+        if (IsDeath) return;
+
         if (_hasHitState)
         {
             _fsm.TransitionTo<HitState>();
         }
 
+        IsHit = true;
+
         var realDamage = damage - Defense.Value;
 
         damage = realDamage <= 0 ? 1 : realDamage;
-
+        
         attacker?.TryLifeSteal(damage);
 
         Health.Update("Engage", -damage);
@@ -360,7 +370,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             healValue = Health.Max - Health.Value;
         }
-        
+
         Health.Update("Engage", healValue);
     }
 
@@ -392,10 +402,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnStun(int stunDuration)
     {
+        if (IsStun) return;
         if (IsDeath) return;
+        if (IsSuperArmor) return;
+        IsStun = true;
         _fsm.TransitionTo<StunState>();
+        _fsm.LockState();
+        Invoke("Melt", stunDuration);
     }
-
+    public void Melt()
+    {
+        _fsm.UnlockState();
+        IsStun = false;
+    }
     public void OnAerial()
     {
         if (IsDeath) return;
@@ -434,10 +453,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Mp.Update("Engage", mpValue);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_AddMp.ToString(),
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Mana_Regen.ToString(),
             new GameEvent //따로 이벤트 나눈건 아군의 Mp를 추가 해 줄 수 있기 때문.
             {
-                eventType = UnitEvents.UnitEvent_AddMp.ToString(),
+                eventType = UnitEvents.UnitEvent_Mana_Regen.ToString(),
                 args = new UnitEventArgs() { publisher = this }
             });
     }
@@ -458,6 +477,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _skillDic.Add(skillData.Id, skillComponent);
 
             skillObj.transform.SetParent(_skillStorage);
+
+            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(), 
+                new GameEvent
+                {
+                    eventType = UnitEvents.UnitEvent_RootSkill.ToString(),
+                    args = skillData
+                });
+
         }
     }
 

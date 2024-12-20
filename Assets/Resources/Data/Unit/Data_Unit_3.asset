@@ -30,7 +30,7 @@ MonoBehaviour:
   _attackRange:
     _value: 0.9
   _criticalRate:
-    _value: 100
+    _value: 0
   _criticalPercent:
     _value: 10000
   _stunRate:

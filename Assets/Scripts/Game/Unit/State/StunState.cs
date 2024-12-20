@@ -19,6 +19,11 @@ public class StunState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
+        if (!unit.IsStun)
+        {
+            _fsm.TransitionTo<ChaseState>();
+        }
+
         if (_currentCheckDelay <= 0.1f)
         {
             _currentCheckDelay += Time.deltaTime;

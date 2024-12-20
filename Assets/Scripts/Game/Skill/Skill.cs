@@ -9,6 +9,9 @@ public class Skill : MonoBehaviour
     [SerializeField] private SkillData _skillData;
     private float _timeMarker;
     private bool _isInitialized = false;
+    private bool _isCooldown;
+    public float TimeMarker => _timeMarker;
+    public bool IsCooldown => _isCooldown;
     public SkillData SkillData => _skillData;
     public int Level => _skillLevel;
 
@@ -34,12 +37,22 @@ public class Skill : MonoBehaviour
         {
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
+        else
+        {
+            GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
+        }
     }
 
     private void OnDisable()
     {
         _skillLevel = 1;
         _isInitialized = false;
+
+        if (_skillData.IsUltSkill)
+        {
+            // 필살기로 지정될 이벤트 등록 필요
+            GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
+        }
 
         if (!_skillData.IsSelfSkill)
         {
@@ -64,6 +77,13 @@ public class Skill : MonoBehaviour
         UseSkill(args.publisher);
     }
 
+    public void TryUseSkillFromUI(GameEvent e)
+    {
+        var args = (SkillEventArgs)e.args;
+        if (args.data.Id != _skillData.Id) return;
+        UseSkill(_owner);
+    }
+
     public void TryUseSkillWheenCoolTimeReady()
     {
         if (!_skillData.IsSelfSkill) return; // 스킬이 특정 조건이 아닌 자가발동 스킬인지 체크 
@@ -82,7 +102,7 @@ public class Skill : MonoBehaviour
 
         if (user.Target == null) return;
 
-        #region ��ų ������ ���Ἲ �˻�
+        #region 스킬 프리팹 무결성 검사
 
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
@@ -103,20 +123,20 @@ public class Skill : MonoBehaviour
         if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
 
         skillFxObject.transform.position = user.Target.transform.position;
+
+        if (_skillData.IsPassiveSkill)
+        {
+            skillFxObject.transform.position = user.transform.position;
+            Vector3 temp = skillFxObject.transform.localScale;
+            temp.x = (user.transform.position.x - user.Target.transform.position.x) >= 0 ? -1f : 1f  ;
+            skillFxObject.transform.localScale = temp;
+        }
+
         if (_skillData.IsAreaAttack)
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
 
-            // TODO : 수정 필요 -> 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시켜야 함.
-            // 1. 타겟을 찾고
-            // 2. 적들 중 타겟과 거리가 일정거리 가까운 애들을 선별하여
-            // 3. 범위 공격 피격
-
-            // BEFORE
-            //List<Unit> targets = enemies.OrderBy(x => Random.value).Take(_skillData.GetSkillLevelData(_skillLevel).targetNum).ToList();
-
-            //AFTER
-            // ...
+            // 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시킴.
             List<Unit> targets = enemies
                 .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <=
                                 _skillData.GetSkillLevelData(_skillLevel).range)
@@ -129,11 +149,6 @@ public class Skill : MonoBehaviour
         {
             skillFx.Initialized(this, user, _skillData, new List<Unit> { user.Target });
         }
-    }
-
-    private void Update()
-    {
-        TryUseSkillWheenCoolTimeReady();
     }
 
     /// <summary>
@@ -151,31 +166,27 @@ public class Skill : MonoBehaviour
             return false;
         }
 
+        if(_owner.IsStun)
+            return false;
+
         if (!_skillData.IsValidTarget(_owner))
             return false;
 
-        if (Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime) // 쿨타임 지났는지 체크 
+        if (_isCooldown) // 쿨타임 지났는지 체크 
             return false;
 
         return true;
     }
 
+    private void Update()
+    {
+        _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
+    }
+
     public void ResetCooltime()
     {
         var cooltime = _skillData.GetSkillLevelData(_skillLevel).coolTime;
-
         if (Time.time - _timeMarker > cooltime) return;
         _timeMarker -= cooltime;
     }
-
-    // 기존 기능 중에 전투 중인지 전투중이 아닌지 체크하는 기능이 존재하여 해당 기능을 비활성화하였습니다.
-    //private void Off(GameEvent e)
-    //{
-    //    OnOff = false;
-    //}
-    //private void On(GameEvent e)
-    //{
-    //    _timeMarker = Time.time;
-    //    OnOff = true;
-    //}
 }

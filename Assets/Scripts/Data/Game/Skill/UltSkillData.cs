@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_Skill_1112", menuName = "SkillData/Create UltTestData")]
 public class UltSkillData : SkillData
 {
+    
     public override bool IsValidTarget(Unit unit)
     {
         return true;
@@ -16,7 +17,7 @@ public class UltSkillData : SkillData
             return;
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
         int damage = (int)(user.Attack.Value * skillValue * 1f);
-        Debug.Log("Ult");
+        TimeManager.Instance.SlowMotion();
         user.Mp.Update("Ult", -user.Mp.Value);
         foreach (var target in targets)
         {

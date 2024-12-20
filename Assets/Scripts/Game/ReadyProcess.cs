@@ -11,7 +11,7 @@ public class ReadyProcess : Process
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.Engage.ToString(), AllReady);
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), AllReady);
         UIManager.Instance.ShowLayoutUI<ReadyUI>();
 
         Ready2Units();
@@ -19,7 +19,7 @@ public class ReadyProcess : Process
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.Engage.ToString(), AllReady);
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), AllReady);
         UIManager.Instance.CloseLayoutUI<ReadyUI>();
     }
 
@@ -40,8 +40,8 @@ public class ReadyProcess : Process
             _camera.Follow = units[0].transform;
         }
 
-        GameEventSystem.Instance.Publish(ProcessEvents.SetActive.ToString(), new GameEvent { args = false });
-        GameEventSystem.Instance.Publish(ProcessEvents.Ready.ToString());
+        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), new GameEvent { args = false });
+        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Ready.ToString());
         SoundSystem.Instance.PlayBGM("EngageBGM");
     }
 

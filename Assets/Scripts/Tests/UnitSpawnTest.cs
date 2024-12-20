@@ -18,8 +18,8 @@ public class UnitSpawnTest
 
         await Awaitable.WaitForSecondsAsync(1f);
 
-        GameEventSystem.Instance.Subscribe(ProcessEvents.AllStageClear.ToString(), OnTestComplete);
-        GameEventSystem.Instance.Subscribe(ProcessEvents.GameOver.ToString(), OnTestComplete);
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_AllStageClear.ToString(), OnTestComplete);
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), OnTestComplete);
 
         _system = GameObject.FindFirstObjectByType<ProcessSystem>();
     }

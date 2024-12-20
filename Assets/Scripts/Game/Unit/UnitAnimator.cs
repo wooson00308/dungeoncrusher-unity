@@ -29,6 +29,38 @@ public class UnitAnimator : MonoBehaviour
         AttackEvent(e);
     }
 
+    private GameObject warningPrefab;
+    private Vector2 targetPos;
+
+    public void WarningEvent(AnimationEvent e)
+    {
+        warningPrefab = ResourceManager.Instance.Spawn(_owner.WarningPrefab.gameObject);
+
+        if (warningPrefab == null) return;
+
+        targetPos = _owner.Target.transform.position;
+        warningPrefab.GetComponent<Warning>().Initialize(_owner, targetPos);
+    }
+
+    private Projectile _projectilePrefab;
+
+    public void RangeAttackEvent(AnimationEvent e)
+    {
+        ResourceManager.Instance.Destroy(warningPrefab);
+        var projectilePrefab = _owner.ProjectilePrefab;
+
+        if (projectilePrefab == null) return;
+
+        _projectilePrefab =
+            ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile>();
+        _projectilePrefab.transform.position = transform.position;
+
+        var target = _owner.Target;
+        _projectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
+
+        // WarningEvent(e);
+    }
+
     public void AttackEvent(AnimationEvent e)
     {
         var realDamage = _owner.Attack.Value;
@@ -42,13 +74,13 @@ public class UnitAnimator : MonoBehaviour
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Attack.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnAttack.ToString(), new GameEvent
         {
             args = new UnitEventArgs
             {
                 publisher = _owner
             },
-            eventType = UnitEvents.UnitEvent_Attack.ToString()
+            eventType = UnitEvents.UnitEvent_OnAttack.ToString()
         });
 
         _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
@@ -64,12 +96,12 @@ public class UnitAnimator : MonoBehaviour
             args = new UnitEventArgs { publisher = _owner }
         });
     }
-                                                                                         
+
     public void SpecialDeathEvent(AnimationEvent e)
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnSpecialDeath.ToString(),
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath_Special.ToString(),
             new GameEvent
             {
                 args = new UnitEventArgs { publisher = _owner } //적 일러스트를 넣는다면 체크하는 용도로 유닛을 넘겨줌.

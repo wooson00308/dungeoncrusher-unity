@@ -16,6 +16,11 @@ public class UnitFactory : SingletonMini<UnitFactory>
     private readonly HashSet<Vector2> _spawnedPositionSet = new();
     private readonly List<Vector2> _spawnedPositions = new();
 
+    public Unit GetPlayer()
+    {
+        return _unitList.Find(x => x.Team == Team.Friendly);
+    }
+
     public HashSet<Unit> GetTeamUnits(Team team)
     {
         if (_teamUnitDic.TryGetValue(team, out HashSet<Unit> units))
