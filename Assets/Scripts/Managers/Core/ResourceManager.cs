@@ -96,7 +96,7 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         if (!uiObject.activeInHierarchy)
         {
-            Debug.LogWarning("이미 풀에 반환된 UI 오브젝트입니다.");
+            //Debug.LogWarning("이미 풀에 반환된 UI 오브젝트입니다.");
             return;
         }
 

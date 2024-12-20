@@ -155,19 +155,21 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _animator = _model.GetComponent<Animator>();
     }
 
-    private void OnEnable()
-    {
-        _fsm.UnlockState();
-        GameEventSystem.Instance.Subscribe(ProcessEvents.SetActive.ToString(), SetActive);
-    }
-
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.SetActive.ToString(), SetActive);
+        if (Team == Team.Enemy) return;
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.SetActive.ToString(), SetActiveEvent);
     }
 
     public void OnInitialized(UnitData data, Team team)
     {
+        if(IsDeath)
+        {
+            ResetStats("Engage");
+            UnitFactory.Instance.GoToSpawnPoint(this);
+            _fsm.UnlockState();
+        }
+
         _fsm.enabled = false;
 
         Team = team;
@@ -175,12 +177,26 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _hitPrefab ??= data.HitPrefab;
 
         SetupStats(data);
+
+        if (team == Team.Friendly)
+        {
+            GameEventSystem.Instance.Subscribe(ProcessEvents.SetActive.ToString(), SetActiveEvent);
+        }
+        else
+        {
+            SetActive(true);
+        }
     }
 
-    private void SetActive(GameEvent gameEvent)
+    private void SetActiveEvent(GameEvent gameEvent)
     {
+        SetActive((bool)gameEvent.args);
+    }
+
+    private void SetActive(bool isActive)
+    {
+        IsActive = isActive;
         _agent.enabled = true;
-        IsActive = (bool)gameEvent.args;
         _fsm.enabled = IsActive;
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new GameEvent
@@ -303,7 +319,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         damage = realDamage <= 0 ? 1 : realDamage;
 
-        attacker.TryLifeSteal(damage);
+        attacker?.TryLifeSteal(damage);
 
         Health.Update("Engage", -damage);
 
@@ -314,7 +330,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
-            Debug.Log("hitPrefab이 없습니다");
+            //Debug.Log("hitPrefab이 없습니다");
         }
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
@@ -326,6 +342,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (Health.Value <= 0)
         {
             OnDeath(attacker, ActiveSpecialDeath);
+            //OnDeath(attacker, true);
+            //죽었다 하면 무조껀 스페셜 데스 하게 만드는 코드
         }
     }
 
@@ -351,7 +369,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void OnDeath(Unit killer = null, bool isSpecialDeath = false)
     {
         if (IsDeath) return;
-        Health.Update("Engage", -Health.Value);
+        Health.Reset("Engage");
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;

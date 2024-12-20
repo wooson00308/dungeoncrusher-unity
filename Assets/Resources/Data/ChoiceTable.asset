@@ -16,4 +16,4 @@ MonoBehaviour:
   - tier: 3
     choiceType: 1
     itemData: {fileID: 0}
-    skillData: {fileID: 11400000, guid: 6de5ac8fe4beef24a984fa243fb5ef54, type: 2}
+    skillData: {fileID: 11400000, guid: c77efe0016ed2cd4db26eec6c17bb258, type: 2}

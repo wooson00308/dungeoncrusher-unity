@@ -1206,10 +1206,10 @@ MonoBehaviour:
   - team: 1
     spawnShape: 1
     radius: 2
-    boxSize: {x: 0.6, y: 1.2}
+    boxSize: {x: 2.48, y: 1.2}
     frontlinePoint: {x: -3.02, y: 0.8}
-    midlinePoint: {x: 3.53, y: 0.8}
-    backlinePoint: {x: 5.26, y: 0.8}
+    midlinePoint: {x: 2.3, y: 0.8}
+    backlinePoint: {x: 4.17, y: 0.8}
 --- !u!1 &1097033291
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,22 +22,23 @@ MonoBehaviour:
   _isAreaAttack: 1
   _isPassiveSkill: 0
   _isSelfSkill: 0
+  _isUltSkill: 0
   _skillEventType: 4
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 1000
+    skillValue: 1
     coolTime: 0
     targetNum: 1
     range: 0
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
   - activationChance: 100
-    skillValue: 1000
+    skillValue: 1
     coolTime: 0
     targetNum: 1
     range: 0
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
   - activationChance: 100
-    skillValue: 200
+    skillValue: 1
     coolTime: 0
     targetNum: 1
     range: 0

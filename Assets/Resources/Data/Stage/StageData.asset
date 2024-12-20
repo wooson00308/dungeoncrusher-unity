@@ -13,21 +13,29 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   stageInfos:
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: dd8f496a2efbf49cf91f786b8fc5380a, type: 2}
-      spawnCount: 10
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 3
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 10
-  - stageUnitDatas:
-    - stageUnits: {fileID: 11400000, guid: cbb1a6e0413d16349a038384c43b6eb8, type: 2}
-      spawnCount: 10
+  - durationTime: 30
+    stageUnitDatas:
+    - spawnCount: 5
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 8
+      underX2Threshold: 8
+      underX4Threshold: 5
+      minimumSpawnCycle: 3
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: f9285f1bb76ce34459e0637ac6d2edfc, type: 2}
+    - spawnCount: 8
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 10
+      underX2Threshold: 8
+      underX4Threshold: 5
+      minimumSpawnCycle: 3
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}

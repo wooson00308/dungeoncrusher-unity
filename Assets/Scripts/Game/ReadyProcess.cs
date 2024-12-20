@@ -29,7 +29,7 @@ public class ReadyProcess : Process
 
         foreach (var stageUnitData in stageInfoData)
         {
-            UnitFactory.Instance.Spawn(stageUnitData.stageUnits, Team.Enemy, stageUnitData.spawnCount);
+            //UnitFactory.Instance.Spawn(stageUnitData.stageUnits, Team.Enemy, stageUnitData.spawnCount);
         }
 
         if (_isSpawnPlayers)
