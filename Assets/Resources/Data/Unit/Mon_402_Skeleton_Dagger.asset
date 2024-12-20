@@ -24,11 +24,11 @@ MonoBehaviour:
   _mp:
     _value: 100
   _speed:
-    _value: 1
+    _value: 0.9
   _attackSpeed:
-    _value: 0.01
+    _value: 1
   _attackRange:
-    _value: 1.2
+    _value: 1.4
   _criticalRate:
     _value: 0
   _criticalPercent:

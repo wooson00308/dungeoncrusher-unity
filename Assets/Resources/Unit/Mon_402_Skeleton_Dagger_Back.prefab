@@ -1183,11 +1183,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4369210421620186998, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_Name
-      value: Mon_402_Skeleton_Dagger
+      value: Mon_402_Skeleton_Dagger_Back
       objectReference: {fileID: 0}
     - target: {fileID: 4974012002743024361, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: _id
       value: Mon_402
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974012002743024361, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: _line
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4974012002743024361, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: _model

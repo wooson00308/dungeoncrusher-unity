@@ -1141,11 +1141,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1186,6 +1186,14 @@ PrefabInstance:
     - target: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043069628328874663, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: m_Height
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043069628328874663, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
+      propertyPath: m_Radius
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8252650263040480405, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: _animationSize
