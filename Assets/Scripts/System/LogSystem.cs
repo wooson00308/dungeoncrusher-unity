@@ -14,12 +14,12 @@ public class LogSystem : MonoBehaviour
 
     private void Awake()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.OnDeath.ToString(), Log);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.OnDeath.ToString(), Log);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
     }
 
     public void Log(GameEvent gameEvent)

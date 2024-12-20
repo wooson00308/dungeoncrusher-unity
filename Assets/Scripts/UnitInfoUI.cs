@@ -26,17 +26,21 @@ public class UnitInfoUI : BaseView
 
     private void Awake()
     {
-        BindUI();
-        GameEventSystem.Instance.Subscribe(UnitEvents.SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Subscribe(UnitEvents.OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.Mana_Regen.ToString(), UpdateMpUI);
+        BindUI(); 
+    }
+
+    private void OnEnable()
+    {
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.Mana_Regen.ToString(), UpdateMpUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
     }
 
     public override void BindUI()

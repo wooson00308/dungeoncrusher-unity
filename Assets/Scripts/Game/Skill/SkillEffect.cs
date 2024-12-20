@@ -20,12 +20,12 @@ public class SkillEffect : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.OnStun.ToString(), OnStunEvent);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.OnStun.ToString(), OnStunEvent);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
     }
 
     private void OnStunEvent(GameEvent e)

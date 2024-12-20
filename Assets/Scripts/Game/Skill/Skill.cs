@@ -31,12 +31,15 @@ public class Skill : MonoBehaviour
         if (_skillData.IsUltSkill)
         {
             // 필살기로 지정될 이벤트 등록 필요
-            GameEventSystem.Instance.Subscribe(UnitEvents.UseSkill_Publish_UI_Ulti.ToString(), TryUseSkillFromUI);
         }
 
         if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
         {
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
+        }
+        else
+        {
+            GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
     }
 
@@ -48,7 +51,7 @@ public class Skill : MonoBehaviour
         if (_skillData.IsUltSkill)
         {
             // 필살기로 지정될 이벤트 등록 필요
-            GameEventSystem.Instance.Unsubscribe(UnitEvents.UseSkill_Publish_UI_Ulti.ToString(), TryUseSkillFromUI);
+            GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
 
         if (!_skillData.IsSelfSkill)
@@ -76,7 +79,8 @@ public class Skill : MonoBehaviour
 
     public void TryUseSkillFromUI(GameEvent e)
     {
-        if (((SkillData)e.args).Id != _skillData.Id) return;
+        var args = (SkillEventArgs)e.args;
+        if (args.data.Id != _skillData.Id) return;
         UseSkill(_owner);
     }
 
@@ -168,12 +172,15 @@ public class Skill : MonoBehaviour
         if (!_skillData.IsValidTarget(_owner))
             return false;
 
-        _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
-
         if (_isCooldown) // 쿨타임 지났는지 체크 
             return false;
 
         return true;
+    }
+
+    private void Update()
+    {
+        _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
     }
 
     public void ResetCooltime()
@@ -182,15 +189,4 @@ public class Skill : MonoBehaviour
         if (Time.time - _timeMarker > cooltime) return;
         _timeMarker -= cooltime;
     }
-
-    // 기존 기능 중에 전투 중인지 전투중이 아닌지 체크하는 기능이 존재하여 해당 기능을 비활성화하였습니다.
-    //private void Off(GameEvent e)
-    //{
-    //    OnOff = false;
-    //}
-    //private void On(GameEvent e)
-    //{
-    //    _timeMarker = Time.time;
-    //    OnOff = true;
-    //}
 }

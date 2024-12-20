@@ -2,10 +2,10 @@ using UnityEngine;
 
 public enum ProcessEvents
 {
-    Engage,
-    Ready,
-    StageClear,
-    AllStageClear,
-    GameOver,
-    SetActive
+    ProcessEvent_Engage,
+    ProcessEvent_Ready,
+    ProcessEvent_StageClear,
+    ProcessEvent_AllStageClear,
+    ProcessEvent_GameOver,
+    ProcessEvent_SetActive
 }

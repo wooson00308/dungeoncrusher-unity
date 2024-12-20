@@ -23,14 +23,14 @@ public class MainView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.OnDeath_Special.ToString(), SpecialDeathEffect);
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Ready.ToString(), UpdateStageUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.Ready.ToString(), UpdateStageUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.OnDeath_Special.ToString(), SpecialDeathEffect);
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Ready.ToString(), UpdateStageUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
     }
 
     private void UpdateStageUI(GameEvent gameEvent)

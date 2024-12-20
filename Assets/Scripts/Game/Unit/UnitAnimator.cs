@@ -74,13 +74,13 @@ public class UnitAnimator : MonoBehaviour
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
-        GameEventSystem.Instance.Publish(UnitEvents.OnAttack.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnAttack.ToString(), new GameEvent
         {
             args = new UnitEventArgs
             {
                 publisher = _owner
             },
-            eventType = UnitEvents.OnAttack.ToString()
+            eventType = UnitEvents.UnitEvent_OnAttack.ToString()
         });
 
         _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
@@ -90,9 +90,9 @@ public class UnitAnimator : MonoBehaviour
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.OnDeath.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath.ToString(), new GameEvent
         {
-            eventType = UnitEvents.OnDeath.ToString(),
+            eventType = UnitEvents.UnitEvent_OnDeath.ToString(),
             args = new UnitEventArgs { publisher = _owner }
         });
     }
@@ -101,7 +101,7 @@ public class UnitAnimator : MonoBehaviour
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.OnDeath_Special.ToString(),
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath_Special.ToString(),
             new GameEvent
             {
                 args = new UnitEventArgs { publisher = _owner } //적 일러스트를 넣는다면 체크하는 용도로 유닛을 넘겨줌.

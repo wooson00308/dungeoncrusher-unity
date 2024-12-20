@@ -167,6 +167,6 @@ public class ChoiceView : BaseView
             }
         }
 
-        GameEventSystem.Instance.Publish(ProcessEvents.Engage.ToString());
+        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Engage.ToString());
     }
 }

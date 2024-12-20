@@ -3,21 +3,21 @@ using UnityEngine;
 public enum UnitEvents
 {
     None,
-    SetActive,
-    UseSkill,
-    UseSkill_Ulti,
-    UseSkill_Publish_UI,
-    UseSkill_Publish_UI_Ulti,
-    RootSkill,
-    Health_Regen,
-    Mana_Regen,
-    OnAttack,
-    OnAttack_Critical,
-    OnHit,
-    OnHit_Critical,
-    OnStun,
-    OnDeath,
-    OnDeath_Special
+    UnitEvent_SetActive,
+    UnitEvent_UseSkill,
+    UnitEvent_UseSkill_Ulti,
+    UnitEvent_UseSkill_Publish_UI,
+    UnitEvent_UseSkill_Publish_UI_Ulti,
+    UnitEvent_RootSkill,
+    UnitEvent_Health_Regen,
+    UnitEvent_Mana_Regen,
+    UnitEvent_OnAttack,
+    UnitEvent_OnAttack_Critical,
+    UnitEvent_OnHit,
+    UnitEvent_OnHit_Critical,
+    UnitEvent_OnStun,
+    UnitEvent_OnDeath,
+    UnitEvent_OnDeath_Special
 }
 
 public class UnitEventArgs
