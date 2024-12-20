@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb9b6db1f2a4d224b90222061bbfe491, type: 3}
-  m_Name: Mon_401_Bat
+  m_Name: Mon_401_Bat_Back
   m_EditorClassIdentifier: 
-  _id: Unit_401
+  _id: Unit_401_B
   _prefab: {fileID: 4602744156704204850, guid: 2676d81d68d3f20419c7e49f525c8222, type: 3}
+  _hitPrefab: {fileID: 0}
   _health:
     _value: 5
   _attack:
@@ -27,10 +28,14 @@ MonoBehaviour:
   _attackSpeed:
     _value: 1
   _attackRange:
-    _value: 1.2
+    _value: 0.8
   _criticalRate:
+    _value: 0
+  _criticalPercent:
     _value: 0
   _stunRate:
     _value: 0
   _lifestealRate:
+    _value: 0
+  _lifestealPercent:
     _value: 0

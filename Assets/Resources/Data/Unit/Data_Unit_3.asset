@@ -18,7 +18,7 @@ MonoBehaviour:
   _health:
     _value: 99999
   _attack:
-    _value: 100
+    _value: 2
   _defense:
     _value: 999
   _mp:
@@ -26,9 +26,9 @@ MonoBehaviour:
   _speed:
     _value: 2
   _attackSpeed:
-    _value: 1
-  _attackRange:
     _value: 0.6
+  _attackRange:
+    _value: 0.9
   _criticalRate:
     _value: 0
   _criticalPercent:

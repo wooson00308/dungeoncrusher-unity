@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Unit_490
   _prefab: {fileID: 4602744156704204850, guid: 37f5c7a70fc2f8c40a924c8d90c62131, type: 3}
+  _hitPrefab: {fileID: 0}
   _health:
     _value: 5
   _attack:
@@ -23,14 +24,18 @@ MonoBehaviour:
   _mp:
     _value: 100
   _speed:
-    _value: 5
+    _value: 3
   _attackSpeed:
     _value: 1
   _attackRange:
     _value: 3
   _criticalRate:
     _value: 0
+  _criticalPercent:
+    _value: 0
   _stunRate:
     _value: 0
   _lifestealRate:
+    _value: 0
+  _lifestealPercent:
     _value: 0

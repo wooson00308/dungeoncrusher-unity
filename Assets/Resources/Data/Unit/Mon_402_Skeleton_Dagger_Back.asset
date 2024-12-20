@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb9b6db1f2a4d224b90222061bbfe491, type: 3}
-  m_Name: Mon_404_Skeleton_Axe
+  m_Name: Mon_402_Skeleton_Dagger_Back
   m_EditorClassIdentifier: 
-  _id: Unit_404
-  _prefab: {fileID: 4602744156704204850, guid: 0e7bc0a6a050cf448b1d50e4f9ce2188, type: 3}
+  _id: Unit_402
+  _prefab: {fileID: 4602744156704204850, guid: b926655cc0f043b4caf6fe19465249e8, type: 3}
   _hitPrefab: {fileID: 0}
   _health:
     _value: 5
   _attack:
-    _value: 1
+    _value: 0
   _defense:
     _value: 0
   _mp:
     _value: 100
   _speed:
-    _value: 1
+    _value: 0.9
   _attackSpeed:
     _value: 1
   _attackRange:
-    _value: 1.5
+    _value: 1.4
   _criticalRate:
     _value: 0
   _criticalPercent:
