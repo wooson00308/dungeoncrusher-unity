@@ -15,8 +15,10 @@ MonoBehaviour:
   _id: Unit_404
   _prefab: {fileID: 4602744156704204850, guid: 0e7bc0a6a050cf448b1d50e4f9ce2188, type: 3}
   _hitPrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 0}
+  _warningPrefab: {fileID: 0}
   _health:
-    _value: 5
+    _value: 25
   _attack:
     _value: 1
   _defense:
@@ -24,7 +26,7 @@ MonoBehaviour:
   _mp:
     _value: 100
   _speed:
-    _value: 1
+    _value: 0.8
   _attackSpeed:
     _value: 1
   _attackRange:
