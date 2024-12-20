@@ -19,5 +19,13 @@ public class CheatManager : MonoBehaviour
                 enemyUnit.OnAerial();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            foreach (var enemyUnit in UnitFactory.Instance.GetTeamUnits(Team.Friendly))
+            {
+                enemyUnit.OnStun(3);
+            }
+        }
     }
 }

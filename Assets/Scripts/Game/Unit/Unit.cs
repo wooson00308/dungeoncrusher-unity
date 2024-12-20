@@ -34,6 +34,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private bool _hasAerialState;
     public float StunDuration => _stunDuration;
     public Unit Target => _targetDetector.Target;
+
+    public bool IsStun { get; private set; }
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
     public bool IsSuperArmor { get; set; }
@@ -375,9 +377,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void OnStun(int stunDuration)
     {
         if (IsDeath) return;
+        if (IsSuperArmor) return;
+        IsStun = true;
         _fsm.TransitionTo<StunState>();
+        _fsm.LockState();
+        Invoke("Melt", stunDuration);
     }
-
+    public void Melt()
+    {
+        _fsm.UnlockState();
+        IsStun = false;
+    }
     public void OnAerial()
     {
         if (IsDeath) return;

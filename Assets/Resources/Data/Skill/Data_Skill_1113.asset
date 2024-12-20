@@ -19,14 +19,14 @@ MonoBehaviour:
   _name: 
   _description: 
   _isAreaAttack: 0
-  _isPassiveSkill: 0
+  _isPassiveSkill: 1
   _isSelfSkill: 1
   _isUltSkill: 0
   _skillEventType: 4
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 10000
-    coolTime: 3
+    skillValue: 1
+    coolTime: 1
     targetNum: 0
     range: 0
     skillFxPrefab: {fileID: 8195431620923900372, guid: b818a2a122e39da4eb2400da439eba3d, type: 3}

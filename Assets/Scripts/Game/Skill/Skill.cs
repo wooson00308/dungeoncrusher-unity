@@ -82,7 +82,7 @@ public class Skill : MonoBehaviour
 
         if (user.Target == null) return;
 
-        #region ��ų ������ ���Ἲ �˻�
+        #region 스킬 프리팹 무결성 검사
 
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
@@ -103,6 +103,15 @@ public class Skill : MonoBehaviour
         if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
 
         skillFxObject.transform.position = user.Target.transform.position;
+
+        if (_skillData.IsPassiveSkill)
+        {
+            skillFxObject.transform.position = user.transform.position;
+            Vector3 temp = skillFxObject.transform.localScale;
+            temp.x = (user.transform.position.x - user.Target.transform.position.x) >= 0 ? 1f : -1f  ;
+            skillFxObject.transform.localScale = temp;
+        }
+
         if (_skillData.IsAreaAttack)
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
@@ -150,6 +159,9 @@ public class Skill : MonoBehaviour
             ResetCooltime();
             return false;
         }
+
+        if(_owner.IsStun)
+            return false;
 
         if (!_skillData.IsValidTarget(_owner))
             return false;

@@ -6,7 +6,7 @@ public class ChaseState : StateBase, IState
 {
     public void OnEnter(Unit unit)
     {
-        if (IsStun(unit)) return;
+        //if (IsStun(unit)) return;
 
         if (unit.Target == null)
         {
@@ -24,7 +24,7 @@ public class ChaseState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
-        if (IsStun(unit)) return;
+        //if (IsStun(unit)) return;
 
         if (unit.Target == null)
         {
