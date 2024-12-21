@@ -13,4 +13,12 @@ public class Process : MonoBehaviour
     {
         gameObject.SetActive(value);
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _processSystem.OnNextProcess<ReadyProcess>();
+        }
+    }
 }

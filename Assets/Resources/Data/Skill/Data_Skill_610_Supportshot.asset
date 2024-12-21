@@ -17,11 +17,11 @@ MonoBehaviour:
   _rarity: 3
   _icon: {fileID: 21300000, guid: 12aaa359bccbf4a33b727567792ce1db, type: 3}
   _name: "\uC11C\uD3EC\uD2B8\uC0F7"
-  _description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E4"
+  _description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E41"
   _isAreaAttack: 0
   _isPassiveSkill: 1
   _isSelfSkill: 1
-  _isUltSkill: 1
+  _isUltSkill: 0
   _skillEventType: 0
   _skillLevelDatas:
   - activationChance: 100
@@ -29,16 +29,19 @@ MonoBehaviour:
     coolTime: 3
     targetNum: 0
     range: 0
+    description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E41"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   - activationChance: 100
     skillValue: 10000
-    coolTime: 3
+    coolTime: 2
     targetNum: 0
     range: 0
+    description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E42"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   - activationChance: 100
     skillValue: 10000
-    coolTime: 3
+    coolTime: 1
     targetNum: 0
     range: 0
+    description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E43"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}

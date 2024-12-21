@@ -32,17 +32,17 @@ public abstract class SkillData : ScriptableObject
     
     public string Name => _name;
 
-    public string Description(int level)
+    public string Description()
     {
-        var skillLevelDetail = GetSkillLevelData(level);
-
+        //var skillLevelDetail = GetSkillLevelData(level);
+        //_description = skillLevelDetail.description;
         // 원본 문자열
         string description = "공격시 {n}(%)확률로 용사 공격력의 {a}%로 추가 공격을 가한다.";
 
         // 변수값으로 문자열 대체
-        description = _description
-            .Replace("{n}", skillLevelDetail.activationChance.ToString("F0")) // {n}에 확률 값 대입 (소수점 한 자리)
-            .Replace("{a}", skillLevelDetail.skillValue.ToString("F0")); // {a}에 공격 배율 값 대입 (정수로 표시)
+        description = _description;
+            //.Replace("{n}", skillLevelDetail.activationChance.ToString("F0")) // {n}에 확률 값 대입 (소수점 한 자리)
+            //.Replace("{a}", skillLevelDetail.skillValue.ToString("F0")); // {a}에 공격 배율 값 대입 (정수로 표시)
 
         return description;
     }
@@ -51,6 +51,8 @@ public abstract class SkillData : ScriptableObject
     public bool IsPassiveSkill => _isPassiveSkill;
     public bool IsSelfSkill => _isSelfSkill; //자가 구동을 위한 bool 값 입력부
     public bool IsUltSkill => _isUltSkill; //자가 구동을 위한 bool 값 입력부
+    public string description { get => _description; set =>_description = value;  }// => _description;
+    
     public UnitEvents SkillEventType => _skillEventType;
 
     public List<SkillLevelData> SkillLevelDatas
@@ -63,7 +65,7 @@ public abstract class SkillData : ScriptableObject
     {
         int skillIndex = skillLevel - 1;
         SkillLevelData defaultSkillLevelData = _skillLevelDatas[^1];
-
+        
         if (defaultSkillLevelData == null)
         {
             string errorMessage = $"{_id}의 레벨 별 스킬 데이터가 존재하지 않습니다.";
@@ -74,6 +76,15 @@ public abstract class SkillData : ScriptableObject
         if (_skillLevelDatas.Count - 1 < skillIndex)
         {
             return defaultSkillLevelData;
+        }
+
+        if (_skillLevelDatas.Count - 1 <= skillIndex)
+        {
+            _description = _skillLevelDatas[skillIndex].description;
+        }
+        else
+        {
+            _description = _skillLevelDatas[skillIndex+1].description;
         }
 
         return _skillLevelDatas[skillIndex];
@@ -91,6 +102,7 @@ public class SkillLevelData
     public float coolTime; //쿨타임 입력
     public int targetNum; //타켓수 지정방식
     public float range; //공격 범위 크기?
+    public string description;
     public GameObject skillFxPrefab;
 }
 
