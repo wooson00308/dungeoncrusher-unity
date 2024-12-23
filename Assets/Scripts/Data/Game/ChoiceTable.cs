@@ -10,7 +10,7 @@ public class ChoiceTable : ScriptableObject
 
     public List<ChoiceData> GetRandomChoices(int count = 3)
     {
-        List<ChoiceData> result = new List<ChoiceData>();
+        List<ChoiceData> result = new();
 
         if (_choiceDatas == null || _choiceDatas.Count == 0)
         {
