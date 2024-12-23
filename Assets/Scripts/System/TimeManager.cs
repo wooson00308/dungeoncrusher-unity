@@ -44,7 +44,7 @@ public class TimeManager : Singleton<TimeManager>
     {
         if(value)
         {
-            Time.timeScale = 0.2f;
+            Time.timeScale = 0.02f;
         }
         else
         {

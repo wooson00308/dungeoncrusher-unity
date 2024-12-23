@@ -82,11 +82,11 @@ public class StageManager : SingletonMini<StageManager>
         {
             int currentMonsterCount = GetCurrentMonsterCount();
 
-            if (currentMonsterCount < unitData.underX4Threshold)
+            if (currentMonsterCount <= unitData.underX4Threshold)
             {
                 spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
             }
-            else if (currentMonsterCount < unitData.underX2Threshold)
+            else if (currentMonsterCount <= unitData.underX2Threshold)
             {
                 spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
             }
