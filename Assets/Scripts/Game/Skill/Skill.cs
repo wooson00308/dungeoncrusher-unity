@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Skill : MonoBehaviour
@@ -109,7 +110,8 @@ public class Skill : MonoBehaviour
 
         _timeMarker = Time.time; // 스킬 쿨타임 초기화
 
-        if (user.Target == null) return;
+        var target = WaitForGetTarget(user).Result;
+        if (target == null) return;
 
         #region 스킬 프리팹 무결성 검사
 
@@ -131,14 +133,16 @@ public class Skill : MonoBehaviour
 
         if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
 
-        skillFxObject.transform.position = user.Target.transform.position;
-
         if (_skillData.IsPassiveSkill)
         {
             skillFxObject.transform.position = user.transform.position;
             Vector3 temp = skillFxObject.transform.localScale;
-            temp.x = (user.transform.position.x - user.Target.transform.position.x) >= 0 ? -1f : 1f  ;
+            temp.x = (user.transform.position.x - target.transform.position.x) >= 0 ? -1f : 1f;
             skillFxObject.transform.localScale = temp;
+        }
+        else
+        {
+            skillFxObject.transform.position = target.transform.position;
         }
 
         if (_skillData.IsAreaAttack)
@@ -147,7 +151,7 @@ public class Skill : MonoBehaviour
 
             // 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시킴.
             List<Unit> targets = enemies
-                .Where(enemy => Vector3.Distance(enemy.transform.position, user.Target.transform.position) <=
+                .Where(enemy => Vector3.Distance(enemy.transform.position, target.transform.position) <=
                                 _skillData.GetSkillLevelData(_skillLevel).range)
                 .OrderBy(x => Random.value)
                 .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
@@ -156,9 +160,28 @@ public class Skill : MonoBehaviour
         }
         else
         {
-            skillFx.Initialized(this, user, _skillData, new List<Unit> { user.Target });
+            skillFx.Initialized(this, user, _skillData, new List<Unit> { target });
         }
     }
+
+    private async Task<Unit> WaitForGetTarget(Unit user)
+    {
+        if(user.Target == null)
+        {
+            int count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
+            if (count > 0)
+            {
+                while (user.Target == null)
+                {
+                    count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
+                    if (count <= 0) return null;
+                    await Awaitable.EndOfFrameAsync();
+                }
+            }
+        }
+
+        return user.Target;
+    } 
 
     /// <summary>
     /// 스킬 사용 여부 판단
