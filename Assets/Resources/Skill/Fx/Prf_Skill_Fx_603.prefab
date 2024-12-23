@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2228836583322241615
+--- !u!1001 &1356435202612960060
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3446151439322725959, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_Name
-      value: Prf_Skill_Fx_Data_Skill_1112
+      value: Prf_Skill_Fx_603
       objectReference: {fileID: 0}
     - target: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_LocalPosition.x

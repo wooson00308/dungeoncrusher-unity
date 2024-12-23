@@ -12,33 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c27a7e0457fb34bb09aa189a6b0a1a, type: 3}
   m_Name: Data_Skill_1114
   m_EditorClassIdentifier: 
-  _id: 
+  _id: 1114
   _prefab: {fileID: 1452896891728999103, guid: 9df96bacdda57804da28d6b29254ee17, type: 3}
   _rarity: 0
   _icon: {fileID: 21300000, guid: 1a3d95f2785d80d42bde2a310abe38ec, type: 3}
-  _name: 
+  _name: "\uC288\uD37C\uC544\uBA38"
   _description: 
   _isAreaAttack: 0
+  _isCooltimeSkill: 1
   _isPassiveSkill: 0
-  _isSelfSkill: 0
-  _isUltSkill: 1
+  _isUltSkill: 0
   _skillEventType: 0
+  _skillFxSpawnPosType: 0
   _skillLevelDatas:
-  - activationChance: 50
-    skillValue: 100
-    coolTime: 0
+  - activationChance: 100
+    skillValue: 0
+    coolTime: 15
     targetNum: 0
     range: 0
+    description: "15\uCD08\uAC04 \uAD81\uC911\uC81C\uC5B4\uAE30\uB97C \uBB34\uC2DC\uD55C\uB2E4"
     skillFxPrefab: {fileID: 258685903134565375, guid: 7401b20ef65ba324f90d8ed9402aa2b0, type: 3}
-  - activationChance: 50
-    skillValue: 100
-    coolTime: 0
+  - activationChance: 100
+    skillValue: 0
+    coolTime: 10
     targetNum: 0
     range: 0
+    description: "15-> 10\uCD08\uAC04 \uAD81\uC911\uC81C\uC5B4\uAE30\uB97C \uBB34\uC2DC\uD55C\uB2E4"
     skillFxPrefab: {fileID: 258685903134565375, guid: 7401b20ef65ba324f90d8ed9402aa2b0, type: 3}
-  - activationChance: 50
-    skillValue: 100
-    coolTime: 0
+  - activationChance: 100
+    skillValue: 0
+    coolTime: 8
     targetNum: 0
     range: 0
+    description: "10->8\uCD08\uAC04 \uAD81\uC911\uC81C\uC5B4\uAE30\uB97C \uBB34\uC2DC\uD55C\uB2E4"
     skillFxPrefab: {fileID: 258685903134565375, guid: 7401b20ef65ba324f90d8ed9402aa2b0, type: 3}

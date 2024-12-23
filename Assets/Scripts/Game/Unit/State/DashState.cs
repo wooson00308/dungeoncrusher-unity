@@ -64,7 +64,14 @@ public class DashState : StateBase, IState
 
     private void PerformDash(Unit unit)
     {
-        Vector2 direction = unit.Target.transform.position - unit.transform.position;
+        var target = Util.WaitForGetTarget(unit).Result;
+        if(target == null)
+        {
+            _fsm.TransitionTo<ChaseState>();
+            return;
+        }
+
+        Vector2 direction = target.transform.position - unit.transform.position;
         _dashDirection = direction.normalized;
 
         unit.Rotation(_dashDirection);
@@ -77,7 +84,7 @@ public class DashState : StateBase, IState
             unit.Warp(hit.position);
         }
 
-        if (Vector2.Distance(unit.transform.position, unit.Target.transform.position) < 0.1f)
+        if (Vector2.Distance(unit.transform.position, target.transform.position) < 0.2f)
         {
             _isEndDash = true;
         }

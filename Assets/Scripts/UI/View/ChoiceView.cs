@@ -119,7 +119,7 @@ public class ChoiceView : BaseView
     {
         if (data.skillData != null)
         {
-            return data.skillData.Description();
+            return data.skillData.Description;
         }
         else if (data.itemData != null)
         {

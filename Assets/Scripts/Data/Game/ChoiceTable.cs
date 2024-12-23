@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ChoiceTable", menuName = "Data/Create ChoiceTable")]
@@ -13,15 +12,36 @@ public class ChoiceTable : ScriptableObject
     {
         List<ChoiceData> result = new List<ChoiceData>();
 
-        if (_choiceDatas.Count == 0)
+        if (_choiceDatas == null || _choiceDatas.Count == 0)
         {
             return result;
         }
 
-        while (result.Count < count)
+        // 확률 기반 선택을 위해 누적 가중치 계산
+        var weightedChoices = _choiceDatas
+            .Where(data => data.weight > 0) // 가중치가 0보다 큰 데이터만 사용
+            .Select(data => (data, cumulativeWeight: data.weight))
+            .ToList();
+
+        float totalWeight = weightedChoices.Sum(w => w.cumulativeWeight);
+
+        while (result.Count < count && weightedChoices.Count > 0)
         {
-            int choiceIndex = UnityEngine.Random.Range(0, _choiceDatas.Count);
-            result.Add(_choiceDatas[choiceIndex]);
+            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+            float runningTotal = 0f;
+
+            foreach (var (data, weight) in weightedChoices)
+            {
+                runningTotal += weight;
+
+                if (randomValue <= runningTotal)
+                {
+                    result.Add(data);
+                    totalWeight -= weight;
+                    weightedChoices.Remove((data, weight));
+                    break;
+                }
+            }
         }
 
         return result;
@@ -38,6 +58,7 @@ public enum ChoiceType
 public class ChoiceData
 {
     public int tier;
+
     public string GetPrefabPath
     {
         get
@@ -61,13 +82,16 @@ public class ChoiceData
     public Sprite Icon()
     {
         if (choiceType == ChoiceType.Item)
-            return itemData.Icon;
+            return itemData?.Icon;
         else if (choiceType == ChoiceType.Skill)
-            return skillData.Icon;
+            return skillData?.Icon;
 
         return null;
     }
 
     public ItemData itemData;
     public SkillData skillData;
+
+    [Range(0, 100)]
+    public float weight = 1f; // 가중치 기본값 1
 }

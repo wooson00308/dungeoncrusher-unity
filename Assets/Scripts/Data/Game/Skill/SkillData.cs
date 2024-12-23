@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillFXSpawnPosType 
+{ 
+    Self,
+    Target
+}
+
 public abstract class SkillData : ScriptableObject
 {
     [SerializeField] protected string _id;
@@ -12,10 +18,11 @@ public abstract class SkillData : ScriptableObject
     [SerializeField] protected string _description;
 
     [Space] [SerializeField] protected bool _isAreaAttack;
-    [SerializeField] protected bool _isPassiveSkill;
-    [SerializeField] protected bool _isSelfSkill; //자가 구동을 위한 bool 값 
+    [SerializeField] protected bool _isCooltimeSkill;
+    [SerializeField] protected bool _isPassiveSkill; //자가 구동을 위한 bool 값 
     [SerializeField] protected bool _isUltSkill; //필살기 체크 값 
     [SerializeField] protected UnitEvents _skillEventType;
+    [SerializeField] protected SkillFXSpawnPosType _skillFxSpawnPosType;
 
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
 
@@ -32,28 +39,14 @@ public abstract class SkillData : ScriptableObject
     
     public string Name => _name;
 
-    public string Description()
-    {
-        //var skillLevelDetail = GetSkillLevelData(level);
-        //_description = skillLevelDetail.description;
-        // 원본 문자열
-        string description = "공격시 {n}(%)확률로 용사 공격력의 {a}%로 추가 공격을 가한다.";
-
-        // 변수값으로 문자열 대체
-        description = _description;
-            //.Replace("{n}", skillLevelDetail.activationChance.ToString("F0")) // {n}에 확률 값 대입 (소수점 한 자리)
-            //.Replace("{a}", skillLevelDetail.skillValue.ToString("F0")); // {a}에 공격 배율 값 대입 (정수로 표시)
-
-        return description;
-    }
-
+    public bool IsCooltimeSkill => _isCooltimeSkill;
     public bool IsAreaAttack => _isAreaAttack;
-    public bool IsPassiveSkill => _isPassiveSkill;
-    public bool IsSelfSkill => _isSelfSkill; //자가 구동을 위한 bool 값 입력부
+    public bool IsPassiveSkill => _isPassiveSkill; //자가 구동을 위한 bool 값 입력부
     public bool IsUltSkill => _isUltSkill; //자가 구동을 위한 bool 값 입력부
-    public string description { get => _description; set =>_description = value;  }// => _description;
+    public string Description { get => _description; set =>_description = value;  }// => _description;
     
     public UnitEvents SkillEventType => _skillEventType;
+    public SkillFXSpawnPosType SkillFXSpawnPosType => _skillFxSpawnPosType;
 
     public List<SkillLevelData> SkillLevelDatas
     {

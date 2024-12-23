@@ -17,3 +17,19 @@ MonoBehaviour:
     choiceType: 1
     itemData: {fileID: 0}
     skillData: {fileID: 11400000, guid: c77efe0016ed2cd4db26eec6c17bb258, type: 2}
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 3625771647641ce428add92cbbe26635, type: 2}
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 407d07a9dab925944ba08721e82b4590, type: 2}
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 40fec7b95445bfb47bb3713a862958f2, type: 2}
