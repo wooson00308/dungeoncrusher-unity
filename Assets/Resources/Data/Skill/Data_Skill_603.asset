@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd93b75e07ecd7438c1591dbf1412e2, type: 3}
   m_Name: Data_Skill_603
   m_EditorClassIdentifier: 
+  _level: 0
   _id: Skill_603
   _prefab: {fileID: 7109323706280591704, guid: a1682a585d7339346bd693d4b9fa3b4b, type: 3}
   _rarity: 3

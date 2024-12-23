@@ -38,13 +38,17 @@ public class Skill : MonoBehaviour
             GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
     }
-    private void OnDestroy()
+    private void OnDestroy() //재시작을 할때
     {
-        SkillData.Description = SkillData.SkillLevelDatas[0].description; //끝나면 글자를 초기화
+        _skillData.Level = 0;
+    }
+    private void OnApplicationQuit() //종료될 때
+    {
+        _skillData.Level = 0;
     }
     private void OnDisable()
     {
-        _skillLevel = 1;
+        _skillLevel = 1; 
         _isInitialized = false;
 
         if (_skillData.IsUltSkill)
@@ -61,7 +65,8 @@ public class Skill : MonoBehaviour
 
     public void LevelUp(int value = 1)
     {
-        _skillLevel += value;
+        if(_skillData.MaxLv > _skillLevel)
+            _skillLevel += value;
     }
 
     public void TryUseEventSkill(GameEvent gameEvent)
