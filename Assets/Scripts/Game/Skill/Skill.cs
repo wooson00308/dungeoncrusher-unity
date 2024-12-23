@@ -29,12 +29,7 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_skillData.IsUltSkill)
-        {
-            // 필살기로 지정될 이벤트 등록 필요
-        }
-
-        if (!_skillData.IsSelfSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
+        if (_skillData.IsPassiveSkill) // 자가 발동 스킬이면 이벤트 등록 필요 없음
         {
             GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
@@ -45,7 +40,7 @@ public class Skill : MonoBehaviour
     }
     private void OnDestroy()
     {
-        SkillData.description = SkillData.SkillLevelDatas[0].description; //끝나면 글자를 초기화
+        SkillData.Description = SkillData.SkillLevelDatas[0].description; //끝나면 글자를 초기화
     }
     private void OnDisable()
     {
@@ -58,7 +53,7 @@ public class Skill : MonoBehaviour
             GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
 
-        if (!_skillData.IsSelfSkill)
+        if (_skillData.IsPassiveSkill)
         {
             GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
         }
@@ -89,9 +84,10 @@ public class Skill : MonoBehaviour
         UseSkill(_owner);
     }
 
-    public void TryUseSkillWheenCoolTimeReady()
+    public void TryUsePassiveSkillWheenCoolTime()
     {
-        if (!_skillData.IsSelfSkill) return; // 스킬이 특정 조건이 아닌 자가발동 스킬인지 체크 
+        if (!_skillData.IsPassiveSkill) return;
+        if (!_skillData.IsCooltimeSkill) return; // 스킬이 특정 조건이 아닌 자가발동 스킬인지 체크 
         UseSkill(_owner);
     }
 
@@ -110,7 +106,7 @@ public class Skill : MonoBehaviour
 
         _timeMarker = Time.time; // 스킬 쿨타임 초기화
 
-        var target = WaitForGetTarget(user).Result;
+        var target = Util.WaitForGetTarget(user).Result;
         if (target == null) return;
 
         #region 스킬 프리팹 무결성 검사
@@ -133,7 +129,7 @@ public class Skill : MonoBehaviour
 
         if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
 
-        if (_skillData.IsPassiveSkill)
+        if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Self)
         {
             skillFxObject.transform.position = user.transform.position;
             Vector3 temp = skillFxObject.transform.localScale;
@@ -163,25 +159,6 @@ public class Skill : MonoBehaviour
             skillFx.Initialized(this, user, _skillData, new List<Unit> { target });
         }
     }
-
-    private async Task<Unit> WaitForGetTarget(Unit user)
-    {
-        if(user.Target == null)
-        {
-            int count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
-            if (count > 0)
-            {
-                while (user.Target == null)
-                {
-                    count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
-                    if (count <= 0) return null;
-                    await Awaitable.EndOfFrameAsync();
-                }
-            }
-        }
-
-        return user.Target;
-    } 
 
     /// <summary>
     /// 스킬 사용 여부 판단
@@ -213,6 +190,7 @@ public class Skill : MonoBehaviour
     private void Update()
     {
         _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
+        TryUsePassiveSkillWheenCoolTime();
     }
 
     public void ResetCooltime()

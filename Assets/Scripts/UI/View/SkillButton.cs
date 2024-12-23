@@ -10,6 +10,7 @@ public class SkillButton : BaseView
     private bool _isRootSkill;
 
     private Unit _player;
+    private Button _button;
 
     public enum Images
     {
@@ -58,16 +59,14 @@ public class SkillButton : BaseView
 
     public override void BindUI()
     {
+        _button = GetComponent<Button>();
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
     }
 
     public void OnClick()
     {
-        if(_player == null)
-        {
-            _player = UnitFactory.Instance.GetPlayer();
-        }
+        if (IsNotEnoughUltiMana) return;
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
@@ -92,16 +91,19 @@ public class SkillButton : BaseView
             _player = UnitFactory.Instance.GetPlayer();
         }
 
+        _button.enabled = !IsNotEnoughUltiMana;
+
         if (!_isRootSkill) return;
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
-            Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCooldown;
-
-            if (!skill.IsCooldown)
+            if(!IsNotEnoughUltiMana)
             {
-                ResetSkillUI();
-                return;
+                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCooldown;
+            }
+            else
+            {
+                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = true;
             }
 
             UpdateSkillCooldown(skill);
@@ -116,22 +118,31 @@ public class SkillButton : BaseView
 
     private void UpdateSkillCooldown(Skill skill)
     {
-        float cooltime = Time.time - skill.TimeMarker;
-        float maxCooltime = _data.GetSkillLevelData(skill.Level).coolTime;
-
-        float remainCooltime = maxCooltime - cooltime;
-
-        if (remainCooltime < 0)
+        if(IsNotEnoughUltiMana)
         {
-            ResetSkillUI();
-            return;
+            Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
         }
+        else
+        {
+            float cooltime = Time.time - skill.TimeMarker;
+            float maxCooltime = _data.GetSkillLevelData(skill.Level).coolTime;
 
-        // 텍스트 업데이트
-        Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"{Mathf.Ceil(remainCooltime)}s");
+            float remainCooltime = maxCooltime - cooltime;
 
-        // 필 마운트 업데이트 (0 ~ 1)
-        Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1 - (cooltime / maxCooltime);
+            if (remainCooltime < 0)
+            {
+                ResetSkillUI();
+                return;
+            }
+
+            // 텍스트 업데이트
+            Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"{Mathf.Ceil(remainCooltime)}s");
+            // 필 마운트 업데이트 (0 ~ 1)
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1 - (cooltime / maxCooltime);
+        }
     }
+
+    private bool IsNotEnoughUltiMana => _data.IsUltSkill && _player.Mp.Value < _player.Mp.Max;
 
 }

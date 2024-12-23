@@ -15,14 +15,15 @@ MonoBehaviour:
   _id: Skill_610
   _prefab: {fileID: 3157651758462457662, guid: 47f162d6ce235b0418e6b0fa4e715e4f, type: 3}
   _rarity: 3
-  _icon: {fileID: 21300000, guid: 12aaa359bccbf4a33b727567792ce1db, type: 3}
+  _icon: {fileID: -5392625257635239999, guid: 93e485463fa2a844e9ff1cba07c991cf, type: 3}
   _name: "\uC11C\uD3EC\uD2B8\uC0F7"
   _description: "\uC11C\uD3EC\uD2B8\uC0F7\uC744 \uC3DC\uB2E41"
   _isAreaAttack: 0
-  _isPassiveSkill: 1
-  _isSelfSkill: 1
-  _isUltSkill: 0
+  _isCooltimeSkill: 1
+  _isPassiveSkill: 0
+  _isUltSkill: 1
   _skillEventType: 0
+  _skillFxSpawnPosType: 0
   _skillLevelDatas:
   - activationChance: 100
     skillValue: 10000

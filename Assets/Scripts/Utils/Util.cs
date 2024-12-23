@@ -1,10 +1,30 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Util
 {
     const double EPSILON = 0.0001;
+
+    public static  async Task<Unit> WaitForGetTarget(Unit user)
+    {
+        if (user.Target == null)
+        {
+            int count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
+            if (count > 0)
+            {
+                while (user.Target == null)
+                {
+                    count = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team).Count;
+                    if (count <= 0) return null;
+                    await Awaitable.EndOfFrameAsync();
+                }
+            }
+        }
+
+        return user.Target;
+    }
 
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
