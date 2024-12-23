@@ -15,127 +15,15 @@ MonoBehaviour:
   stageInfos:
   - durationTime: 30
     stageUnitDatas:
-    - spawnCount: 3
+    - spawnCount: 5
       firstSpawnTime: 0
-      additionalSpawnCycle: 4
+      additionalSpawnCycle: 10
       additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
+      underX2Threshold: 3
+      underX4Threshold: 0
       minimumSpawnCycle: 0
       maxAdditionalSpawns: -1
       reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
-  - durationTime: 30
-    stageUnitDatas:
-    - spawnCount: 3
-      firstSpawnTime: 0
-      additionalSpawnCycle: 4
-      additionalSpawnCount: 2
-      underX2Threshold: 2
-      underX4Threshold: 1
-      minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
-      reductionFormula:
-        underX2Factor: 0.5
-        underX4Factor: 0.25
+        underX2Factor: 0.25
+        underX4Factor: 0.1
       stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
