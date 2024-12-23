@@ -113,7 +113,7 @@ public class ChoiceView : BaseView
         }
         else if (data.unitStatUpgradeData != null)
         {
-            return data.unitStatUpgradeData.upgradeType.ToString();
+            return data.unitStatUpgradeData.UpgradeName;
         }
         else
         {
@@ -132,10 +132,14 @@ public class ChoiceView : BaseView
         {
             return data.itemData.Description;
         }
+        else if (data.unitStatUpgradeData != null)
+        {
+            return data.unitStatUpgradeData.Description;
+        }
         else
         {
             Debug.Log("아이템 데이터와 스킬데이터가 둘다 없습니다.");
-            return null;
+            return string.Empty;
         }
     }
 

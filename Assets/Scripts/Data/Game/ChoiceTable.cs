@@ -75,40 +75,5 @@ public class ChoiceData
 
     public ItemData itemData;
     public SkillData skillData;
-    public UnitStatUpgradeData unitStatUpgradeData;
-}
-
-public enum UpgradeStatType
-{
-    Health,
-    Attack,
-    Defense,
-    Speed,
-    AttackSpeed,
-    CriticalRate,
-    CriticalPercent,
-    AttackStunRate,
-    LifeStealRate,
-    LifeStealPercent,
-}
-
-[Serializable]
-public class UnitStatUpgradeData : IStats
-{
-    public UpgradeStatType upgradeType;
-    [field: SerializeField] public IntStat Health { get; set; }
-    [field: SerializeField] public IntStat Attack { get; set; }
-    [field: SerializeField] public IntStat Defense { get; set; }
-    [field: SerializeField] public IntStat Mp { get; set; }
-    [field: SerializeField] public IntStat Exp { get; set; }
-    [field: SerializeField] public IntStat Level { get; set; }
-    [field: SerializeField] public IntStat StageLevel { get; set; }
-    [field: SerializeField] public FloatStat Speed { get; set; }
-    [field: SerializeField] public FloatStat AttackSpeed { get; set; }
-    [field: SerializeField] public FloatStat AttackRange { get; set; }
-    [field: SerializeField] public FloatStat CriticalRate { get; set; }
-    [field: SerializeField] public FloatStat CriticalPercent { get; set; }
-    [field: SerializeField] public FloatStat AttackStunRate { get; set; }
-    [field: SerializeField] public FloatStat LifestealRate { get; set; }
-    [field: SerializeField] public FloatStat LifestealPercent { get; set; }
+    public UnitStatsUpgradeData unitStatUpgradeData;
 }

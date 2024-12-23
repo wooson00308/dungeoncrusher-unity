@@ -21,14 +21,15 @@ public class ReadyUI : BasePresenter<ReadyView, ReadyModel>
     {
         bool isPlayer = false;
         Unit player = null;
-        while (!isPlayer)
+        
+        while (!isPlayer)//처음에 안받아져서 받을때까지 기다림
         {
             await Awaitable.NextFrameAsync();
             player = UnitFactory.Instance.GetTeamUnits(Team.Friendly).FirstOrDefault();
             isPlayer = player != null;
         }
 
-        if (!isPlayer) return;
+        if (!isPlayer) return;     
 
         List<ChoiceData> datas = new();
 
@@ -38,7 +39,6 @@ public class ReadyUI : BasePresenter<ReadyView, ReadyModel>
             {
                 _statChoiceCount = player.StageLevel.Value;
             }
-
             isReady = false;
         }
 

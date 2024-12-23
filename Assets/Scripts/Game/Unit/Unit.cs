@@ -551,11 +551,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
         Unit unit = unitEventArgs.publisher;
+        
         Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
 
         if (Exp.Value < Exp.Max) return;
 
-        int levelUp = Exp.Value / Exp.Max;
+        int levelUp = Exp.Value + unit.DropExp / Exp.Max;
+        
         if (levelUp > 0)
         {
             LevelUp(levelUp);

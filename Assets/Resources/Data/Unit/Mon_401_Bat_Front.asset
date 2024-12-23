@@ -17,7 +17,7 @@ MonoBehaviour:
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
-  _dropExp: 50
+  _dropExp: 200
   _health:
     _value: 5
   _attack:
@@ -29,6 +29,8 @@ MonoBehaviour:
   _exp:
     _value: 0
   _level:
+    _value: 0
+  _stageLevel:
     _value: 0
   _speed:
     _value: 1

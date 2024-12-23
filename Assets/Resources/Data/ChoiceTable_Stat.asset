@@ -17,67 +17,9 @@ MonoBehaviour:
     choiceType: 2
     itemData: {fileID: 0}
     skillData: {fileID: 0}
-    unitStatUpgradeData:
-      upgradeType: 0
-      <Health>k__BackingField:
-        _value: 100
-      <Attack>k__BackingField:
-        _value: 0
-      <Defense>k__BackingField:
-        _value: 0
-      <Mp>k__BackingField:
-        _value: 0
-      <Exp>k__BackingField:
-        _value: 0
-      <Level>k__BackingField:
-        _value: 0
-      <Speed>k__BackingField:
-        _value: 0
-      <AttackSpeed>k__BackingField:
-        _value: 0
-      <AttackRange>k__BackingField:
-        _value: 0
-      <CriticalRate>k__BackingField:
-        _value: 0
-      <CriticalPercent>k__BackingField:
-        _value: 0
-      <AttackStunRate>k__BackingField:
-        _value: 0
-      <LifestealRate>k__BackingField:
-        _value: 0
-      <LifestealPercent>k__BackingField:
-        _value: 0
+    unitStatUpgradeData: {fileID: 11400000, guid: 1f6e1c8f5f4144227b99ef97ddee3c0a, type: 2}
   - tier: 3
     choiceType: 2
     itemData: {fileID: 0}
     skillData: {fileID: 0}
-    unitStatUpgradeData:
-      upgradeType: 1
-      <Health>k__BackingField:
-        _value: 0
-      <Attack>k__BackingField:
-        _value: 100
-      <Defense>k__BackingField:
-        _value: 0
-      <Mp>k__BackingField:
-        _value: 0
-      <Exp>k__BackingField:
-        _value: 0
-      <Level>k__BackingField:
-        _value: 0
-      <Speed>k__BackingField:
-        _value: 0
-      <AttackSpeed>k__BackingField:
-        _value: 0
-      <AttackRange>k__BackingField:
-        _value: 0
-      <CriticalRate>k__BackingField:
-        _value: 0
-      <CriticalPercent>k__BackingField:
-        _value: 0
-      <AttackStunRate>k__BackingField:
-        _value: 0
-      <LifestealRate>k__BackingField:
-        _value: 0
-      <LifestealPercent>k__BackingField:
-        _value: 0
+    unitStatUpgradeData: {fileID: 11400000, guid: b2318090a36d240b3a4be959e5bcded8, type: 2}
