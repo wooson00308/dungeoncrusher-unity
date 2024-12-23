@@ -76,22 +76,28 @@ public class StageManager : SingletonMini<StageManager>
         SpawnMonsters(unitData.spawnCount, unitData);
 
         int additionalSpawns = 0;
+        float currentTime = 0;
         float spawnCycle = unitData.additionalSpawnCycle;
 
         while (!_isStageCleared && (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
         {
-            int currentMonsterCount = GetCurrentMonsterCount();
-
-            if (currentMonsterCount < unitData.underX4Threshold)
+            while (currentTime < spawnCycle)
             {
-                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
-            }
-            else if (currentMonsterCount < unitData.underX2Threshold)
-            {
-                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
-            }
+                int currentMonsterCount = GetCurrentMonsterCount();
 
-            yield return new WaitForSeconds(spawnCycle);
+                if (currentMonsterCount < unitData.underX4Threshold)
+                {
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
+                }
+                else if (currentMonsterCount < unitData.underX2Threshold)
+                {
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
+                }
+
+                currentTime += Time.deltaTime;
+
+                yield return null;
+            }
 
             SpawnMonsters(unitData.additionalSpawnCount, unitData);
             additionalSpawns++;
