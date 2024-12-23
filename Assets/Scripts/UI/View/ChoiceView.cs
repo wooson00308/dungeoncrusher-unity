@@ -25,8 +25,11 @@ public class ChoiceView : BaseView
 
     private ChoiceData _data;
 
+    private ReadyView _readyView;
+
     private void Awake()
     {
+        _readyView = transform.parent.GetComponentInParent<ReadyView>();
         BindUI();
     }
 
@@ -108,10 +111,14 @@ public class ChoiceView : BaseView
         {
             return data.itemData.Name;
         }
+        else if (data.unitStatUpgradeData != null)
+        {
+            return data.unitStatUpgradeData.UpgradeName;
+        }
         else
         {
-            Debug.Log("아이템 데이터와 스킬데이터가 둘다 없습니다.");
-            return null;
+            Debug.Log("모든 선택 데이터가 없습니다.");
+            return string.Empty;
         }
     }
 
@@ -125,10 +132,14 @@ public class ChoiceView : BaseView
         {
             return data.itemData.Description;
         }
+        else if (data.unitStatUpgradeData != null)
+        {
+            return data.unitStatUpgradeData.Description;
+        }
         else
         {
             Debug.Log("아이템 데이터와 스킬데이터가 둘다 없습니다.");
-            return null;
+            return string.Empty;
         }
     }
 
@@ -154,6 +165,7 @@ public class ChoiceView : BaseView
     public void OnClick()
     {
         var players = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
+        Debug.Log("OnClick");
         foreach (var player in players)
         {
             if (_data.choiceType == ChoiceType.Item)
@@ -161,12 +173,18 @@ public class ChoiceView : BaseView
                 var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
                 player.EquipItem(item);
             }
-            else
+            else if (_data.choiceType == ChoiceType.Skill)
             {
                 player.AddSkill(_data.skillData);
             }
+            else
+            {
+                player.UpdateStats("Enagage", _data.unitStatUpgradeData);
+                _readyView.DisCountStatChoiceCount();
+            }
         }
 
+        if (_readyView.StatChoiceCount >= 0) return;
         GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Engage.ToString());
     }
 }

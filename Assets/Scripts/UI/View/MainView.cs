@@ -9,6 +9,7 @@ public class MainView : BaseView
     public enum Texts
     {
         Txt_Stage_Value,
+        Txt_Timer,
         Txt_GameSpeed
     }
     public enum Images
@@ -36,6 +37,11 @@ public class MainView : BaseView
     private void UpdateStageUI(GameEvent gameEvent)
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Stage_Value).SetText($"{StageManager.Instance.CurrentStage}");
+    }
+
+    private void Update()
+    {
+        Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{StageManager.Instance.EnageTime}s");
     }
 
     public override void BindUI()

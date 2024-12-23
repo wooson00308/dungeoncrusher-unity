@@ -25,7 +25,7 @@ public class UnitAnimator : MonoBehaviour
 
     public void ChargeAttackEvent(AnimationEvent e)
     {
-        _owner.Target?.OnStun();
+        _owner.Target?.OnStun(e.floatParameter);
         AttackEvent(e);
     }
 

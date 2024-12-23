@@ -106,7 +106,7 @@ public class Skill : MonoBehaviour
 
         if(_skillData.IsUltSkill)
         {
-            _owner.Mp.Update("Ult", -_owner.Mp.Value);
+            _owner.Mp.Update("Engage", -_owner.Mp.Value);
         }
 
         _timeMarker = Time.time; // 스킬 쿨타임 초기화

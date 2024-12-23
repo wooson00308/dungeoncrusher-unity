@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UnitInfoUI : BaseView
 {
     [SerializeField] private string _unitId;
+    [SerializeField] private Sprite _defaultSkillSprite;
     private Unit _unit;
 
     public enum Images
@@ -158,16 +159,31 @@ public class UnitInfoUI : BaseView
 
         Image[] images = Get<RectTransform>((int)RectTransforms.Group_List_Skill).GetComponentsInChildren<Image>();
 
-        foreach (var skills in _unit.SkillDic.Keys)
+        foreach(Image image in images)
         {
-            for (int i = 0; i < _unit.SkillDic.Count; i++)
-            {
-                var skillDataIcon = _unit.SkillDic[skills].SkillData.Icon;
-                if (skillDataIcon != null)
-                {
-                    images[i].sprite = skillDataIcon;
-                }
-            }
+            image.sprite = _defaultSkillSprite;
+        }
+
+        //foreach (var skills in _unit.SkillDic.Keys)
+        //{
+        //    for (int i = 0; i < _unit.SkillDic.Count; i++)
+        //    {
+        //        var skillDataIcon = _unit.SkillDic[skills].SkillData.Icon;
+        //        if (skillDataIcon != null)
+        //        {
+        //            images[i].sprite = skillDataIcon;
+        //        }
+        //    }
+        //}
+
+        int index = 0;
+
+        foreach (var key in _unit.SkillDic.Keys)
+        {
+            var data = _unit.SkillDic[key].SkillData;
+            var image = images[index++];
+
+            image.sprite = data.Icon;
         }
     }
 

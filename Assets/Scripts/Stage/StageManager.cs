@@ -8,11 +8,14 @@ public class StageManager : SingletonMini<StageManager>
     public int CurrentStage => _currentStage;
     public StageData _stageDatas;
 
-    public bool IsAllStageClear => _stageDatas.stageInfos.Count <= _currentStage;
+    public bool IsAllStageClear => _stageDatas.stageInfos.Count < _currentStage;
 
     private List<Coroutine> _spawnCoroutines = new List<Coroutine>();
     private Coroutine _stageTimerCoroutine;
     private bool _isStageCleared = false;
+
+    private float _engageTime;
+    public float EnageTime => _engageTime;
 
     public void ClearStage()
     {
@@ -115,12 +118,12 @@ public class StageManager : SingletonMini<StageManager>
 
         int maxDuration = currentStageInfo.durationTime;
 
-        float remainingTime = maxDuration;
-        while (remainingTime > 0 && !_isStageCleared)
+        _engageTime = maxDuration;
+        while (_engageTime > 0 && !_isStageCleared)
         {
             yield return new WaitForSeconds(1f);
-            remainingTime--;
-            Debug.Log($"Time Remaining: {remainingTime}s");
+            _engageTime--;
+            Debug.Log($"Time Remaining: {_engageTime}s");
         }
 
         if (!_isStageCleared)
