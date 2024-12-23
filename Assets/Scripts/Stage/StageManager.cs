@@ -76,11 +76,11 @@ public class StageManager : SingletonMini<StageManager>
         SpawnMonsters(unitData.spawnCount, unitData);
 
         int additionalSpawns = 0;
-        float spawnCycle = unitData.additionalSpawnCycle;
 
         while (!_isStageCleared && (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
         {
             float currentTime = 0;
+            float spawnCycle = unitData.additionalSpawnCycle;
 
             while (currentTime < spawnCycle)
             {
