@@ -3409,7 +3409,7 @@ AnimationClip:
     functionName: ChargeAttackEvent
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 1.5
     intParameter: 0
     messageOptions: 0
   - time: 0.6333333
