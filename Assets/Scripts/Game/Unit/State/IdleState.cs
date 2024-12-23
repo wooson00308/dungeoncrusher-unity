@@ -5,6 +5,7 @@ public class IdleState : StateBase, IState
 {
     public void OnEnter(Unit unit)
     {
+        if (unit.IsDeath) return;
         unit.CrossFade("Idle", 0f);
         unit.Stop();
     }

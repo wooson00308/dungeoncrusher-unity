@@ -40,6 +40,18 @@ public class TimeManager : Singleton<TimeManager>
         isBossDead = false;
     }
 
+    public void SlowMotion(bool value)
+    {
+        if(value)
+        {
+            Time.timeScale = 0.2f;
+        }
+        else
+        {
+            Time.timeScale = _gameTimeScale;
+        }
+    }
+
     public async Task FreezeTime(int time)
     {
         Time.timeScale = 0.01f;

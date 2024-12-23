@@ -7,6 +7,7 @@ public class DashState : StateBase, IState
     private bool _isEndDash;
     private bool _isDashing;
     private Vector2 _dashDirection;
+    private Vector2 _dashPos;
     private float _dashSpeed;
     private float _remainingDistance;
 
@@ -34,6 +35,17 @@ public class DashState : StateBase, IState
 
         unit.CrossFade("Dash", 0f);
         unit.Stop();
+
+        var target = Util.WaitForGetTarget(unit).Result;
+        if (target == null)
+        {
+            _fsm.TransitionTo<ChaseState>();
+            return;
+        }
+
+        Vector2 direction = target.transform.position - unit.transform.position;
+        _dashDirection = direction.normalized;
+        _dashPos = target.transform.position;
 
         _isDashing = true;
     }
@@ -64,9 +76,6 @@ public class DashState : StateBase, IState
 
     private void PerformDash(Unit unit)
     {
-        Vector2 direction = unit.Target.transform.position - unit.transform.position;
-        _dashDirection = direction.normalized;
-
         unit.Rotation(_dashDirection);
 
         float moveDistance = _dashSpeed * Time.deltaTime;
@@ -77,7 +86,7 @@ public class DashState : StateBase, IState
             unit.Warp(hit.position);
         }
 
-        if (Vector2.Distance(unit.transform.position, unit.Target.transform.position) < 0.1f)
+        if (Vector2.Distance(unit.transform.position, _dashPos) < 0.5f)
         {
             _isEndDash = true;
         }

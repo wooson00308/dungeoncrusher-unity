@@ -14,6 +14,9 @@ public class StageManager : SingletonMini<StageManager>
     private Coroutine _stageTimerCoroutine;
     private bool _isStageCleared = false;
 
+    private float _engageTime;
+    public float EnageTime => _engageTime;
+
     public void ClearStage()
     {
         _currentStage++;
@@ -76,25 +79,34 @@ public class StageManager : SingletonMini<StageManager>
         SpawnMonsters(unitData.spawnCount, unitData);
 
         int additionalSpawns = 0;
-        float spawnCycle = unitData.additionalSpawnCycle;
 
         while (!_isStageCleared && (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
         {
-            int currentMonsterCount = GetCurrentMonsterCount();
+            float currentTime = 0;
+            float spawnCycle = unitData.additionalSpawnCycle;
 
-            if (currentMonsterCount < unitData.underX4Threshold)
+            while (currentTime < spawnCycle)
             {
-                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
-            }
-            else if (currentMonsterCount < unitData.underX2Threshold)
-            {
-                spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
-            }
+                int currentMonsterCount = GetCurrentMonsterCount();
 
-            yield return new WaitForSeconds(spawnCycle);
+                if (currentMonsterCount < unitData.underX4Threshold)
+                {
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
+                }
+                else if (currentMonsterCount < unitData.underX2Threshold)
+                {
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
+                }
+
+                currentTime += Time.deltaTime;
+
+                yield return null;
+            }
 
             SpawnMonsters(unitData.additionalSpawnCount, unitData);
             additionalSpawns++;
+
+            yield return null;
         }
     }
 
@@ -106,12 +118,12 @@ public class StageManager : SingletonMini<StageManager>
 
         int maxDuration = currentStageInfo.durationTime;
 
-        float remainingTime = maxDuration;
-        while (remainingTime > 0 && !_isStageCleared)
+        _engageTime = maxDuration;
+        while (_engageTime > 0 && !_isStageCleared)
         {
             yield return new WaitForSeconds(1f);
-            remainingTime--;
-            Debug.Log($"Time Remaining: {remainingTime}s");
+            _engageTime--;
+            Debug.Log($"Time Remaining: {_engageTime}s");
         }
 
         if (!_isStageCleared)

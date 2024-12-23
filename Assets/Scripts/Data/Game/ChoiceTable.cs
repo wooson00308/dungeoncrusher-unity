@@ -11,17 +11,38 @@ public class ChoiceTable : ScriptableObject
 
     public List<ChoiceData> GetRandomChoices(int count = 3)
     {
-        List<ChoiceData> result = new List<ChoiceData>();
+        List<ChoiceData> result = new();
 
-        if (_choiceDatas.Count == 0)
+        if (_choiceDatas == null || _choiceDatas.Count == 0)
         {
             return result;
         }
 
-        while (result.Count < count)
+        // È®·ü ±â¹Ý ¼±ÅÃÀ» À§ÇØ ´©Àû °¡ÁßÄ¡ °è»ê
+        var weightedChoices = _choiceDatas
+            .Where(data => data.weight > 0) // °¡ÁßÄ¡°¡ 0º¸´Ù Å« µ¥ÀÌÅÍ¸¸ »ç¿ë
+            .Select(data => (data, cumulativeWeight: data.weight))
+            .ToList();
+
+        float totalWeight = weightedChoices.Sum(w => w.cumulativeWeight);
+
+        while (result.Count < count && weightedChoices.Count > 0)
         {
-            int choiceIndex = UnityEngine.Random.Range(0, _choiceDatas.Count);
-            result.Add(_choiceDatas[choiceIndex]);
+            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+            float runningTotal = 0f;
+
+            foreach (var (data, weight) in weightedChoices)
+            {
+                runningTotal += weight;
+
+                if (randomValue <= runningTotal)
+                {
+                    result.Add(data);
+                    totalWeight -= weight;
+                    weightedChoices.Remove((data, weight));
+                    break;
+                }
+            }
         }
 
         return result;
@@ -66,14 +87,16 @@ public class ChoiceData
     public Sprite Icon()
     {
         if (choiceType == ChoiceType.Item)
-            return itemData.Icon;
+            return itemData?.Icon;
         else if (choiceType == ChoiceType.Skill)
-            return skillData.Icon;
+            return skillData?.Icon;
 
         return null;
     }
 
     public ItemData itemData;
     public SkillData skillData;
-    public UnitStatsUpgradeData unitStatUpgradeData;
+
+    [Range(0, 100)]
+    public float weight = 1f; // °¡ÁßÄ¡ ±âº»°ª 1
 }

@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public float StunDuration => _stunDuration;
 
     public Unit Target => _targetDetector.Target;
-    public bool IsStun { get; private set; }
+    public bool IsStun { get; set; }
     public Projectile ProjectilePrefab => _projectilePrefab;
     public Warning WarningPrefab => _warningPrefab;
     public int DropExp => _dropExp;
@@ -318,21 +318,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #region FSM
 
-    public void OnStun()
-    {
-        if (!IsActive) return;
-        if (IsDeath) return;
-        if (IsSuperArmor) return;
-
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_OnStun.ToString(),
-            args = new UnitEventArgs { publisher = this }
-        });
-
-        _fsm.TransitionTo<StunState>();
-    }
-
     public void OnHit(int damage, Unit attacker = null)
     {
         if (!IsActive) return;
@@ -417,27 +402,38 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             AddForce(killer);
             TimeManager.Instance.FreezeTime(500);
-            CameraShake.Instance.Shake(8, 0.05f);
+            CameraController.Instance.Shake(8, 0.05f);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }
 
-    public void OnStun(int stunDuration)
+    public void OnStun(float stunDuration = 3)
     {
+        if (!IsActive) return;
         if (IsStun) return;
         if (IsDeath) return;
         if (IsSuperArmor) return;
-        IsStun = true;
-        _fsm.TransitionTo<StunState>();
-        _fsm.LockState();
-        Invoke("Melt", stunDuration);
-    }
 
-    public void Melt()
-    {
-        _fsm.UnlockState();
-        IsStun = false;
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
+        {
+            eventType = UnitEvents.UnitEvent_OnStun.ToString(),
+            args = new UnitEventArgs { publisher = this }
+        });
+
+        if (TryGetComponent<StunState>(out var state))
+        {
+            state.OnStun(stunDuration);
+        }
+
+        //_fsm.OnStun(stunDuration);
+        //_fsm.LockState();
+        //Invoke("Melt", stunDuration);
     }
+    //public void Melt()
+    //{
+    //    _fsm.UnlockState();
+    //    IsStun = false;
+    //}
 
     public void OnAerial()
     {
@@ -452,11 +448,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void CrossFade(int state, float fadeTime)
     {
+        if (IsStun) return;
         _animator.CrossFade(state, fadeTime);
     }
 
     public void CrossFade(string state, float fadeTime)
     {
+        if (IsStun) return;
         _animator.CrossFade(state, fadeTime);
     }
 
