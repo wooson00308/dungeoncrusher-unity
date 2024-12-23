@@ -42,7 +42,10 @@ public class Skill : MonoBehaviour
             GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
     }
-
+    private void OnDestroy()
+    {
+        SkillData.description = SkillData.SkillLevelDatas[0].description; //끝나면 글자를 초기화
+    }
     private void OnDisable()
     {
         _skillLevel = 1;
