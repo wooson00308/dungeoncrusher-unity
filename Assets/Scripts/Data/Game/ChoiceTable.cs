@@ -96,7 +96,7 @@ public class ChoiceData
 
     public ItemData itemData;
     public SkillData skillData;
+    public UnitStatsUpgradeData unitStatUpgradeData;
 
-    [Range(0, 100)]
-    public float weight = 1f; // °¡ÁßÄ¡ ±âº»°ª 1
+    [Range(0, 100)] public float weight = 1f; // °¡ÁßÄ¡ ±âº»°ª 1
 }
