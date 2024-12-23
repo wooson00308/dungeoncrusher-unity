@@ -316,7 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _view: {fileID: 708325495450714520}
   _model: {fileID: 4300911688185402644}
-  _choiceTable: {fileID: 11400000, guid: 2749125b846c8d94187530843ffdc8e3, type: 2}
+  _itemnSkillChoiceTable: {fileID: 11400000, guid: 2749125b846c8d94187530843ffdc8e3, type: 2}
+  _statChoiceTable: {fileID: 11400000, guid: 38d0d45db2faf4732a00404124f4d735, type: 2}
 --- !u!114 &708325495450714520
 MonoBehaviour:
   m_ObjectHideFlags: 0

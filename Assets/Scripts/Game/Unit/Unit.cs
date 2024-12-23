@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -72,6 +73,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public IntStat Mp { get; private set; }
     public IntStat Exp { get; private set; }
     public IntStat Level { get; private set; }
+    public IntStat StageLevel { get; private set; }
     public FloatStat Speed { get; private set; }
     public FloatStat AttackSpeed { get; private set; }
     public FloatStat AttackRange { get; private set; }
@@ -96,6 +98,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Exp = new(stats.Exp.Value);
         Exp.SetMaxValue(100);
         Level = new(stats.Level.Value);
+        StageLevel = new(0);
         AttackSpeed.OnValueChanged += (value) => { _animator.SetFloat("AttackSpeed", value); };
         _animator.SetFloat("AttackSpeed", AttackSpeed.Value);
 
@@ -125,6 +128,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Speed.Update(key, stats.Speed.Value);
         Exp.Update(key, stats.Exp.Value, StatValueType.Max);
         Level.Update(key, stats.Level.Value);
+        StageLevel.Update(key, stats.StageLevel.Value);
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
         AttackRange.Update(key, stats.AttackRange.Value);
         CriticalRate.Update(key, stats.CriticalRate.Value);
@@ -144,6 +148,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Speed.Reset(key);
         Exp.Reset(key);
         Level.Reset(key);
+        StageLevel.Reset(key);
         AttackSpeed.Reset(key);
         AttackRange.Reset(key);
         CriticalRate.Reset(key);
@@ -234,6 +239,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
+            ResetStats("Ready");
             _fsm.UnlockState();
         }
     }
@@ -536,18 +542,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void LevelUp(int value)
     {
         Exp.SetMaxValue(Exp.Value * 2);
-        Exp.Update("Engage", -Exp.Value);
-        Level.Update("Engage", value);
+        Exp.Update("Main", -Exp.Value);
+        Level.Update("Main", value);
+        StageLevel.Update("Ready", value);
     }
 
     public void ExpUp(GameEvent gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
         Unit unit = unitEventArgs.publisher;
-        Exp.Update("Engage", unit.DropExp); //Levelup 하고나면 0
+        Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
 
         if (Exp.Value < Exp.Max) return;
-        
+
         int levelUp = Exp.Value / Exp.Max;
         if (levelUp > 0)
         {

@@ -20,6 +20,7 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private IntStat _mp;
     [SerializeField] private IntStat _exp;
     [SerializeField] private IntStat _level;
+    [SerializeField] private IntStat _stageLevel;
     [SerializeField] private FloatStat _speed;
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
@@ -37,7 +38,7 @@ public class UnitData : ScriptableObject, IStats
 
     public Projectile ProjectilePrefab => _projectilePrefab;
     public Warning WarningPrefab => _warningPrefab;
-    
+
     public int dropExp => _dropExp;
 
     public IntStat Health => _health;
@@ -46,6 +47,7 @@ public class UnitData : ScriptableObject, IStats
     public IntStat Mp => _mp;
     public IntStat Exp => _exp;
     public IntStat Level => _level;
+    public IntStat StageLevel => _stageLevel;
     public FloatStat Speed => _speed;
     public FloatStat AttackSpeed => _attackSpeed;
     public FloatStat AttackRange => _attackRange;

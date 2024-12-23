@@ -8,6 +8,7 @@ public interface IStats
     public IntStat Mp { get; }
     public IntStat Exp { get; }
     public IntStat Level { get; }
+    public IntStat StageLevel { get; }
     public FloatStat Speed { get; }
     public FloatStat AttackSpeed { get; }
     public FloatStat AttackRange { get; }

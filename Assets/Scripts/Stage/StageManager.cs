@@ -8,7 +8,7 @@ public class StageManager : SingletonMini<StageManager>
     public int CurrentStage => _currentStage;
     public StageData _stageDatas;
 
-    public bool IsAllStageClear => _stageDatas.stageInfos.Count <= _currentStage;
+    public bool IsAllStageClear => _stageDatas.stageInfos.Count < _currentStage;
 
     private List<Coroutine> _spawnCoroutines = new List<Coroutine>();
     private Coroutine _stageTimerCoroutine;

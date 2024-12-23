@@ -4,9 +4,12 @@ using UnityEngine;
 public class ReadyView : BaseView
 {
     [SerializeField] private List<Transform> _slots;
+    private ReadyUI _readyUI;
+    public int StatChoiceCount => _readyUI.StatChoiceCount;
 
     private void Awake()
     {
+        _readyUI = GetComponent<ReadyUI>();
         BindUI();
     }
 
@@ -33,6 +36,10 @@ public class ReadyView : BaseView
 
     public override void BindUI()
     {
-        
+    }
+
+    public void DisCountStatChoiceCount()
+    {
+        _readyUI.DisCountStatChoiceCount();
     }
 }
