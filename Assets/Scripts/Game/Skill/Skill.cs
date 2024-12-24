@@ -163,6 +163,7 @@ public class Skill : MonoBehaviour
                 return;
             }
             skillFx.Initialized(this, user, _skillData, enemy);
+            return;
         }
 
         if (_skillData.IsAreaAttack)
