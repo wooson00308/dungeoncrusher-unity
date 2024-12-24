@@ -176,6 +176,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private void OnDisable()
     {
+        IsActive = false;
         if (Team == Team.Enemy) return;
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
@@ -209,6 +210,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             SetActive(true);
         }
+
+        ResetStats("Main");
     }
 
     private void SetActiveEvent(GameEvent gameEvent)
@@ -539,10 +542,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void LevelUp(int value)
     {
-        Exp.SetMaxValue(Exp.Value * 2);
-        Exp.Update("Main", -Exp.Value);
         Level.Update("Main", value);
         StageLevel.Update("Ready", value);
+
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Level.ToString(), new GameEvent
+        {
+            eventType = UnitEvents.UnitEvent_Exp.ToString(),
+            args = new UnitEventArgs { publisher = this }
+        });
     }
 
     public void ExpUp(GameEvent gameEvent)
@@ -550,16 +557,32 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
         Unit unit = unitEventArgs.publisher;
 
+        if (unit.Team == Team) return;
+
         Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
 
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new GameEvent
+        {
+            eventType = UnitEvents.UnitEvent_Exp.ToString(),
+            args = new UnitEventArgs { publisher = this }
+        });
+
         if (Exp.Value < Exp.Max) return;
-        
-        int levelUp = unit.DropExp / Exp.Max;
+
+        int levelUp = (unit.DropExp + Exp.Value) / Exp.Max;
 
         if (levelUp > 0)
         {
             LevelUp(levelUp);
+            Exp.SetMaxValue(Exp.Value * 2);
+            Exp.Update("Main", -Exp.Value);
         }
+
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new GameEvent
+        {
+            eventType = UnitEvents.UnitEvent_Exp.ToString(),
+            args = new UnitEventArgs { publisher = this }
+        });
     }
 
     #endregion
