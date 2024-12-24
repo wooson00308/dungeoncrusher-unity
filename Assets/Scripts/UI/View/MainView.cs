@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class MainView : BaseView
 {
+    private MainUI _presenter;
+
+
     public enum Texts
     {
         Txt_Stage_Value,
         Txt_Timer,
         Txt_GameSpeed
     }
+
     public enum Images
     {
         SUPER_ARMOR_IMAGE
@@ -19,6 +23,7 @@ public class MainView : BaseView
 
     private void Awake()
     {
+        _presenter = GetComponent<MainUI>();
         BindUI();
     }
 
@@ -43,7 +48,7 @@ public class MainView : BaseView
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{StageManager.Instance.EnageTime}s");
     }
-
+    
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -69,7 +74,7 @@ public class MainView : BaseView
 
     public void OnClickChangeGameSpeed()
     {
-        GetComponent<MainUI>().ChangeGameSpeed();
+        _presenter.ChangeGameSpeed();
         Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
             .SetText($"<size=45>x</size>{GetComponent<MainUI>().GetGameSpeed()}");
     }
@@ -80,7 +85,8 @@ public class MainView : BaseView
         image.enabled = !image.enabled;
         var friendlys = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
         if (friendlys == null) return;
-        var player = friendlys.ToArray()[0];
+        var player = friendlys.FirstOrDefault();
+        // var player = friendlys.ToArray()[0];
 
         player.IsSuperArmor = !player.IsSuperArmor;
     }

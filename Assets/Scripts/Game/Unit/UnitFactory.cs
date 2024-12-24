@@ -157,6 +157,16 @@ public class UnitFactory : SingletonMini<UnitFactory>
         }
     }
 
+    public void DestroyTeamUnits(Team team)
+    {
+        var units = GetTeamUnits(team);
+
+        foreach (var unit in units)
+        {
+            ResourceManager.Instance.Destroy(unit.gameObject);
+        }
+    }
+
     /// <summary>
     /// 디버그 기즈모
     /// </summary>
@@ -200,14 +210,12 @@ public class TeamSpawnConfig
     [Tooltip("팀 정보")] public Team team;
     [Tooltip("스폰 형태 (Circle/Box)")] public SpawnShape spawnShape = SpawnShape.Circle;
 
-    [Space]
+    [Space] [Tooltip("Circle 크기 (가로, 세로)")]
+    public float radius = 2;
 
-    [Tooltip("Circle 크기 (가로, 세로)")] public float radius = 2;
     [Tooltip("Box 크기 (가로, 세로)")] public Vector2 boxSize = new Vector2(5f, 5f);
 
-    [Space]
-
-    [Tooltip("앞 라인 스폰 포인트")] public Vector2 frontlinePoint;
+    [Space] [Tooltip("앞 라인 스폰 포인트")] public Vector2 frontlinePoint;
     [Tooltip("센터 스폰 포인트")] public Vector2 midlinePoint;
     [Tooltip("뒷 라인 스폰 포인트")] public Vector2 backlinePoint;
 

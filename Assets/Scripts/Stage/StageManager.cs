@@ -158,7 +158,7 @@ public class StageManager : SingletonMini<StageManager>
 
     private void ClearAllMonsters()
     {
-        UnitFactory.Instance.KillTeamUnits(Team.Enemy);
+        UnitFactory.Instance.DestroyTeamUnits(Team.Enemy);
         Debug.Log("All monsters cleared from the field.");
     }
 
