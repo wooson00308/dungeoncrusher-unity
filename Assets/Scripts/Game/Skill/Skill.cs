@@ -146,6 +146,25 @@ public class Skill : MonoBehaviour
             skillFxObject.transform.position = target.transform.position;
         }
 
+        if (_skillData.IsRamdomDetected)
+        {
+            HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
+            var enemy = enemies.OrderBy(x => Random.value).Take(1).ToList();
+            if (_skillData.IsAreaAttack)
+            {
+                // 현재 타겟 주변의 일정 거리의 존재하는 유닛들을 범위 공격으로 피격 시킴.
+                List<Unit> targets = enemies
+                    .Where(x => Vector3.Distance(x.transform.position, enemy[0].transform.position) <=
+                                    _skillData.GetSkillLevelData(_skillLevel).range)
+                    .OrderBy(x => Random.value)
+                    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
+                    .ToList();
+                skillFx.Initialized(this, user, _skillData, targets);
+                return;
+            }
+            skillFx.Initialized(this, user, _skillData, enemy);
+        }
+
         if (_skillData.IsAreaAttack)
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);

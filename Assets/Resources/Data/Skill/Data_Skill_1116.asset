@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c72e5dfd498a1489683753491e9a7c, type: 3}
+  m_Name: Data_Skill_1116
+  m_EditorClassIdentifier: 
+  _id: 
+  _prefab: {fileID: 7393259528163117129, guid: 84aeba76365fc0645bbbb75f43801902, type: 3}
+  _rarity: 0
+  _icon: {fileID: 0}
+  _name: "\uD30C\uC774\uC5B4\uBCFC"
+  _description: 
+  _isAreaAttack: 1
+  _isCooltimeSkill: 1
+  _isRandomDetected: 1
+  _isPassiveSkill: 1
+  _isUltSkill: 0
+  _skillEventType: 0
+  _skillFxSpawnPosType: 1
+  _skillLevelDatas:
+  - activationChance: 100
+    skillValue: 10000
+    coolTime: 1
+    targetNum: 10
+    range: 1
+    icon: {fileID: 0}
+    description: 
+    skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
+  - activationChance: 100
+    skillValue: 10000
+    coolTime: 3
+    targetNum: 10
+    range: 0.3
+    icon: {fileID: 0}
+    description: 
+    skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
+  - activationChance: 100
+    skillValue: 10000
+    coolTime: 2
+    targetNum: 10
+    range: 0.3
+    icon: {fileID: 0}
+    description: 
+    skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
