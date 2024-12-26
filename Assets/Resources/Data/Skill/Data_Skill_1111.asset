@@ -15,12 +15,11 @@ MonoBehaviour:
   _id: Skill_1111
   _prefab: {fileID: 2331923126263427583, guid: 495daf80d4b75b44683b4807faf087da, type: 3}
   _rarity: 2
-  _icon: {fileID: 21300000, guid: 04f15935351bf844e9c3d61d5f88ef3e, type: 3}
   _name: CoolDownSkill Temp
-  _description: "\uC784\uC2DC\uC6A9 \uC2A4\uD0AC\uC785\uB2C8\uB2E4"
   _isAreaAttack: 1
+  _isCooltimeSkill: 0
+  _isRandomDetected: 0
   _isPassiveSkill: 0
-  _isSelfSkill: 1
   _isUltSkill: 0
   _skillEventType: 0
   _skillFxSpawnPosType: 1
@@ -30,6 +29,7 @@ MonoBehaviour:
     coolTime: 3
     targetNum: 3
     range: 0.7
+    icon: {fileID: 21300000, guid: 04f15935351bf844e9c3d61d5f88ef3e, type: 3}
     description: 
     skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}
   - activationChance: 100
@@ -37,5 +37,6 @@ MonoBehaviour:
     coolTime: 3
     targetNum: 3
     range: 0.9
+    icon: {fileID: 21300000, guid: 04f15935351bf844e9c3d61d5f88ef3e, type: 3}
     description: 
     skillFxPrefab: {fileID: 6765417815671805330, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}

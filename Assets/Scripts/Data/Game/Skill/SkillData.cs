@@ -14,9 +14,7 @@ public abstract class SkillData : ScriptableObject
     [SerializeField] protected string _id;
     [SerializeField] protected GameObject _prefab;
     [SerializeField] protected int _rarity;
-    [SerializeField] protected Sprite _icon;
     [SerializeField] protected string _name;
-    [SerializeField] protected string _description;
     [Space] [SerializeField] protected bool _isAreaAttack;
     [SerializeField] protected bool _isCooltimeSkill;
     [SerializeField] protected bool _isRandomDetected;

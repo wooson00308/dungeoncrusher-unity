@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mon_403_Skeleton_Bow
   m_EditorClassIdentifier: 
   _id: Unit_403
+  _icon: {fileID: 21300000, guid: 4c772a688e6c64a7b8d770689d42291f, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: f3bbcf98058534f448c0db2a1e383b82, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}

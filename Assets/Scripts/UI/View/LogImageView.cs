@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class LogImageView : BaseView
 {
+    [SerializeField] private Sprite defaultSprite;
+
     public enum Images
     {
-        LogIcon
+        Icon_Log
     }
 
     public enum Texts
@@ -30,7 +32,12 @@ public class LogImageView : BaseView
     {
         if (icon != null)
         {
-            Get<Image>((int)Images.LogIcon).sprite = icon;
+            Debug.Log(icon.name);
+            Get<Image>((int)Images.Icon_Log).sprite = icon;
+        }
+        else
+        {
+            Get<Image>((int)Images.Icon_Log).sprite = defaultSprite;
         }
 
         if (description != null)

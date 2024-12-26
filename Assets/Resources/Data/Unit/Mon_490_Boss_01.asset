@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Mon_490_Boss_01
   m_EditorClassIdentifier: 
   _id: Unit_490
+  _icon: {fileID: 21300000, guid: 0d74d1f506f9740bd87307f41c08cf8c, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: 37f5c7a70fc2f8c40a924c8d90c62131, type: 3}
   _hitPrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 0}
+  _warningPrefab: {fileID: 0}
+  _dropExp: 0
   _health:
     _value: 5
   _attack:
@@ -23,6 +27,12 @@ MonoBehaviour:
     _value: 0
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 3
   _attackSpeed:

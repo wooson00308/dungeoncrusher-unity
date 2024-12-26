@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class UnitData : ScriptableObject, IStats
 {
     [Header("Config")] [SerializeField] private string _id;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private GameObject _hitPrefab;
 
@@ -27,12 +28,16 @@ public class UnitData : ScriptableObject, IStats
 
 
     [Tooltip("발생확률")] [SerializeField] private FloatStat _criticalRate;
-    [Tooltip("데미지 배수(일반 공격에 몇배)")] [SerializeField] private FloatStat _criticalPercent;
+
+    [Tooltip("데미지 배수(일반 공격에 몇배)")] [SerializeField]
+    private FloatStat _criticalPercent;
+
     [SerializeField] private FloatStat _stunRate;
     [Tooltip("발생확률")] [SerializeField] private FloatStat _lifestealRate;
     [Tooltip("흡혈 퍼센트")] [SerializeField] private FloatStat _lifestealPercent;
 
     public string Id => _id;
+    public Sprite Icon => _icon;
     public GameObject Prefab => _prefab;
     public GameObject HitPrefab => _hitPrefab;
 

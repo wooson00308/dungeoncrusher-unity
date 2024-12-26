@@ -29,10 +29,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private FSM _fsm;
     private Rigidbody2D _rigidbody;
 
+    private Sprite _icon;
     private GameObject _hitPrefab;
     private Projectile _projectilePrefab;
     private Warning _warningPrefab;
     private int _dropExp;
+
+    public Sprite Icon => _icon;
 
     private bool _hasHitState;
     private bool _hasAerialState;
@@ -192,7 +195,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
 
         _fsm?.StartState<IdleState>();
-
+        _icon ??= data.Icon;
         _hitPrefab ??= data.HitPrefab;
         _projectilePrefab ??= data.ProjectilePrefab;
         _warningPrefab ??= data.WarningPrefab;

@@ -84,19 +84,20 @@ public class ChoiceData
 
     [Space] public ChoiceType choiceType;
 
+    public ItemData itemData;
+    public SkillData skillData;
+    public UnitStatsUpgradeData unitStatUpgradeData;
+
     public Sprite Icon()
     {
         if (choiceType == ChoiceType.Item)
             return itemData?.Icon;
-        else if (choiceType == ChoiceType.Skill)
+
+        if (choiceType == ChoiceType.Skill)
             return skillData?.Icon;
 
         return null;
     }
-
-    public ItemData itemData;
-    public SkillData skillData;
-    public UnitStatsUpgradeData unitStatUpgradeData;
 
     [Range(0, 100)] public float weight = 1f; // °¡ÁßÄ¡ ±âº»°ª 1
 }

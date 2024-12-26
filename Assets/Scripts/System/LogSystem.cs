@@ -73,7 +73,7 @@ public class LogSystem : MonoBehaviour
             _logImages.Enqueue(logImageView);
             logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
             logImageView.transform.SetAsFirstSibling();
-            logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
+            logImageView.GetComponent<LogImageView>().SetLog(unit.Icon, unit.Id);
             await Awaitable.WaitForSecondsAsync(0.1f);
         }
 
@@ -87,7 +87,7 @@ public class LogSystem : MonoBehaviour
             _logImages.Enqueue(logImageView);
             logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
             logImageView.transform.SetAsFirstSibling();
-            logImageView.GetComponent<LogImageView>().SetLog(null, skillData.Name);
+            logImageView.GetComponent<LogImageView>().SetLog(skillData.Icon, skillData.Name);
             await Awaitable.WaitForSecondsAsync(0.1f);
         }
     }
