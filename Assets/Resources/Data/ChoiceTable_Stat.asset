@@ -31,3 +31,15 @@ MonoBehaviour:
     skillData: {fileID: 0}
     unitStatUpgradeData: {fileID: 11400000, guid: 3b6741f3e03f94d6d988d3eddb53a4fb, type: 2}
     weight: 1
+  - tier: 3
+    choiceType: 2
+    itemData: {fileID: 0}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 11400000, guid: 1cd32e2c604f44f0f8b6ce5e95c633fb, type: 2}
+    weight: 1
+  - tier: 3
+    choiceType: 2
+    itemData: {fileID: 0}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 11400000, guid: bb89142dd79f34c01bd23ba75c2330df, type: 2}
+    weight: 1

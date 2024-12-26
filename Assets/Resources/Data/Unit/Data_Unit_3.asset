@@ -30,6 +30,8 @@ MonoBehaviour:
     _value: 0
   _level:
     _value: 1
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 2
   _attackSpeed:
@@ -39,7 +41,7 @@ MonoBehaviour:
   _criticalRate:
     _value: 0
   _criticalPercent:
-    _value: 10000
+    _value: 2
   _stunRate:
     _value: 0
   _lifestealRate:

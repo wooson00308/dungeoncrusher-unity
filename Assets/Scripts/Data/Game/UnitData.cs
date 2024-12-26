@@ -27,7 +27,7 @@ public class UnitData : ScriptableObject, IStats
 
 
     [Tooltip("발생확률")] [SerializeField] private FloatStat _criticalRate;
-    [Tooltip("데미지 퍼센트")] [SerializeField] private FloatStat _criticalPercent;
+    [Tooltip("데미지 배수(일반 공격에 몇배)")] [SerializeField] private FloatStat _criticalPercent;
     [SerializeField] private FloatStat _stunRate;
     [Tooltip("발생확률")] [SerializeField] private FloatStat _lifestealRate;
     [Tooltip("흡혈 퍼센트")] [SerializeField] private FloatStat _lifestealPercent;
