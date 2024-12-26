@@ -8,18 +8,21 @@ public class LogSystem : MonoBehaviour
     [SerializeField] private Transform _parent;
 
     private Queue<GameObject> _logImages = new();
-    private Queue<UnitEventArgs> _logEvents = new();
+    private Queue<UnitEventArgs> _killLogEvents = new();
+    private Queue<SkillEventArgs> _skillLogEvents = new();
 
     private int _currentLogCount = 0;
 
     private void Awake()
     {
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), Log);
     }
 
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), Log);
     }
 
     public void Log(GameEvent gameEvent)
@@ -28,27 +31,41 @@ public class LogSystem : MonoBehaviour
 
         if (unitEventArgs != null)
         {
-            _logEvents.Enqueue(unitEventArgs);
-            
-            if (_logImages.Count > _logCount)
+            if (gameEvent.args is SkillEventArgs skillEventArgs)
             {
-                while (_logImages.Count > _logCount)
-                {
-                    ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
-                }
+                _skillLogEvents.Enqueue(skillEventArgs);
 
-                //Debug.Log("Log 최대 갯수보다 많습니다.");
+                if (_logImages.Count > _logCount)
+                {
+                    while (_logImages.Count > _logCount)
+                    {
+                        ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
+                    }
+                }
             }
-            
+            else
+            {
+                _killLogEvents.Enqueue(unitEventArgs);
+
+                if (_logImages.Count > _logCount)
+                {
+                    while (_logImages.Count > _logCount)
+                    {
+                        ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
+                    }
+                    //Debug.Log("Log 최대 갯수보다 많습니다.");
+                }
+            }
+
             LogSpawn();
         }
     }
 
     private async void LogSpawn()
     {
-        while (_logEvents.Count > 0)
+        while (_killLogEvents.Count > 0)
         {
-            var unitEventArgs = _logEvents.Dequeue();
+            var unitEventArgs = _killLogEvents.Dequeue();
 
             Unit unit = unitEventArgs.publisher;
 
@@ -57,6 +74,20 @@ public class LogSystem : MonoBehaviour
             logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
             logImageView.transform.SetAsFirstSibling();
             logImageView.GetComponent<LogImageView>().SetLog(null, unit.Id);
+            await Awaitable.WaitForSecondsAsync(0.1f);
+        }
+
+        while (_skillLogEvents.Count > 0)
+        {
+            var skillEventArgs = _skillLogEvents.Dequeue();
+
+            SkillData skillData = skillEventArgs.data;
+
+            GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
+            _logImages.Enqueue(logImageView);
+            logImageView.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
+            logImageView.transform.SetAsFirstSibling();
+            logImageView.GetComponent<LogImageView>().SetLog(null, skillData.Name);
             await Awaitable.WaitForSecondsAsync(0.1f);
         }
     }
