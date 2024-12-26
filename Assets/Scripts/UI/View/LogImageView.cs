@@ -32,7 +32,6 @@ public class LogImageView : BaseView
     {
         if (icon != null)
         {
-            Debug.Log(icon.name);
             Get<Image>((int)Images.Icon_Log).sprite = icon;
         }
         else

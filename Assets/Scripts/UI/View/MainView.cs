@@ -31,6 +31,8 @@ public class MainView : BaseView
     {
         GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Ready.ToString(), UpdateStageUI);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
+        Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
+            .SetText($"<size=45>x</size>{1}");
     }
 
     private void OnDisable()

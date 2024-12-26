@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class InfoView : BaseView
 {
+    private Image[] levelUpImages;
+
     public enum Sliders
     {
         Group_Exp
@@ -53,6 +56,8 @@ public class InfoView : BaseView
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<RectTransform>(typeof(RectTransforms));
 
+        levelUpImages = Get<RectTransform>((int)RectTransforms.Group_List_Leveluppoint)
+            .GetComponentsInChildren<Image>();
         StartInfo();
     }
 
@@ -91,39 +96,39 @@ public class InfoView : BaseView
         Get<TextMeshProUGUI>((int)Texts.Txt_Level).SetText($"LV.{unit.Level.Value}");
         UpdateLevelUppoint(gameEvent);
     }
-    
+
     public void UpdateLevelUppoint(GameEvent gameEvent = null)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent?.args;
-        Image[] levelUpObject = Get<RectTransform>((int)RectTransforms.Group_List_Leveluppoint)
-            .GetComponentsInChildren<Image>();
+
 
         if (unitEventArgs != null)
         {
             Unit unit = unitEventArgs.publisher;
-
             for (int i = 0; i < unit.StageLevel.Value; i++)
             {
-                levelUpObject[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (unit.StageLevel.Value >= levelUpImages.Length) break;
+                levelUpImages[i].transform.GetChild(0).gameObject.SetActive(true);
             }
 
-            for (int i = unit.StageLevel.Value; i < levelUpObject.Length; i++)
+            for (int i = unit.StageLevel.Value; i < levelUpImages.Length; i++)
             {
-                levelUpObject[i].transform.GetChild(0).gameObject.SetActive(false);
+                if (unit.StageLevel.Value >= levelUpImages.Length) break;
+                levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
             }
         }
         else
         {
-            for (int i = 0; i < levelUpObject.Length; i++)
+            for (int i = 0; i < levelUpImages.Length; i++)
             {
-                if (levelUpObject[i].transform.childCount > 0)
+                if (levelUpImages[i].transform.childCount > 0)
                 {
-                    levelUpObject[i].transform.GetChild(0).gameObject.SetActive(false);
+                    levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
                 }
             }
         }
     }
-    
+
     #endregion
 
 
