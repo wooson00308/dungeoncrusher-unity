@@ -13,20 +13,28 @@ MonoBehaviour:
   m_Name: Mon_401_Bat_Front
   m_EditorClassIdentifier: 
   _id: Unit_401_F
+  _icon: {fileID: 21300000, guid: 0f352b3e8242c4006a6ca42a808c43ad, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: 2676d81d68d3f20419c7e49f525c8222, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
+  _dropExp: 10
   _health:
-    _value: 13
+    _value: 5
   _attack:
     _value: 1
   _defense:
     _value: 0
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
-    _value: 0.8
+    _value: 1
   _attackSpeed:
     _value: 1
   _attackRange:

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "ChoiceTable", menuName = "Data/Create ChoiceTable")]
 public class ChoiceTable : ScriptableObject
@@ -17,9 +18,9 @@ public class ChoiceTable : ScriptableObject
             return result;
         }
 
-        // È®·ü ±â¹İ ¼±ÅÃÀ» À§ÇØ ´©Àû °¡ÁßÄ¡ °è»ê
+        // ÃˆÂ®Â·Ã¼ Â±Ã¢Â¹Ã Â¼Â±Ã…ÃƒÃ€Â» Ã€Â§Ã‡Ã˜ Â´Â©Ã€Ã» Â°Â¡ÃÃŸÃ„Â¡ Â°Ã¨Â»Ãª
         var weightedChoices = _choiceDatas
-            .Where(data => data.weight > 0) // °¡ÁßÄ¡°¡ 0º¸´Ù Å« µ¥ÀÌÅÍ¸¸ »ç¿ë
+            .Where(data => data.weight > 0) // Â°Â¡ÃÃŸÃ„Â¡Â°Â¡ 0ÂºÂ¸Â´Ã™ Ã…Â« ÂµÂ¥Ã€ÃŒÃ…ÃÂ¸Â¸ Â»Ã§Â¿Ã«
             .Select(data => (data, cumulativeWeight: data.weight))
             .ToList();
 
@@ -51,7 +52,8 @@ public class ChoiceTable : ScriptableObject
 public enum ChoiceType
 {
     Item,
-    Skill
+    Skill,
+    Stat
 }
 
 [Serializable]
@@ -71,27 +73,31 @@ public class ChoiceData
             {
                 return "UI/Unit/Unit_Skill";
             }
+            else
+            {
+                return "UI/Unit/Unit_Stat";
+            }
 
             return string.Empty;
         }
     }
 
-    [Space]
-    public ChoiceType choiceType;
+    [Space] public ChoiceType choiceType;
+
+    public ItemData itemData;
+    public SkillData skillData;
+    public UnitStatsUpgradeData unitStatUpgradeData;
 
     public Sprite Icon()
     {
         if (choiceType == ChoiceType.Item)
             return itemData?.Icon;
-        else if (choiceType == ChoiceType.Skill)
+
+        if (choiceType == ChoiceType.Skill)
             return skillData?.Icon;
 
         return null;
     }
 
-    public ItemData itemData;
-    public SkillData skillData;
-
-    [Range(0, 100)]
-    public float weight = 1f; // °¡ÁßÄ¡ ±âº»°ª 1
+    [Range(0, 100)] public float weight = 1f; // Â°Â¡ÃÃŸÃ„Â¡ Â±Ã¢ÂºÂ»Â°Âª 1
 }

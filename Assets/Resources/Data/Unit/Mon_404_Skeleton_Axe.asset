@@ -13,20 +13,28 @@ MonoBehaviour:
   m_Name: Mon_404_Skeleton_Axe
   m_EditorClassIdentifier: 
   _id: Unit_404
+  _icon: {fileID: 21300000, guid: 4c772a688e6c64a7b8d770689d42291f, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: 0e7bc0a6a050cf448b1d50e4f9ce2188, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
+  _dropExp: 10
   _health:
-    _value: 25
+    _value: 5
   _attack:
     _value: 1
   _defense:
     _value: 0
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
-    _value: 0.8
+    _value: 1
   _attackSpeed:
     _value: 1
   _attackRange:

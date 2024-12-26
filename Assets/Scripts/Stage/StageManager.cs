@@ -8,7 +8,7 @@ public class StageManager : SingletonMini<StageManager>
     public int CurrentStage => _currentStage;
     public StageData _stageDatas;
 
-    public bool IsAllStageClear => _stageDatas.stageInfos.Count <= _currentStage;
+    public bool IsAllStageClear => _stageDatas.stageInfos.Count < _currentStage;
 
     private List<Coroutine> _spawnCoroutines = new List<Coroutine>();
     private Coroutine _stageTimerCoroutine;
@@ -158,7 +158,7 @@ public class StageManager : SingletonMini<StageManager>
 
     private void ClearAllMonsters()
     {
-        UnitFactory.Instance.KillTeamUnits(Team.Enemy);
+        UnitFactory.Instance.DestroyTeamUnits(Team.Enemy);
         Debug.Log("All monsters cleared from the field.");
     }
 

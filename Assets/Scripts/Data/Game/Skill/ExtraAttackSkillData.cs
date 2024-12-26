@@ -13,8 +13,6 @@ public class ExtraAttackSkillData : SkillData
 
     public override void OnAction(Skill skill, Unit user, List<Unit> targets)
     {
-        HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
-        targets = enemies.OrderBy(x => Random.value).Take(1).ToList();
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
         int damage = (int)(user.Attack.Value * skillValue * 0.01f);
         foreach (var target in targets)

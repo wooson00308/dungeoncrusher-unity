@@ -17,26 +17,33 @@ MonoBehaviour:
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
+  _dropExp: 0
   _health:
     _value: 99999
   _attack:
-    _value: 10
+    _value: 2
   _defense:
-    _value: 0
+    _value: 999
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 1
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 2
   _attackSpeed:
-    _value: 0.75
+    _value: 0.6
   _attackRange:
     _value: 0.9
   _criticalRate:
-    _value: 20
+    _value: 0
   _criticalPercent:
     _value: 2
   _stunRate:
-    _value: 10
+    _value: 0
   _lifestealRate:
     _value: 100
   _lifestealPercent:

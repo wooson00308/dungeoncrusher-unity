@@ -16,7 +16,7 @@ public class UltSkillData : SkillData
         if (skill.SkillData.IsUltSkill && user.Mp.Value < user.Mp.Max)
             return;
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
-        int damage = (int)(user.Attack.Value * skillValue * 1f);
+        int damage = (int)(user.Attack.Value * skillValue * 0.01f);
         TimeManager.Instance.SlowMotion();
         user.Mp.Update("Ult", -user.Mp.Value);
         foreach (var target in targets)
