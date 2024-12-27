@@ -36,8 +36,9 @@ public class ReadyProcess : Process
         {
             _isSpawnPlayers = false;
 
-            var units = UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-            _camera.Follow = units[0].transform;
+            UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+
+            _camera.Follow = UnitFactory.Instance.GetPlayer().transform;
         }
 
         GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), new GameEvent { args = false });

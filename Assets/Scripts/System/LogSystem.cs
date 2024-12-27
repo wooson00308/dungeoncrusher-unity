@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,34 +32,42 @@ public class LogSystem : MonoBehaviour
 
         if (unitEventArgs != null)
         {
-            if (gameEvent.args is SkillEventArgs skillEventArgs)
-            {
-                _skillLogEvents.Enqueue(skillEventArgs);
-
-                if (_logImages.Count > _logCount)
-                {
-                    while (_logImages.Count > _logCount)
-                    {
-                        ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
-                    }
-                }
-            }
-            else
-            {
-                _killLogEvents.Enqueue(unitEventArgs);
-
-                if (_logImages.Count > _logCount)
-                {
-                    while (_logImages.Count > _logCount)
-                    {
-                        ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
-                    }
-                    //Debug.Log("Log 최대 갯수보다 많습니다.");
-                }
-            }
-
-            LogSpawn();
+            StartCoroutine(LogSpawnProcess(unitEventArgs));
         }
+    }
+
+    bool _isRunningDestroyUI;
+
+    private IEnumerator LogSpawnProcess(UnitEventArgs args)
+    {
+        if (args is SkillEventArgs skillEventArgs)
+        {
+            _skillLogEvents.Enqueue(skillEventArgs);
+
+            yield return StartCoroutine(DestroyLogUIWheenEnoughLogs());
+        }
+        else
+        {
+            _killLogEvents.Enqueue(args);
+
+            yield return StartCoroutine(DestroyLogUIWheenEnoughLogs());
+        }
+
+        LogSpawn();
+    }
+
+    private IEnumerator DestroyLogUIWheenEnoughLogs()
+    {
+        if (_isRunningDestroyUI || _logImages.Count <= _logCount) yield break;
+        _isRunningDestroyUI = true;
+
+        while (_logImages.Count > _logCount)
+        {
+            ResourceManager.Instance.DestroyUI(_logImages.Dequeue());
+            yield return null;
+        }
+
+        _isRunningDestroyUI = false;
     }
 
     private async void LogSpawn()

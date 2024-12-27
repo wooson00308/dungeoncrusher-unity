@@ -27,7 +27,7 @@ public class StunState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
-        while(_currentCheckDelay < _stunDuration)
+        if(_currentCheckDelay < _stunDuration)
         {
             _currentCheckDelay += Time.deltaTime;
             return;
