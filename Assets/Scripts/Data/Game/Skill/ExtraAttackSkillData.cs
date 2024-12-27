@@ -20,7 +20,7 @@ public class ExtraAttackSkillData : SkillData
             if (target.Health.Max * 0.3f > target.Health.Value)
             {
                 target?.OnDeath(user, true);
-                target?.OnHit(target.Health.Value, user);
+                // target?.OnHit(target.Health.Value, user);
                 skill.ResetCooltime();
                 return;
             }
