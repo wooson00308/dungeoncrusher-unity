@@ -36,7 +36,7 @@ public class DashState : StateBase, IState
         unit.CrossFade("Dash", 0f);
         unit.Stop();
 
-        var target = Util.WaitForGetTarget(unit).Result;
+        var target = unit.Target;
         if (target == null)
         {
             _fsm.TransitionTo<ChaseState>();

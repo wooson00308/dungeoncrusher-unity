@@ -111,7 +111,7 @@ public class Skill : MonoBehaviour
 
         _timeMarker = Time.time; // 스킬 쿨타임 초기화
 
-        var target = Util.WaitForGetTarget(user).Result;
+        var target = user.Target;
         if (target == null) return;
 
         #region 스킬 프리팹 무결성 검사
