@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthUpgrade
   m_EditorClassIdentifier: 
   _upgradeName: Health
-  _upgradeIcon: {fileID: 0}
+  _upgradeIcon: {fileID: 21300000, guid: 4f790aa8ef5334eea883865fc924dafa, type: 3}
   _description: "\uCCB4\uB825\uC774 100 \uC0C1\uC2B9\uD569\uB2C8\uB2E4."
   <Health>k__BackingField:
     _value: 100

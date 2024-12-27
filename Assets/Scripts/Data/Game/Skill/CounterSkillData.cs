@@ -16,7 +16,7 @@ public class CounterSkillData : SkillData
         Debug.Log("Counter");
         foreach (var target in targets)
         {
-            target?.OnHit((int)damage, user);
+            target?.OnHit(damage, user);
             if (skill.Level > 1)
             {
                 if (!target.IsStun)

@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,7 +25,7 @@ public class FireballSkillData : SkillData
         Visualizer.Instance.ShowRange(targets[0].transform.position, GetSkillLevelData(skill.Level).range);
         foreach (var _target in targets)
         {
-            _target?.OnHit((int)damage, user);
+            _target?.OnHit(damage, user);
             if (skill.Level > 1)
             {
                 if (!_target.IsStun)
@@ -35,6 +34,7 @@ public class FireballSkillData : SkillData
                         _target.OnStun();
                 }
             }
+
             if (skill.Level > 2)
             {
                 if (!_target.IsStun)

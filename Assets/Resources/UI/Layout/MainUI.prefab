@@ -7474,6 +7474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "UI_Main_\uCEE8\uD2B8\uB864\uD328\uB110"
       objectReference: {fileID: 0}
+    - target: {fileID: 6255500959311025683, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cd2dcea91ea19241b43ed9509bb6a49, type: 3}
     - target: {fileID: 7808184579007580076, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2

@@ -363,8 +363,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (Health.Value <= 0)
         {
             OnDeath(attacker, ActiveSpecialDeath);
-            //OnDeath(attacker, true);
-            //죽었다 하면 무조껀 스페셜 데스 하게 만드는 코드
         }
     }
 
