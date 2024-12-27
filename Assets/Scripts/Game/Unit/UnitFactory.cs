@@ -55,7 +55,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
     /// <param name="unitId"></param>
     /// <param name="team"></param>
     /// <param name="value"></param>
-    public List<Unit> Spawn(UnitData data, Team team, int value)
+    public void Spawn(UnitData data, Team team, int value)
     {
         int spawnedCount = 0;
         var teamSpawnPoint = _teamSpawnPoints.Find(x => x.team == team);
@@ -83,8 +83,6 @@ public class UnitFactory : SingletonMini<UnitFactory>
                 _teamUnitDic.Add(team, new HashSet<Unit> { spawnUnit });
             }
         }
-
-        return spawnUnits;
     }
 
     public void GoToSpawnPoint(Unit unit)
