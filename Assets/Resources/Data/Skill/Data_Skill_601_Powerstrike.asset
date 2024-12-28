@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: Skill_601
   _prefab: {fileID: 8639989175812388404, guid: 50b935677516f94438c229e4585593e0, type: 3}
   _rarity: 3
-  _name: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C "
+  _name: "\uCE7C\uB9AC\uC548\uC758 \uCC3D"
   _isAreaAttack: 1
   _isCooltimeSkill: 0
   _isRandomDetected: 0
@@ -24,27 +24,29 @@ MonoBehaviour:
   _skillEventType: 9
   _skillFxSpawnPosType: 1
   _skillLevelDatas:
-  - activationChance: 0.2
-    skillValue: 1
+  - activationChance: 30
+    skillValue: 200
     coolTime: 0
-    targetNum: 10
-    range: 0.5
-    icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
-    description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 1"
+    targetNum: 25
+    range: 1.5
+    icon: {fileID: 21300000, guid: 8fdf0284b84b28d48895168775082b95, type: 3}
+    description: "\uACF5\uACA9\uC2DC 20% \uD655\uB960\uB85C \uCE7C\uB9AC\uC548\uC758
+      \uB3C4\uC6C0\uC744 \uBC1B\uC544 \uC801\uC744 \uACF5\uACA9"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
-  - activationChance: 0.2
-    skillValue: 1
+  - activationChance: 50
+    skillValue: 200
     coolTime: 0
-    targetNum: 10
-    range: 0.5
-    icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
-    description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 2"
+    targetNum: 25
+    range: 1.5
+    icon: {fileID: 21300000, guid: 8fdf0284b84b28d48895168775082b95, type: 3}
+    description: "\uBC1C\uB3D9 \uD655\uB960 \uC99D\uAC00 (20%\u2192 40%)"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
-  - activationChance: 0.2
-    skillValue: 1
+  - activationChance: 50
+    skillValue: 600
     coolTime: 0
-    targetNum: 10
-    range: 0.5
-    icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
-    description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 3"
+    targetNum: 25
+    range: 1.5
+    icon: {fileID: 21300000, guid: 8fdf0284b84b28d48895168775082b95, type: 3}
+    description: "\uCE7C\uB9AC\uC548\uC758 \uACF5\uACA9\uC5D0 \uB9DE\uC740 \uC801
+      '\uC5D0\uC5B4\uBCF8'"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}

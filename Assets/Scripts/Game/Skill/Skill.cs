@@ -119,6 +119,8 @@ public class Skill : MonoBehaviour
         var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
 
         GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
+        if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
+
         if (skillFxPrefab == null) return;
 
         var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
@@ -132,7 +134,7 @@ public class Skill : MonoBehaviour
 
         #endregion
 
-        if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
+        
 
         if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Self)
         {

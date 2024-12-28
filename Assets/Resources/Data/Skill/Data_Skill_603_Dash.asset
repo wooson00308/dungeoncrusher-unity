@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: Skill_603
   _prefab: {fileID: 7109323706280591704, guid: a1682a585d7339346bd693d4b9fa3b4b, type: 3}
   _rarity: 3
-  _name: "\uC2E0\uC18D\uC758 \uBD80\uCE20"
+  _name: "\uBE14\uB8E8\uBCA8\uC758 \uD798"
   _isAreaAttack: 0
   _isCooltimeSkill: 1
   _isRandomDetected: 0
@@ -26,34 +26,30 @@ MonoBehaviour:
   _skillLevelDatas:
   - activationChance: 100
     skillValue: 10
-    coolTime: 5
+    coolTime: 3
     targetNum: 0
     range: 0
-    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
-    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
-      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+    icon: {fileID: 21300000, guid: a28c36d55f14bd7498a8fd9d4b7a4aa5, type: 3}
+    description: "5\uCD08\uB9C8\uB2E4 \uB3CC\uC9C4\uD574 \uB300\uC0C1\uC744 \uACF5\uACA9"
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 100
     skillValue: 10
-    coolTime: 5
+    coolTime: 3
     targetNum: 0
     range: 0
-    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
-    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
-      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \uC801\uC744 \uCC98\uC9C0 \uC2DC \uCFE8\uD0C0\uC784\uC774
-      \uCD08\uAE30\uD654\uB41C\uB2E4"
+    icon: {fileID: 21300000, guid: a28c36d55f14bd7498a8fd9d4b7a4aa5, type: 3}
+    description: "\uB3CC\uC9C4\uC73C\uB85C \uD53C\uD574\uB97C \uC900 \uC801\uC5D0\uAC8C
+      \uC5D0\uC5B4\uBCF8"
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 100
     skillValue: 10
-    coolTime: 5
+    coolTime: 3
     targetNum: 0
     range: 0
-    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
-    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
-      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \uC801\uC744 \uCC98\uC9C0 \uC2DC \uCFE8\uD0C0\uC784\uC774
-      \uCD08\uAE30\uD654\uB41C\uB2E4. \uC2A4\uD0AC\uC5D0 \uD53C\uACA9\uC2DC \uACF5\uC911\uC5D0
-      \uB72C\uB2E4."
+    icon: {fileID: 21300000, guid: a28c36d55f14bd7498a8fd9d4b7a4aa5, type: 3}
+    description: "\uC801\uC744 \uCC98\uCE58\uD560 \uACBD\uC6B0 \uCFE8\uD0C0\uC784
+      \uCD08\uAE30\uD654"
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   _dashRange: 2
-  _dashSpeed: 30
+  _dashSpeed: 10
   _additionalDistance: 1.2

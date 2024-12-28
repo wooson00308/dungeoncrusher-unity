@@ -49,3 +49,9 @@ MonoBehaviour:
     skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
     unitStatUpgradeData: {fileID: 0}
     weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
