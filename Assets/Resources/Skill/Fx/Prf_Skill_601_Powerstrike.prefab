@@ -27,12 +27,12 @@ Transform:
   m_GameObject: {fileID: 1107432078152450393}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.99986154, w: 0.016643703}
-  m_LocalPosition: {x: -0.106, y: 0.315, z: 0}
-  m_LocalScale: {x: 0.39895996, y: 0.39895996, z: 0.15916908}
+  m_LocalPosition: {x: -0.095718555, y: 0.3109709, z: 0.07604976}
+  m_LocalScale: {x: 0.8973916, y: 0.8973916, z: 0.1729253}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8291852323082080586}
-  m_Father: {fileID: 3584023009570158999}
+  m_Father: {fileID: 3872596179331454821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -178.093}
 --- !u!198 &1107432078133838397
 ParticleSystem:
@@ -4771,7 +4771,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_EnableGPUInstancing: 0
@@ -9593,7 +9593,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_EnableGPUInstancing: 0
@@ -14509,7 +14509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3446151439322725959, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_Name
-      value: Prf_Skill_Fx_601
+      value: Prf_Skill_601_Powerstrike
       objectReference: {fileID: 0}
     - target: {fileID: 3795119629370001092, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_Color.b
@@ -14995,11 +14995,11 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1107432078152255827}
-    - targetCorrespondingSourceObject: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
-      insertIndex: 6
+      insertIndex: 5
       addedObject: {fileID: 5601600413636246477}
+    - targetCorrespondingSourceObject: {fileID: 4531916837383950554, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1107432078152255827}
     - targetCorrespondingSourceObject: {fileID: 8128198672446968591, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4011066664946159172}
@@ -15008,6 +15008,11 @@ PrefabInstance:
 --- !u!4 &3584023009570158999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+  m_PrefabInstance: {fileID: 818146530026833855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3872596179331454821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4531916837383950554, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
   m_PrefabInstance: {fileID: 818146530026833855}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8905738862596658352 stripped
