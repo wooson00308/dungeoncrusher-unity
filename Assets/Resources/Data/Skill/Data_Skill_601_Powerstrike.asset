@@ -24,27 +24,27 @@ MonoBehaviour:
   _skillEventType: 9
   _skillFxSpawnPosType: 1
   _skillLevelDatas:
-  - activationChance: 100
+  - activationChance: 0.2
     skillValue: 1
     coolTime: 0
-    targetNum: 1
-    range: 0
+    targetNum: 10
+    range: 0.5
     icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
     description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 1"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
-  - activationChance: 100
+  - activationChance: 0.2
     skillValue: 1
     coolTime: 0
-    targetNum: 1
-    range: 0
+    targetNum: 10
+    range: 0.5
     icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
     description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 2"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}
-  - activationChance: 100
+  - activationChance: 0.2
     skillValue: 1
     coolTime: 0
-    targetNum: 1
-    range: 0
+    targetNum: 10
+    range: 0.5
     icon: {fileID: 21300000, guid: 483be454e1bc20c4a96c7f2b0a54bac6, type: 3}
     description: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C 3"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 67312562c484b624f84724f7695508d1, type: 3}

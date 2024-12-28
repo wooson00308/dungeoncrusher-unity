@@ -26,7 +26,7 @@ MonoBehaviour:
   _skillLevelDatas:
   - activationChance: 100
     skillValue: 0
-    coolTime: 15
+    coolTime: 5
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: 7cd2dcea91ea19241b43ed9509bb6a49, type: 3}
@@ -34,7 +34,7 @@ MonoBehaviour:
     skillFxPrefab: {fileID: 258685903134565375, guid: 7401b20ef65ba324f90d8ed9402aa2b0, type: 3}
   - activationChance: 100
     skillValue: 0
-    coolTime: 10
+    coolTime: 5
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: f0c2bcf5cf2a89740aa93d727b645769, type: 3}
@@ -42,7 +42,7 @@ MonoBehaviour:
     skillFxPrefab: {fileID: 258685903134565375, guid: 7401b20ef65ba324f90d8ed9402aa2b0, type: 3}
   - activationChance: 100
     skillValue: 0
-    coolTime: 8
+    coolTime: 5
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: 4551109833311324e9f2472f204f5d0a, type: 3}
