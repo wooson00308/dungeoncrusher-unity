@@ -15,7 +15,7 @@ MonoBehaviour:
   stageInfos:
   - durationTime: 30
     stageUnitDatas:
-    - spawnCount: 3
+    - spawnCount: 1
       firstSpawnTime: 0
       additionalSpawnCycle: 10
       additionalSpawnCount: 2
@@ -34,7 +34,7 @@ MonoBehaviour:
       underX2Threshold: 1
       underX4Threshold: 0
       minimumSpawnCycle: 0
-      maxAdditionalSpawns: -1
+      maxAdditionalSpawns: 0
       reductionFormula:
         underX2Factor: 0.5
         underX4Factor: 0.25

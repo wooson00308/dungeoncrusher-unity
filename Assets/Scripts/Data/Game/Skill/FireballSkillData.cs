@@ -22,7 +22,7 @@ public class FireballSkillData : SkillData
         //        .ToList();
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
         int damage = (int)(user.Attack.Value * skillValue * 0.01f);
-        Visualizer.Instance.ShowRange(targets[0].transform.position, GetSkillLevelData(skill.Level).range);
+        //Visualizer.Instance.ShowRange(targets[0].transform.position, GetSkillLevelData(skill.Level).range);
         foreach (var _target in targets)
         {
             _target?.OnHit(damage, user);

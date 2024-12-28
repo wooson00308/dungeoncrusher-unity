@@ -1783,7 +1783,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1806685055}
   - component: {fileID: 1806685056}
-  - component: {fileID: 1806685057}
   m_Layer: 0
   m_Name: CheatManager
   m_TagString: Untagged
@@ -1818,19 +1817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2960e1d7603f244b2b5a85b75387cccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1806685057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806685054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d576f78234a9b04b9b352501c3194a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangeIndicatorPrefab: {fileID: 4141339117988943669, guid: 9c51d1077df1faa45a14e07432bcec6f, type: 3}
 --- !u!1 &1844026551
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08f87ddebf02be24ba83d8f4f0910a0a, type: 3}
-  m_Name: Data_Skill_601
+  m_Name: Data_Skill_601_Powerstrike
   m_EditorClassIdentifier: 
   _id: Skill_601
   _prefab: {fileID: 8639989175812388404, guid: 50b935677516f94438c229e4585593e0, type: 3}

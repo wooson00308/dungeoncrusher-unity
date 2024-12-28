@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Data_Unit_3
   m_EditorClassIdentifier: 
   _id: Unit_3
+  _icon: {fileID: 0}
   _prefab: {fileID: 4602744156704204850, guid: e1d7b3b92fcd3442ba886ddb14e2231b, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
@@ -35,7 +36,7 @@ MonoBehaviour:
   _speed:
     _value: 2
   _attackSpeed:
-    _value: 0.6
+    _value: 0.00006
   _attackRange:
     _value: 0.9
   _criticalRate:

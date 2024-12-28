@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65c72e5dfd498a1489683753491e9a7c, type: 3}
-  m_Name: Data_Skill_1116
+  m_Name: Data_Skill_1116_Fireball
   m_EditorClassIdentifier: 
   _id: Data_Skill_1116
   _prefab: {fileID: 7393259528163117129, guid: 84aeba76365fc0645bbbb75f43801902, type: 3}
@@ -25,26 +25,26 @@ MonoBehaviour:
   _skillFxSpawnPosType: 1
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 10000
-    coolTime: 1
-    targetNum: 10
-    range: 1
+    skillValue: 1000
+    coolTime: 5
+    targetNum: 100
+    range: 0.5
     icon: {fileID: 21300000, guid: 3fa61aca263c44f009ad42dd8b1c7d50, type: 3}
     description: "\uD30C\uC774\uC5B4\uBCFC"
     skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
   - activationChance: 100
-    skillValue: 10000
-    coolTime: 3
-    targetNum: 10
-    range: 0.3
+    skillValue: 1000
+    coolTime: 5
+    targetNum: 100
+    range: 0.5
     icon: {fileID: 21300000, guid: 3fa61aca263c44f009ad42dd8b1c7d50, type: 3}
     description: "\uD30C\uC774\uC5B4\uBCFC"
     skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
   - activationChance: 100
-    skillValue: 10000
-    coolTime: 2
-    targetNum: 10
-    range: 0.3
+    skillValue: 1000
+    coolTime: 5
+    targetNum: 100
+    range: 0.5
     icon: {fileID: 21300000, guid: 3fa61aca263c44f009ad42dd8b1c7d50, type: 3}
     description: "\uD30C\uC774\uC5B4\uBCFC"
     skillFxPrefab: {fileID: 2774863506226174364, guid: 13ac29d9fb2ffe14c9ed6636ad434f71, type: 3}
