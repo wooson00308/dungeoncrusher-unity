@@ -31,7 +31,7 @@ public class FireballSkillData : SkillData
                 if (!_target.IsStun)
                 {
                     if (Random.Range(1, 100) <= 20)
-                        _target.OnStun();
+                        _target?.OnStun();
                 }
             }
 
