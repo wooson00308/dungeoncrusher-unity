@@ -5,11 +5,10 @@ using UnityEngine;
 public class DistanceDetectData : DetectDataBase
 {
     [SerializeField]
-    private bool _isClosestDistance = true; // true: 가장 가까운 거리, false: 가장 먼 거리
+    private bool _isClosestDistance = true;
 
     public override Unit Detect(Unit user, HashSet<Unit> enemies, Unit currentTarget = null)
     {
-        // 타겟 고정 옵션이 활성화되어 있고, 현재 타겟이 존재하며, 살아있는 경우
         if (_isLockOnTargetUntilDeath && currentTarget != null && !currentTarget.IsDeath)
         {
             return currentTarget;
@@ -20,8 +19,7 @@ public class DistanceDetectData : DetectDataBase
 
         foreach (Unit unit in enemies)
         {
-            // 유닛이 죽었거나 자신인 경우 스킵
-            if (unit.IsDeath || unit == user)
+            if (unit.IsDeath || unit == user || !unit.gameObject.activeSelf)
                 continue;
 
             float unitDistance = Vector3.Distance(user.transform.position, unit.transform.position);

@@ -19,8 +19,8 @@ MonoBehaviour:
   _isAreaAttack: 0
   _isCooltimeSkill: 1
   _isRandomDetected: 1
-  _isPassiveSkill: 1
-  _isUltSkill: 0
+  _isPassiveSkill: 0
+  _isUltSkill: 1
   _skillEventType: 0
   _skillFxSpawnPosType: 0
   _skillLevelDatas:
