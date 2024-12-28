@@ -25,13 +25,13 @@ MonoBehaviour:
   _skillFxSpawnPosType: 0
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 10000
+    skillValue: 25835
     coolTime: 3
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
-    description: "\uC5D8\uD504 \uAD81\uC218 \uAE00\uB9B0\uC774 5\uCD08\uB9C8\uB2E4
-      \uC801 \uACF5\uACA9"
+    description: "[\uC5D8\uD504 \uAD81\uC218 \uAE00\uB9B0] 5\uCD08\uB9C8\uB2E4 \uC801
+      \uACF5\uACA9 - \uC801\uC744 \uACF5\uACA9\uD558\uBA74 "
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   - activationChance: 100
     skillValue: 10000

@@ -22,7 +22,7 @@ MonoBehaviour:
   _health:
     _value: 99999
   _attack:
-    _value: 10
+    _value: 1
   _defense:
     _value: 999
   _mp:
