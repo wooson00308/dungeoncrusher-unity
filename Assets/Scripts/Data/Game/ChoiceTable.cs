@@ -96,6 +96,9 @@ public class ChoiceData
         if (choiceType == ChoiceType.Skill)
             return skillData?.Icon;
 
+        if (choiceType == ChoiceType.Stat)
+            return unitStatUpgradeData?.UpgradeIcon;
+
         return null;
     }
 
