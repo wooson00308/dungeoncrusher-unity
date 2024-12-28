@@ -8,9 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 543669141518277263, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501131418047372239, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802658099236847598, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281102417635433758, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3446151439322725959, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_Name
       value: Prf_Skill_Fx_981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627657151985969880, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50,6 +70,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4244539427851255336, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400821151319107778, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822431288268951986, guid: 5d27c71cffa319a4cbf6e304e45cd0ca, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

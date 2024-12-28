@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd93b75e07ecd7438c1591dbf1412e2, type: 3}
+  m_Name: Data_Skill_603_Dash
+  m_EditorClassIdentifier: 
+  _id: Skill_603
+  _prefab: {fileID: 7109323706280591704, guid: a1682a585d7339346bd693d4b9fa3b4b, type: 3}
+  _rarity: 3
+  _name: "\uC2E0\uC18D\uC758 \uBD80\uCE20"
+  _isAreaAttack: 0
+  _isCooltimeSkill: 1
+  _isRandomDetected: 0
+  _isPassiveSkill: 1
+  _isUltSkill: 0
+  _skillEventType: 0
+  _skillFxSpawnPosType: 1
+  _skillLevelDatas:
+  - activationChance: 100
+    skillValue: 10
+    coolTime: 5
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
+    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
+      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+    skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
+  - activationChance: 100
+    skillValue: 10
+    coolTime: 5
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
+    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
+      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \uC801\uC744 \uCC98\uC9C0 \uC2DC \uCFE8\uD0C0\uC784\uC774
+      \uCD08\uAE30\uD654\uB41C\uB2E4"
+    skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
+  - activationChance: 100
+    skillValue: 10
+    coolTime: 5
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: 7fefb867e38d41646bdc134f86c0b550, type: 3}
+    description: "5\uCD08\uB9C8\uB2E4 \uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD574
+      \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \uC801\uC744 \uCC98\uC9C0 \uC2DC \uCFE8\uD0C0\uC784\uC774
+      \uCD08\uAE30\uD654\uB41C\uB2E4. \uC2A4\uD0AC\uC5D0 \uD53C\uACA9\uC2DC \uACF5\uC911\uC5D0
+      \uB72C\uB2E4."
+    skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
+  _dashRange: 2
+  _dashSpeed: 30
+  _additionalDistance: 1.2
