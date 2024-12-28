@@ -9,6 +9,8 @@ public class ChoiceTable : ScriptableObject
 {
     [SerializeField] private List<ChoiceData> _choiceDatas;
 
+    public List<ChoiceData> ChoiceDatas => _choiceDatas;
+
     public List<ChoiceData> GetRandomChoices(int count = 3)
     {
         List<ChoiceData> result = new();
@@ -18,9 +20,8 @@ public class ChoiceTable : ScriptableObject
             return result;
         }
 
-        // È®·ü ±â¹Ý ¼±ÅÃÀ» À§ÇØ ´©Àû °¡ÁßÄ¡ °è»ê
         var weightedChoices = _choiceDatas
-            .Where(data => data.weight > 0) // °¡ÁßÄ¡°¡ 0º¸´Ù Å« µ¥ÀÌÅÍ¸¸ »ç¿ë
+            .Where(data => data.weight > 0)
             .Select(data => (data, cumulativeWeight: data.weight))
             .ToList();
 

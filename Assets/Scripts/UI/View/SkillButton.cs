@@ -52,6 +52,11 @@ public class SkillButton : BaseView
         Get<Image>((int)Images.Skill_Icon_Image).enabled = true;
         Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 0;
 
+        if (_player == null)
+        {
+            _player = UnitFactory.Instance.GetPlayer();
+        }
+
         var skill = _player.SkillDic[data.Id];
 
         _isRootSkill = true;
@@ -136,9 +141,9 @@ public class SkillButton : BaseView
                 return;
             }
 
-            // ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+            // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"{Mathf.Ceil(remainCooltime)}s");
-            // ÇÊ ¸¶¿îÆ® ¾÷µ¥ÀÌÆ® (0 ~ 1)
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® (0 ~ 1)
             Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1 - (cooltime / maxCooltime);
         }
     }
