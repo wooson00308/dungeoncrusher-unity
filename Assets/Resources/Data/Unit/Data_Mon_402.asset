@@ -12,19 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9b6db1f2a4d224b90222061bbfe491, type: 3}
   m_Name: Data_Mon_402
   m_EditorClassIdentifier: 
-  _id: Unit_1
+  _id: Unit_402
+  _icon: {fileID: 0}
   _prefab: {fileID: 4602744156704204850, guid: 4648fe85790ac3742b2b4e1c3841d431, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
+  _dropExp: 0
   _health:
-    _value: 1
+    _value: 16
   _attack:
     _value: 0
   _defense:
     _value: 0
   _mp:
     _value: 100
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 1.4
   _attackSpeed:

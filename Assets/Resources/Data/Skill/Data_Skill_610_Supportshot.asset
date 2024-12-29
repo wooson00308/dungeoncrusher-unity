@@ -25,29 +25,28 @@ MonoBehaviour:
   _skillFxSpawnPosType: 0
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 25835
+    skillValue: 258
     coolTime: 3
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
-    description: "[\uC5D8\uD504 \uAD81\uC218 \uAE00\uB9B0] 5\uCD08\uB9C8\uB2E4 \uC801
-      \uACF5\uACA9 - \uC801\uC744 \uACF5\uACA9\uD558\uBA74 "
+    description: "[Lv.1] 5\uCD08\uB9C8\uB2E4 \uC801 \uACF5\uACA9 - \uC801\uC744 \uACF5\uACA9\uD558\uBA74 "
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   - activationChance: 100
-    skillValue: 10000
+    skillValue: 258
     coolTime: 2
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
-    description: "\uAE00\uB9B0\uC758 \uACF5\uACA9\uC774 \uB0A8\uC740 \uCCB4\uB825\uC758
+    description: "[Lv.2] \uAE00\uB9B0\uC758 \uACF5\uACA9\uC774 \uB0A8\uC740 \uCCB4\uB825\uC758
       50% \uC774\uD558\uC758 \uC801 \uCC98\uD615"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   - activationChance: 100
-    skillValue: 10000
+    skillValue: 258
     coolTime: 1
     targetNum: 0
     range: 0
     icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
-    description: "\uAE00\uB9B0\uC774 \uC801\uC744 \uCC98\uCE58\uD558\uBA74 \uCFE8\uD0C0\uC784
-      \uCD08\uAE30\uD654"
+    description: "[Lv.3] \uAE00\uB9B0\uC774 \uC801\uC744 \uCC98\uCE58\uD558\uBA74
+      \uCFE8\uD0C0\uC784 \uCD08\uAE30\uD654"
     skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18455622e71d043ba940a96db9027f07, type: 3}
-  m_Name: HealthUpgrade
+  m_Name: Upgrade_Exp_Up
   m_EditorClassIdentifier: 
-  _upgradeName: Health
-  _upgradeIcon: {fileID: 21300000, guid: 4f790aa8ef5334eea883865fc924dafa, type: 3}
-  _description: "\uCCB4\uB825\uC774 100 \uC0C1\uC2B9\uD569\uB2C8\uB2E4."
+  _upgradeName: "\uC601\uD63C\uC758 \uAD50\uAC10"
+  _upgradeIcon: {fileID: 21300000, guid: d30fcbd832ef786408e46594d6303673, type: 3}
+  _description: "\uACBD\uD5D8\uCE58 \uD68D\uB4DD\uB7C9 50% \uC99D\uAC00"
   <Health>k__BackingField:
-    _value: 100
+    _value: 0
   <Attack>k__BackingField:
     _value: 0
   <Defense>k__BackingField:

@@ -14,26 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_990
   _prefab: {fileID: 5564285513405598355, guid: 8a49c2c5c113c4fda8790943b8ffa3a7, type: 3}
-  _name: DummySword
+  _name: "\uAC80 I"
   _iconId: 
-  _icon: {fileID: 21300000, guid: 4330ba8551db422499f22cb78ac4d193, type: 3}
+  _icon: {fileID: 21300000, guid: 2a82e412fb4893340a1d9e4262b91b19, type: 3}
   _partType: 1
-  _description: "\uB354\uBBF8\uC6A9 \uB9C8\uAC80\uC774\uB2E4 \uC5C4\uCCAD\uB098\uAC8C
-    \uAC15\uD558\uB2E4."
+  _description: "\uACF5\uACA9\uB825 +2, \uACF5\uACA9\uC18D\uB3C4 +0.2"
   _health:
     _value: 0
   _attack:
-    _value: 0
+    _value: 2
   _defense:
     _value: 0
   _mp:
     _value: 0
   _maxMp:
     _value: 0
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 1
+    _value: 0.2
   _attackRange:
     _value: 0
   _criticalRate:

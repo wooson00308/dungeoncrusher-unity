@@ -18,11 +18,11 @@ MonoBehaviour:
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
-  _dropExp: 10
+  _dropExp: 5
   _health:
-    _value: 250
+    _value: 14
   _attack:
-    _value: 1
+    _value: 2
   _defense:
     _value: 0
   _mp:
@@ -36,7 +36,7 @@ MonoBehaviour:
   _speed:
     _value: 1
   _attackSpeed:
-    _value: 1
+    _value: 1.5
   _attackRange:
     _value: 0.8
   _criticalRate:

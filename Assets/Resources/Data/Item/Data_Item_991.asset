@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_991
   _prefab: {fileID: 5564285513405598355, guid: 73275dff08f2646c9978c21edf5c5e23, type: 3}
-  _name: John'sArmor
+  _name: "\uAE30\uBCF8 \uC544\uBA38"
   _iconId: 
-  _icon: {fileID: 21300022, guid: d8060a3f1578843dc9cd55e61e533829, type: 3}
+  _icon: {fileID: 21300000, guid: 04dd7020ca44aed4081be8f2ae983953, type: 3}
   _partType: 3
   _description: "\uC874\uC774 \uB9CC\uB4E0 \uC138\uACC4 \uCD5C\uACE0\uC758 \uC544\uBA38\uB2E4.
     \uC785\uC73C\uBA74 \uBB34\uC801\uC5D0 \uAC00\uAE5D\uB2E4."
@@ -25,21 +25,31 @@ MonoBehaviour:
   _attack:
     _value: 0
   _defense:
-    _value: 15
+    _value: 1
   _mp:
     _value: 0
   _maxMp:
     _value: 0
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 1
+    _value: 0
   _attackRange:
     _value: 0
   _criticalRate:
     _value: 0
+  _criticalDamage:
+    _value: 0
   _stunRate:
     _value: 0
   _lifestealRate:
+    _value: 0
+  _lifestealPercent:
     _value: 0
   _skillDatas: []

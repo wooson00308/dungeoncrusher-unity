@@ -55,3 +55,81 @@ MonoBehaviour:
     skillData: {fileID: 11400000, guid: c919d8a7f4aa6db479b5197e897e5769, type: 2}
     unitStatUpgradeData: {fileID: 0}
     weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: e06fd1c2e215353499df50aa3f6ee88b, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 0ab8890013e0b624bb748b501779494f, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: cdc7aa36070b4bd4d815cfdae19b5325, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 07d82e57fcfe57345a8882b99a21ff01, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: da460e015d82f7046946ad7c89e2c323, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 00e8d02ea2798324b9553e17a1d6cc47, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: dcd6f8e95c48b2846a9701b4101389d4, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 3fe995f6b1616de47a3608655ad100b2, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 49cf89d4fcc773b4a9f2789e2f711ba9, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 32bd17a96ce1b8e449e8d29fcd184458, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: b99b4ce3fa5a9f74a88051d2614a4645, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 1c73d404a2301f3439856030da276247, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: db5f8d1bb1cba9a4db9db956731e6a97, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1

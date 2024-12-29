@@ -20,11 +20,11 @@ MonoBehaviour:
   _warningPrefab: {fileID: 0}
   _dropExp: 0
   _health:
-    _value: 99999
+    _value: 150
   _attack:
-    _value: 1
+    _value: 10
   _defense:
-    _value: 999
+    _value: 0
   _mp:
     _value: 100
   _exp:
@@ -38,9 +38,9 @@ MonoBehaviour:
   _attackSpeed:
     _value: 0.8
   _attackRange:
-    _value: 0.9
+    _value: 1
   _criticalRate:
-    _value: 0
+    _value: 15
   _criticalPercent:
     _value: 2
   _stunRate:
@@ -48,4 +48,4 @@ MonoBehaviour:
   _lifestealRate:
     _value: 100
   _lifestealPercent:
-    _value: 1
+    _value: 0.2

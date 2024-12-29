@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba908e9cfdc37314392ba0c704528002, type: 3}
+  m_Name: Data_Skill_Default_610_Supportshot 1
+  m_EditorClassIdentifier: 
+  _id: Skill_610
+  _prefab: {fileID: 3157651758462457662, guid: 47f162d6ce235b0418e6b0fa4e715e4f, type: 3}
+  _rarity: 3
+  _name: "\uAE00\uB9B0\uC758 \uC11C\uD3EC\uD2B8"
+  _isAreaAttack: 0
+  _isCooltimeSkill: 1
+  _isRandomDetected: 1
+  _isPassiveSkill: 0
+  _isUltSkill: 1
+  _skillEventType: 0
+  _skillFxSpawnPosType: 0
+  _skillLevelDatas:
+  - activationChance: 100
+    skillValue: 25835
+    coolTime: 3
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
+    description: "[Lv.1] 5\uCD08\uB9C8\uB2E4 \uC801 \uACF5\uACA9 - \uC801\uC744 \uACF5\uACA9\uD558\uBA74 "
+    skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
+  - activationChance: 100
+    skillValue: 10000
+    coolTime: 2
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
+    description: "[Lv.2] \uAE00\uB9B0\uC758 \uACF5\uACA9\uC774 \uB0A8\uC740 \uCCB4\uB825\uC758
+      50% \uC774\uD558\uC758 \uC801 \uCC98\uD615"
+    skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
+  - activationChance: 100
+    skillValue: 10000
+    coolTime: 1
+    targetNum: 0
+    range: 0
+    icon: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
+    description: "[Lv.3] \uAE00\uB9B0\uC774 \uC801\uC744 \uCC98\uCE58\uD558\uBA74
+      \uCFE8\uD0C0\uC784 \uCD08\uAE30\uD654"
+    skillFxPrefab: {fileID: 2632797732036671992, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}

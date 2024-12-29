@@ -18,13 +18,13 @@ MonoBehaviour:
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
-  _dropExp: 10
+  _dropExp: 30
   _health:
-    _value: 5
+    _value: 35
   _attack:
-    _value: 0
+    _value: 4
   _defense:
-    _value: 0
+    _value: 5
   _mp:
     _value: 100
   _exp:
