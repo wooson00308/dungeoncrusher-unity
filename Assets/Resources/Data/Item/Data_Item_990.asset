@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Item_990
   _prefab: {fileID: 5564285513405598355, guid: 8a49c2c5c113c4fda8790943b8ffa3a7, type: 3}
-  _name: "\uAC80 I"
+  _name: "\uAE30\uBCF8"
   _iconId: 
   _icon: {fileID: 21300000, guid: 2a82e412fb4893340a1d9e4262b91b19, type: 3}
   _partType: 1
-  _description: "\uACF5\uACA9\uB825 +2, \uACF5\uACA9\uC18D\uB3C4 +0.2"
+  _description: "\uAE30\uBCF8"
   _health:
     _value: 0
   _attack:
-    _value: 2
+    _value: 0
   _defense:
     _value: 0
   _mp:
@@ -38,7 +38,7 @@ MonoBehaviour:
   _speed:
     _value: 0
   _attackSpeed:
-    _value: 0.2
+    _value: 0
   _attackRange:
     _value: 0
   _criticalRate:

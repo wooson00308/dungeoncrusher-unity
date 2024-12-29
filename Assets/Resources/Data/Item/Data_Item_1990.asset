@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
+  m_Name: Data_Item_1990
+  m_EditorClassIdentifier: 
+  _id: Item_1990
+  _prefab: {fileID: 5564285513405598355, guid: eb278e9dd0b0ad24f879fc69679134a1, type: 3}
+  _name: "\uAC80 A"
+  _iconId: 
+  _icon: {fileID: 21300000, guid: 0629f55cd50e4b047b180b42656b4f83, type: 3}
+  _partType: 1
+  _description: "\uACF5\uACA9\uB825 +4, \uACF5\uACA9\uC18D\uB3C4 +0.2"
+  _health:
+    _value: 0
+  _attack:
+    _value: 4
+  _defense:
+    _value: 0
+  _mp:
+    _value: 0
+  _maxMp:
+    _value: 0
+  _exp:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
+  _speed:
+    _value: 0
+  _attackSpeed:
+    _value: 0.1
+  _attackRange:
+    _value: 0
+  _criticalRate:
+    _value: 0
+  _criticalDamage:
+    _value: 0
+  _stunRate:
+    _value: 0
+  _lifestealRate:
+    _value: 0
+  _lifestealPercent:
+    _value: 0
+  _skillDatas: []

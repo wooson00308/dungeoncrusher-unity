@@ -22,7 +22,7 @@ MonoBehaviour:
   _isPassiveSkill: 0
   _isUltSkill: 0
   _skillEventType: 0
-  _skillFxSpawnPosType: 0
+  _skillFxSpawnPosType: 1
   _skillLevelDatas:
   - activationChance: 0
     skillValue: 0

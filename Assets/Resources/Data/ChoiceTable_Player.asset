@@ -36,16 +36,16 @@ MonoBehaviour:
     itemData: {fileID: 11400000, guid: 4a76854baa95245abab4d78266c6ca60, type: 2}
     skillData: {fileID: 0}
     unitStatUpgradeData: {fileID: 0}
-    weight: 100
+    weight: 0
   - tier: 3
     choiceType: 0
     itemData: {fileID: 11400000, guid: a30a45598754c4ec4b121267d8eb911f, type: 2}
     skillData: {fileID: 0}
     unitStatUpgradeData: {fileID: 0}
-    weight: 100
+    weight: 0
   - tier: 3
     choiceType: 0
     itemData: {fileID: 11400000, guid: 45fd0eefa04454746b46f3631363a037, type: 2}
     skillData: {fileID: 0}
     unitStatUpgradeData: {fileID: 0}
-    weight: 100
+    weight: 0

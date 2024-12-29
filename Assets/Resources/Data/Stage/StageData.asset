@@ -205,10 +205,10 @@ MonoBehaviour:
         underX2Factor: 0.5
         underX4Factor: 0.25
       stageUnit: {fileID: 11400000, guid: 1beb0b53ed6c28641a142cddd4e0011d, type: 2}
-    - spawnCount: 3
+    - spawnCount: 2
       firstSpawnTime: 0
-      additionalSpawnCycle: 5
-      additionalSpawnCount: 3
+      additionalSpawnCycle: 8
+      additionalSpawnCount: 2
       underX2Threshold: 1
       underX4Threshold: 0
       minimumSpawnCycle: 1
@@ -267,10 +267,10 @@ MonoBehaviour:
         underX2Factor: 0.5
         underX4Factor: 0.25
       stageUnit: {fileID: 11400000, guid: 1beb0b53ed6c28641a142cddd4e0011d, type: 2}
-    - spawnCount: 3
+    - spawnCount: 2
       firstSpawnTime: 0
-      additionalSpawnCycle: 5
-      additionalSpawnCount: 3
+      additionalSpawnCycle: 8
+      additionalSpawnCount: 2
       underX2Threshold: 1
       underX4Threshold: 0
       minimumSpawnCycle: 1
@@ -303,7 +303,7 @@ MonoBehaviour:
         underX2Factor: 0.5
         underX4Factor: 0.25
       stageUnit: {fileID: 11400000, guid: f9285f1bb76ce34459e0637ac6d2edfc, type: 2}
-  - durationTime: 25
+  - durationTime: 50
     stageUnitDatas:
     - spawnCount: 6
       firstSpawnTime: 0
@@ -329,10 +329,10 @@ MonoBehaviour:
         underX2Factor: 1
         underX4Factor: 0.5
       stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
-    - spawnCount: 0
-      firstSpawnTime: 0
-      additionalSpawnCycle: 24
-      additionalSpawnCount: 1
+    - spawnCount: 1
+      firstSpawnTime: 25
+      additionalSpawnCycle: 0
+      additionalSpawnCount: 0
       underX2Threshold: 0
       underX4Threshold: 0
       minimumSpawnCycle: 0

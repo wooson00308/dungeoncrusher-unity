@@ -36,16 +36,16 @@ MonoBehaviour:
   _speed:
     _value: 2
   _attackSpeed:
-    _value: 0.8
+    _value: 0.95
   _attackRange:
     _value: 1
   _criticalRate:
     _value: 15
   _criticalPercent:
-    _value: 2
+    _value: 1.5
   _stunRate:
     _value: 0
   _lifestealRate:
     _value: 100
   _lifestealPercent:
-    _value: 0.2
+    _value: 0.15

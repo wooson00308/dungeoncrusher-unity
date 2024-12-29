@@ -25,7 +25,7 @@ MonoBehaviour:
   _skillFxSpawnPosType: 1
   _skillLevelDatas:
   - activationChance: 100
-    skillValue: 10
+    skillValue: 15
     coolTime: 3
     targetNum: 0
     range: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
       \uACF5\uACA9"
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 100
-    skillValue: 10
+    skillValue: 15
     coolTime: 3
     targetNum: 0
     range: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
       \uC5D0\uC5B4\uBCF8"
     skillFxPrefab: {fileID: 4562540775991856171, guid: ab5a9cc2f7681e3428dd39562db711c7, type: 3}
   - activationChance: 100
-    skillValue: 10
+    skillValue: 15
     coolTime: 3
     targetNum: 0
     range: 0

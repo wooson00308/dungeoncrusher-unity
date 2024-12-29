@@ -36,7 +36,7 @@ MonoBehaviour:
   <AttackRange>k__BackingField:
     _value: 0
   <CriticalRate>k__BackingField:
-    _value: 10
+    _value: 6
   <CriticalPercent>k__BackingField:
     _value: 0
   <AttackStunRate>k__BackingField:

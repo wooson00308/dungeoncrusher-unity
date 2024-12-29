@@ -133,3 +133,63 @@ MonoBehaviour:
     skillData: {fileID: 11400000, guid: db5f8d1bb1cba9a4db9db956731e6a97, type: 2}
     unitStatUpgradeData: {fileID: 0}
     weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 965866d061d306e4aa75099780d39ae9, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: fa6e8fdef0e3fb04583573f800c635a2, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 01f00377430f16d4fa876736f962c9db, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: fa94eefc6f153b649bab9803e8b38f15, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 17e86d26b25af5f4c801f74e6ef22556, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 982b6d78f424e274ca17a273d30b5457, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: 5388dea769429ef4f9d429b9039bda8a, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: dbcc8ea3f23253a4592aeb751ce07b0b, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: f0a007614cb8363459bda369abc89e4b, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 0
+    itemData: {fileID: 11400000, guid: e83b0ae5b39185542b17f94dfd725a51, type: 2}
+    skillData: {fileID: 0}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1

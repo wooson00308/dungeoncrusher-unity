@@ -21,11 +21,11 @@ MonoBehaviour:
   _description: "\uC874\uC774 \uB9CC\uB4E0 \uC138\uACC4 \uCD5C\uACE0\uC758 \uC544\uBA38\uB2E4.
     \uC785\uC73C\uBA74 \uBB34\uC801\uC5D0 \uAC00\uAE5D\uB2E4."
   _health:
-    _value: 200
+    _value: 0
   _attack:
     _value: 0
   _defense:
-    _value: 1
+    _value: 0
   _mp:
     _value: 0
   _maxMp:
