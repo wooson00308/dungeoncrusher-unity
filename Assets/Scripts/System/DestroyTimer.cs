@@ -19,6 +19,8 @@ public class DestroyTimer : MonoBehaviour
 
     private void DestroyThis()
     {
+        if (!gameObject.activeSelf) return;
+        
         if (TryGetComponent(out RectTransform rectTransform))
         {
             ResourceManager.Instance.DestroyUI(gameObject);

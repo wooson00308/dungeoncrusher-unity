@@ -173,8 +173,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _animator = _model.GetComponent<Animator>();
-
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
     }
 
     private void OnDisable()
@@ -183,10 +181,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (Team == Team.Enemy) return;
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
+        ResetItemNSkills();
     }
 
     public void OnInitialized(UnitData data, Team team)
     {
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
         if (IsDeath)
         {
             ResetStats("Engage");
@@ -215,6 +215,15 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
 
         ResetStats("Main");
+    }
+
+    private void ResetItemNSkills()
+    {
+        if (Team == Team.Enemy) return;
+        _equipments.Clear();
+        _equipments = new();
+        _skillDic.Clear();
+        _skillDic = new();
     }
 
     private void SetActiveEvent(GameEvent gameEvent)
@@ -247,6 +256,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             ResetStats("Ready");
             _fsm.UnlockState();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnDeath();
         }
     }
 
@@ -534,7 +551,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         UpdateStats(item.Data.Id, item.Data);
 
-        spawnItem.transform.SetParent(_inventory);
+        spawnItem?.transform.SetParent(_inventory);
     }
 
     #endregion

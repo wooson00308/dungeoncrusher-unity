@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,21 @@ public class StageManager : SingletonMini<StageManager>
     private float _engageTime;
     public float EnageTime => _engageTime;
 
+    private void Start()
+    {
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), StopAll);
+    }
+
+    private void OnDisable()
+    {
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), StopAll);
+    }
+
+    private void StopAll(GameEvent gameEvent)
+    {
+        StopAllCoroutines();
+    }
+
     public void ClearStage()
     {
         _currentStage++;
@@ -26,6 +42,7 @@ public class StageManager : SingletonMini<StageManager>
         {
             StopCoroutine(coroutine);
         }
+
         _spawnCoroutines.Clear();
 
         if (_stageTimerCoroutine != null)
@@ -51,6 +68,7 @@ public class StageManager : SingletonMini<StageManager>
         {
             StopCoroutine(coroutine);
         }
+
         _spawnCoroutines.Clear();
 
         if (_stageTimerCoroutine != null)
@@ -80,7 +98,8 @@ public class StageManager : SingletonMini<StageManager>
 
         int additionalSpawns = 0;
 
-        while (!_isStageCleared && (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
+        while (!_isStageCleared &&
+               (unitData.maxAdditionalSpawns == -1 || additionalSpawns < unitData.maxAdditionalSpawns))
         {
             float currentTime = 0;
             float spawnCycle = unitData.additionalSpawnCycle;
@@ -91,11 +110,13 @@ public class StageManager : SingletonMini<StageManager>
 
                 if (currentMonsterCount < unitData.underX4Threshold)
                 {
-                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX4Factor);
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle,
+                        spawnCycle * unitData.reductionFormula.underX4Factor);
                 }
                 else if (currentMonsterCount < unitData.underX2Threshold)
                 {
-                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle, spawnCycle * unitData.reductionFormula.underX2Factor);
+                    spawnCycle = Mathf.Max(unitData.minimumSpawnCycle,
+                        spawnCycle * unitData.reductionFormula.underX2Factor);
                 }
 
                 currentTime += Time.deltaTime;
@@ -172,6 +193,7 @@ public class StageManager : SingletonMini<StageManager>
                 return true;
             }
         }
+
         return false;
     }
 
