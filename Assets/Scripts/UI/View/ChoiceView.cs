@@ -61,9 +61,9 @@ public class ChoiceView : BaseView
 
         if (texts != null)
         {
-            texts[0].text = $"Health +{data.itemData.Health.Value}";
-            texts[1].text = $"Defense +{data.itemData.Defense.Value}";
-            texts[2].text = $"Attack +{data.itemData.Attack.Value}";
+            texts[0].text = $"Health {ResultText(data.itemData.Health.Value)}";
+            texts[1].text = $"Defense {ResultText(data.itemData.Defense.Value)}";
+            texts[2].text = $"Attack {ResultText(data.itemData.Attack.Value)}";
         }
 
         if (afterTexts != null)
@@ -72,9 +72,9 @@ public class ChoiceView : BaseView
 
             if (teamUnits == null)
             {
-                afterTexts[0].text = $"Health +{data.itemData.Health.Value}";
-                afterTexts[1].text = $"Defense +{data.itemData.Defense.Value}";
-                afterTexts[2].text = $"Attack +{data.itemData.Attack.Value}";
+                afterTexts[0].text = $"Health {ResultText(data.itemData.Health.Value)}";
+                afterTexts[1].text = $"Defense {ResultText(data.itemData.Defense.Value)}";
+                afterTexts[2].text = $"Attack {ResultText(data.itemData.Attack.Value)}";
             }
             else
             {
@@ -93,9 +93,9 @@ public class ChoiceView : BaseView
                 }
                 else
                 {
-                    afterTexts[0].text = $"Health +{data.itemData.Health.Value}";
-                    afterTexts[1].text = $"Defense +{data.itemData.Defense.Value}";
-                    afterTexts[2].text = $"Attack +{data.itemData.Attack.Value}";
+                    afterTexts[0].text = $"Health {ResultText(data.itemData.Health.Value)}";
+                    afterTexts[1].text = $"Defense {ResultText(data.itemData.Defense.Value)}";
+                    afterTexts[2].text = $"Attack {ResultText(data.itemData.Attack.Value)}";
                 }
             }
         }
