@@ -27,11 +27,12 @@ public class UnitInfoUI : BaseView
 
     private void Awake()
     {
-        BindUI(); 
+        BindUI();
     }
 
     private void OnEnable()
     {
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
@@ -39,6 +40,7 @@ public class UnitInfoUI : BaseView
 
     private void OnDisable()
     {
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
@@ -50,13 +52,17 @@ public class UnitInfoUI : BaseView
         Bind<RectTransform>(typeof(RectTransforms));
     }
 
-    private void Initialized(GameEvent gameEvent)
+    private async void Initialized(GameEvent gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
-
-        if (unitEventArgs.publisher.Team == Team.Enemy) return;
-
-        _unit = unitEventArgs.publisher;
+        if (_unit == null)
+        {
+            _unit = UnitFactory.Instance.GetPlayer();
+            
+            while (_unit == null)
+            {
+                await Awaitable.EndOfFrameAsync();
+            }
+        }
 
         ShowHpUI();
         ShowMpUI();
@@ -85,7 +91,6 @@ public class UnitInfoUI : BaseView
 
     private void UpdateHpUI(GameEvent gameEvent)
     {
-        if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
         var fillAmount = (float)_unit.Health.Value / _maxHealth;
@@ -159,7 +164,7 @@ public class UnitInfoUI : BaseView
 
         Image[] images = Get<RectTransform>((int)RectTransforms.Group_List_Skill).GetComponentsInChildren<Image>();
 
-        foreach(Image image in images)
+        foreach (Image image in images)
         {
             image.sprite = _defaultSkillSprite;
         }
