@@ -12,9 +12,7 @@ public enum UnitEvents
     UnitEvent_Health_Regen,
     UnitEvent_Mana_Regen,
     UnitEvent_OnAttack,
-    UnitEvent_OnAttack_Critical,
     UnitEvent_OnHit,
-    UnitEvent_OnHit_Critical,
     UnitEvent_OnStun,
     UnitEvent_Exp,
     UnitEvent_Level,
@@ -36,6 +34,7 @@ public class SetActiveEventArgs : UnitEventArgs
 public class OnHitEventArgs : UnitEventArgs
 {
     public int damageValue;
+    public bool isCiritical;
 }
 
 public class SkillEventArgs : UnitEventArgs

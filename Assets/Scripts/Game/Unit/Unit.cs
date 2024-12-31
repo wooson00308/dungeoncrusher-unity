@@ -341,7 +341,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #region FSM
 
-    public void OnHit(int damage, Unit attacker = null)
+    public void OnHit(int damage, Unit attacker = null, bool isCritical = false)
     {
         if (!IsActive) return;
         if (IsDeath) return;
@@ -374,7 +374,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
         {
             eventType = UnitEvents.UnitEvent_OnHit.ToString(),
-            args = new OnHitEventArgs { publisher = this, damageValue = damage }
+            args = new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical }
         });
 
         if (Health.Value <= 0)

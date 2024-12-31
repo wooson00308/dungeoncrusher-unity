@@ -68,9 +68,12 @@ public class UnitAnimator : MonoBehaviour
         if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))
         {
             realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
+            _owner.Target?.OnHit(realDamage, _owner, true);
         }
-
-        _owner.Target?.OnHit(realDamage, _owner);
+        else
+        {
+            _owner.Target?.OnHit(realDamage, _owner);
+        }
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 

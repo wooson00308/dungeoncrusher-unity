@@ -48,7 +48,14 @@ public class EngageView : BaseView
         {
             var onHitArgs = _damageEventQueue.Dequeue();
             var damageText = ResourceManager.Instance.SpawnFromPath("UI/DamageTextUI").GetComponent<DamageTextUI>();
-            damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position);
+            if (onHitArgs.isCiritical)
+            {
+                damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position, true);
+            }
+            else
+            {
+                damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position);
+            }
             await Awaitable.EndOfFrameAsync();
         }
 
@@ -80,7 +87,7 @@ public class EngageView : BaseView
         if (!setActiveEventArgs.isActive) return;
 
         MpSliderUI mpSlider;
-        
+
         if (setActiveEventArgs.publisher.IsBoss)
         {
             mpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider").GetComponent<MpSliderUI>();
@@ -89,7 +96,7 @@ public class EngageView : BaseView
         {
             mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
         }
-        
+
         mpSlider.Show(setActiveEventArgs.publisher);
     }
 

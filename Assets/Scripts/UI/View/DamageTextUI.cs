@@ -26,7 +26,7 @@ public class DamageTextUI : BaseView
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Show(int damage, Vector3 worldPos)
+    public void Show(int damage, Vector3 worldPos, bool isCritical = false)
     {
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
         var randomPos = Random.insideUnitCircle * randomValue;
@@ -34,6 +34,20 @@ public class DamageTextUI : BaseView
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, worldPos) + _pivot +
             randomPos;
 
-        Get<TextMeshProUGUI>((int)Texts.Damage_Text).SetText($"{damage}");
+        var damageTxt = Get<TextMeshProUGUI>((int)Texts.Damage_Text);
+
+        if (isCritical)
+        {
+            damageTxt.enableVertexGradient = true;
+            damageTxt.color = Color.yellow;
+        }
+        else
+        {
+            damageTxt.enableVertexGradient = false;
+            damageTxt.color = Color.white; //애니메이션 쪽이라 안 바뀜
+        }
+
+
+        damageTxt.SetText($"{damage}");
     }
 }
