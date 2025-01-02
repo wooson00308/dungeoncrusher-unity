@@ -9,7 +9,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] protected string _iconId;
     [SerializeField] protected Sprite _icon;
     [SerializeField] protected PartType _partType;
-    [SerializeField] protected string _description;
+    [TextArea] [SerializeField] protected string _description;
 
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;

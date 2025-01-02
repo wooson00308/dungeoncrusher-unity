@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillFXSpawnPosType 
-{ 
+public enum SkillFXSpawnPosType
+{
     Self,
     Target
 }
@@ -24,7 +24,7 @@ public abstract class SkillData : ScriptableObject
     [SerializeField] protected SkillFXSpawnPosType _skillFxSpawnPosType;
 
     [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
-    
+
     public string Id => _id;
 
     public GameObject Prefab
@@ -34,6 +34,7 @@ public abstract class SkillData : ScriptableObject
     }
 
     public int Rarity => _rarity;
+
     public Sprite Icon
     {
         get
@@ -44,35 +45,47 @@ public abstract class SkillData : ScriptableObject
                 return _skillLevelDatas[_level - 1].icon;
         }
     } //=> _icon;
-    
+
     public string Name => _name;
+
     public int Level
     {
-        get => _level; 
+        get => _level;
         set
         {
             if (MaxLv > _level)
             {
                 _level = value;
             }
-            else { _level = MaxLv; }
+            else
+            {
+                _level = MaxLv;
+            }
         }
     }
-    public int MaxLv { get => _skillLevelDatas.Count; }
+
+    public int MaxLv
+    {
+        get => _skillLevelDatas.Count;
+    }
+
     public bool IsCooltimeSkill => _isCooltimeSkill;
     public bool IsAreaAttack => _isAreaAttack;
     public bool IsPassiveSkill => _isPassiveSkill; //자가 구동을 위한 bool 값 입력부
     public bool IsRamdomDetected => _isRandomDetected;
     public bool IsUltSkill => _isUltSkill; //자가 구동을 위한 bool 값 입력부
-    public string Description {
-        get {
+
+    public string Description
+    {
+        get
+        {
             if (_level < _skillLevelDatas.Count)
                 return _skillLevelDatas[_level].description;
             else
-                return _skillLevelDatas[_level-1].description;
+                return _skillLevelDatas[_level - 1].description;
         }
     }
-    
+
     public UnitEvents SkillEventType => _skillEventType;
     public SkillFXSpawnPosType SkillFXSpawnPosType => _skillFxSpawnPosType;
 
@@ -84,21 +97,21 @@ public abstract class SkillData : ScriptableObject
 
     public SkillLevelData GetSkillLevelData(int skillLevel)
     {
-        
         int skillIndex = skillLevel - 1;
         SkillLevelData defaultSkillLevelData = _skillLevelDatas[^1];
-        
+
         if (defaultSkillLevelData == null)
         {
             string errorMessage = $"{_id}의 레벨 별 스킬 데이터가 존재하지 않습니다.";
             Debug.LogError(errorMessage);
             throw new SkillDataNotFoundException(errorMessage);
         }
-        
+
         if (_skillLevelDatas.Count - 1 < skillIndex)
         {
             return defaultSkillLevelData;
         }
+
         _level = skillLevel;
         return _skillLevelDatas[skillIndex];
     }
@@ -116,7 +129,7 @@ public class SkillLevelData
     public int targetNum; //타켓수 지정방식
     public float range; //공격 범위 크기?
     public Sprite icon;
-    public string description;
+    [TextArea] public string description;
     public GameObject skillFxPrefab;
 }
 

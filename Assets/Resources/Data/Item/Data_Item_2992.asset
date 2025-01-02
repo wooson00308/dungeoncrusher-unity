@@ -20,7 +20,7 @@ MonoBehaviour:
   _partType: 3
   _description: "\uBC29\uC5B4\uB825+3, \uC774\uB3D9\uC18D\uB3C4 -0.1"
   _health:
-    _value: -10
+    _value: 0
   _attack:
     _value: 0
   _defense:

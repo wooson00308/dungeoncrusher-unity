@@ -18,7 +18,7 @@ MonoBehaviour:
   _iconId: 
   _icon: {fileID: 21300000, guid: 229348b918d15c046ad3c0046849169c, type: 3}
   _partType: 3
-  _description: "\uBC29\uC5B4\uB825+2, \uCCB4\uB825+20"
+  _description: "\uCCB4\uB825+20, \uBC29\uC5B4\uB825+3"
   _health:
     _value: 20
   _attack:

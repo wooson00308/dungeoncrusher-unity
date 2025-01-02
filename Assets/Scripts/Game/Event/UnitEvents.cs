@@ -16,6 +16,7 @@ public enum UnitEvents
     UnitEvent_OnStun,
     UnitEvent_Exp,
     UnitEvent_Level,
+    UnitEvnet_LevelUpCount,
     UnitEvent_OnDestroy,
     UnitEvent_OnDeath,
     UnitEvent_OnDeath_Special

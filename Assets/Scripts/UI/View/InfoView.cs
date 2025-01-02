@@ -38,6 +38,7 @@ public class InfoView : BaseView
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), UpdateKillCountUI);
         GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), UpdateKillCountUI);
         GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateLevelUppoint);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateLevelUppoint);
         StartInfo();
     }
 
@@ -48,6 +49,7 @@ public class InfoView : BaseView
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), UpdateKillCountUI);
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), UpdateKillCountUI);
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateLevelUppoint);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateLevelUppoint);
     }
 
     public override void BindUI()
@@ -94,26 +96,36 @@ public class InfoView : BaseView
         if (unit.Team == Team.Enemy) return;
 
         Get<TextMeshProUGUI>((int)Texts.Txt_Level).SetText($"LV.{unit.Level.Value}");
-        UpdateLevelUppoint(gameEvent);
+        UpdateLevelUppoint(new GameEvent()
+        {
+            args = unit.StageLevel.Value
+        });
     }
 
     public void UpdateLevelUppoint(GameEvent gameEvent = null)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent?.args;
+        int levelUpPoint;
 
-
-        if (unitEventArgs != null)
+        if (gameEvent != null)
         {
-            Unit unit = unitEventArgs.publisher;
-            for (int i = 0; i < unit.StageLevel.Value; i++)
+            levelUpPoint = gameEvent.args is int ? (int)gameEvent.args : 0;
+        }
+        else
+        {
+            levelUpPoint = 0;
+        }
+
+        if (levelUpPoint != 0)
+        {
+            for (int i = 0; i < levelUpPoint; i++)
             {
-                if (unit.StageLevel.Value >= levelUpImages.Length) break;
+                if (levelUpPoint >= levelUpImages.Length) break;
                 levelUpImages[i].transform.GetChild(0).gameObject.SetActive(true);
             }
 
-            for (int i = unit.StageLevel.Value; i < levelUpImages.Length; i++)
+            for (int i = levelUpPoint; i < levelUpImages.Length; i++)
             {
-                if (unit.StageLevel.Value >= levelUpImages.Length) break;
+                if (levelUpPoint >= levelUpImages.Length) break;
                 levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
             }
         }
