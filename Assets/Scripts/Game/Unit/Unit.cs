@@ -220,6 +220,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private void ResetItemNSkills()
     {
         if (Team == Team.Enemy) return;
+
+        foreach (var equipment in _equipments)
+        {
+            if (equipment.Value.Data.Health.Value != 0)
+            {
+                Health.SetMaxValue(Health.Max - equipment.Value.Data.Health.Value);
+            }
+
+            ResetStats(equipment.Value.Data.Id);
+        }
+
         _equipments.Clear();
         _equipments = new();
         _skillDic.Clear();
@@ -541,6 +552,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
             ResetStats(equipment.Data.Id);
+
+            if (equipment.Data.Health.Value != 0)
+            {
+                Health.SetMaxValue(Health.Max - equipment.Data.Health.Value);
+            }
+
             ResourceManager.Instance.Destroy(equipment.gameObject);
             _equipments[item.Data.PartType] = item;
         }
@@ -549,9 +566,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _equipments.Add(item.Data.PartType, item);
         }
 
+        if (item.Data.Health.Value != 0)
+        {
+            Health.SetMaxValue(Health.Max + item.Data.Health.Value);
+        }
+
         UpdateStats(item.Data.Id, item.Data);
 
-        spawnItem?.transform.SetParent(_inventory);
+        spawnItem.transform.SetParent(_inventory);
     }
 
     #endregion
