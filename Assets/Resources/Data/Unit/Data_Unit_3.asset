@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Unit_3
   m_EditorClassIdentifier: 
   _id: Unit_3
-  _icon: {fileID: 0}
+  _icon: {fileID: 1676033942, guid: 5b3d82af3bc149f44b16627f9a1b92bb, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: e1d7b3b92fcd3442ba886ddb14e2231b, type: 3}
   _hitPrefab: {fileID: 0}
   _projectilePrefab: {fileID: 0}

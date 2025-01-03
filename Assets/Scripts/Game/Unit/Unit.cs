@@ -540,7 +540,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
-            ResetStats(item.Data.Id);
+            ResetStats(equipment.Data.Id);
             ResourceManager.Instance.Destroy(equipment.gameObject);
             _equipments[item.Data.PartType] = item;
         }
