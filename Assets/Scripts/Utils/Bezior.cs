@@ -4,14 +4,16 @@ public static class Bezior
 {
     public static Vector2 BeziorMove(Vector2[] points, float lerpTime)
     {
-        for (int i = points.Length - 1; i >= 0; i--)
+        Vector2[] tempPoints = (Vector2[])points.Clone();
+
+        for (int i = tempPoints.Length - 1; i > 0; i--)
         {
             for (int j = 0; j < i; j++)
             {
-                points[j] = Vector2.MoveTowards(points[j], points[j + 1], lerpTime * Time.deltaTime);
+                tempPoints[j] = Vector2.Lerp(tempPoints[j], tempPoints[j + 1], lerpTime);
             }
         }
 
-        return points[0];
+        return tempPoints[0];
     }
 }

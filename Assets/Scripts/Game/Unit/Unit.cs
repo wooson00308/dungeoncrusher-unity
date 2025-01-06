@@ -31,8 +31,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private Sprite _icon;
     private GameObject _hitPrefab;
-    private Projectile _projectilePrefab;
-    private Warning _warningPrefab;
+    private GameObject _projectilePrefab;
+    private GameObject _warningPrefab;
     private int _dropExp;
 
     public Sprite Icon => _icon;
@@ -43,8 +43,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public Unit Target => _targetDetector.Target;
     public bool IsStun { get; set; }
-    public Projectile ProjectilePrefab => _projectilePrefab;
-    public Warning WarningPrefab => _warningPrefab;
+    public GameObject ProjectilePrefab => _projectilePrefab;
+    public GameObject WarningPrefab => _warningPrefab;
     public int DropExp => _dropExp;
 
     public bool IsHit { get; private set; }
