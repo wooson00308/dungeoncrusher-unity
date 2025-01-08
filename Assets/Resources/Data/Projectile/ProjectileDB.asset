@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f930900bc0547558f2751ef37d85c3, type: 3}
+  m_Name: ProjectileDB
+  m_EditorClassIdentifier: 
+  MoveSpeed: 0
+  DetectRange: 0
+  ProjectileDatas:
+  - {fileID: 11400000, guid: 48d02239a7a9d4121a05a7debe74322f, type: 2}
+  - {fileID: 11400000, guid: f0873d5653518445ba04d0b4a4d09a62, type: 2}
