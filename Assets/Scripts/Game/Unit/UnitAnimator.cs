@@ -42,7 +42,6 @@ public class UnitAnimator : MonoBehaviour
         warningPrefab.GetComponent<Warning>().Initialize(_owner, targetPos);
     }
 
-    private Projectile _projectilePrefab;
 
     public void RangeAttackEvent(AnimationEvent e)
     {
@@ -51,14 +50,12 @@ public class UnitAnimator : MonoBehaviour
 
         if (projectilePrefab == null) return;
 
-        _projectilePrefab =
+        Projectile _spawnProjectilePrefab =
             ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile>();
-        _projectilePrefab.transform.position = transform.position;
-
+        _spawnProjectilePrefab.transform.position = transform.position;
+        
         var target = _owner.Target;
-        _projectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
-
-        // WarningEvent(e);
+        _spawnProjectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
     }
 
     public void AttackEvent(AnimationEvent e)

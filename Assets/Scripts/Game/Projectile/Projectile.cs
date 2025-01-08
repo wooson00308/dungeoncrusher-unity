@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class Projectile : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public abstract class Projectile : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        OnMove();
-
         if (IsTargetInSight())
         {
             TargetHit();
@@ -21,13 +18,15 @@ public abstract class Projectile : MonoBehaviour
         {
             TargetPosHit();
         }
+        
+        OnMove();
     }
 
     public virtual void Initialize(Unit target, Vector2 targetPos, int damage)
     {
-        this._target = target;
-        this._targetPos = targetPos;
-        this._damage = damage;
+        _target = target;
+        _targetPos = targetPos;
+        _damage = damage;
     }
 
     protected abstract void OnMove();
@@ -46,12 +45,12 @@ public abstract class Projectile : MonoBehaviour
 
     protected bool IsTargetInSight()
     {
+        if (_target == null) return false;
         return Vector3.Distance(transform.position, _target.transform.position) <= _data.detectRange;
     }
 
     protected bool IsTargetPosInSight()
     {
-        return Vector3.Distance(transform.position, _targetPos) <= _data.detectRange;
+        return Vector3.Distance(transform.position, _targetPos) <= 0.1f;
     }
-    //도착하는 시간과 위치를 반환하는 함수 필요할듯
 }

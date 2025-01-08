@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class StraightProjectile : Projectile
 {
+    private Vector2 moveDir;
+
+    public override void Initialize(Unit target, Vector2 targetPos, int damage)
+    {
+        base.Initialize(target, targetPos, damage);
+        moveDir = _targetPos - (Vector2)transform.position;
+    }
+
     protected override void OnMove()
     {
-        Vector2 movePos = _targetPos - (Vector2)transform.position;
-        transform.Translate(movePos * _data.moveSpeed * Time.deltaTime);
+        transform.Translate(moveDir * _data.moveSpeed * Time.deltaTime);
     }
 
     protected override void TargetHit()

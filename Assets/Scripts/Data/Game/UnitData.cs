@@ -9,8 +9,8 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private GameObject _prefab;
     [SerializeField] private GameObject _hitPrefab;
 
-    [Header("원거리")] [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private Warning _warningPrefab;
+    [Header("원거리")] [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private GameObject _warningPrefab;
 
     [Header("drop exp")] [Tooltip("몬스터가 죽을때 드롭하는 경험치")] [SerializeField]
     private int _dropExp;
@@ -41,8 +41,8 @@ public class UnitData : ScriptableObject, IStats
     public GameObject Prefab => _prefab;
     public GameObject HitPrefab => _hitPrefab;
 
-    public Projectile ProjectilePrefab => _projectilePrefab;
-    public Warning WarningPrefab => _warningPrefab;
+    public GameObject ProjectilePrefab => _projectilePrefab;
+    public GameObject WarningPrefab => _warningPrefab;
 
     public int dropExp => _dropExp;
 
