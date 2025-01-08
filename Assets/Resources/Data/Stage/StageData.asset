@@ -26,7 +26,7 @@ MonoBehaviour:
       reductionFormula:
         underX2Factor: 0.5
         underX4Factor: 0.25
-      stageUnit: {fileID: 11400000, guid: edf6812246acd0a4b893fe85c37380bc, type: 2}
+      stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
     - spawnCount: 5
       firstSpawnTime: 0
       additionalSpawnCycle: 10

@@ -3405,15 +3405,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6333333
-    functionName: ChargeAttackEvent
+  - time: 0
+    functionName: WarningEvent
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 1.5
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6333333
-    functionName: AttackEvent
+  - time: 0.53333336
+    functionName: RangeAttackEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
