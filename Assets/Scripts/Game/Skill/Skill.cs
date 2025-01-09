@@ -151,7 +151,7 @@ public class Skill : MonoBehaviour
         if (_skillData.IsRamdomDetected)
         {
             HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
-            Debug.Log(enemies.Count);
+            // Debug.Log(enemies.Count);
             var enemy = enemies.OrderBy(x => Random.value).Take(1).ToList();
             if (_skillData.IsAreaAttack)
             {

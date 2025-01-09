@@ -39,14 +39,34 @@ public abstract class BaseSlider : BaseView
 
     private void MoveSlider()
     {
+        Vector2 movePos;
         if (_unit.IsBoss)
         {
-            _rectTransform.anchoredPosition = Vector2.zero + _pivot;
+            movePos = Vector2.zero + _pivot;
             return;
         }
 
-        _rectTransform.anchoredPosition =
-            (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, _unit.transform.position) +
-            _pivot;
+        var worldToCanvasPoint =
+            (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas,
+                _unit.transform.position) + _pivot;
+
+        if (_unit.Team == Team.Enemy)
+        {
+            if (_unit.IsAerial)
+            {
+                movePos = (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas,
+                    _unit.Model.Body.transform.position) + _pivot * 0.5f;
+            }
+            else
+            {
+                movePos = worldToCanvasPoint;
+            }
+        }
+        else
+        {
+            movePos = worldToCanvasPoint;
+        }
+
+        _rectTransform.anchoredPosition = movePos;
     }
 }

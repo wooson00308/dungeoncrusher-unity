@@ -42,11 +42,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public float StunDuration => _stunDuration;
 
     public Unit Target => _targetDetector.Target;
-    public bool IsStun { get; set; }
+
     public GameObject ProjectilePrefab => _projectilePrefab;
     public GameObject WarningPrefab => _warningPrefab;
     public int DropExp => _dropExp;
 
+    public bool IsStun { get; set; }
+    public bool IsAerial { get; set; }
     public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
@@ -55,6 +57,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
     [SerializeField] private UnitAnimator _model;
+    public UnitAnimator Model => _model;
     [SerializeField] private Transform _skillStorage;
     [SerializeField] private Transform _inventory;
 
@@ -475,7 +478,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsSuperArmor) return;
 
         _isAerial = true;
-        
+
         if (TryGetComponent(out AerialState aerialState))
         {
             _fsm.TransitionTo<AerialState>();

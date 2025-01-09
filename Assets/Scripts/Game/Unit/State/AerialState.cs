@@ -9,6 +9,7 @@ public class AerialState : StateBase, IState
     {
         unit.CrossFade("Aerial", 0f);
         unit.Stop();
+        unit.IsAerial = true;
     }
 
     public void OnUpdate(Unit unit)
@@ -23,5 +24,6 @@ public class AerialState : StateBase, IState
 
     public void OnExit(Unit unit)
     {
+        unit.IsAerial = false;
     }
 }
