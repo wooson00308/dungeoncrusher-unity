@@ -525,7 +525,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
                 args = new UnitEventArgs() { publisher = this }
             });
     }
-
+    public void SetSuperArmor(float time)
+    {
+        if (IsSuperArmor)
+            return;
+        IsSuperArmor = true;
+        Debug.Log("On superarmor");
+        Invoke("InvokeSuperArmor",time);
+    }
+    public void InvokeSuperArmor()
+    {
+        IsSuperArmor = false;
+        Debug.Log("Off superarmor");
+    }
     public void AddSkill(SkillData skillData)
     {
         if (_skillDic.TryGetValue(skillData.Id, out var skill))

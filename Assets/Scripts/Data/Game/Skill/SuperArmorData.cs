@@ -11,6 +11,7 @@ public class SuperArmorData : SkillData
 
     public override void OnAction(Skill skill, Unit user, List<Unit> targets)
     {
-        user.IsSuperArmor = true;
+        float skillValue = GetSkillLevelData(skill.Level).skillValue;
+        user.SetSuperArmor(skillValue);
     }
 }
