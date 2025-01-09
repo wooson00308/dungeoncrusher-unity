@@ -1,5 +1,5 @@
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine;
 
 public abstract class DBEditor : Editor
 {
@@ -12,6 +12,7 @@ public abstract class DBEditor : Editor
     protected abstract void DeleteButton();
 
     protected abstract void RefreshData(string path);
-    
+
     protected abstract string GetAssetPath();
 }
+#endif

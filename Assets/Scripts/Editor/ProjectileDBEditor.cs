@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class ProjectileDBEditor : DBEditor
 
         EditorGUILayout.LabelField("제작하고 싶은 투사체 데이터 이름");
         _dataName = EditorGUILayout.TextField("", _dataName);
-        
+
         _projectileDB.MoveSpeed = EditorGUILayout.FloatField("MoveSpeed", _projectileDB.MoveSpeed);
         _projectileDB.DetectRange = EditorGUILayout.FloatField("DetectRange", _projectileDB.DetectRange);
 
@@ -103,3 +104,4 @@ public class ProjectileDBEditor : DBEditor
         return path;
     }
 }
+#endif

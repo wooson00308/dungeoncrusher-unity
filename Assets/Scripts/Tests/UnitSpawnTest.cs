@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
@@ -39,6 +40,7 @@ public class UnitSpawnTest
         UIManager.Instance.ShowLayoutUI<MainUI>();
         _system.OnNextProcess<ReadyProcess>();
 
-        yield return new WaitUntil(() =>  _isTestComplelte);
+        yield return new WaitUntil(() => _isTestComplelte);
     }
 }
+#endif

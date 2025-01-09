@@ -42,7 +42,7 @@ public class TimeManager : Singleton<TimeManager>
 
     public void SlowMotion(bool value)
     {
-        if(value)
+        if (value)
         {
             Time.timeScale = 0.02f;
         }
@@ -52,10 +52,10 @@ public class TimeManager : Singleton<TimeManager>
         }
     }
 
-    public async Task FreezeTime(int time)
+    public async void FreezeTime(float time)
     {
         Time.timeScale = 0.01f;
-        await Task.Delay(time);
+        await Awaitable.WaitForSecondsAsync(time);
         Time.timeScale = _gameTimeScale;
     }
 
