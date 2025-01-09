@@ -9,7 +9,7 @@ public class CheatManager : MonoBehaviour
         {
             foreach (var enemyUnit in UnitFactory.Instance.GetTeamUnits(Team.Enemy))
             {
-                enemyUnit.OnStun(3);
+                enemyUnit.OnStun();
             }
         }
         else if (Input.GetKeyDown(KeyCode.F2))
@@ -19,12 +19,11 @@ public class CheatManager : MonoBehaviour
                 enemyUnit.OnAerial();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.F3))
+        else if (Input.GetKeyDown(KeyCode.F3))
         {
             foreach (var enemyUnit in UnitFactory.Instance.GetTeamUnits(Team.Friendly))
             {
-                enemyUnit.OnStun(3);
+                enemyUnit.OnStun();
             }
         }
     }

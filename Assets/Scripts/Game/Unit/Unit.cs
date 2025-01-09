@@ -38,7 +38,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public Sprite Icon => _icon;
 
     private bool _hasHitState;
-    private bool _hasAerialState;
+    private bool _isAerial;
     public float StunDuration => _stunDuration;
 
     public Unit Target => _targetDetector.Target;
@@ -439,7 +439,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
     }
 
-    public void OnStun(float stunDuration = 3)
+    public void OnStun(float stunDuration = 1.0f)
     {
         if (!IsActive) return;
         if (IsStun) return;
@@ -469,9 +469,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnAerial()
     {
+        if (!IsActive) return;
+        if (IsStun) return;
         if (IsDeath) return;
-        _hasAerialState = true;
-        _fsm.TransitionTo<AerialState>();
+        if (IsSuperArmor) return;
+
+        _isAerial = true;
+        
+        if (TryGetComponent(out AerialState aerialState))
+        {
+            _fsm.TransitionTo<AerialState>();
+        }
     }
 
     #endregion

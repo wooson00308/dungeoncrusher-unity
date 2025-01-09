@@ -6,8 +6,6 @@ public class ChaseState : StateBase, IState
 {
     public void OnEnter(Unit unit)
     {
-        //if (IsStun(unit)) return;
-
         if (unit.Target == null)
         {
             _fsm.TransitionTo<IdleState>();
@@ -19,12 +17,13 @@ public class ChaseState : StateBase, IState
 
     public void OnExit(Unit unit)
     {
-
     }
 
     public void OnUpdate(Unit unit)
     {
-        //if (IsStun(unit)) return;
+        if (IsStun(unit)) return;
+
+        if (IsAerial(unit)) return;
 
         if (unit.Target == null)
         {
