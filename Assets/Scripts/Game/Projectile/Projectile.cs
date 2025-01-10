@@ -18,7 +18,7 @@ public abstract class Projectile : MonoBehaviour
         {
             TargetPosHit();
         }
-        
+
         OnMove();
     }
 
@@ -34,7 +34,7 @@ public abstract class Projectile : MonoBehaviour
     protected void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _data.detectRange);
+        Gizmos.DrawWireSphere(transform.position, _data.projectileInfo.detectRange);
     }
 
     protected abstract void TargetHit();
@@ -46,7 +46,7 @@ public abstract class Projectile : MonoBehaviour
     protected bool IsTargetInSight()
     {
         if (_target == null) return false;
-        return Vector3.Distance(transform.position, _target.transform.position) <= _data.detectRange;
+        return Vector3.Distance(transform.position, _target.transform.position) <= _data.projectileInfo.detectRange;
     }
 
     protected bool IsTargetPosInSight()

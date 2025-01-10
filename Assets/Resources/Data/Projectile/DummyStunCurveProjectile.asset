@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5065b8dde234e22a40a01d59ca07be, type: 3}
-  m_Name: DummyStraightProjectile
+  m_Name: DummyStunCurveProjectile
   m_EditorClassIdentifier: 
   projectileInfo:
-    moveSpeed: 3
-    detectRange: 0.5
+    moveSpeed: 1
+    detectRange: 0.3
     isStun: 0
-    isAerial: 0
+    isAerial: 1

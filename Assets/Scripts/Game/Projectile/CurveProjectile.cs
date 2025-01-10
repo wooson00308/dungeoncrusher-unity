@@ -36,7 +36,7 @@ public class CurveProjectile : Projectile
         };
 
         currentTime = 0;
-        endTime = _data.moveSpeed;
+        endTime = _data.projectileInfo.moveSpeed;
     }
 
     private void RotateModel(float t)
@@ -65,6 +65,16 @@ public class CurveProjectile : Projectile
     protected override void TargetHit()
     {
         _target.OnHit(_damage);
+        
+        if (_data.projectileInfo.isStun)
+        {
+            _target.OnStun();
+        }
+
+        if (_data.projectileInfo.isAerial)
+        {
+            _target.OnAerial();
+        }
 
         if (_linoleum != null)
         {
