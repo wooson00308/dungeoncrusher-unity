@@ -4,9 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectileDB", menuName = "Data/DB/ProjectileDB")]
 public class ProjectileDB : ScriptableObject
 {
-    public float MoveSpeed;
-    public float DetectRange;
-    
+    public ProjectileInfo projectileInfo;
+
     public List<ProjectileData> ProjectileDatas = new();
     public Stack<ProjectileData> AddedProjectiles = new();
 }

@@ -8,7 +8,7 @@ public class ProjectileDBEditor : DBEditor
 {
     private SerializedProperty _projectileData;
     private ProjectileDB _projectileDB;
-
+                                            
     private string _projectilePath = "Projectile";
 
     private void OnEnable()
@@ -31,8 +31,14 @@ public class ProjectileDBEditor : DBEditor
         EditorGUILayout.LabelField("제작하고 싶은 투사체 데이터 이름");
         _dataName = EditorGUILayout.TextField("", _dataName);
 
-        _projectileDB.MoveSpeed = EditorGUILayout.FloatField("MoveSpeed", _projectileDB.MoveSpeed);
-        _projectileDB.DetectRange = EditorGUILayout.FloatField("DetectRange", _projectileDB.DetectRange);
+        _projectileDB.projectileInfo.moveSpeed =
+            EditorGUILayout.FloatField("MoveSpeed", _projectileDB.projectileInfo.moveSpeed);
+        _projectileDB.projectileInfo.detectRange =
+            EditorGUILayout.FloatField("DetectRange", _projectileDB.projectileInfo.detectRange);
+        _projectileDB.projectileInfo.isStun =
+            EditorGUILayout.Toggle("IsStun", _projectileDB.projectileInfo.isStun);
+        _projectileDB.projectileInfo.isAerial =
+            EditorGUILayout.Toggle("IsAerial", _projectileDB.projectileInfo.isAerial);
 
         CreateButton();
 
@@ -59,8 +65,10 @@ public class ProjectileDBEditor : DBEditor
             {
                 var createData = ScriptableObject.CreateInstance<ProjectileData>();
 
-                createData.moveSpeed = _projectileDB.MoveSpeed;
-                createData.detectRange = _projectileDB.DetectRange;
+                createData.projectileInfo.moveSpeed = _projectileDB.projectileInfo.moveSpeed;
+                createData.projectileInfo.detectRange = _projectileDB.projectileInfo.detectRange;
+                createData.projectileInfo.isStun = _projectileDB.projectileInfo.isStun;
+                createData.projectileInfo.isAerial = _projectileDB.projectileInfo.isAerial;
 
                 _projectileDB.AddedProjectiles.Push(createData);
 
