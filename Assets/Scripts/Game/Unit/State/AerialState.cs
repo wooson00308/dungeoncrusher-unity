@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class AerialState : StateBase, IState
 {
-    [SerializeField] private float aerialTime;
+    [SerializeField] private float aerialTime = 1;
     private float currentAerialTime = 0;
 
     public void OnEnter(Unit unit)
     {
-        Debug.Log("Aerial State");
         unit.CrossFade("Aerial", 0f);
+        unit.Stop();
+        unit.IsAerial = true;
     }
 
     public void OnUpdate(Unit unit)
@@ -23,5 +24,6 @@ public class AerialState : StateBase, IState
 
     public void OnExit(Unit unit)
     {
+        unit.IsAerial = false;
     }
 }

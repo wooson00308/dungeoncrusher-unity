@@ -12,12 +12,23 @@ public class StraightProjectile : Projectile
 
     protected override void OnMove()
     {
-        transform.Translate(moveDir * _data.moveSpeed * Time.deltaTime);
+        transform.Translate(moveDir * _data.projectileInfo.moveSpeed * Time.deltaTime);
     }
 
     protected override void TargetHit()
     {
         _target.OnHit(_damage);
+        
+        if (_data.projectileInfo.isStun)
+        {
+            _target.OnStun();
+        }
+
+        if (_data.projectileInfo.isAerial)
+        {
+            _target.OnAerial();
+        }
+
         ResourceManager.Instance.Destroy(gameObject);
     }
 }

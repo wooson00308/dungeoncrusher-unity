@@ -16,7 +16,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 4c772a688e6c64a7b8d770689d42291f, type: 3}
   _prefab: {fileID: 4602744156704204850, guid: f3bbcf98058534f448c0db2a1e383b82, type: 3}
   _hitPrefab: {fileID: 1314346859962251579, guid: ee9818566bd9b714fa1825e60b5c15fa, type: 3}
-  _projectilePrefab: {fileID: 2435140094399223749, guid: 768a9d4774c2d4894bde232627211957, type: 3}
+  _projectilePrefab: {fileID: 2435140094399223749, guid: 1972aa93dd538468cab899827564fcd3, type: 3}
   _warningPrefab: {fileID: 823821373648782918, guid: 16bbe0af2e10d485c8a73ba563df1a80, type: 3}
   _dropExp: 20
   _health:

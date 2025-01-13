@@ -11,7 +11,8 @@ public class StateBase : MonoBehaviour
 
     protected bool IsAerial(Unit unit)
     {
-        return unit.IsUpdateState("Aerial");
+        var isAerial = unit.IsUpdateState("Aerial");
+        return isAerial;
     }
 
     protected virtual void Awake()

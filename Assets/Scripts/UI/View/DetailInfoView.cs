@@ -18,13 +18,23 @@ public class DetailInfoView : BaseView
     private void Awake()
     {
         BindUI();
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateStatsUI);
     }
 
     private void OnEnable()
     {
         UpdateStatsUI();
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateStatsUI);
+    }
+
+    private void OnDisable()
+    {
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateStatsUI);
     }
 
     public override void BindUI()
@@ -36,9 +46,9 @@ public class DetailInfoView : BaseView
     private void UpdateStatsUI(GameEvent gameEvent = null)
     {
         Unit player = UnitFactory.Instance.GetPlayer();
-        
+
         if (player == null) return;
-        
+
         Get<Image>((int)Images.UnitIcon).sprite = player.Icon;
         TextMeshProUGUI[] statsTexts = Get<RectTransform>((int)RectTransforms.Grid_Stats)
             .GetComponentsInChildren<TextMeshProUGUI>();

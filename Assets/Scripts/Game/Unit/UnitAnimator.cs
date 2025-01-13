@@ -9,6 +9,8 @@ public class UnitAnimator : MonoBehaviour
     private Unit _owner;
     private Animator _animator;
     private SortingGroup _sortingGroup;
+    private Transform _body;
+    public Transform Body => _body;
 
     private void Awake()
     {
@@ -16,6 +18,7 @@ public class UnitAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
         _sortingGroup = GetComponentInChildren<SortingGroup>() ??
                         transform.GetChild(2).gameObject.AddComponent<SortingGroup>();
+        _body = transform.Find("Body");
     }
 
     private void FixedUpdate()
@@ -53,7 +56,7 @@ public class UnitAnimator : MonoBehaviour
         Projectile _spawnProjectilePrefab =
             ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile>();
         _spawnProjectilePrefab.transform.position = transform.position;
-        
+
         var target = _owner.Target;
         _spawnProjectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
     }

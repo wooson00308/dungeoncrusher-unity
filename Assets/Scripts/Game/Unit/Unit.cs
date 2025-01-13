@@ -38,15 +38,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public Sprite Icon => _icon;
 
     private bool _hasHitState;
-    private bool _hasAerialState;
+    private bool _isAerial;
     public float StunDuration => _stunDuration;
 
     public Unit Target => _targetDetector.Target;
-    public bool IsStun { get; set; }
+
     public GameObject ProjectilePrefab => _projectilePrefab;
     public GameObject WarningPrefab => _warningPrefab;
     public int DropExp => _dropExp;
 
+    public bool IsStun { get; set; }
+    public bool IsAerial { get; set; }
     public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
     public bool IsActive { get; private set; }
@@ -55,6 +57,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
     [SerializeField] private UnitAnimator _model;
+    public UnitAnimator Model => _model;
     [SerializeField] private Transform _skillStorage;
     [SerializeField] private Transform _inventory;
 
@@ -433,13 +436,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         else
         {
             AddForce(killer);
-            TimeManager.Instance.FreezeTime(500);
+            TimeManager.Instance.FreezeTime(0.005f);
             CameraController.Instance.Shake(8, 0.05f);
             _fsm.TransitionTo<SpecialDeathState>();
         }
     }
 
-    public void OnStun(float stunDuration = 3)
+    public void OnStun(float stunDuration = 1.0f)
     {
         if (!IsActive) return;
         if (IsStun) return;
@@ -469,9 +472,17 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnAerial()
     {
+        if (!IsActive) return;
+        if (IsStun) return;
         if (IsDeath) return;
-        _hasAerialState = true;
-        _fsm.TransitionTo<AerialState>();
+        if (IsSuperArmor) return;
+
+        _isAerial = true;
+
+        if (TryGetComponent(out AerialState aerialState))
+        {
+            _fsm.TransitionTo<AerialState>();
+        }
     }
 
     #endregion
@@ -513,6 +524,21 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
                 eventType = UnitEvents.UnitEvent_Mana_Regen.ToString(),
                 args = new UnitEventArgs() { publisher = this }
             });
+    }
+
+    public void SetSuperArmor(float time)
+    {
+        if (IsSuperArmor)
+            return;
+        IsSuperArmor = true;
+        Debug.Log("On superarmor");
+        Invoke("InvokeSuperArmor", time);
+    }
+
+    public void InvokeSuperArmor()
+    {
+        IsSuperArmor = false;
+        Debug.Log("Off superarmor");
     }
 
     public void AddSkill(SkillData skillData)
