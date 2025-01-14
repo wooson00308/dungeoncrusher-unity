@@ -8,7 +8,6 @@ public class MainView : BaseView
 {
     private MainUI _presenter;
 
-
     public enum Texts
     {
         Txt_Stage_Value,

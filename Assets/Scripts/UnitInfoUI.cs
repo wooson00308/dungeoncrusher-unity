@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -57,7 +59,7 @@ public class UnitInfoUI : BaseView
         if (_unit == null)
         {
             _unit = UnitFactory.Instance.GetPlayer();
-            
+
             while (_unit == null)
             {
                 await Awaitable.EndOfFrameAsync();
@@ -162,11 +164,19 @@ public class UnitInfoUI : BaseView
     {
         if (_unitId != _unit.Id) return;
 
-        Image[] images = Get<RectTransform>((int)RectTransforms.Group_List_Skill).GetComponentsInChildren<Image>();
+        var groupListSkill = Get<RectTransform>((int)RectTransforms.Group_List_Skill);
+        List<Image> images = new List<Image>();
+
+        for (int i = 0; i < groupListSkill.childCount; i++)
+        {
+            images.Add(groupListSkill.GetChild(i).GetComponent<Image>());
+        }
 
         foreach (Image image in images)
         {
             image.sprite = _defaultSkillSprite;
+            var skillLevelBackground = image.transform.GetChild(0).GetComponent<Image>();
+            skillLevelBackground.gameObject.SetActive(false);
         }
 
         //foreach (var skills in _unit.SkillDic.Keys)
@@ -189,6 +199,12 @@ public class UnitInfoUI : BaseView
             var image = images[index++];
 
             image.sprite = data.Icon;
+
+            var skillLevelBackground = image.transform.GetChild(0).GetComponent<Image>();
+            skillLevelBackground.gameObject.SetActive(true);
+
+            var skillLevelTxt = skillLevelBackground.GetComponentInChildren<TextMeshProUGUI>();
+            skillLevelTxt.SetText($"{data.Level}");
         }
     }
 
