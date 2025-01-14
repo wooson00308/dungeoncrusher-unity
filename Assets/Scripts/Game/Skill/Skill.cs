@@ -38,23 +38,27 @@ public class Skill : MonoBehaviour
             GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
         }
     }
+
     private void OnDestroy() //재시작을 할때
     {
         _skillData.Level = 0;
     }
+
     private void OnApplicationQuit() //종료될 때
     {
         _skillData.Level = 0;
     }
+
     private void OnDisable()
     {
-        _skillLevel = 1; 
+        _skillLevel = 1;
         _isInitialized = false;
 
         if (_skillData.IsUltSkill)
         {
             // 필살기로 지정될 이벤트 등록 필요
-            GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
+            GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
+                TryUseSkillFromUI);
         }
 
         if (_skillData.IsPassiveSkill)
@@ -104,7 +108,7 @@ public class Skill : MonoBehaviour
     {
         if (!IsUseableSkill()) return;
 
-        if(_skillData.IsUltSkill)
+        if (_skillData.IsUltSkill)
         {
             _owner.Mp.Update("Engage", -_owner.Mp.Value);
         }
@@ -134,7 +138,6 @@ public class Skill : MonoBehaviour
 
         #endregion
 
-        
 
         if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Self)
         {
@@ -162,14 +165,14 @@ public class Skill : MonoBehaviour
                 //    .OrderBy(x => Random.value)
                 //    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
                 //    .ToList();
-                List<Unit> targets = enemies                    
+                List<Unit> targets = enemies
                     .Where(x => Vector3.Distance(x.transform.position, enemy[0].transform.position) <=
-                    _skillData.GetSkillLevelData(_skillLevel).range)
+                                _skillData.GetSkillLevelData(_skillLevel).range)
                     .Where(x => x.enabled && x.IsActive)
-                    .OrderBy(x => Vector3.Distance(x.transform.position, enemy[0].transform.position)) 
-                    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum) 
+                    .OrderBy(x => Vector3.Distance(x.transform.position, enemy[0].transform.position))
+                    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
                     .ToList();
-                Debug.Log("targets"+targets.Count);
+                Debug.Log("targets" + targets.Count);
                 if (!targets.Contains(enemy[0]))
                 {
                     targets.Insert(0, enemy[0]); // enemy를 targets의 맨 앞에 추가
@@ -180,11 +183,13 @@ public class Skill : MonoBehaviour
                     targets.Remove(enemy[0]);
                     targets.Insert(0, enemy[0]);
                 }
-                    if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Target)
-                        skillFxObject.transform.position = targets[0].transform.position;
+
+                if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Target)
+                    skillFxObject.transform.position = targets[0].transform.position;
                 skillFx.Initialized(this, user, _skillData, targets);
                 return;
             }
+
             if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Target)
                 skillFxObject.transform.position = enemy[0].transform.position;
             skillFx.Initialized(this, user, _skillData, enemy);
@@ -226,7 +231,7 @@ public class Skill : MonoBehaviour
             return false;
         }
 
-        if(_owner.IsStun)
+        if (_owner.IsStun)
             return false;
 
         if (!_skillData.IsValidTarget(_owner))

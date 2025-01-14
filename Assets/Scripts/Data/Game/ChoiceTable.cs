@@ -32,8 +32,35 @@ public class ChoiceTable : ScriptableObject
             float randomValue = UnityEngine.Random.Range(0f, totalWeight);
             float runningTotal = 0f;
 
-            foreach (var (data, weight) in weightedChoices)
+            foreach (var (data, weight) in weightedChoices.ToList())
             {
+                var player = UnitFactory.Instance.GetPlayer();
+
+                if (data.choiceType == ChoiceType.Skill)
+                {
+                    if (player.SkillDic
+                        .TryGetValue(data.skillData.Id, out Skill skill))
+                    {
+                        if (skill != null && skill.Level >= data.skillData.MaxLv)
+                        {
+                            weightedChoices.Remove((data, weight)); //만렙 스킬 제거
+                            continue;
+                        }
+                    }
+                }
+
+                if (data.choiceType == ChoiceType.Item)
+                {
+                    if (player.Equipment.TryGetValue(data.itemData.PartType, out var item))
+                    {
+                        if (item != null && item.Data.Id == data.itemData.Id)
+                        {
+                            weightedChoices.Remove((data, weight)); //장착중인 아이템 제거
+                            continue;
+                        }
+                    }
+                }
+
                 runningTotal += weight;
 
                 if (randomValue <= runningTotal)

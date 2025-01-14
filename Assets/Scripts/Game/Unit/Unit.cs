@@ -37,6 +37,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public Sprite Icon => _icon;
 
+    private bool _isRevivable;
     private bool _hasHitState;
     private bool _isAerial;
     public float StunDuration => _stunDuration;
@@ -390,6 +391,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             eventType = UnitEvents.UnitEvent_OnHit.ToString(),
             args = new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical }
         });
+
+        if (_isRevivable)
+        {
+            // Todo : 부활 로직
+            return;
+        }
 
         if (Health.Value <= 0)
         {
