@@ -12,10 +12,10 @@ public class SuperArmorData : SkillData
     public override void OnAction(Skill skill, Unit user, List<Unit> targets)
     {
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
-        user.SetSuperArmor(skillValue); //1번 항목
+        //user.SetSuperArmor(skillValue); //1번 항목
 
-        //user.IsSuperArmor = true;
-        //Debug.Log(user.IsSuperArmor);
-        //TimingManager.Instance.SetTimer(skillValue, () => { user.IsSuperArmor = false; Debug.Log(user.IsSuperArmor); }); //2번 항목
+        user.IsSuperArmor = true;
+        Debug.Log(user.IsSuperArmor);
+        TimingManager.Instance.SetTimer(skillValue, () => { user.IsSuperArmor = false; Debug.Log(user.IsSuperArmor); }); //2번 항목
     }
 }

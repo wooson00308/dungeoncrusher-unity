@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class TimingManager : SingletonMini<TimingManager>
 {
-    public void SetTimer(float duration, Action onComplete)
+    public async Awaitable SetTimer(float duration, Action onComplete)
     {
-        StartCoroutine(TimerCoroutine(duration, onComplete));
+        Debug.Log("진입");
+        await Awaitable.WaitForSecondsAsync(duration);
+        onComplete?.Invoke();
+        Debug.Log("반환");
     }
     
-    IEnumerator TimerCoroutine(float duration, Action onComplete)
-    {
-        yield return new WaitForSeconds(duration);
-        onComplete?.Invoke();
-    }
 }
