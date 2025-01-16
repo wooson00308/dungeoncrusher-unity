@@ -26,9 +26,9 @@ public class LogSystem : MonoBehaviour
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), Log);
     }
 
-    public void Log(GameEvent gameEvent)
+    public void Log(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
 
         if (unitEventArgs != null)
         {

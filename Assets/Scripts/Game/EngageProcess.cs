@@ -16,7 +16,7 @@ public class EngageProcess : Process
     {
         StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), new GameEvent { args = true });
+        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), true);
     }
 
     private void OnDisable()
@@ -27,9 +27,9 @@ public class EngageProcess : Process
         UIManager.Instance.CloseLayoutUI<EngageUI>();
     }
 
-    private void TryNextProcess(GameEvent gameEvent)
+    private void TryNextProcess(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team.Friendly)

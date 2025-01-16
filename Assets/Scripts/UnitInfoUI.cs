@@ -54,7 +54,7 @@ public class UnitInfoUI : BaseView
         Bind<RectTransform>(typeof(RectTransforms));
     }
 
-    private async void Initialized(GameEvent gameEvent)
+    private async void Initialized(object gameEvent)
     {
         if (_unit == null)
         {
@@ -91,7 +91,7 @@ public class UnitInfoUI : BaseView
         }
     }
 
-    private void UpdateHpUI(GameEvent gameEvent)
+    private void UpdateHpUI(object gameEvent)
     {
         if (_unit.Team == Team.Enemy) return;
 
@@ -120,7 +120,7 @@ public class UnitInfoUI : BaseView
         }
     }
 
-    private void UpdateMpUI(GameEvent gameEvent)
+    private void UpdateMpUI(object gameEvent)
     {
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;

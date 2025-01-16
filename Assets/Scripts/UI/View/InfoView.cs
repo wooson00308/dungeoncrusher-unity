@@ -76,9 +76,9 @@ public class InfoView : BaseView
 
     #region Level
 
-    public void UpdateExpUI(GameEvent gameEvent)
+    public void UpdateExpUI(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team.Enemy) return;
@@ -88,27 +88,24 @@ public class InfoView : BaseView
             .SetText($"{unit.Exp.Value / (float)unit.Exp.Max * 100}%");
     }
 
-    public void UpdateLevelUI(GameEvent gameEvent)
+    public void UpdateLevelUI(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team.Enemy) return;
 
         Get<TextMeshProUGUI>((int)Texts.Txt_Level).SetText($"LV.{unit.Level.Value}");
-        UpdateLevelUppoint(new GameEvent()
-        {
-            args = unit.StageLevel.Value
-        });
+        UpdateLevelUppoint(unit.StageLevel.Value);
     }
 
-    public void UpdateLevelUppoint(GameEvent gameEvent = null)
+    public void UpdateLevelUppoint(object gameEvent = null)
     {
         int levelUpPoint;
 
         if (gameEvent != null)
         {
-            levelUpPoint = gameEvent.args is int ? (int)gameEvent.args : 0;
+            levelUpPoint = gameEvent is int ? (int)gameEvent : 0;
         }
         else
         {
@@ -146,9 +143,9 @@ public class InfoView : BaseView
 
     private int killCount = 0;
 
-    public void UpdateKillCountUI(GameEvent gameEvent)
+    public void UpdateKillCountUI(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
         if (unit.Team == Team.Friendly) return;
         Get<TextMeshProUGUI>((int)Texts.Txt_Count_Kill).SetText($"{++killCount}");

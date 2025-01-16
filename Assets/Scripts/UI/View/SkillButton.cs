@@ -41,9 +41,9 @@ public class SkillButton : BaseView
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_RootSkill.ToString(), RootSkillEvent);
     }
 
-    private void RootSkillEvent(GameEvent e)
+    private void RootSkillEvent(object e)
     {
-        var data = e.args as SkillData;
+        var data = e as SkillData;
 
         if (data == null) return;
         if (data.Id != _data.Id) return;
@@ -76,14 +76,9 @@ public class SkillButton : BaseView
         {
             if (skill.IsCooldown) return;
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
-            new GameEvent
+            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), new SkillEventArgs
             {
-                eventType = UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
-                args = new SkillEventArgs
-                {
-                    data = _data
-                }
+                data = _data
             });
         }
     }

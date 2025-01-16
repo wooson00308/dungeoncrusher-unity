@@ -57,12 +57,12 @@ public class ReadyProcess : Process
             }
         }
 
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), new GameEvent { args = false });
+        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), false);
         GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Ready.ToString());
         SoundSystem.Instance.PlayBGM("EngageBGM");
     }
 
-    private void AllReady(GameEvent gameEvent)
+    private void AllReady(object gameEvent)
     {
         _processSystem.OnNextProcess<EngageProcess>();
     }

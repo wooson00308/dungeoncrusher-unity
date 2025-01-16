@@ -25,7 +25,7 @@ public class UnitSpawnTest
         _system = GameObject.FindFirstObjectByType<ProcessSystem>();
     }
 
-    private void OnTestComplete(GameEvent gameEvent)
+    private void OnTestComplete(object gameEvent)
     {
         _isTestComplelte = true;
     }

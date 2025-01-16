@@ -43,7 +43,7 @@ public class DetailInfoView : BaseView
         Bind<RectTransform>(typeof(RectTransforms));
     }
 
-    private void UpdateStatsUI(GameEvent gameEvent = null)
+    private void UpdateStatsUI(object gameEvent = null)
     {
         Unit player = UnitFactory.Instance.GetPlayer();
 

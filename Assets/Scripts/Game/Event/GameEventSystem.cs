@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameEventSystem : SingletonMini<GameEventSystem>
 {
-    private readonly Dictionary<string, Action<GameEvent>> _eventDictionary = new();
+    private readonly Dictionary<string, Action<object>> _eventDictionary = new();
 
-    public void Subscribe(string eventType, Action<GameEvent> listener)
+    public void Subscribe(string eventType, Action<object> listener)
     {
         if (!_eventDictionary.ContainsKey(eventType))
         {
@@ -16,7 +16,7 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         _eventDictionary[eventType] += listener;
     }
 
-    public void Subscribe(string eventType, params Action<GameEvent>[] listeners)
+    public void Subscribe(string eventType, params Action<object>[] listeners)
     {
         if (!_eventDictionary.ContainsKey(eventType))
         {
@@ -29,7 +29,7 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         }
     }
 
-    public void Unsubscribe(string eventType, Action<GameEvent> listener)
+    public void Unsubscribe(string eventType, Action<object> listener)
     {
         if (_eventDictionary.ContainsKey(eventType))
         {
@@ -41,7 +41,7 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         }
     }
 
-    public void Unsubscribe(string eventType, params Action<GameEvent>[] listeners)
+    public void Unsubscribe(string eventType, params Action<object>[] listeners)
     {
         if (_eventDictionary.ContainsKey(eventType))
         {
@@ -57,17 +57,11 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         }
     }
 
-    public void Publish(string eventType, GameEvent gameEvent = null)
+    public void Publish(string eventType, object gameEvent = null)
     {
         if (_eventDictionary.TryGetValue(eventType, out var action))
         {
             action?.Invoke(gameEvent); // 즉시 실행
         }
     }
-}
-
-public class GameEvent
-{
-    public string eventType;
-    public object args;
 }

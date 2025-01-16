@@ -241,9 +241,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _skillDic = new();
     }
 
-    private void SetActiveEvent(GameEvent gameEvent)
+    private void SetActiveEvent(object gameEvent)
     {
-        SetActive((bool)gameEvent.args);
+        SetActive((bool)gameEvent);
     }
 
     private void SetActive(bool isActive)
@@ -252,14 +252,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.enabled = true;
         _fsm.enabled = IsActive;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new GameEvent
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new SetActiveEventArgs()
         {
-            args = new SetActiveEventArgs()
-            {
-                publisher = this,
-                isActive = IsActive
-            },
-            eventType = UnitEvents.UnitEvent_SetActive.ToString()
+            publisher = this,
+            isActive = IsActive
         });
 
         if (!IsActive)
@@ -386,11 +382,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             //Debug.Log("hitPrefab이 없습니다");
         }
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_OnHit.ToString(),
-            args = new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical }
-        });
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
 
         if (_isRevivable)
         {
@@ -456,11 +448,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         if (IsSuperArmor) return;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_OnStun.ToString(),
-            args = new UnitEventArgs { publisher = this }
-        });
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new UnitEventArgs { publisher = this });
 
         if (TryGetComponent<StunState>(out var state))
         {
@@ -526,11 +514,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Mp.Update("Engage", mpValue);
 
         GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Mana_Regen.ToString(),
-            new GameEvent //따로 이벤트 나눈건 아군의 Mp를 추가 해 줄 수 있기 때문.
-            {
-                eventType = UnitEvents.UnitEvent_Mana_Regen.ToString(),
-                args = new UnitEventArgs() { publisher = this }
-            });
+            new UnitEventArgs() { publisher = this });
     }
 
     public void SetSuperArmor(float time)
@@ -565,12 +549,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
             skillObj.transform.SetParent(_skillStorage);
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(),
-                new GameEvent
-                {
-                    eventType = UnitEvents.UnitEvent_RootSkill.ToString(),
-                    args = skillData
-                });
+            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(), skillData);
         }
     }
 
@@ -618,27 +597,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Level.Update("Main", value);
         StageLevel.Update("Ready", value);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Level.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_Exp.ToString(),
-            args = new UnitEventArgs { publisher = this }
-        });
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Level.ToString(), new UnitEventArgs { publisher = this });
     }
 
-    public void ExpUp(GameEvent gameEvent)
+    public void ExpUp(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team) return;
 
         Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_Exp.ToString(),
-            args = new UnitEventArgs { publisher = this }
-        });
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new UnitEventArgs { publisher = this });
 
         if (Exp.Value < Exp.Max) return;
 
@@ -651,11 +622,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             Exp.Update("Main", -Exp.Value);
         }
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new GameEvent
-        {
-            eventType = UnitEvents.UnitEvent_Exp.ToString(),
-            args = new UnitEventArgs { publisher = this }
-        });
+        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new UnitEventArgs { publisher = this });
     }
 
     #endregion

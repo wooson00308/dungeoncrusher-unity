@@ -28,9 +28,9 @@ public class EngageView : BaseView
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
     }
 
-    private void EnqueueDamageText(GameEvent gameEvent)
+    private void EnqueueDamageText(object gameEvent)
     {
-        if (gameEvent.args is OnHitEventArgs onHitArgs)
+        if (gameEvent is OnHitEventArgs onHitArgs)
         {
             _damageEventQueue.Enqueue(onHitArgs);
             if (!_isProcessingDamageQueue)
@@ -62,9 +62,9 @@ public class EngageView : BaseView
         _isProcessingDamageQueue = false;
     }
 
-    private void ShowHealthSlider(GameEvent gameEvent)
+    private void ShowHealthSlider(object gameEvent)
     {
-        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        var setActiveEventArgs = gameEvent as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
         HpSliderUI hpSlider;
@@ -81,9 +81,9 @@ public class EngageView : BaseView
         hpSlider.Show(setActiveEventArgs.publisher);
     }
 
-    private void ShowMpSlider(GameEvent gameEvent)
+    private void ShowMpSlider(object gameEvent)
     {
-        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        var setActiveEventArgs = gameEvent as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
         MpSliderUI mpSlider;

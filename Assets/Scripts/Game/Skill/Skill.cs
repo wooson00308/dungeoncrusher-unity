@@ -73,21 +73,20 @@ public class Skill : MonoBehaviour
             _skillLevel += value;
     }
 
-    public void TryUseEventSkill(GameEvent gameEvent)
+    public void TryUseEventSkill(object gameEvent)
     {
-        UnitEventArgs args = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs args = (UnitEventArgs)gameEvent;
 
         if (args == null) return;
         if (!args.publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
-        if (gameEvent.eventType != _skillData.SkillEventType.ToString()) return;
         if (args.publisher.Target == null) return;
 
         UseSkill(args.publisher);
     }
 
-    public void TryUseSkillFromUI(GameEvent e)
+    public void TryUseSkillFromUI(object e)
     {
-        var args = (SkillEventArgs)e.args;
+        var args = (SkillEventArgs)e;
         if (args.data.Id != _skillData.Id) return;
         if (_skillData.IsUltSkill && _owner.Mp.Value < _owner.Mp.Max) return;
         UseSkill(_owner);

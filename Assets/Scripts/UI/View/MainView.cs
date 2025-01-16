@@ -40,7 +40,7 @@ public class MainView : BaseView
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
     }
 
-    private void UpdateStageUI(GameEvent gameEvent)
+    private void UpdateStageUI(object gameEvent)
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Stage_Value).SetText($"{StageManager.Instance.CurrentStage}");
     }
@@ -56,9 +56,9 @@ public class MainView : BaseView
         Bind<Image>(typeof(Images));
     }
 
-    private void SpecialDeathEffect(GameEvent gameEvent)
+    private void SpecialDeathEffect(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
 
         Unit unit = unitEventArgs.publisher;
 

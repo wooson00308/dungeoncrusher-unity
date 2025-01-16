@@ -28,7 +28,7 @@ public class StageManager : SingletonMini<StageManager>
         GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), StopAll);
     }
 
-    private void StopAll(GameEvent gameEvent)
+    private void StopAll(object gameEvent)
     {
         StopAllCoroutines();
     }

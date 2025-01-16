@@ -28,11 +28,11 @@ public class SkillEffect : MonoBehaviour
         GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
     }
 
-    private void OnStunEvent(GameEvent e)
+    private void OnStunEvent(object e)
     {
         if (!_isInitialized) return;
 
-        var args = e.args as UnitEventArgs;
+        var args = e as UnitEventArgs;
         if (!args.publisher.GetInstanceID().Equals(_user.GetInstanceID())) return;
 
         Destroy(null);
