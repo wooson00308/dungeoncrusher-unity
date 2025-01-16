@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CurveProjectile : Projectile
+public class CurveProjectile : Projectile_old
 {
     #region Fields
 

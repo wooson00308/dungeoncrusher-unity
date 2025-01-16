@@ -53,8 +53,8 @@ public class UnitAnimator : MonoBehaviour
 
         if (projectilePrefab == null) return;
 
-        Projectile _spawnProjectilePrefab =
-            ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile>();
+        Projectile_old _spawnProjectilePrefab =
+            ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile_old>();
         _spawnProjectilePrefab.transform.position = transform.position;
 
         var target = _owner.Target;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StraightProjectile : Projectile
+public class StraightProjectile : Projectile_old
 {
     private Vector2 moveDir;
 
