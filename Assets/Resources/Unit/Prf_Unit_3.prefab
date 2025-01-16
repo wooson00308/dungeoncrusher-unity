@@ -10829,7 +10829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec522b6ba1b9499c9c34c8f2554ff67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aerialTime: 1
+  aerialTime: 2.2
 --- !u!4 &4937252866342536607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5171842683720741595, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
@@ -11131,6 +11131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prf_Unit_Model_3
       objectReference: {fileID: 0}
+    - target: {fileID: 7123221853619239286, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 9183663330167283340, guid: 398ba998659ea1745abec3d164206e3a, type: 3}
     - target: {fileID: 7862123533429762855, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: m_SortingLayer
       value: 1
