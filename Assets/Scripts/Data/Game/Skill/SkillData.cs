@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : Data
 {
+    [field:SerializeField] public Sprite Icon { get; private set; }
+
     public int MaxLevel
     {
         get
@@ -42,6 +44,7 @@ public class SkillLevelData
 {
     [field: SerializeField] public int ADRatio { get; private set; }
     [field: SerializeField] public int APRatio { get; private set; }
+    [field: SerializeField] public int NeedMP { get; private set; }
     [field: SerializeField] public string Description { get; private set; }
     [field: SerializeField] public float Duration { get; private set; }
     [field: SerializeField] public float Cooltime { get; private set; }

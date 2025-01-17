@@ -87,7 +87,7 @@ public class Skill_old : MonoBehaviour
     public void TryUseSkillFromUI(object e)
     {
         var args = (SkillEventArgs)e;
-        if (args.data.Id != _skillData.Id) return;
+        if (args.data_old.Id != _skillData.Id) return;
         if (_skillData.IsUltSkill && _owner.Mp.Value < _owner.Mp.Max) return;
         UseSkill(_owner);
     }

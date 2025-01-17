@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class SkillButton : BaseView
 {
-    public SkillData_old _data;
+    public SkillData _data;
 
     private bool _isRootSkill;
 
     private Unit _player;
+    private Skill _skill;
     private Button _button;
 
     public enum Images
@@ -43,7 +44,7 @@ public class SkillButton : BaseView
 
     private void RootSkillEvent(object e)
     {
-        var data = e as SkillData_old;
+        var data = e as SkillData;
 
         if (data == null) return;
         if (data.Id != _data.Id) return;
@@ -54,9 +55,11 @@ public class SkillButton : BaseView
         if (_player == null)
         {
             _player = UnitFactory.Instance.GetPlayer();
+            if(_player.SkillDic.TryGetValue(data.Id, out Skill skill))
+            {
+                _skill = skill;
+            }
         }
-
-        var skill = _player.SkillDic[data.Id];
 
         _isRootSkill = true;
     }
@@ -72,9 +75,9 @@ public class SkillButton : BaseView
     {
         if (IsNotEnoughUltiMana) return;
 
-        if (_player.SkillDic.TryGetValue(_data.Id, out Skill_old skill))
+        if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
-            if (skill.IsCooldown) return;
+            if (skill.IsCoolingdown) return;
 
             GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
             {
@@ -94,11 +97,11 @@ public class SkillButton : BaseView
 
         if (!_isRootSkill) return;
 
-        if (_player.SkillDic.TryGetValue(_data.Id, out Skill_old skill))
+        if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
             if(!IsNotEnoughUltiMana)
             {
-                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCooldown;
+                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCoolingdown;
             }
             else
             {
@@ -115,7 +118,7 @@ public class SkillButton : BaseView
         Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 0;
     }
 
-    private void UpdateSkillCooldown(Skill_old skill)
+    private void UpdateSkillCooldown(Skill skill)
     {
         if(IsNotEnoughUltiMana)
         {
@@ -124,8 +127,8 @@ public class SkillButton : BaseView
         }
         else
         {
-            float cooltime = Time.time - skill.TimeMarker;
-            float maxCooltime = _data.GetSkillLevelData(skill.Level).coolTime;
+            float cooltime = skill.CooltimeRemain;
+            float maxCooltime = _data.GetSkillLevelData(skill.Level).Cooltime;
 
             float remainCooltime = maxCooltime - cooltime;
 
@@ -142,6 +145,6 @@ public class SkillButton : BaseView
         }
     }
 
-    private bool IsNotEnoughUltiMana => _data.IsUltSkill && _player.Mp.Value < _player.Mp.Max;
+    private bool IsNotEnoughUltiMana => _player.Mp.Value < _data.GetSkillLevelData(_skill.Level).NeedMP;
 
 }

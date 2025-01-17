@@ -195,7 +195,8 @@ public class UnitInfoUI : BaseView
 
         foreach (var key in _unit.SkillDic.Keys)
         {
-            var data = _unit.SkillDic[key].SkillData;
+            var skill = _unit.SkillDic[key];
+            var data = skill.Data;
             var image = images[index++];
 
             image.sprite = data.Icon;
@@ -204,7 +205,7 @@ public class UnitInfoUI : BaseView
             skillLevelBackground.gameObject.SetActive(true);
 
             var skillLevelTxt = skillLevelBackground.GetComponentInChildren<TextMeshProUGUI>();
-            skillLevelTxt.SetText($"{data.Level}");
+            skillLevelTxt.SetText($"{skill.Level}");
         }
     }
 

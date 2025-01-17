@@ -41,5 +41,6 @@ public class OnHitEventArgs : UnitEventArgs
 public class SkillEventArgs : UnitEventArgs
 {
     public int skillId;
-    public SkillData_old data;
+    public SkillData_old data_old;
+    public SkillData data;
 }

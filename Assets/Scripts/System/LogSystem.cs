@@ -90,7 +90,7 @@ public class LogSystem : MonoBehaviour
         {
             var skillEventArgs = _skillLogEvents.Dequeue();
 
-            SkillData_old skillData = skillEventArgs.data;
+            SkillData skillData = skillEventArgs.data;
 
             GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
             _logImages.Enqueue(logImageView);

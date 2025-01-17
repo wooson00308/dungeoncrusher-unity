@@ -20,8 +20,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private Dictionary<PartType, Item> _equipments = new();
     public Dictionary<PartType, Item> Equipment => _equipments;
-    private Dictionary<string, Skill_old> _skillDic = new();
-    public Dictionary<string, Skill_old> SkillDic => _skillDic;
+    private Dictionary<int, Skill> _skillDic = new();
+    public Dictionary<int, Skill> SkillDic => _skillDic;
 
     private TargetDetector _targetDetector;
     private NavMeshAgent _agent;
@@ -532,7 +532,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Debug.Log("Off superarmor");
     }
 
-    public void AddSkill(SkillData_old skillData)
+    public void AddSkill(SkillData skillData)
     {
         if (_skillDic.TryGetValue(skillData.Id, out var skill))
         {
@@ -541,9 +541,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
-            var skillObj = ResourceManager.Instance.Spawn(skillData.Prefab);
-            var skillComponent = skillObj.GetComponent<Skill_old>();
-            skillComponent.Setup(this);
+            var skillObj = ResourceManager.Instance.Spawn(skillData.Prefab.gameObject);
+            var skillComponent = skillObj.GetComponent<Skill>();
+            skillComponent.Initialized(this, skillData);
 
             _skillDic.Add(skillData.Id, skillComponent);
 

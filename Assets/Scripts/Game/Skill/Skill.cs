@@ -27,6 +27,10 @@ public class Skill : MonoBehaviour
 
     public int Level => _level;
 
+    public float CooltimeRemain => _cooltimeRemain;
+
+    public bool IsCoolingdown => _isCoolingDown;
+
     /// <summary>
     /// 스킬 초기화
     /// </summary>
