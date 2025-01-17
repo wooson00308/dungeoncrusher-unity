@@ -23,18 +23,18 @@ public class DetailInfoView : BaseView
     private void OnEnable()
     {
         UpdateStatsUI();
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateStatsUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, UpdateStatsUI);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateStatsUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateStatsUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, UpdateStatsUI);
     }
 
     public override void BindUI()

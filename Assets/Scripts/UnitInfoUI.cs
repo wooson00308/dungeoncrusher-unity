@@ -34,18 +34,18 @@ public class UnitInfoUI : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, Initialized);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, Initialized);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
     }
 
     public override void BindUI()

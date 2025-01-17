@@ -77,7 +77,7 @@ public class UnitAnimator : MonoBehaviour
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnAttack.ToString(), new UnitEventArgs
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventArgs
         {
             publisher = _owner
         });
@@ -89,14 +89,14 @@ public class UnitAnimator : MonoBehaviour
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath.ToString(), new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath, new UnitEventArgs { publisher = _owner });
     }
 
     public void SpecialDeathEvent(AnimationEvent e)
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnDeath_Special.ToString(), new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Special, new UnitEventArgs { publisher = _owner });
     }
 
     private void OrderSprite()

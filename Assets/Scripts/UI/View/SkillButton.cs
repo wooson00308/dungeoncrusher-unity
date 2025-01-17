@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SkillButton : BaseView
 {
-    public SkillData _data;
+    public SkillData_old _data;
 
     private bool _isRootSkill;
 
@@ -33,17 +33,17 @@ public class SkillButton : BaseView
         Get<Image>((int)Images.Skill_Icon_Image).enabled = false;
         Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
         Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"LOCKED");
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_RootSkill.ToString(), RootSkillEvent);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_RootSkill.ToString(), RootSkillEvent);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
     }
 
     private void RootSkillEvent(object e)
     {
-        var data = e as SkillData;
+        var data = e as SkillData_old;
 
         if (data == null) return;
         if (data.Id != _data.Id) return;
@@ -72,11 +72,11 @@ public class SkillButton : BaseView
     {
         if (IsNotEnoughUltiMana) return;
 
-        if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
+        if (_player.SkillDic.TryGetValue(_data.Id, out Skill_old skill))
         {
             if (skill.IsCooldown) return;
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), new SkillEventArgs
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
             {
                 data = _data
             });
@@ -94,7 +94,7 @@ public class SkillButton : BaseView
 
         if (!_isRootSkill) return;
 
-        if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
+        if (_player.SkillDic.TryGetValue(_data.Id, out Skill_old skill))
         {
             if(!IsNotEnoughUltiMana)
             {
@@ -115,7 +115,7 @@ public class SkillButton : BaseView
         Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 0;
     }
 
-    private void UpdateSkillCooldown(Skill skill)
+    private void UpdateSkillCooldown(Skill_old skill)
     {
         if(IsNotEnoughUltiMana)
         {

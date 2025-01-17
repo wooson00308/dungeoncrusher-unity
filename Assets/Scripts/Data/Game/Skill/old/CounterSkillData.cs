@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data_Skill_1115", menuName = "SkillData/Create CounterSkill")]
-public class CounterSkillData : SkillData
+public class CounterSkillData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)
     {
         return true;
     }
 
-    public override void OnAction(Skill skill, Unit user, List<Unit> targets)
+    public override void OnAction(Skill_old skill, Unit user, List<Unit> targets)
     {
         float skillValue = GetSkillLevelData(skill.Level).skillValue;
         int damage = (int)(user.Attack.Value * skillValue * 0.01f);

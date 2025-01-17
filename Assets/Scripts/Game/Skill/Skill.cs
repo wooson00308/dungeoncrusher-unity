@@ -1,257 +1,186 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 
+/// <summary>
+/// À¯´ÖÀÌ º¸À¯ÇÏ°í ÀÖ´Â ½ºÅ³ Á¤º¸
+/// </summary>
 public class Skill : MonoBehaviour
 {
     private Unit _owner;
-    private int _skillLevel = 1;
-    [SerializeField] private SkillData _skillData;
-    private float _timeMarker;
-    private bool _isInitialized = false;
-    private bool _isCooldown;
-    public float TimeMarker => _timeMarker;
-    public bool IsCooldown => _isCooldown;
-    public SkillData SkillData => _skillData;
-    public int Level => _skillLevel;
+    private SkillData _data;
+    private SkillLevelData _currentLevelData;
+    private readonly Dictionary<SkillConditionData, Action<object>> _conditionActions = new();
 
-    public void Setup(Unit owner)
+    private int _level = 1;
+    private bool _isInitialized;
+
+    // === Ãß°¡: ÄğÅ¸ÀÓ / µà·¹ÀÌ¼Ç °ü·Ã ÇÊµå ===
+    private bool _isCoolingDown;
+    private float _cooltimeRemain;    // ³²Àº ÄğÅ¸ÀÓ
+    private bool _isDurationActive;
+    private float _durationRemain;    // ³²Àº Áö¼Ó½Ã°£
+
+    public Unit Owner => _owner;
+    public SkillData Data => _data;
+    public SkillLevelData CurrentLevelData => _currentLevelData;
+
+    public int Level => _level;
+
+    /// <summary>
+    /// ½ºÅ³ ÃÊ±âÈ­
+    /// </summary>
+    public void Initialized(Unit owner, SkillData data)
     {
         _owner = owner;
+        _data = data;
+
+        _level = 1;
+        _currentLevelData = _data.GetSkillLevelData(_level);
+
+        SubscribeConditionEvents();
+
+        // ½ºÅ³ÀÌ È°¼ºÈ­µÉ ¶§ Àû¿ëµÇ´Â ÀÌÆåÆ® (¹öÇÁ µî)
+        foreach (var fxEventData in _currentLevelData.ApplyFxDatas)
+        {
+            fxEventData.OnSkillEvent(_owner, this);
+        }
+
         _isInitialized = true;
     }
 
-    public void SetSkillData(SkillData skillData)
+    /// <summary>
+    /// OnDisable µÉ ¶§ (¿ÀºêÁ§Æ®°¡ ºñÈ°¼ºÈ­µÉ ¶§) Ã³¸®
+    /// </summary>
+    public void OnDisable()
     {
-        _skillData = skillData;
-    }
-
-    private void OnEnable()
-    {
-        if (_skillData.IsPassiveSkill) // ìê°€ ë°œë™ ìŠ¤í‚¬ì´ë©´ ì´ë²¤íŠ¸ ë“±ë¡ í•„ìš” ì—†ìŒ
+        // ½ºÅ³ÀÌ ºñÈ°¼ºÈ­µÉ ¶§ Á¦°ÅÇØ¾ß ÇÒ ÀÌÆåÆ®°¡ ÀÖ´Ù¸é ¿©±â¼­ Ã³¸®
+        foreach (var fxEventData in _currentLevelData.RemoveFxDatas)
         {
-            GameEventSystem.Instance.Subscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
+            fxEventData.OnSkillEvent(_owner, this);
         }
-        else
-        {
-            GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), TryUseSkillFromUI);
-        }
-    }
 
-    private void OnDestroy() //ì¬ì‹œì‘ì„ í• ë•Œ
-    {
-        _skillData.Level = 0;
-    }
-
-    private void OnApplicationQuit() //ì¢…ë£Œë  ë•Œ
-    {
-        _skillData.Level = 0;
-    }
-
-    private void OnDisable()
-    {
-        _skillLevel = 1;
         _isInitialized = false;
-
-        if (_skillData.IsUltSkill)
-        {
-            // í•„ì‚´ê¸°ë¡œ ì§€ì •ë  ì´ë²¤íŠ¸ ë“±ë¡ í•„ìš”
-            GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
-                TryUseSkillFromUI);
-        }
-
-        if (_skillData.IsPassiveSkill)
-        {
-            GameEventSystem.Instance.Unsubscribe(_skillData.SkillEventType.ToString(), TryUseEventSkill);
-        }
+        UnsubscribeConditionEvents();
     }
 
-    public void LevelUp(int value = 1)
+    private void SubscribeConditionEvents()
     {
-        if(_skillData.MaxLv > _skillLevel)
-            _skillLevel += value;
-    }
-
-    public void TryUseEventSkill(object gameEvent)
-    {
-        UnitEventArgs args = (UnitEventArgs)gameEvent;
-
-        if (args == null) return;
-        if (!args.publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
-        if (args.publisher.Target == null) return;
-
-        UseSkill(args.publisher);
-    }
-
-    public void TryUseSkillFromUI(object e)
-    {
-        var args = (SkillEventArgs)e;
-        if (args.data.Id != _skillData.Id) return;
-        if (_skillData.IsUltSkill && _owner.Mp.Value < _owner.Mp.Max) return;
-        UseSkill(_owner);
-    }
-
-    public void TryUsePassiveSkillWheenCoolTime()
-    {
-        if (!_skillData.IsPassiveSkill) return;
-        if (!_skillData.IsCooltimeSkill) return; // ìŠ¤í‚¬ì´ íŠ¹ì • ì¡°ê±´ì´ ì•„ë‹Œ ìê°€ë°œë™ ìŠ¤í‚¬ì¸ì§€ ì²´í¬ 
-        UseSkill(_owner);
-    }
-
-    /// <summary>
-    /// ìŠ¤í‚¬ ì‚¬ìš© ì¤‘ë³µ ì½”ë“œ ë©”ì„œë“œí™”
-    /// </summary>
-    /// <param name="user"></param>
-    private void UseSkill(Unit user)
-    {
-        if (!IsUseableSkill()) return;
-
-        if (_skillData.IsUltSkill)
+        foreach (var condition in _currentLevelData.Conditions)
         {
-            _owner.Mp.Update("Engage", -_owner.Mp.Value);
-        }
-
-        _timeMarker = Time.time; // ìŠ¤í‚¬ ì¿¨íƒ€ì„ ì´ˆê¸°í™”
-
-        var target = user.Target;
-        if (target == null) return;
-
-        #region ìŠ¤í‚¬ í”„ë¦¬íŒ¹ ë¬´ê²°ì„± ê²€ì‚¬
-
-        var skillLevelDetails = _skillData.GetSkillLevelData(_skillLevel);
-
-        GameObject skillFxPrefab = skillLevelDetails.skillFxPrefab;
-        if (!Operator.IsRate(skillLevelDetails.activationChance)) return;
-
-        if (skillFxPrefab == null) return;
-
-        var skillFxObject = ResourceManager.Instance.Spawn(skillFxPrefab);
-        if (skillFxObject == null)
-        {
-            ResourceManager.Instance.Destroy(skillFxPrefab);
-            return;
-        }
-
-        if (!skillFxObject.TryGetComponent<SkillEffect>(out var skillFx)) return;
-
-        #endregion
-
-
-        if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Self)
-        {
-            skillFxObject.transform.position = user.transform.position;
-            Vector3 temp = skillFxObject.transform.localScale;
-            temp.x = (user.transform.position.x - target.transform.position.x) >= 0 ? -1f : 1f;
-            skillFxObject.transform.localScale = temp;
-        }
-        else
-        {
-            skillFxObject.transform.position = target.transform.position;
-        }
-
-        if (_skillData.IsRamdomDetected)
-        {
-            HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
-            // Debug.Log(enemies.Count);
-            var enemy = enemies.OrderBy(x => Random.value).Take(1).ToList();
-            if (_skillData.IsAreaAttack)
+            if (!_conditionActions.ContainsKey(condition))
             {
-                // í˜„ì¬ íƒ€ê²Ÿ ì£¼ë³€ì˜ ì¼ì • ê±°ë¦¬ì˜ ì¡´ì¬í•˜ëŠ” ìœ ë‹›ë“¤ì„ ë²”ìœ„ ê³µê²©ìœ¼ë¡œ í”¼ê²© ì‹œí‚´.
-                //List<Unit> targets = enemies
-                //    .Where(x => Vector3.Distance(x.transform.position, enemy[0].transform.position) <=
-                //                    _skillData.GetSkillLevelData(_skillLevel).range)
-                //    .OrderBy(x => Random.value)
-                //    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
-                //    .ToList();
-                List<Unit> targets = enemies
-                    .Where(x => Vector3.Distance(x.transform.position, enemy[0].transform.position) <=
-                                _skillData.GetSkillLevelData(_skillLevel).range)
-                    .Where(x => x.enabled && x.IsActive)
-                    .OrderBy(x => Vector3.Distance(x.transform.position, enemy[0].transform.position))
-                    .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
-                    .ToList();
-                Debug.Log("targets" + targets.Count);
-                if (!targets.Contains(enemy[0]))
-                {
-                    targets.Insert(0, enemy[0]); // enemyë¥¼ targetsì˜ ë§¨ ì•ì— ì¶”ê°€
-                }
-                else
-                {
-                    // enemyê°€ ì´ë¯¸ í¬í•¨ë˜ì–´ ìˆë‹¤ë©´ targetsì˜ ì²« ë²ˆì§¸ë¡œ ì´ë™
-                    targets.Remove(enemy[0]);
-                    targets.Insert(0, enemy[0]);
-                }
-
-                if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Target)
-                    skillFxObject.transform.position = targets[0].transform.position;
-                skillFx.Initialized(this, user, _skillData, targets);
-                return;
+                Action<object> action = OnEvent(condition);
+                _conditionActions.Add(condition, action);
             }
-
-            if (_skillData.SkillFXSpawnPosType == SkillFXSpawnPosType.Target)
-                skillFxObject.transform.position = enemy[0].transform.position;
-            skillFx.Initialized(this, user, _skillData, enemy);
-            return;
+            GameEventSystem.Instance.Subscribe(condition.EventId, _conditionActions[condition]);
         }
 
-        if (_skillData.IsAreaAttack)
+        Action<object> OnEvent(SkillConditionData condition)
         {
-            HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
-
-            // í˜„ì¬ íƒ€ê²Ÿ ì£¼ë³€ì˜ ì¼ì • ê±°ë¦¬ì˜ ì¡´ì¬í•˜ëŠ” ìœ ë‹›ë“¤ì„ ë²”ìœ„ ê³µê²©ìœ¼ë¡œ í”¼ê²© ì‹œí‚´.
-            List<Unit> targets = enemies
-                .Where(enemy => Vector3.Distance(enemy.transform.position, target.transform.position) <=
-                                _skillData.GetSkillLevelData(_skillLevel).range)
-                .OrderBy(x => Random.value)
-                .Take(_skillData.GetSkillLevelData(_skillLevel).targetNum)
-                .ToList();
-
-            skillFx.Initialized(this, user, _skillData, targets);
+            // ¹Ì¸® delegate(¶÷´Ù) »ı¼º ÈÄ ÀúÀå
+            return (gameEvent) => { condition.TryUseSkill(this, gameEvent); };
         }
-        else
+    }
+
+    private void UnsubscribeConditionEvents()
+    {
+        foreach (var condition in _currentLevelData.Conditions)
         {
-            skillFx.Initialized(this, user, _skillData, new List<Unit> { target });
+            if (_conditionActions.TryGetValue(condition, out var action))
+            {
+                GameEventSystem.Instance.Unsubscribe(condition.EventId, action);
+                _conditionActions.Remove(condition);
+            }
         }
     }
 
     /// <summary>
-    /// ìŠ¤í‚¬ ì‚¬ìš© ì—¬ë¶€ íŒë‹¨
+    /// (Á÷Á¢ È£ÃâÇÏ°Å³ª ConditionÀÌ ¸¸Á·ÇßÀ» ¶§) ½ºÅ³ »ç¿ë
     /// </summary>
-    /// <returns></returns>
-    private bool IsUseableSkill()
+    public void UseSkill()
     {
-        if (!_isInitialized) // ì´ˆê¸°í™” ë˜ì—ˆëŠ”ì§€ ì²´í¬
-            return false;
-
-        if (!_owner.IsActive) // ìŠ¤í‚¬ì„ ì‚¬ìš©í•˜ëŠ” ìœ ë‹›ì´ ë¹„í™œì„±í™” ë˜ì—ˆëŠ”ì§€ í™•ì¸. ë¹„í™œì„±í™” ì¡°ê±´ -> ê²Œì„ì´ ì¤€ë¹„ ë‹¨ê³„ë¡œ ë„˜ì–´ê°€ë©´ ë¹„í™œì„±í™” ë¨.
+        // ÀÌ¹Ì ÄğÅ¸ÀÓ ÁßÀÌ¸é ½ºÅ³ »ç¿ë ºÒ°¡
+        if (_isCoolingDown)
         {
-            ResetCooltime();
-            return false;
+            Debug.Log($"[{name}] ½ºÅ³ÀÌ ÄğÅ¸ÀÓÀÔ´Ï´Ù. ³²Àº ÄğÅ¸ÀÓ: {_cooltimeRemain:F2}s");
+            return;
         }
 
-        if (_owner.IsStun)
-            return false;
+        _isCoolingDown = true;
 
-        if (!_skillData.IsValidTarget(_owner))
-            return false;
+        // ½ºÅ³ »ç¿ë FX Ã³¸®
+        foreach (var fxEventData in _currentLevelData.UseSkillFxDatas)
+        {
+            fxEventData.OnEvent(_owner);
+        }
 
-        if (_isCooldown) // ì¿¨íƒ€ì„ ì§€ë‚¬ëŠ”ì§€ ì²´í¬ 
-            return false;
+        // === Ãß°¡: ÄğÅ¸ÀÓ ¼³Á¤ ===
+        _cooltimeRemain = _currentLevelData.Cooltime;
 
-        return true;
+        // === Ãß°¡: µà·¹ÀÌ¼Ç ¼³Á¤(Áö¼ÓÈ¿°ú°¡ ÀÖ´Â ½ºÅ³ÀÌ¶ó¸é) ===
+        if (_currentLevelData.Duration > 0f)
+        {
+            _isDurationActive = true;
+            _durationRemain = _currentLevelData.Duration;
+        }
+        else
+        {
+            _isDurationActive = false;
+        }
+
+        Debug.Log($"[{name}] ½ºÅ³ »ç¿ë! (ÄğÅ¸ÀÓ {_cooltimeRemain:F2}s, Áö¼Ó½Ã°£ {_durationRemain:F2}s)");
     }
 
-    private void Update()
+    /// <summary>
+    /// ½ºÅ³ ·¹º§ ¾÷
+    /// </summary>
+    public void LevelUp(int amount = 1)
     {
-        _isCooldown = Time.time - _timeMarker <= _skillData.GetSkillLevelData(_skillLevel).coolTime;
-        TryUsePassiveSkillWheenCoolTime();
+        if (!_isInitialized) return;
+        if (_level >= _data.MaxLevel) return;
+
+        int changeLevel = Math.Min(_level + amount, _data.MaxLevel);
+
+        if (_level == changeLevel) return;
+        _level = changeLevel;
+
+        UnsubscribeConditionEvents();
+
+        _currentLevelData = _data.GetSkillLevelData(_level);
+        SubscribeConditionEvents();
     }
 
-    public void ResetCooltime()
+    // === Ãß°¡: ÄğÅ¸ÀÓ / µà·¹ÀÌ¼Ç °»½Å ·ÎÁ÷ ===
+    public void Update()
     {
-        var cooltime = _skillData.GetSkillLevelData(_skillLevel).coolTime;
-        if (Time.time - _timeMarker > cooltime) return;
-        _timeMarker -= cooltime;
+        // 1) ÄğÅ¸ÀÓÀÌ µ¹°í ÀÖ´Ù¸é
+        if (_isCoolingDown)
+        {
+            _cooltimeRemain -= Time.deltaTime;
+            if (_cooltimeRemain <= 0f)
+            {
+                _cooltimeRemain = 0f;
+                _isCoolingDown = false;
+                Debug.Log($"[{name}] ½ºÅ³ ÄğÅ¸ÀÓÀÌ Á¾·áµÇ¾ú½À´Ï´Ù.");
+            }
+        }
+
+        // 2) Áö¼Ó È¿°ú°¡ È°¼ºÈ­µÇ¾î ÀÖ´Ù¸é
+        if (_isDurationActive)
+        {
+            _durationRemain -= Time.deltaTime;
+            if (_durationRemain <= 0f)
+            {
+                _durationRemain = 0f;
+                _isDurationActive = false;
+
+                // ÀÌ°÷¿¡¼­ Áö¼Ó È¿°ú°¡ ³¡³µÀ» ¶§ÀÇ ÀÌÆåÆ®³ª Ã³¸® È£Ãâ
+                Debug.Log($"[{name}] ½ºÅ³ È¿°ú(µà·¹ÀÌ¼Ç)°¡ Á¾·áµÇ¾ú½À´Ï´Ù.");
+
+                // RemoveFxDatas °°Àº °É ¿©±â¼­ È£ÃâÇÒ ¼öµµ ÀÖÀ½
+                // (¸¸¾à "½ºÅ³ È¿°ú°¡ ³¡³ª´Â ½ÃÁ¡"¿¡¸¸ ¹ßµ¿ÇÏ´Â ·ÎÁ÷ÀÌ ÇÊ¿äÇÏ´Ù¸é)
+            }
+        }
     }
 }

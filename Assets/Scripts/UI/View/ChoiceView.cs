@@ -287,6 +287,6 @@ public class ChoiceView : BaseView
         }
 
         if (_readyView.StatChoiceCount >= 0) return;
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Engage.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Engage);
     }
 }

@@ -39,7 +39,7 @@ public class ChoiceTable : ScriptableObject
                 if (data.choiceType == ChoiceType.Skill)
                 {
                     if (player.SkillDic
-                        .TryGetValue(data.skillData.Id, out Skill skill))
+                        .TryGetValue(data.skillData.Id, out Skill_old skill))
                     {
                         if (skill != null && skill.Level >= data.skillData.MaxLv)
                         {
@@ -113,7 +113,7 @@ public class ChoiceData
     [Space] public ChoiceType choiceType;
 
     public ItemData itemData;
-    public SkillData skillData;
+    public SkillData_old skillData;
     public UnitStatsUpgradeData unitStatUpgradeData;
 
     public Sprite Icon()

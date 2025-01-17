@@ -16,14 +16,14 @@ public class LogSystem : MonoBehaviour
 
     private void Awake()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), Log);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), Log);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(), Log);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
     }
 
     public void Log(object gameEvent)
@@ -90,7 +90,7 @@ public class LogSystem : MonoBehaviour
         {
             var skillEventArgs = _skillLogEvents.Dequeue();
 
-            SkillData skillData = skillEventArgs.data;
+            SkillData_old skillData = skillEventArgs.data;
 
             GameObject logImageView = ResourceManager.Instance.SpawnFromPath("UI/Pop/LogImage", _parent);
             _logImages.Enqueue(logImageView);

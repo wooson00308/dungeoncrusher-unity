@@ -8,7 +8,7 @@ public class GameOverProcess : Process
         UIManager.Instance.CloseLayoutUI<MainUI>();
         UIManager.Instance.ShowLayoutUI<GameOverUI>();
 
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_GameOver.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_GameOver);
         SoundSystem.Instance.PlayBGM("GameOver");
     }
 

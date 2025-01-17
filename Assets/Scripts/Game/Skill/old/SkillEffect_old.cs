@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SkillEffect : MonoBehaviour
+public class SkillEffect_old : MonoBehaviour
 {
     [SerializeField] protected Animator _animator;
 
@@ -13,19 +13,19 @@ public class SkillEffect : MonoBehaviour
     protected bool _isMultiTargeting = false;
 
     private Unit _user;
-    private SkillData _skillData;
+    private SkillData_old _skillData;
     private Unit _target;
     private List<Unit> _targets;
-    private Skill _skill;
+    private Skill_old _skill;
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnStun, OnStunEvent);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnStun.ToString(), OnStunEvent);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnStun, OnStunEvent);
     }
 
     private void OnStunEvent(object e)
@@ -38,7 +38,7 @@ public class SkillEffect : MonoBehaviour
         Destroy(null);
     }
 
-    public void Initialized(Skill skill, Unit user, SkillData skillData, Unit target = null)
+    public void Initialized(Skill_old skill, Unit user, SkillData_old skillData, Unit target = null)
     {
         _skill = skill;
         _user = user;
@@ -51,7 +51,7 @@ public class SkillEffect : MonoBehaviour
 
         _isInitialized = true;
     }
-    public void Initialized(Skill skill, Unit user, SkillData skillData, List<Unit> targets = null)
+    public void Initialized(Skill_old skill, Unit user, SkillData_old skillData, List<Unit> targets = null)
     {
         _skill = skill;
         _user = user;

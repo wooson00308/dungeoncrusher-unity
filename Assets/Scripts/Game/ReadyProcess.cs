@@ -12,7 +12,7 @@ public class ReadyProcess : Process
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), AllReady);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, AllReady);
         UIManager.Instance.ShowLayoutUI<ReadyUI>();
 
         Ready2Units();
@@ -20,7 +20,7 @@ public class ReadyProcess : Process
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), AllReady);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, AllReady);
         UIManager.Instance.CloseLayoutUI<ReadyUI>();
     }
 
@@ -57,8 +57,8 @@ public class ReadyProcess : Process
             }
         }
 
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), false);
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Ready.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, false);
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Ready);
         SoundSystem.Instance.PlayBGM("EngageBGM");
     }
 

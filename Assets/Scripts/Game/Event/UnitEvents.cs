@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum UnitEvents
 {
-    None,
+    None = 200,
     UnitEvent_SetActive,
     UnitEvent_UseSkill,
     UnitEvent_UseSkill_Ulti,
@@ -40,5 +40,6 @@ public class OnHitEventArgs : UnitEventArgs
 
 public class SkillEventArgs : UnitEventArgs
 {
-    public SkillData data;
+    public int skillId;
+    public SkillData_old data;
 }

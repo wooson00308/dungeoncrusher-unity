@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data_Skill_1112", menuName = "SkillData/Create UltTestData")]
-public class UltSkillData : SkillData
+public class UltSkillData : SkillData_old
 {
     
     public override bool IsValidTarget(Unit unit)
@@ -11,7 +11,7 @@ public class UltSkillData : SkillData
         return true;
     }
 
-    public override void OnAction(Skill skill, Unit user, List<Unit> targets)
+    public override void OnAction(Skill_old skill, Unit user, List<Unit> targets)
     {
         if (skill.SkillData.IsUltSkill && user.Mp.Value < user.Mp.Max)
             return;

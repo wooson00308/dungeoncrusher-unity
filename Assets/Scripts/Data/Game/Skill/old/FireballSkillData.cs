@@ -3,14 +3,14 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data_Skill_1116", menuName = "SkillData/Create FireballSkill")]
-public class FireballSkillData : SkillData
+public class FireballSkillData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)
     {
         return true;
     }
 
-    public override void OnAction(Skill skill, Unit user, List<Unit> targets)
+    public override void OnAction(Skill_old skill, Unit user, List<Unit> targets)
     {
         //HashSet<Unit> enemies = UnitFactory.Instance.GetUnitsExcludingTeam(user.Team);
         //var target = enemies.OrderBy(x => Random.value).Take(1).ToList();

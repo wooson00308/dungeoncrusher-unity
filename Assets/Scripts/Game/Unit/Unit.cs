@@ -20,8 +20,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     private Dictionary<PartType, Item> _equipments = new();
     public Dictionary<PartType, Item> Equipment => _equipments;
-    private Dictionary<string, Skill> _skillDic = new();
-    public Dictionary<string, Skill> SkillDic => _skillDic;
+    private Dictionary<string, Skill_old> _skillDic = new();
+    public Dictionary<string, Skill_old> SkillDic => _skillDic;
 
     private TargetDetector _targetDetector;
     private NavMeshAgent _agent;
@@ -183,14 +183,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         IsActive = false;
         if (Team == Team.Enemy) return;
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_SetActive, SetActiveEvent);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
         ResetItemNSkills();
     }
 
     public void OnInitialized(UnitData data, Team team)
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), ExpUp);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
         if (IsDeath)
         {
             ResetStats("Engage");
@@ -211,7 +211,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         if (team == Team.Friendly)
         {
-            GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_SetActive.ToString(), SetActiveEvent);
+            GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_SetActive, SetActiveEvent);
         }
         else
         {
@@ -252,7 +252,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.enabled = true;
         _fsm.enabled = IsActive;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_SetActive.ToString(), new SetActiveEventArgs()
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_SetActive, new SetActiveEventArgs()
         {
             publisher = this,
             isActive = IsActive
@@ -382,7 +382,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             //Debug.Log("hitPrefab이 없습니다");
         }
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnHit.ToString(), new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit, new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
 
         if (_isRevivable)
         {
@@ -448,7 +448,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         if (IsSuperArmor) return;
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_OnStun.ToString(), new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnStun, new UnitEventArgs { publisher = this });
 
         if (TryGetComponent<StunState>(out var state))
         {
@@ -513,7 +513,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Mp.Update("Engage", mpValue);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Mana_Regen.ToString(),
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Mana_Regen,
             new UnitEventArgs() { publisher = this });
     }
 
@@ -532,7 +532,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Debug.Log("Off superarmor");
     }
 
-    public void AddSkill(SkillData skillData)
+    public void AddSkill(SkillData_old skillData)
     {
         if (_skillDic.TryGetValue(skillData.Id, out var skill))
         {
@@ -542,14 +542,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         else
         {
             var skillObj = ResourceManager.Instance.Spawn(skillData.Prefab);
-            var skillComponent = skillObj.GetComponent<Skill>();
+            var skillComponent = skillObj.GetComponent<Skill_old>();
             skillComponent.Setup(this);
 
             _skillDic.Add(skillData.Id, skillComponent);
 
             skillObj.transform.SetParent(_skillStorage);
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_RootSkill.ToString(), skillData);
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_RootSkill, skillData);
         }
     }
 
@@ -597,7 +597,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Level.Update("Main", value);
         StageLevel.Update("Ready", value);
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Level.ToString(), new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Level, new UnitEventArgs { publisher = this });
     }
 
     public void ExpUp(object gameEvent)
@@ -609,7 +609,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { publisher = this });
 
         if (Exp.Value < Exp.Max) return;
 
@@ -622,7 +622,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             Exp.Update("Main", -Exp.Value);
         }
 
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_Exp.ToString(), new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { publisher = this });
     }
 
     #endregion

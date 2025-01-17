@@ -5,22 +5,34 @@ using UnityEngine;
 public class DestroyTimer : MonoBehaviour
 {
     [SerializeField] private float destroyTime;
+    private bool _isDestroy;
 
     private void OnEnable()
     {
+        _isDestroy = false;
         DestroyTime();
     }
 
     private async void DestroyTime()
     {
-        await Awaitable.WaitForSecondsAsync(destroyTime);
+        float time = 0;
+
+        while(time < destroyTime)
+        {
+            if (_isDestroy) return;
+
+            time += Time.deltaTime; 
+            await Awaitable.EndOfFrameAsync();
+        }
+
         DestroyThis();
     }
 
     private void DestroyThis()
     {
-        if (!gameObject.activeSelf) return;
-        
+        if (_isDestroy) return;
+        _isDestroy = true;
+
         if (TryGetComponent(out RectTransform rectTransform))
         {
             ResourceManager.Instance.DestroyUI(gameObject);

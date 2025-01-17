@@ -7,7 +7,7 @@ public class GameClearProcess : Process
         UIManager.Instance.CloseLayoutUI<MainUI>();
         UIManager.Instance.ShowLayoutUI<GameClearUI>();
 
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_AllStageClear.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_AllStageClear);
         SoundSystem.Instance.PlayBGM("GameClear");
     }
 

@@ -33,23 +33,23 @@ public class InfoView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Exp.ToString(), UpdateExpUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Level.ToString(), UpdateLevelUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), UpdateKillCountUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), UpdateKillCountUI);
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateLevelUppoint);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateLevelUppoint);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Exp, UpdateExpUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Level, UpdateLevelUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, UpdateKillCountUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, UpdateKillCountUI);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateLevelUppoint);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateLevelUppoint);
         StartInfo();
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Exp.ToString(), UpdateExpUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Level.ToString(), UpdateLevelUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), UpdateKillCountUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), UpdateKillCountUI);
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), UpdateLevelUppoint);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvnet_LevelUpCount.ToString(), UpdateLevelUppoint);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Exp, UpdateExpUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Level, UpdateLevelUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, UpdateKillCountUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Special, UpdateKillCountUI);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateLevelUppoint);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateLevelUppoint);
     }
 
     public override void BindUI()

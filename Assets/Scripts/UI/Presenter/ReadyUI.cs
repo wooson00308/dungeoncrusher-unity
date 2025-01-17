@@ -59,7 +59,7 @@ public class ReadyUI : BasePresenter<ReadyView, ReadyModel>
     public void DisCountStatChoiceCount()
     {
         _statChoiceCount--;
-        GameEventSystem.Instance.Publish(UnitEvents.UnitEvnet_LevelUpCount.ToString(), _statChoiceCount);
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvnet_LevelUpCount, _statChoiceCount);
         ChoiceTable();
     }
 }

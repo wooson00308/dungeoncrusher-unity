@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data_Skill_981", menuName = "SkillData/Create Dash")]
-public class DashData : SkillData
+public class DashData : SkillData_old
 {
     [Header("Dash Config")]
     [SerializeField] private float _dashRange;
@@ -25,7 +25,7 @@ public class DashData : SkillData
         return true;
     }
 
-    public override void OnAction(Skill skill, Unit user, List<Unit> targets)
+    public override void OnAction(Skill_old skill, Unit user, List<Unit> targets)
     {
         user.DashToTarget(this, () =>
         {

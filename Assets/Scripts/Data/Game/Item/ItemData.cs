@@ -28,7 +28,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private FloatStat _stunRate;
     [SerializeField] private FloatStat _lifestealRate;
     [SerializeField] private FloatStat _lifestealPercent;
-    [SerializeField] protected List<SkillData> _skillDatas;
+    [SerializeField] protected List<SkillData_old> _skillDatas;
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
