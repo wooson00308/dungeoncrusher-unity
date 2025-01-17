@@ -44,3 +44,8 @@ public class SkillEventArgs : UnitEventArgs
     public SkillData_old data_old;
     public SkillData data;
 }
+
+public class UnitEventWithAttackerArgs : UnitEventArgs
+{
+    public Unit attacker;
+}

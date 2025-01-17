@@ -167,6 +167,12 @@ public class Skill : MonoBehaviour
                 _cooltimeRemain = 0f;
                 _isCoolingDown = false;
                 Debug.Log($"[{name}] 스킬 쿨타임이 종료되었습니다.");
+
+                // 컨디션 조건이 없다면 자동 실행
+                if(CurrentLevelData.Conditions.Count <= 0 && _owner.Mp.Value >= _currentLevelData.NeedMP)
+                {
+                    UseSkill();
+                }
             }
         }
 

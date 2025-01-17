@@ -145,6 +145,6 @@ public class SkillButton : BaseView
         }
     }
 
-    private bool IsNotEnoughUltiMana => _player.Mp.Value < _data.GetSkillLevelData(_skill.Level).NeedMP;
+    private bool IsNotEnoughUltiMana => _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
 
 }
