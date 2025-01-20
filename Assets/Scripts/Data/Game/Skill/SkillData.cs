@@ -64,5 +64,6 @@ public class SkillLevelData
     [field: SerializeField] public List<SkillConditionData> Conditions { get; private set; }
     [field: SerializeField] public List<SkillFxEventData> ApplyFxDatas { get; private set; }
     [field: SerializeField] public List<SkillFxEventData> UseSkillFxDatas { get; private set; }
+    [field: SerializeField] public List<SkillFxEventData> EndDurationSkillFxDatas { get; private set; }
     [field: SerializeField] public List<SkillFxEventData> RemoveFxDatas { get; private set; }
 }
