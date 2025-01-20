@@ -83,7 +83,7 @@ public class Skill : MonoBehaviour
         Action<object> OnEvent(SkillConditionData condition)
         {
             // 미리 delegate(람다) 생성 후 저장
-            return (gameEvent) => { condition.TryUseSkill(this, gameEvent); };
+            return (gameEvent) => { condition.TryEvent(this, gameEvent); };
         }
     }
 
@@ -153,6 +153,11 @@ public class Skill : MonoBehaviour
 
         _currentLevelData = _data.GetSkillLevelData(_level);
         SubscribeConditionEvents();
+    }
+
+    public void ResetCooltime()
+    {
+        _cooltimeRemain = 0;
     }
 
     // === 추가: 쿨타임 / 듀레이션 갱신 로직 ===

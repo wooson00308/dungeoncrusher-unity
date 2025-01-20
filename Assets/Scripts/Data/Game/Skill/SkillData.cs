@@ -35,7 +35,7 @@ public class SkillData : Data
         return LevelDatas[index];
     }
 
-    [field: SerializeField] private string _defaultPrefabPath = "/Skill/Skill";
+    [field: SerializeField] private string _defaultPrefabPath = "Skill/Skill";
     [Header("커스텀 된 스킬 프리팹이 있으면 넣어주세요")]
     [field: SerializeField] private Skill _prefab;
     public Skill Prefab
@@ -44,7 +44,9 @@ public class SkillData : Data
         {
             if(_prefab != null) return _prefab;
 
-            return Resources.Load(_defaultPrefabPath) as Skill;
+            var prefab = Resources.Load<Skill>(_defaultPrefabPath);
+
+            return prefab;
         }
     }
     [field: SerializeField] public List<SkillLevelData> LevelDatas { get; private set; }

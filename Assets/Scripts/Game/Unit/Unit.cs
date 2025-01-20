@@ -35,6 +35,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private GameObject _warningPrefab;
     private int _dropExp;
 
+    private Unit _killer;
+    public Unit Killer => _killer;
+
     public Sprite Icon => _icon;
 
     private bool _isRevivable;
@@ -298,7 +301,18 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _agent.Warp(pos);
     }
 
-    public void DashToTarget(DashData data, Action callback = null)
+    public void DashToTarget_old(DashData data, Action callback = null)
+    {
+        if (!IsActive) return;
+        if (TryGetComponent<DashState>(out var state))
+        {
+            var speed = data.DashSpeed;
+            var distance = data.AdditionalDistance;
+            state.OnDash(this, speed, distance, callback);
+        }
+    }
+
+    public void DashToTarget(DashSkillFxEventData data, Action callback = null)
     {
         if (!IsActive) return;
         if (TryGetComponent<DashState>(out var state))
@@ -422,6 +436,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = true;
         IsActive = false;
         _agent.enabled = false;
+        _killer = killer;
 
         if (_isBoss)
         {

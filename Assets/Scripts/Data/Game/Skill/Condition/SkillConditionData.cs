@@ -12,7 +12,7 @@ public abstract class SkillConditionData : Data
         return true;
     }
 
-    public void TryUseSkill(Skill skill, object gameEvent)
+    public virtual void TryEvent(Skill skill, object gameEvent)
     {
         if (!IsSatisfied(skill, gameEvent)) return;
 

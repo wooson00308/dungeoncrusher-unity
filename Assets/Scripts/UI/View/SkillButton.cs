@@ -145,6 +145,15 @@ public class SkillButton : BaseView
         }
     }
 
-    private bool IsNotEnoughUltiMana => _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+    private bool IsNotEnoughUltiMana
+    {
+        get
+        {
+            if (_player == null) return false;
+            if (_skill == null) return false;
+
+            return _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+        }
+    }
 
 }

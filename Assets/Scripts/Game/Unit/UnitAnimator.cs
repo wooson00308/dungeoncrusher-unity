@@ -90,6 +90,7 @@ public class UnitAnimator : MonoBehaviour
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath, new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnKillArgs { publisher = _owner.Killer, target = _owner });
     }
 
     public void SpecialDeathEvent(AnimationEvent e)
@@ -97,6 +98,7 @@ public class UnitAnimator : MonoBehaviour
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Special, new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnKillArgs { publisher = _owner.Killer, target = _owner });
     }
 
     private void OrderSprite()
