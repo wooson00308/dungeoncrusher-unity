@@ -6,8 +6,10 @@ public abstract class SkillConditionData : Data
     public virtual bool IsSatisfied(Skill skill, object gameEvent)
     {
         if (gameEvent is not UnitEventArgs args) return false;
-        if (args is SkillEventArgs skillArgs &&
-            skillArgs.skillId != skill.Data.Id) return false;
+        if (args is SkillEventArgs skillArgs)
+        {
+            if(skillArgs.data.Id != skill.Data.Id) return false;
+        }
 
         return true;
     }

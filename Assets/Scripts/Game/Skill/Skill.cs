@@ -116,7 +116,7 @@ public class Skill : MonoBehaviour
         // 스킬 사용 FX 처리
         foreach (var fxEventData in _currentLevelData.UseSkillFxDatas)
         {
-            fxEventData.OnEvent(_owner);
+            fxEventData.OnEvent(_owner, this);
         }
 
         // === 추가: 쿨타임 설정 ===

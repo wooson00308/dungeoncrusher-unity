@@ -10,8 +10,6 @@ public class DashSkillFxEventData : SkillFxEventData
         // 대쉬 스킬 구현
         var skillLevelData = skill.CurrentLevelData;
 
-        if (owner.Target == null) return;
-
         owner.DashToTarget(this, () =>
         {
             var target = owner.Target;

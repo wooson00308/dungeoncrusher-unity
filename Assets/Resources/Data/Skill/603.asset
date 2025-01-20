@@ -30,7 +30,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 971a32cdf3a64b4418ec4f81cdfdd38b, type: 2}
+    - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 971a32cdf3a64b4418ec4f81cdfdd38b, type: 2}
+    - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
@@ -56,6 +56,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 971a32cdf3a64b4418ec4f81cdfdd38b, type: 2}
+    - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}
     - {fileID: 11400000, guid: 7451047d855a43645ba48ff7bd303e0d, type: 2}
     <RemoveFxDatas>k__BackingField: []

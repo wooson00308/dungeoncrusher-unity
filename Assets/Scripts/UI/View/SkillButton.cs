@@ -127,21 +127,17 @@ public class SkillButton : BaseView
         }
         else
         {
-            float cooltime = skill.CooltimeRemain;
-            float maxCooltime = _data.GetSkillLevelData(skill.Level).Cooltime;
+            float remainCooltime = skill.CooltimeRemain;
+            float maxCooltime = skill.CurrentLevelData.Cooltime;
 
-            float remainCooltime = maxCooltime - cooltime;
-
-            if (remainCooltime < 0)
+            if (remainCooltime <= 0)
             {
                 ResetSkillUI();
                 return;
             }
 
-            // �ؽ�Ʈ ������Ʈ
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"{Mathf.Ceil(remainCooltime)}s");
-            // �� ����Ʈ ������Ʈ (0 ~ 1)
-            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1 - (cooltime / maxCooltime);
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = remainCooltime / maxCooltime;
         }
     }
 

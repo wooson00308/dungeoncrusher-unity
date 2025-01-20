@@ -16,5 +16,5 @@ MonoBehaviour:
   <Name>k__BackingField: "\uB300\uC26C \uC2A4\uD0AC"
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  DashSpeed: 0
-  AdditionalDistance: 0
+  DashSpeed: 10
+  AdditionalDistance: 1.2
