@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SoulyearningSkill
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 0
-  <Name>k__BackingField: 
-  <DisplayName>k__BackingField: 
+  <Name>k__BackingField: Soulyearning
+  <DisplayName>k__BackingField: SoulyearningSkill
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 0}
   _defaultPrefabPath: /Skill/Skill
@@ -23,7 +23,7 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: 
+    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 1\uB808\uBCA8"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
@@ -35,7 +35,7 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: 
+    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 2\uB808\uBCA8"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
@@ -47,7 +47,7 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: 
+    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 3\uB808\uBCA8"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:

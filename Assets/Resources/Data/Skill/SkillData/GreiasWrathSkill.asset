@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
+  m_Name: GreiasWrathSkill
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: 607
+  <Name>k__BackingField: Greia's wrath
+  <DisplayName>k__BackingField: Greia's wrathSkill
+  <Description>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 07bd998c3434f6b40a9a7a63f09ab33f, type: 3}
+  _defaultPrefabPath: Skill/Skill
+  _prefab: {fileID: 0}
+  <LevelDatas>k__BackingField:
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 5
+    <Conditions>k__BackingField: []
+    <ApplyFxDatas>k__BackingField: []
+    <UseSkillFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 9d9d189e29c1447cd843c41cf828c92e, type: 2}
+    <RemoveFxDatas>k__BackingField: []
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 5
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 029451c251abb48d7b36ea750650ce34, type: 2}
+    <ApplyFxDatas>k__BackingField: []
+    <UseSkillFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 9d9d189e29c1447cd843c41cf828c92e, type: 2}
+    <RemoveFxDatas>k__BackingField: []
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 5
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 029451c251abb48d7b36ea750650ce34, type: 2}
+    <ApplyFxDatas>k__BackingField: []
+    <UseSkillFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 9d9d189e29c1447cd843c41cf828c92e, type: 2}
+    <RemoveFxDatas>k__BackingField: []

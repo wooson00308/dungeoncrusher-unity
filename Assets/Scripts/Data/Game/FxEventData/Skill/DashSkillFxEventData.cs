@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DashSkillFxEventData", menuName = "Scriptable Objects/DashSkillFxEventData")]
+[CreateAssetMenu(fileName = "DashSkillFxEventData", menuName = "Scriptable Objects/Skill/FxEvent/DashSkillFxEventData")]
 public class DashSkillFxEventData : SkillFxEventData
 {
     public float DashSpeed;
     public float AdditionalDistance;
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        // ´ë½¬ ½ºÅ³ ±¸Çö
+        // ï¿½ë½¬ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
         var skillLevelData = skill.CurrentLevelData;
 
         owner.DashToTarget(this, () =>

@@ -52,7 +52,8 @@ public class Projectile : MonoBehaviour
             triggerFx.StayUnitEvent += _data.OnTriggerStayEvent;
             triggerFx.ExitUnitEvent += _data.OnTriggerExitEvent;
             triggerFx.DestroyEvent +=
-                () => {
+                () =>
+                {
                     bool isAllDestroyed = true;
 
                     foreach (var triggerFx in _triggerFxs)
@@ -69,7 +70,6 @@ public class Projectile : MonoBehaviour
                         _speed = 0;
                     }
                 };
-
             triggerFx.Initialized(owner);
         }
 
@@ -82,7 +82,6 @@ public class Projectile : MonoBehaviour
 
     public void OnFireOnTarget(Unit owner, ProjectileData data)
     {
-
     }
 
     public async void StartDuration()

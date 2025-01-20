@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "ImmediateExecutionSkillConditionData",
     menuName = "Scriptable Objects/Skill/Condition/ImmediateExecutionSkillConditionData")]
 public class ImmediateExecutionSkillConditionData : SkillConditionData //즉결처형 - 적 공격시 일정 확률로 처형
 {
     public UnitEvents condition;
-    [SerializeField] private int executionPercent;
+    [SerializeField] private int executionRate;
 
     public override int EventId
     {
@@ -24,7 +25,7 @@ public class ImmediateExecutionSkillConditionData : SkillConditionData //즉결�
         if (!owner.IsActive) return false;
 
         int random = Random.Range(1, 100);
-        if (random > executionPercent) return false;
+        if (random > executionRate) return false;
         return true;
     }
 }

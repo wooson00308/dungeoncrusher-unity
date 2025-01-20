@@ -24,7 +24,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
     <Description>k__BackingField: 
-    <Duration>k__BackingField: 3
+    <Duration>k__BackingField: 5
     <Cooltime>k__BackingField: 8
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}

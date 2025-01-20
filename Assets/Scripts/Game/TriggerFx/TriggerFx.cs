@@ -32,7 +32,7 @@ public class TriggerFx : MonoBehaviour
 
     public void Awake()
     {
-        _model = GetComponent<TriggerFxAnimator>();
+        _model ??= GetComponent<TriggerFxAnimator>();
         _colliders = GetComponents<CompositeCollider2D>();
     }
 
@@ -117,7 +117,10 @@ public class TriggerFx : MonoBehaviour
             collider.enabled = false;
         }
 
-        _model.Animator.CrossFade("Destroy", 0f);
+        if (_model != null)
+        {
+            _model.Animator.CrossFade("Destroy", 0f);
+        }
 
         DestroyEvent?.Invoke();
     }
@@ -136,8 +139,8 @@ public class TriggerFx : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!CanCollide(collision)) return;
-
         if (!_isInitialized) return;
+
         if (collision.TryGetComponent(out Unit target) && target.IsActive)
         {
             if (!_onEventFromSelf && _owner.EqualsUnit(target)) return;
@@ -177,8 +180,8 @@ public class TriggerFx : MonoBehaviour
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (!CanCollide(collision)) return;
-
         if (!_isInitialized) return;
+
         if (collision.TryGetComponent(out Unit target) && target.IsActive)
         {
             if (!_onEventFromSelf && _owner.EqualsUnit(target)) return;

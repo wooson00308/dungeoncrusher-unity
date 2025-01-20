@@ -5,6 +5,6 @@ public class AerialFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        owner.OnAerial();
+        owner.Target.OnAerial();
     }
 }
