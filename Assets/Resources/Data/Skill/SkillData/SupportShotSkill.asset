@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
   m_Name: SupportShotSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 0
+  <Id>k__BackingField: 605
   <Name>k__BackingField: SupportShot
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: SupportShotSkill
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
-  _defaultPrefabPath: /Skill/Skill
-  _prefab: {fileID: 6897636195242508009, guid: 451bbccdc5bf311449e7a5c152384f7d, type: 3}
+  _defaultPrefabPath: Skill/Skill
+  _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
@@ -26,7 +26,8 @@ MonoBehaviour:
     <Description>k__BackingField: 
     <Duration>k__BackingField: 3
     <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField: []
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}

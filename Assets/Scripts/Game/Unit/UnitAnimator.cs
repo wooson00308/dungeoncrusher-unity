@@ -82,7 +82,7 @@ public class UnitAnimator : MonoBehaviour
             publisher = _owner
         });
 
-        _owner.AddSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
+        _owner.UpdateSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
     }
 
     public void DeathEvent(AnimationEvent e)

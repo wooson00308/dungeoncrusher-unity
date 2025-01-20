@@ -17,7 +17,7 @@ MonoBehaviour:
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 8fdf0284b84b28d48895168775082b95, type: 3}
-  _defaultPrefabPath: /Skill/Skill
+  _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0

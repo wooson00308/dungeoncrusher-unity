@@ -543,7 +543,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #region Skill
 
-    public void AddSkillMp(int mpValue)
+    public void UpdateSkillMp(int mpValue)
     {
         if (Mp.Max < Mp.Value + mpValue) return;
 
