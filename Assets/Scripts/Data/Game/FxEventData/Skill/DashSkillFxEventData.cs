@@ -3,8 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashSkillFxEventData", menuName = "Scriptable Objects/DashSkillFxEventData")]
 public class DashSkillFxEventData : SkillFxEventData
 {
+    public float DashSpeed;
+    public float AdditionalDistance;
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        // ï¿½ë½¬ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
-    }                                                           
+        // ´ë½¬ ½ºÅ³ ±¸Çö
+        var skillLevelData = skill.CurrentLevelData;
+
+        if (owner.Target == null) return;
+
+        owner.DashToTarget(this, () =>
+        {
+            var target = owner.Target;
+
+            var damage = skillLevelData.ADRatio;
+            target.OnHit((int)damage, owner);
+        });
+    }
 }

@@ -44,12 +44,6 @@ public class SkillButton : BaseView
 
     private void RootSkillEvent(object e)
     {
-        if (_data == null)
-        {
-            Debug.LogWarning("Button Doesn't have data");
-            return;
-        }
-
         var data = e as SkillData;
 
         if (data == null) return;
@@ -61,7 +55,7 @@ public class SkillButton : BaseView
         if (_player == null)
         {
             _player = UnitFactory.Instance.GetPlayer();
-            if (_player.SkillDic.TryGetValue(data.Id, out Skill skill))
+            if(_player.SkillDic.TryGetValue(data.Id, out Skill skill))
             {
                 _skill = skill;
             }
@@ -105,7 +99,7 @@ public class SkillButton : BaseView
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
-            if (!IsNotEnoughUltiMana)
+            if(!IsNotEnoughUltiMana)
             {
                 Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCoolingdown;
             }
@@ -126,7 +120,7 @@ public class SkillButton : BaseView
 
     private void UpdateSkillCooldown(Skill skill)
     {
-        if (IsNotEnoughUltiMana)
+        if(IsNotEnoughUltiMana)
         {
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
             Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
@@ -151,5 +145,15 @@ public class SkillButton : BaseView
         }
     }
 
-    private bool IsNotEnoughUltiMana => _player?.Mp.Value < _skill?.CurrentLevelData.NeedMP;
+    private bool IsNotEnoughUltiMana
+    {
+        get
+        {
+            if (_player == null) return false;
+            if (_skill == null) return false;
+
+            return _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+        }
+    }
+
 }

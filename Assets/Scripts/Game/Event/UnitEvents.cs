@@ -19,7 +19,8 @@ public enum UnitEvents
     UnitEvnet_LevelUpCount,
     UnitEvent_OnDestroy,
     UnitEvent_OnDeath,
-    UnitEvent_OnDeath_Special
+    UnitEvent_OnDeath_Special,
+    UnitEvent_OnKill,
 }
 
 public class UnitEventArgs
@@ -48,4 +49,9 @@ public class SkillEventArgs : UnitEventArgs
 public class UnitEventWithAttackerArgs : UnitEventArgs
 {
     public Unit attacker;
+}
+
+public class UnitEventOnKillArgs : UnitEventArgs
+{
+    public Unit target;
 }

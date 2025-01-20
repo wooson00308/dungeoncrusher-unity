@@ -27,7 +27,7 @@ public class DashData : SkillData_old
 
     public override void OnAction(Skill_old skill, Unit user, List<Unit> targets)
     {
-        user.DashToTarget(this, () =>
+        user.DashToTarget_old(this, () =>
         {
             var target = user.Target;
 
