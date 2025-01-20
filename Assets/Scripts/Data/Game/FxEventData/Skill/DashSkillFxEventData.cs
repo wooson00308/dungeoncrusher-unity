@@ -5,6 +5,6 @@ public class DashSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        // ´ë½¬ ½ºÅ³ ±¸Çö
-    }
+        // ï¿½ë½¬ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
+    }                                                           
 }

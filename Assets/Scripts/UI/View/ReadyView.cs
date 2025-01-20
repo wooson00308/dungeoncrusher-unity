@@ -24,6 +24,12 @@ public class ReadyView : BaseView
             }
         }
 
+        if (tripleChoices.Count == 0)
+        {
+            GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Engage);
+            return;
+        }
+
         int index = 0;
         foreach (var choice in tripleChoices)
         {

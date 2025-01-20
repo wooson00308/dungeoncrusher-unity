@@ -165,6 +165,26 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         LifestealPercent.Reset(key);
     }
 
+    public void UpdateCriticalRate(string key, float value)
+    {
+        CriticalRate.Update(key, value);
+    }
+
+    public void UpdateAttack(string key, int value)
+    {
+        Attack.Update(key, value);
+    }
+
+    public void UpdateMaxHealth(int value)
+    {
+        Health.SetMaxValue(value);
+    }
+
+    public void UpdateMp(string key, int value)
+    {
+        Mp.Update(key, value);
+    }
+
     #endregion
 
     private void Awake()
@@ -382,7 +402,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             //Debug.Log("hitPrefab이 없습니다");
         }
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit, new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit,
+            new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
 
         if (_isRevivable)
         {

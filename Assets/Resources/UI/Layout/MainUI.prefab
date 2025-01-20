@@ -15137,6 +15137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 260101890435085053, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: 6bad2a427f59ed54e906d04dfdcf5753, type: 2}
     - target: {fileID: 308509370426973005, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -15200,7 +15204,7 @@ PrefabInstance:
     - target: {fileID: 5926301464233114103, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: _data
       value: 
-      objectReference: {fileID: 11400000, guid: 875465eeb4516be439ed44bea400b06f, type: 2}
+      objectReference: {fileID: 11400000, guid: 5ff1279baed434e28b3f213fa1b81a55, type: 2}
     - target: {fileID: 6255500959311025683, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -15216,7 +15220,7 @@ PrefabInstance:
     - target: {fileID: 6434760033973661220, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: _data
       value: 
-      objectReference: {fileID: 11400000, guid: b80011a5980869243a3ee0ba2f74c157, type: 2}
+      objectReference: {fileID: 11400000, guid: bb12e3bb1cb7344fe9f1f11d704e15f0, type: 2}
     - target: {fileID: 7808184579007580076, guid: 8c361c809e1707a46b8d25bc0acb7653, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2

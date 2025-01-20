@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : Data
 {
-    [field:SerializeField] public Sprite Icon { get; private set; }
+    [field: SerializeField] public Sprite Icon { get; private set; }
 
     public int MaxLevel
     {
@@ -20,7 +20,7 @@ public class SkillData : Data
     {
         if (LevelDatas == null || LevelDatas.Count == 0)
         {
-            Debug.LogError($"{Id}ÀÇ ·¹º§ º° ½ºÅ³ µ¥ÀÌÅÍ°¡ ºñ¾îÀÖ½À´Ï´Ù.");
+            Debug.LogError($"{Id}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½.");
             return null;
         }
 
@@ -36,17 +36,20 @@ public class SkillData : Data
     }
 
     [field: SerializeField] private string _defaultPrefabPath = "/Skill/Skill";
-    [Header("Ä¿½ºÅÒ µÈ ½ºÅ³ ÇÁ¸®ÆÕÀÌ ÀÖÀ¸¸é ³Ö¾îÁÖ¼¼¿ä")]
-    [field: SerializeField] private Skill _prefab;
+
+    [Header("Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½")] [field: SerializeField]
+    private Skill _prefab;
+
     public Skill Prefab
     {
         get
         {
-            if(_prefab != null) return _prefab;
+            if (_prefab != null) return _prefab;
 
             return Resources.Load(_defaultPrefabPath) as Skill;
         }
     }
+
     [field: SerializeField] public List<SkillLevelData> LevelDatas { get; private set; }
 }
 
@@ -56,7 +59,11 @@ public class SkillLevelData
     [field: SerializeField] public int ADRatio { get; private set; }
     [field: SerializeField] public int APRatio { get; private set; }
     [field: SerializeField] public int NeedMP { get; private set; }
-    [field: SerializeField] public string Description { get; private set; }
+
+    [field: TextArea]
+    [field: SerializeField]
+    public string Description { get; private set; }
+
     [field: SerializeField] public float Duration { get; private set; }
     [field: SerializeField] public float Cooltime { get; private set; }
     [field: SerializeField] public List<SkillConditionData> Conditions { get; private set; }

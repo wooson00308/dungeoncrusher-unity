@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e54a8599a5384b4ebfcb0c4a1505ca4, type: 3}
+  m_Name: ChoiceTable 1
+  m_EditorClassIdentifier: 
+  _choiceDatas:
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 5ff1279baed434e28b3f213fa1b81a55, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: a543dc35d500c4baaad6b6a0fc38cfee, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: 6bad2a427f59ed54e906d04dfdcf5753, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
+  - tier: 3
+    choiceType: 1
+    itemData: {fileID: 0}
+    skillData: {fileID: 11400000, guid: c70895246a2f64000915a0b655ae844a, type: 2}
+    unitStatUpgradeData: {fileID: 0}
+    weight: 1
