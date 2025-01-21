@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TimeManager : Singleton<TimeManager>
 {
+    private int _timeScale = 1;
     private int _gameTimeScale = 1;
     private bool isBossDead = false;
 
@@ -11,32 +12,32 @@ public class TimeManager : Singleton<TimeManager>
     {
         base.Awake();
         _gameTimeScale = 1;
-        Time.timeScale = _gameTimeScale;
+        GameTime.TimeScale = _gameTimeScale;
     }
 
     public void StopTime()
     {
-        Time.timeScale = 0;
+        GameTime.TimeScale = 0;
     }
 
     public void PlayTime()
     {
-        Time.timeScale = _gameTimeScale;
+        GameTime.TimeScale = _gameTimeScale;
     }
 
     public void ChangeTimeScale()
     {
         if (isBossDead) return;
-        _gameTimeScale = _gameTimeScale == 1 ? 2 : 1;
-        Time.timeScale = _gameTimeScale;
+        _timeScale = _timeScale == 1 ? 2 : 1;
+        Time.timeScale = _timeScale;
     }
 
     public async void SlowMotion()
     {
         isBossDead = true;
-        Time.timeScale = 0.2f;
+        GameTime.TimeScale = 0.2f;
         await Awaitable.WaitForSecondsAsync(0.5f);
-        Time.timeScale = _gameTimeScale;
+        GameTime.TimeScale = _gameTimeScale;
         isBossDead = false;
     }
 
@@ -44,11 +45,11 @@ public class TimeManager : Singleton<TimeManager>
     {
         if (value)
         {
-            Time.timeScale = 0.02f;
+            GameTime.TimeScale = 0.02f;
         }
         else
         {
-            Time.timeScale = _gameTimeScale;
+            GameTime.TimeScale = _gameTimeScale;
         }
     }
 
@@ -56,7 +57,7 @@ public class TimeManager : Singleton<TimeManager>
     {
         Time.timeScale = 0.01f;
         await Awaitable.WaitForSecondsAsync(time);
-        Time.timeScale = _gameTimeScale;
+        Time.timeScale = _timeScale;
     }
 
     public int GetGameSpeed()

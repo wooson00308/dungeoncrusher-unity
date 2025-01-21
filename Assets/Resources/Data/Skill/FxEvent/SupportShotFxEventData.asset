@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7e55af622f64769b8fc2896cb21410, type: 3}
-  m_Name: SupportShotSkillFxEventData
+  m_Script: {fileID: 11500000, guid: 0426a73bd57e8a14ea3ab253f0faa466, type: 3}
+  m_Name: SupportShotFxEventData
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 0
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  Prefab: {fileID: 0}
-  data: {fileID: 11400000, guid: 3acf624ff3973c94dae6020468ab68c8, type: 2}
-  offset: {x: 0, y: 0}
+  IsGameTime: 0
+  Prefab: {fileID: 2017119685302849515, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}

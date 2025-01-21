@@ -78,7 +78,7 @@ public class DashState : StateBase, IState
     {
         unit.Rotation(_dashDirection);
 
-        float moveDistance = _dashSpeed * Time.deltaTime;
+        float moveDistance = _dashSpeed * GameTime.DeltaTime;
         Vector3 newPosition = unit.transform.position + (Vector3)_dashDirection * moveDistance;
 
         if (NavMesh.SamplePosition(newPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
@@ -94,7 +94,7 @@ public class DashState : StateBase, IState
 
     private void PerformAdditionalDash(Unit unit)
     {
-        float moveDistance = _dashSpeed * Time.deltaTime;
+        float moveDistance = _dashSpeed * GameTime.DeltaTime;
         float moveDelta = Mathf.Min(_remainingDistance, moveDistance);
         _remainingDistance -= moveDelta;
 

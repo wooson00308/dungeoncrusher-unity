@@ -20,7 +20,7 @@ MonoBehaviour:
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
-  - <ADRatio>k__BackingField: 0
+  - <ADRatio>k__BackingField: 258
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 1\uB819"
@@ -32,7 +32,7 @@ MonoBehaviour:
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}
     <RemoveFxDatas>k__BackingField: []
-  - <ADRatio>k__BackingField: 0
+  - <ADRatio>k__BackingField: 258
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 2\uB819"
@@ -44,7 +44,7 @@ MonoBehaviour:
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}
     <RemoveFxDatas>k__BackingField: []
-  - <ADRatio>k__BackingField: 0
+  - <ADRatio>k__BackingField: 258
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 3\uB819"

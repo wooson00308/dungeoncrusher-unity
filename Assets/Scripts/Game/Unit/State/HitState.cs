@@ -22,7 +22,7 @@ public class HitState : StateBase, IState
     {
         if (_currentAttackStateCheckDelay <= 0.1f)
         {
-            _currentAttackStateCheckDelay += Time.deltaTime;
+            _currentAttackStateCheckDelay += GameTime.DeltaTime;
             return;
         }
 

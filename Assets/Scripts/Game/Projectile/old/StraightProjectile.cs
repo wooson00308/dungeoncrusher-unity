@@ -12,7 +12,7 @@ public class StraightProjectile : Projectile_old
 
     protected override void OnMove()
     {
-        transform.Translate(moveDir * _data.projectileInfo.moveSpeed * Time.deltaTime);
+        transform.Translate(moveDir * _data.projectileInfo.moveSpeed * GameTime.DeltaTime);
     }
 
     protected override void TargetHit()

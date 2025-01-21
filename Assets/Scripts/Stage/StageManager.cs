@@ -119,7 +119,7 @@ public class StageManager : SingletonMini<StageManager>
                         spawnCycle * unitData.reductionFormula.underX2Factor);
                 }
 
-                currentTime += Time.deltaTime;
+                currentTime += GameTime.DeltaTime;
 
                 yield return null;
             }

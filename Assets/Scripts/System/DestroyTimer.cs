@@ -21,7 +21,7 @@ public class DestroyTimer : MonoBehaviour
         {
             if (_isDestroy) return;
 
-            time += Time.deltaTime; 
+            time += GameTime.DeltaTime; 
             await Awaitable.EndOfFrameAsync();
         }
 

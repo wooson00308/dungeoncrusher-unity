@@ -73,6 +73,7 @@ public class SkillButton : BaseView
 
     public void OnClick()
     {
+        if (GameTime.TimeScale == 0) return;
         if (IsNotEnoughUltiMana) return;
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
