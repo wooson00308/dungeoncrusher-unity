@@ -378,7 +378,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.3
-        value: {x: 0, y: 0, z: 191.769}
+        value: {x: 0, y: 0, z: -168.2309}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -7064,7 +7064,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.3
-        value: 191.769
+        value: -168.2309
         inSlope: 0
         outSlope: 0
         tangentMode: 1
@@ -13526,7 +13526,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Body/Front arm/Front weapon
+    path: Body/Low body/Front leg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -13538,7 +13538,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Body/Front arm/Front weapon
+    path: Body/Low body/Front leg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -13550,7 +13550,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Body/Front arm/Front weapon
+    path: Body/Low body/Front leg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -13922,7 +13922,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Body/Low body/Front leg
+    path: Body/Front arm/Front weapon
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -13934,7 +13934,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Body/Low body/Front leg
+    path: Body/Front arm/Front weapon
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -13946,7 +13946,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Body/Low body/Front leg
+    path: Body/Front arm/Front weapon
     classID: 4
     script: {fileID: 0}
     flags: 0

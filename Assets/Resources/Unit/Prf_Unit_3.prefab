@@ -10791,7 +10791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043069628328874663, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: m_Radius
-      value: 0.04
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 8252650263040480405, guid: 2716fccc9cbf9424a91e83be13ba2278, type: 3}
       propertyPath: _animationSize

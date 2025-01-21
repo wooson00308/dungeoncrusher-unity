@@ -20,7 +20,7 @@ MonoBehaviour:
   _warningPrefab: {fileID: 0}
   _dropExp: 0
   _health:
-    _value: 2
+    _value: 500000
   _attack:
     _value: 1
   _defense:
