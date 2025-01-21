@@ -23,7 +23,8 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178\n5\uCD08\uC5D0
+      \uD55C\uBC88\uC529 \uD30C\uC774\uC5B4\uBCFC\uC744 \uC18C\uD658\uD55C\uB2E4."
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 5
     <Conditions>k__BackingField: []
@@ -34,11 +35,11 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Description>k__BackingField: "2\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178\n3\uCD08\uC5D0
+      \uD55C\uBC88\uC529 \uD30C\uC774\uC5B4\uBCFC\uC744 \uC18C\uD658\uD55C\uB2E4."
     <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 5
-    <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 029451c251abb48d7b36ea750650ce34, type: 2}
+    <Cooltime>k__BackingField: 3
+    <Conditions>k__BackingField: []
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 9d9d189e29c1447cd843c41cf828c92e, type: 2}
@@ -46,11 +47,11 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "1\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178"
+    <Description>k__BackingField: "3\uB808\uBCA8 \uADF8\uB808\uC774\uC544\uC758 \uBD84\uB178\n2\uCD08\uC5D0
+      \uD55C\uBC88\uC529 \uD30C\uC774\uC5B4\uBCFC\uC744 \uC18C\uD658\uD55C\uB2E4."
     <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 5
-    <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 029451c251abb48d7b36ea750650ce34, type: 2}
+    <Cooltime>k__BackingField: 2
+    <Conditions>k__BackingField: []
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 9d9d189e29c1447cd843c41cf828c92e, type: 2}

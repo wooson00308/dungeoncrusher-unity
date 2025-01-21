@@ -24,8 +24,8 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 1\uB819"
-    <Duration>k__BackingField: 3
-    <Cooltime>k__BackingField: 5
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 0.5
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
@@ -37,8 +37,9 @@ MonoBehaviour:
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 2\uB819"
     <Duration>k__BackingField: 3
-    <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField: []
+    <Cooltime>k__BackingField: 0.5
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}
@@ -48,8 +49,9 @@ MonoBehaviour:
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 3\uB819"
     <Duration>k__BackingField: 3
-    <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField: []
+    <Cooltime>k__BackingField: 0.5
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}

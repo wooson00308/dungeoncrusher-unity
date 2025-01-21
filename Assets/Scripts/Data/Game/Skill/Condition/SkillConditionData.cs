@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public abstract class SkillConditionData : Data
 {
     public virtual int EventId { get; set; }

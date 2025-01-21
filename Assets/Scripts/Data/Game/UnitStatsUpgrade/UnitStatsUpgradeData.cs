@@ -14,7 +14,9 @@ public class UnitStatsUpgradeData : ScriptableObject, IStats
     [field: SerializeField] public IntStat Attack { get; set; }
     [field: SerializeField] public IntStat Defense { get; set; }
     [field: SerializeField] public IntStat Mp { get; set; }
+    [field: SerializeField] public FloatStat MpPercent { get; set; }
     [field: SerializeField] public IntStat Exp { get; set; }
+    [field: SerializeField] public FloatStat ExpPercent { get; set; }
     [field: SerializeField] public IntStat Level { get; set; }
     [field: SerializeField] public IntStat StageLevel { get; set; }
     [field: SerializeField] public FloatStat Speed { get; set; }

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameTime : Singleton<GameTime>
 {
-    public float timeScale;
+    public float timeScale = 1;
 
-    [Tooltip("°ÔÀÓ ³» ÀüÃ¼ ¼Óµµ ¹è¼ö. 1ÀÌ¸é Á¤»ó ¼Óµµ, 0.5f¸é Àý¹Ý ¼Óµµ, 2ÀÌ¸é µÎ ¹è¼Ó.")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Óµï¿½ ï¿½ï¿½ï¿½. 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½, 0.5fï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½, 2ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½.")]
     public static float TimeScale
     {
         get

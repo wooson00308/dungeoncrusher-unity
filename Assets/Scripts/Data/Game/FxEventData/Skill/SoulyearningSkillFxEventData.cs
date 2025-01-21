@@ -4,10 +4,12 @@ using UnityEngine;
     menuName = "Scriptable Objects/Skill/FxEvent/SoulyearningSkillFxEventData")]
 public class SoulyearningSkillFxEventData : SkillFxEventData
 {
-    public int value;
+    public float value;
 
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        owner.UpdateMp($"{skill.Data.Id}", value);
+        Debug.Log("OnSkill");
+        owner.MpPercent.Reset($"{skill.Data.Id}");
+        owner.UpdateMpPercent($"{skill.Data.Id}", value);
     }
 }

@@ -9,7 +9,9 @@ public class SuperArmorSkillFxEventData : SkillFxEventData
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
         owner.IsSuperArmor = true;
-        ResourceManager.Instance.Spawn(Prefab);
+        var spawnPrefab = ResourceManager.Instance.Spawn(Prefab);
+        spawnPrefab.transform.SetParent(owner.Model.transform);
+        spawnPrefab.transform.position = owner.Model.transform.position;
     }
 
     public override void OnEndEvent(Unit owner, object args = null)

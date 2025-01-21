@@ -19,13 +19,14 @@ public class UnitData : ScriptableObject, IStats
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
+    private FloatStat _mpPercent;
     [SerializeField] private IntStat _exp;
+    private FloatStat _expPercent;
     [SerializeField] private IntStat _level;
     [SerializeField] private IntStat _stageLevel;
     [SerializeField] private FloatStat _speed;
     [SerializeField] private FloatStat _attackSpeed;
     [SerializeField] private FloatStat _attackRange;
-
 
     [Tooltip("발생확률")] [SerializeField] private FloatStat _criticalRate;
 
@@ -50,7 +51,9 @@ public class UnitData : ScriptableObject, IStats
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
+    public FloatStat MpPercent => _mpPercent;
     public IntStat Exp => _exp;
+    public FloatStat ExpPercent => _expPercent;
     public IntStat Level => _level;
     public IntStat StageLevel => _stageLevel;
     public FloatStat Speed => _speed;

@@ -234,7 +234,7 @@ public class ChoiceView : BaseView
         {
             if (_owner.SkillDic.TryGetValue(data.skillData.Id, out Skill skill))
             {
-                return data.skillData.GetSkillLevelData(skill.Level).Description;
+                return data.skillData.GetSkillLevelData(skill.Level + 1).Description;
             }
             else
             {

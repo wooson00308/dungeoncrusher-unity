@@ -123,11 +123,6 @@ public class Skill : MonoBehaviour
         // === �߰�: ��Ÿ�� ���� ===
         _cooltimeRemain = _currentLevelData.Cooltime;
 
-        if (_data.Id == 607)
-        {
-            Debug.Log(_currentLevelData.Cooltime);
-        }
-
         // === �߰�: �෹�̼� ����(����ȿ���� �ִ� ��ų�̶��) ===
         if (_currentLevelData.Duration > 0f)
         {
@@ -139,7 +134,7 @@ public class Skill : MonoBehaviour
             _isDurationActive = false;
         }
 
-        if (_owner.Mp.Value >= _currentLevelData.NeedMP)
+        if (_owner.Mp.Value >= _currentLevelData.NeedMP && _currentLevelData.NeedMP != 0)
         {
             _owner.UpdateSkillMp(-_currentLevelData.NeedMP);
         }
@@ -174,11 +169,6 @@ public class Skill : MonoBehaviour
     // === �߰�: ��Ÿ�� / �෹�̼� ���� ���� ===
     public void Update()
     {
-        if (_data.Id == 607)
-        {
-            Debug.Log($"coolTimeRemain: {_cooltimeRemain}");
-        }
-
         // 1) ��Ÿ���� ���� �ִٸ�
         if (_isCoolingDown)
         {

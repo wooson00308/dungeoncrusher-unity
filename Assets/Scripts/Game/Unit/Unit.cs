@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +32,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private GameObject _projectilePrefab;
     private GameObject _warningPrefab;
     private int _dropExp;
+
+    private Unit _attacker;
+    public Unit Attacker => _attacker;
 
     private Unit _killer;
     public Unit Killer => _killer;
@@ -81,7 +82,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public IntStat Attack { get; private set; }
     public IntStat Defense { get; private set; }
     public IntStat Mp { get; private set; }
+    public FloatStat MpPercent { get; private set; }
     public IntStat Exp { get; private set; }
+    public FloatStat ExpPercent { get; private set; }
     public IntStat Level { get; private set; }
     public IntStat StageLevel { get; private set; }
     public FloatStat Speed { get; private set; }
@@ -100,6 +103,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health = new(stats.Health.Value);
         Mp = new(0);
         Mp.SetMaxValue(stats.Mp.Value);
+        MpPercent = new(1);
         Health.SetMaxValue(stats.Health.Value);
         Attack = new(stats.Attack.Value);
         Defense = new(stats.Defense.Value);
@@ -107,6 +111,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         AttackSpeed = new(stats.AttackSpeed.Value);
         Exp = new(stats.Exp.Value);
         Exp.SetMaxValue(100);
+        ExpPercent = new(1);
         Level = new(stats.Level.Value);
         StageLevel = new(0);
         AttackSpeed.OnValueChanged += (value) => { _animator.SetFloat("AttackSpeed", value); };
@@ -135,8 +140,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Attack.Update(key, stats.Attack.Value);
         Defense.Update(key, stats.Defense.Value);
         Mp.Update(key, stats.Mp.Value, StatValueType.Max);
+        MpPercent.Update(key, stats.MpPercent.Value);
         Speed.Update(key, stats.Speed.Value);
         Exp.Update(key, stats.Exp.Value, StatValueType.Max);
+        ExpPercent.Update(key, stats.ExpPercent.Value);
         Level.Update(key, stats.Level.Value);
         StageLevel.Update(key, stats.StageLevel.Value);
         AttackSpeed.Update(key, stats.AttackSpeed.Value);
@@ -155,8 +162,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Defense.Reset(key);
         Mp.Reset(key);
         Mp.Reset(key, StatValueType.Max);
+        MpPercent.Reset(key);
         Speed.Reset(key);
         Exp.Reset(key);
+        ExpPercent.Reset(key);
         Level.Reset(key);
         StageLevel.Reset(key);
         AttackSpeed.Reset(key);
@@ -183,9 +192,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health.SetMaxValue(value);
     }
 
-    public void UpdateMp(string key, int value)
+    public void UpdateMpPercent(string key, float value)
     {
-        Mp.Update(key, value);
+        MpPercent.Update(key, value);
+    }
+
+    public void UpdateExpPercent(string key, int value)
+    {
+        ExpPercent.Update(key, value);
     }
 
     #endregion
@@ -403,6 +417,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         damage = realDamage <= 0 ? 1 : realDamage;
 
         attacker?.TryLifeSteal(damage);
+        _attacker ??= attacker;
 
         Health.Update("Engage", -damage);
 
@@ -545,9 +560,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void UpdateSkillMp(int mpValue)
     {
-        if (Mp.Max < Mp.Value + mpValue) return;
+        if (mpValue >= 0)//mpValue가 0보다 낮으면 감소라
+        {
+            if (Mp.Max <= Mp.Value + (int)(mpValue * MpPercent.Value))
+            {
+                mpValue = Mp.Max;
+            }
+            else
+            {
+                mpValue = (int)(mpValue * MpPercent.Value);
+            }
+        }
 
-        Mp.Update("Engage", mpValue);
+        Mp.Update("mp", mpValue);
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Mana_Regen,
             new UnitEventArgs() { publisher = this });
