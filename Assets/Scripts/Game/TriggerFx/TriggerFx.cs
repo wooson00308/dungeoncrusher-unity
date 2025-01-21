@@ -56,7 +56,7 @@ public class TriggerFx : MonoBehaviour
         }
 
         _duration = Data.Durtaion;
-        _eps = Data.EPS;
+        _eps = Data.EventPerTime;
 
         _onEventFromSelf = Data.OnEventFromSelf;
         _onEventFromOwnerTriggerFx = Data.OnEventFromOwnerProjectile;
@@ -119,7 +119,7 @@ public class TriggerFx : MonoBehaviour
 
         if (_model != null)
         {
-            _model.Animator.CrossFade("Destroy", 0f);
+            _model.Animator?.CrossFade("Destroy", 0f);
         }
 
         DestroyEvent?.Invoke();

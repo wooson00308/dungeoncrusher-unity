@@ -11,6 +11,7 @@ public class TriggerFxAnimator : MonoBehaviour
 
     public void Update()
     {
+        if (Animator == null) return;
         Animator.speed = GameTime.TimeScale;
     }
 

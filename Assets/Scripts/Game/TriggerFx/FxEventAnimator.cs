@@ -9,6 +9,8 @@ public class FxEventAnimator : MonoBehaviour
     private Unit _owner;
     private Skill _skill;
 
+    public bool isGameTime = true;
+
     public void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -16,7 +18,7 @@ public class FxEventAnimator : MonoBehaviour
 
     public void Update()
     {
-        if(_data != null && _data.IsGameTime)
+        if(isGameTime)
         {
             Animator.speed = GameTime.TimeScale;
         }
@@ -27,6 +29,8 @@ public class FxEventAnimator : MonoBehaviour
         _data = data;
         _owner = owner;
         _skill = skill;
+
+        isGameTime = data.IsGameTime;
     }
 
     public void OnAction(AnimationEvent e)
