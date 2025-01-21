@@ -1,20 +1,15 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileData", menuName = "Data/ProjectileData")]
-public class ProjectileData : ScriptableObject
+public abstract class ProjectileData : Data
 {
-    public ProjectileInfo projectileInfo = new();
-}
+    [field: SerializeField] public bool HasHoming { get; private set; }
+    [field: SerializeField] public Projectile Prefab { get; private set; }
+    [field: SerializeField] public FloatStat MoveSpeed { get; private set; }
+    [field: SerializeField] public FloatStat RotationSpeed { get; private set; }
+    [field: SerializeField] public FloatStat Duration { get; private set; }
 
-[Serializable]
-public class ProjectileInfo
-{
-    [Header("이동속도")] [Tooltip("커브라면 도착하는 시간")]
-    public float moveSpeed;
-
-    [Tooltip("콜라이더 범위")] public float detectRange;
-
-    public bool isStun;
-    public bool isAerial;
+    public virtual void OnTriggerEnterEvent(Unit owner, Unit target) { }
+    public virtual void OnTriggerStayEvent(Unit owner, Unit target) { }
+    public virtual void OnTriggerExitEvent(Unit owner, Unit target) { }
 }

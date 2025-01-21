@@ -18,19 +18,19 @@ public class EngageView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, ShowHealthSlider, ShowMpSlider);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, EnqueueDamageText);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), ShowHealthSlider, ShowMpSlider);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), EnqueueDamageText);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, ShowHealthSlider, ShowMpSlider);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, EnqueueDamageText);
     }
 
-    private void EnqueueDamageText(GameEvent gameEvent)
+    private void EnqueueDamageText(object gameEvent)
     {
-        if (gameEvent.args is OnHitEventArgs onHitArgs)
+        if (gameEvent is OnHitEventArgs onHitArgs)
         {
             _damageEventQueue.Enqueue(onHitArgs);
             if (!_isProcessingDamageQueue)
@@ -62,9 +62,9 @@ public class EngageView : BaseView
         _isProcessingDamageQueue = false;
     }
 
-    private void ShowHealthSlider(GameEvent gameEvent)
+    private void ShowHealthSlider(object gameEvent)
     {
-        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        var setActiveEventArgs = gameEvent as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
         HpSliderUI hpSlider;
@@ -81,9 +81,9 @@ public class EngageView : BaseView
         hpSlider.Show(setActiveEventArgs.publisher);
     }
 
-    private void ShowMpSlider(GameEvent gameEvent)
+    private void ShowMpSlider(object gameEvent)
     {
-        var setActiveEventArgs = gameEvent.args as SetActiveEventArgs;
+        var setActiveEventArgs = gameEvent as SetActiveEventArgs;
         if (!setActiveEventArgs.isActive) return;
 
         MpSliderUI mpSlider;

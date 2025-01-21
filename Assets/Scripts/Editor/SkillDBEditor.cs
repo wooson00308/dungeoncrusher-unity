@@ -5,15 +5,15 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SkillDB))]
+[CustomEditor(typeof(SkillDB_old))]
 public class SkillDBEditor : Editor
 {
-    private SkillDB _skillDatabase;
+    private SkillDB_old _skillDatabase;
     private string _newSkillName = "NewSkill";
     private Type _selectedType;
     private string[] _availableTypes;
 
-    private Dictionary<SkillData, bool> _foldoutStates = new(); // ����ƿ� ���� ����
+    private Dictionary<SkillData_old, bool> _foldoutStates = new(); // ����ƿ� ���� ����
 
     private const string SKILL_BASE_PATH = "Assets/Resources/Skill";
     private const string SKILL_PREFAB_PATH = SKILL_BASE_PATH + "/";
@@ -22,7 +22,7 @@ public class SkillDBEditor : Editor
 
     private void OnEnable()
     {
-        _skillDatabase = (SkillDB)target;
+        _skillDatabase = (SkillDB_old)target;
         _availableTypes = GetSkillDataTypes();
         RefreshSkillDatabase();
     }
@@ -72,7 +72,7 @@ public class SkillDBEditor : Editor
                 EditorGUI.indentLevel++;
 
                 // ��ų ������ ǥ��
-                EditorGUILayout.ObjectField("Skill Data", skillData, typeof(SkillData), false);
+                EditorGUILayout.ObjectField("Skill Data", skillData, typeof(SkillData_old), false);
 
                 // Skill Prefab ���� ǥ��
                 EditorGUILayout.ObjectField("Skill Prefab", skillData.Prefab, typeof(GameObject), false);
@@ -116,7 +116,7 @@ public class SkillDBEditor : Editor
         string[] assetFiles = Directory.GetFiles(path, "*.asset");
         foreach (string file in assetFiles)
         {
-            SkillData skillData = AssetDatabase.LoadAssetAtPath<SkillData>(file);
+            SkillData_old skillData = AssetDatabase.LoadAssetAtPath<SkillData_old>(file);
             if (skillData != null)
             {
                 _skillDatabase.AddSkillData(skillData);
@@ -153,7 +153,7 @@ public class SkillDBEditor : Editor
             Debug.Log($"Directory created at: {directoryPath}");
         }
 
-        SkillData newSkillData = (SkillData)ScriptableObject.CreateInstance(_selectedType);
+        SkillData_old newSkillData = (SkillData_old)ScriptableObject.CreateInstance(_selectedType);
         newSkillData.name = skillName;
 
         AssetDatabase.CreateAsset(newSkillData, savePath);
@@ -169,10 +169,10 @@ public class SkillDBEditor : Editor
     }
 
 
-    private GameObject CreateSkillPrefab(string skillName, SkillData skillData)
+    private GameObject CreateSkillPrefab(string skillName, SkillData_old skillData)
     {
         GameObject skillPrefab = new(skillName);
-        Skill skillComponent = skillPrefab.AddComponent<Skill>();
+        Skill_old skillComponent = skillPrefab.AddComponent<Skill_old>();
         //skillComponent.SetSkillData(skillData);
 
         string prefabPath = SKILL_PREFAB_PATH + $"{skillName}.prefab";
@@ -189,7 +189,7 @@ public class SkillDBEditor : Editor
         return skillPrefab;
     }
 
-    private void CreateSkillFxPrefabs(string skillName, SkillData skillData)
+    private void CreateSkillFxPrefabs(string skillName, SkillData_old skillData)
     {
         GameObject fxBase = AssetDatabase.LoadAssetAtPath<GameObject>(SKILL_FX_PREFAB_PATH);
         if (fxBase == null)
@@ -206,13 +206,13 @@ public class SkillDBEditor : Editor
 
         Debug.Log($"Skill FX prefab created at: {fxPrefabPath}");
 
-        skillData.SkillLevelDatas = new List<SkillLevelData>();
+        skillData.SkillLevelDatas = new List<SkillLevelData_old>();
 
         for (int i = 0; i < 3; i++)
         {
             fxPrefab.name = fxPrefabName;
 
-            var skillLevelData = new SkillLevelData
+            var skillLevelData = new SkillLevelData_old
             {
                 activationChance = 50,
                 skillValue = 100,
@@ -227,7 +227,7 @@ public class SkillDBEditor : Editor
         AssetDatabase.Refresh();
     }
 
-    private void RemoveSkillData(SkillData skillData)
+    private void RemoveSkillData(SkillData_old skillData)
     {
         if (skillData == null)
         {
@@ -272,7 +272,7 @@ public class SkillDBEditor : Editor
     }
 
 
-    private void RemovePrefabsFromSkillData(SkillData skillData)
+    private void RemovePrefabsFromSkillData(SkillData_old skillData)
     {
         // Skill Prefab ����
         if (skillData.Prefab != null)
@@ -303,7 +303,7 @@ public class SkillDBEditor : Editor
 
     private string[] GetSkillDataTypes()
     {
-        var skillDataType = typeof(SkillData);
+        var skillDataType = typeof(SkillData_old);
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         var types = new List<string>();
 

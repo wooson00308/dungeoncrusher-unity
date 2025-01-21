@@ -3,18 +3,18 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ProjectileDB))]
+[CustomEditor(typeof(ProjectileDB_old))]
 public class ProjectileDBEditor : DBEditor
 {
     private SerializedProperty _projectileData;
-    private ProjectileDB _projectileDB;
+    private ProjectileDB_old _projectileDB;
                                             
     private string _projectilePath = "Projectile";
 
     private void OnEnable()
     {
         _projectileData = serializedObject.FindProperty("ProjectileDatas");
-        _projectileDB = target as ProjectileDB;
+        _projectileDB = target as ProjectileDB_old;
 
         RefreshData(_projectilePath);
     }
@@ -63,7 +63,7 @@ public class ProjectileDBEditor : DBEditor
 
             if (!AssetDatabase.AssetPathExists(path))
             {
-                var createData = ScriptableObject.CreateInstance<ProjectileData>();
+                var createData = ScriptableObject.CreateInstance<ProjectileData_old>();
 
                 createData.projectileInfo.moveSpeed = _projectileDB.projectileInfo.moveSpeed;
                 createData.projectileInfo.detectRange = _projectileDB.projectileInfo.detectRange;
@@ -102,7 +102,7 @@ public class ProjectileDBEditor : DBEditor
     protected override void RefreshData(string path)
     {
         var loadAllData = Resources.LoadAll($"{_dataPath}{path}");
-        _projectileDB.ProjectileDatas = loadAllData.Select(data => data as ProjectileData).ToList();
+        _projectileDB.ProjectileDatas = loadAllData.Select(data => data as ProjectileData_old).ToList();
         _projectileDB.ProjectileDatas = _projectileDB.ProjectileDatas.Where(data => data != null).ToList();
     }
 

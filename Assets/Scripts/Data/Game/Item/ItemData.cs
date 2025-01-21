@@ -15,8 +15,10 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private IntStat _attack;
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
+    [SerializeField] private FloatStat _mpPercent;
     [SerializeField] private IntStat _maxMp;
     [SerializeField] private IntStat _exp;
+    [SerializeField] private FloatStat _expPercent;
     [SerializeField] private IntStat _level;
     [SerializeField] private IntStat _stageLevel;
     [SerializeField] private FloatStat _speed;
@@ -28,7 +30,7 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private FloatStat _stunRate;
     [SerializeField] private FloatStat _lifestealRate;
     [SerializeField] private FloatStat _lifestealPercent;
-    [SerializeField] protected List<SkillData> _skillDatas;
+    [SerializeField] protected List<SkillData_old> _skillDatas;
 
     public string Id => _id;
     public GameObject Prefab => _prefab;
@@ -42,7 +44,9 @@ public abstract class ItemData : ScriptableObject, IStats
     public IntStat Attack => _attack;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
+    public FloatStat MpPercent => _mpPercent;
     public IntStat Exp => _exp;
+    public FloatStat ExpPercent => _expPercent;
     public IntStat Level => _level;
     public IntStat StageLevel => _stageLevel;
     public IntStat MaxMp => _maxMp;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum UnitEvents
 {
-    None,
+    None = 200,
     UnitEvent_SetActive,
     UnitEvent_UseSkill,
     UnitEvent_UseSkill_Ulti,
@@ -19,7 +19,8 @@ public enum UnitEvents
     UnitEvnet_LevelUpCount,
     UnitEvent_OnDestroy,
     UnitEvent_OnDeath,
-    UnitEvent_OnDeath_Special
+    UnitEvent_OnDeath_Special,
+    UnitEvent_OnKill,
 }
 
 public class UnitEventArgs
@@ -40,5 +41,16 @@ public class OnHitEventArgs : UnitEventArgs
 
 public class SkillEventArgs : UnitEventArgs
 {
+    public SkillData_old data_old;
     public SkillData data;
+}
+
+public class UnitEventWithAttackerArgs : UnitEventArgs
+{
+    public Unit attacker;
+}
+
+public class UnitEventOnKillArgs : UnitEventArgs
+{
+    public Unit target;
 }

@@ -9,6 +9,7 @@ public class SkillButton : BaseView
     private bool _isRootSkill;
 
     private Unit _player;
+    private Skill _skill;
     private Button _button;
 
     public enum Images
@@ -33,17 +34,17 @@ public class SkillButton : BaseView
         Get<Image>((int)Images.Skill_Icon_Image).enabled = false;
         Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
         Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"LOCKED");
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_RootSkill.ToString(), RootSkillEvent);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_RootSkill.ToString(), RootSkillEvent);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
     }
 
-    private void RootSkillEvent(GameEvent e)
+    private void RootSkillEvent(object e)
     {
-        var data = e.args as SkillData;
+        var data = e as SkillData;
 
         if (data == null) return;
         if (data.Id != _data.Id) return;
@@ -54,9 +55,11 @@ public class SkillButton : BaseView
         if (_player == null)
         {
             _player = UnitFactory.Instance.GetPlayer();
+            if (_player.SkillDic.TryGetValue(data.Id, out Skill skill))
+            {
+                _skill = skill;
+            }
         }
-
-        var skill = _player.SkillDic[data.Id];
 
         _isRootSkill = true;
     }
@@ -74,16 +77,11 @@ public class SkillButton : BaseView
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
-            if (skill.IsCooldown) return;
+            if (skill.IsCoolingdown) return;
 
-            GameEventSystem.Instance.Publish(UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
-            new GameEvent
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
             {
-                eventType = UnitEvents.UnitEvent_UseSkill_Publish_UI.ToString(),
-                args = new SkillEventArgs
-                {
-                    data = _data
-                }
+                data = _data
             });
         }
     }
@@ -101,9 +99,9 @@ public class SkillButton : BaseView
 
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
-            if(!IsNotEnoughUltiMana)
+            if (!IsNotEnoughUltiMana)
             {
-                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCooldown;
+                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCoolingdown;
             }
             else
             {
@@ -122,31 +120,35 @@ public class SkillButton : BaseView
 
     private void UpdateSkillCooldown(Skill skill)
     {
-        if(IsNotEnoughUltiMana)
+        if (IsNotEnoughUltiMana)
         {
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
             Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
         }
         else
         {
-            float cooltime = Time.time - skill.TimeMarker;
-            float maxCooltime = _data.GetSkillLevelData(skill.Level).coolTime;
+            float remainCooltime = skill.CooltimeRemain;
+            float maxCooltime = skill.CurrentLevelData.Cooltime;
 
-            float remainCooltime = maxCooltime - cooltime;
-
-            if (remainCooltime < 0)
+            if (remainCooltime <= 0)
             {
                 ResetSkillUI();
                 return;
             }
 
-            // �ؽ�Ʈ ������Ʈ
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText($"{Mathf.Ceil(remainCooltime)}s");
-            // �� ����Ʈ ������Ʈ (0 ~ 1)
-            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1 - (cooltime / maxCooltime);
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = remainCooltime / maxCooltime;
         }
     }
 
-    private bool IsNotEnoughUltiMana => _data.IsUltSkill && _player.Mp.Value < _player.Mp.Max;
+    private bool IsNotEnoughUltiMana
+    {
+        get
+        {
+            if (_player == null) return false;
+            if (_skill == null) return false;
 
+            return _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+        }
+    }
 }

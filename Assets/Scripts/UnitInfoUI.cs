@@ -34,18 +34,18 @@ public class UnitInfoUI : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, Initialized);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Engage.ToString(), Initialized);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_SetActive.ToString(), Initialized);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnHit.ToString(), UpdateHpUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_Mana_Regen.ToString(), UpdateMpUI);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, Initialized);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
     }
 
     public override void BindUI()
@@ -54,7 +54,7 @@ public class UnitInfoUI : BaseView
         Bind<RectTransform>(typeof(RectTransforms));
     }
 
-    private async void Initialized(GameEvent gameEvent)
+    private async void Initialized(object gameEvent)
     {
         if (_unit == null)
         {
@@ -91,7 +91,7 @@ public class UnitInfoUI : BaseView
         }
     }
 
-    private void UpdateHpUI(GameEvent gameEvent)
+    private void UpdateHpUI(object gameEvent)
     {
         if (_unit.Team == Team.Enemy) return;
 
@@ -120,7 +120,7 @@ public class UnitInfoUI : BaseView
         }
     }
 
-    private void UpdateMpUI(GameEvent gameEvent)
+    private void UpdateMpUI(object gameEvent)
     {
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
@@ -195,7 +195,8 @@ public class UnitInfoUI : BaseView
 
         foreach (var key in _unit.SkillDic.Keys)
         {
-            var data = _unit.SkillDic[key].SkillData;
+            var skill = _unit.SkillDic[key];
+            var data = skill.Data;
             var image = images[index++];
 
             image.sprite = data.Icon;
@@ -204,7 +205,7 @@ public class UnitInfoUI : BaseView
             skillLevelBackground.gameObject.SetActive(true);
 
             var skillLevelTxt = skillLevelBackground.GetComponentInChildren<TextMeshProUGUI>();
-            skillLevelTxt.SetText($"{data.Level}");
+            skillLevelTxt.SetText($"{skill.Level}");
         }
     }
 

@@ -28,19 +28,19 @@ public class MainView : BaseView
 
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_Ready.ToString(), UpdateStageUI);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
         Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
             .SetText($"<size=45>x</size>{1}");
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_Ready.ToString(), UpdateStageUI);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), SpecialDeathEffect);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
     }
 
-    private void UpdateStageUI(GameEvent gameEvent)
+    private void UpdateStageUI(object gameEvent)
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Stage_Value).SetText($"{StageManager.Instance.CurrentStage}");
     }
@@ -56,9 +56,9 @@ public class MainView : BaseView
         Bind<Image>(typeof(Images));
     }
 
-    private void SpecialDeathEffect(GameEvent gameEvent)
+    private void SpecialDeathEffect(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
 
         Unit unit = unitEventArgs.publisher;
 

@@ -41,7 +41,7 @@ public class ChoiceTable : ScriptableObject
                     if (player.SkillDic
                         .TryGetValue(data.skillData.Id, out Skill skill))
                     {
-                        if (skill != null && skill.Level >= data.skillData.MaxLv)
+                        if (skill != null && skill.Level >= data.skillData.MaxLevel)
                         {
                             weightedChoices.Remove((data, weight)); //만렙 스킬 제거
                             continue;

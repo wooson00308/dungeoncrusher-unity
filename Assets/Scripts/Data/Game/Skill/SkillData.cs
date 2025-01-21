@@ -2,140 +2,75 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillFXSpawnPosType
+[CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
+public class SkillData : Data
 {
-    Self,
-    Target
-}
+    [field: SerializeField] public Sprite Icon { get; private set; }
 
-public abstract class SkillData : ScriptableObject
-{
-    private int _level = 0; //스킬데이터 자체에서 레벨을 알 수 있도록 함.
-    [SerializeField] protected string _id;
-    [SerializeField] protected GameObject _prefab;
-    [SerializeField] protected int _rarity;
-    [SerializeField] protected string _name;
-    [Space] [SerializeField] protected bool _isAreaAttack;
-    [SerializeField] protected bool _isCooltimeSkill;
-    [SerializeField] protected bool _isRandomDetected;
-    [SerializeField] protected bool _isPassiveSkill; //자가 구동을 위한 bool 값 
-    [SerializeField] protected bool _isUltSkill; //필살기 체크 값 
-    [SerializeField] protected UnitEvents _skillEventType;
-    [SerializeField] protected SkillFXSpawnPosType _skillFxSpawnPosType;
-
-    [Space] [SerializeField] protected List<SkillLevelData> _skillLevelDatas;
-
-    public string Id => _id;
-
-    public GameObject Prefab
-    {
-        get { return _prefab; }
-        set { _prefab = value; }
-    }
-
-    public int Rarity => _rarity;
-
-    public Sprite Icon
+    public int MaxLevel
     {
         get
         {
-            if (_level < _skillLevelDatas.Count)
-                return _skillLevelDatas[_level].icon;
-            else
-                return _skillLevelDatas[_level - 1].icon;
+            if (LevelDatas == null) return 0;
+            return LevelDatas.Count;
         }
-    } //=> _icon;
+    }
 
-    public string Name => _name;
-
-    public int Level
+    public SkillLevelData GetSkillLevelData(int level)
     {
-        get => _level;
-        set
+        if (LevelDatas == null || LevelDatas.Count == 0)
         {
-            if (MaxLv > _level)
-            {
-                _level = value;
-            }
-            else
-            {
-                _level = MaxLv;
-            }
+            Debug.LogError($"{Id}�� ���� �� ��ų �����Ͱ� ����ֽ��ϴ�.");
+            return null;
         }
+
+        int index = level - 1;
+        SkillLevelData defaultData = level >= MaxLevel ? LevelDatas[^1] : LevelDatas[0];
+
+        if (index >= MaxLevel || index < 0)
+        {
+            return defaultData;
+        }
+
+        return LevelDatas[index];
     }
 
-    public int MaxLv
-    {
-        get => _skillLevelDatas.Count;
-    }
+    [field: SerializeField] private string _defaultPrefabPath = "Skill/Skill";
 
-    public bool IsCooltimeSkill => _isCooltimeSkill;
-    public bool IsAreaAttack => _isAreaAttack;
-    public bool IsPassiveSkill => _isPassiveSkill; //자가 구동을 위한 bool 값 입력부
-    public bool IsRamdomDetected => _isRandomDetected;
-    public bool IsUltSkill => _isUltSkill; //자가 구동을 위한 bool 값 입력부
+    [Header("Ŀ���� �� ��ų �������� ������ �־��ּ���")] [field: SerializeField]
+    private Skill _prefab;
 
-    public string Description
+    public Skill Prefab
     {
         get
         {
-            if (_level < _skillLevelDatas.Count)
-                return _skillLevelDatas[_level].description;
-            else
-                return _skillLevelDatas[_level - 1].description;
+            if (_prefab != null) return _prefab;
+
+            var prefab = Resources.Load<Skill>(_defaultPrefabPath);
+
+            return prefab;
         }
     }
 
-    public UnitEvents SkillEventType => _skillEventType;
-    public SkillFXSpawnPosType SkillFXSpawnPosType => _skillFxSpawnPosType;
-
-    public List<SkillLevelData> SkillLevelDatas
-    {
-        get { return _skillLevelDatas; }
-        set { _skillLevelDatas = value; }
-    }
-
-    public SkillLevelData GetSkillLevelData(int skillLevel)
-    {
-        int skillIndex = skillLevel - 1;
-        SkillLevelData defaultSkillLevelData = _skillLevelDatas[^1];
-
-        if (defaultSkillLevelData == null)
-        {
-            string errorMessage = $"{_id}의 레벨 별 스킬 데이터가 존재하지 않습니다.";
-            Debug.LogError(errorMessage);
-            throw new SkillDataNotFoundException(errorMessage);
-        }
-
-        if (_skillLevelDatas.Count - 1 < skillIndex)
-        {
-            return defaultSkillLevelData;
-        }
-
-        _level = skillLevel;
-        return _skillLevelDatas[skillIndex];
-    }
-
-    public abstract bool IsValidTarget(Unit unit);
-    public abstract void OnAction(Skill skill, Unit user, List<Unit> targets);
+    [field: SerializeField] public List<SkillLevelData> LevelDatas { get; private set; }
 }
 
 [Serializable]
 public class SkillLevelData
 {
-    [Range(0f, 100f)] public float activationChance;
-    public float skillValue; // n%
-    public float coolTime; //쿨타임 입력
-    public int targetNum; //타켓수 지정방식
-    public float range; //공격 범위 크기?
-    public Sprite icon;
-    [TextArea] public string description;
-    public GameObject skillFxPrefab;
-}
+    [field: SerializeField] public int ADRatio { get; private set; }
+    [field: SerializeField] public int APRatio { get; private set; }
+    [field: SerializeField] public int NeedMP { get; private set; }
 
-public class SkillDataNotFoundException : Exception
-{
-    public SkillDataNotFoundException(string message) : base(message)
-    {
-    }
+    [field: TextArea]
+    [field: SerializeField]
+    public string Description { get; private set; }
+
+    [field: SerializeField] public float Duration { get; private set; }
+
+    [field: SerializeField] public float Cooltime { get; private set; }
+    [field: SerializeField] public List<SkillConditionData> Conditions { get; private set; }
+    [field: SerializeField] public List<SkillFxEventData> ApplyFxDatas { get; private set; }
+    [field: SerializeField] public List<SkillFxEventData> UseSkillFxDatas { get; private set; }
+    [field: SerializeField] public List<SkillFxEventData> RemoveFxDatas { get; private set; }
 }

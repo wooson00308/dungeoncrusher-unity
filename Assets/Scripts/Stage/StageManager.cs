@@ -20,15 +20,15 @@ public class StageManager : SingletonMini<StageManager>
 
     private void Start()
     {
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), StopAll);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_GameOver, StopAll);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), StopAll);
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_GameOver, StopAll);
     }
 
-    private void StopAll(GameEvent gameEvent)
+    private void StopAll(object gameEvent)
     {
         StopAllCoroutines();
     }

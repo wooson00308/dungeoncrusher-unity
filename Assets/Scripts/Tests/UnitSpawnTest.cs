@@ -19,13 +19,13 @@ public class UnitSpawnTest
 
         await Awaitable.WaitForSecondsAsync(1f);
 
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_AllStageClear.ToString(), OnTestComplete);
-        GameEventSystem.Instance.Subscribe(ProcessEvents.ProcessEvent_GameOver.ToString(), OnTestComplete);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_AllStageClear, OnTestComplete);
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_GameOver, OnTestComplete);
 
         _system = GameObject.FindFirstObjectByType<ProcessSystem>();
     }
 
-    private void OnTestComplete(GameEvent gameEvent)
+    private void OnTestComplete(object gameEvent)
     {
         _isTestComplelte = true;
     }

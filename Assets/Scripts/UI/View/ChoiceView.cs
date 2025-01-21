@@ -28,9 +28,12 @@ public class ChoiceView : BaseView
 
     private ReadyView _readyView;
 
+    private Unit _owner;
+
     private void Awake()
     {
         _readyView = transform.parent.GetComponentInParent<ReadyView>();
+        _owner = UnitFactory.Instance.GetPlayer();
         BindUI();
     }
 
@@ -229,7 +232,14 @@ public class ChoiceView : BaseView
     {
         if (data.skillData != null)
         {
-            return data.skillData.Description;
+            if (_owner.SkillDic.TryGetValue(data.skillData.Id, out Skill skill))
+            {
+                return data.skillData.GetSkillLevelData(skill.Level + 1).Description;
+            }
+            else
+            {
+                return data.skillData.GetSkillLevelData(1).Description;
+            }
         }
         else if (data.itemData != null)
         {
@@ -287,6 +297,6 @@ public class ChoiceView : BaseView
         }
 
         if (_readyView.StatChoiceCount >= 0) return;
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Engage.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Engage);
     }
 }

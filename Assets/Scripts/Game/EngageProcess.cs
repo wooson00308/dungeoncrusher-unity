@@ -5,8 +5,8 @@ public class EngageProcess : Process
 {
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath.ToString(), TryNextProcess);
-        GameEventSystem.Instance.Subscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), TryNextProcess);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, TryNextProcess);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, TryNextProcess);
 
         UIManager.Instance.ShowLayoutUI<EngageUI>();
         EngageStart();
@@ -16,20 +16,20 @@ public class EngageProcess : Process
     {
         StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_SetActive.ToString(), new GameEvent { args = true });
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
     }
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath.ToString(), TryNextProcess);
-        GameEventSystem.Instance.Unsubscribe(UnitEvents.UnitEvent_OnDeath_Special.ToString(), TryNextProcess);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, TryNextProcess);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Special, TryNextProcess);
 
         UIManager.Instance.CloseLayoutUI<EngageUI>();
     }
 
-    private void TryNextProcess(GameEvent gameEvent)
+    private void TryNextProcess(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent.args;
+        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team.Friendly)

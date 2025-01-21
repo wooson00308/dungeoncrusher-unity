@@ -19,6 +19,6 @@ public class ReadyText : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEventSystem.Instance.Publish(ProcessEvents.ProcessEvent_Engage.ToString());
+        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Engage);
     } 
 }
