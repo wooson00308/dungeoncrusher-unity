@@ -169,6 +169,8 @@ public class Skill : MonoBehaviour
     // === �߰�: ��Ÿ�� / �෹�̼� ���� ���� ===
     public void Update()
     {
+        if (GameTime.TimeScale == 0) return;
+
         // 1) ��Ÿ���� ���� �ִٸ�
         if (_isCoolingDown)
         {

@@ -14,7 +14,7 @@ public class AerialState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
-        currentAerialTime += Time.deltaTime;
+        currentAerialTime += GameTime.DeltaTime;
         if (currentAerialTime >= aerialTime)
         {
             _fsm.TransitionTo<ChaseState>();

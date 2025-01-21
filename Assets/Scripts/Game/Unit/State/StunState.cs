@@ -29,7 +29,7 @@ public class StunState : StateBase, IState
     {
         if (_currentCheckDelay < _stunDuration)
         {
-            _currentCheckDelay += Time.deltaTime;
+            _currentCheckDelay += GameTime.DeltaTime;
             return;
         }
 

@@ -21,6 +21,11 @@ public class UnitAnimator : MonoBehaviour
         _body = transform.Find("Body");
     }
 
+    private void Update()
+    {
+        _animator.speed = GameTime.TimeScale;
+    }
+
     private void FixedUpdate()
     {
         OrderSprite();

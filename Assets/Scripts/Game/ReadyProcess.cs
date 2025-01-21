@@ -60,6 +60,8 @@ public class ReadyProcess : Process
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, false);
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Ready);
         SoundSystem.Instance.PlayBGM("EngageBGM");
+
+        TimeManager.Instance.StopTime();
     }
 
     private void AllReady(object gameEvent)

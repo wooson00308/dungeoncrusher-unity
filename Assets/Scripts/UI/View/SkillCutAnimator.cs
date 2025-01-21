@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class SkillCutAnimator : MonoBehaviour
 {
+    private void Awake()
+    {
+        //GetComponent<Animator>().speed = GameTime.DeltaTime;
+    }
+
+    private void Update()
+    {
+        GetComponent<Animator>().speed = GameTime.TimeScale;
+    }
+
     public void StartCut(AnimationEvent e)
     {
         TimeManager.Instance.SlowMotion(true);
@@ -10,8 +20,12 @@ public class SkillCutAnimator : MonoBehaviour
 
     public void EndCut(AnimationEvent e)
     {
-        TimeManager.Instance.SlowMotion(false);
-        CameraController.Instance.ZoomInOut(true);
+        if(GameTime.TimeScale != 1)
+        {
+            TimeManager.Instance.SlowMotion(false);
+            CameraController.Instance.ZoomInOut(true);
+        }
+        
         transform.parent.gameObject.SetActive(false);
     }
 }
