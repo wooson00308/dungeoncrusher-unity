@@ -49,7 +49,7 @@ public class CurveProjectile : Projectile_old
 
     protected override void OnMove()
     {
-        currentTime += Time.deltaTime;
+        currentTime += GameTime.DeltaTime;
 
         float t = Mathf.Clamp01(currentTime / endTime);
 

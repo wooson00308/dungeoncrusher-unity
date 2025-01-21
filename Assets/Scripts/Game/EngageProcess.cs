@@ -17,6 +17,8 @@ public class EngageProcess : Process
         StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
+
+        TimeManager.Instance.PlayTime();
     }
 
     private void OnDisable()

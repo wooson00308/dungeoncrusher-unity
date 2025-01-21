@@ -11,7 +11,7 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 {
     #region Fields
-
+    public const int MOVE_SPEED_FACTOR = 100;
     public Team Team { get; set; }
 
     private float _stunDuration;
@@ -326,7 +326,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         IsHit = false;
         _agent.isStopped = false;
-        _agent.speed = Speed.Value;
+        _agent.speed = (Speed.Value * MOVE_SPEED_FACTOR) * GameTime.DeltaTime;
         _agent.SetDestination(target.position);
         Rotation(target.position - transform.position);
     }
@@ -341,7 +341,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (!IsActive) return;
         if (TryGetComponent<DashState>(out var state))
         {
-            var speed = data.DashSpeed;
+            var speed = (data.DashSpeed * MOVE_SPEED_FACTOR) * GameTime.DeltaTime;
             var distance = data.AdditionalDistance;
             state.OnDash(this, speed, distance, callback);
         }
@@ -494,6 +494,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
+            if(GameTime.TimeScale != 1)
+            {
+                TimeManager.Instance.SlowMotion(false);
+                CameraController.Instance.ZoomInOut(true);
+            }
+            
             AddForce(killer);
             TimeManager.Instance.FreezeTime(0.005f);
             CameraController.Instance.Shake(8, 0.05f);

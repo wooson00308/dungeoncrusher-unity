@@ -76,8 +76,7 @@ public class MainView : BaseView
     public void OnClickChangeGameSpeed()
     {
         _presenter.ChangeGameSpeed();
-        Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
-            .SetText($"<size=45>x</size>{GetComponent<MainUI>().GetGameSpeed()}");
+        Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed).SetText($"<size=45>x</size>{Time.timeScale}");
     }
 
     public void OnClickSuperArmor()
