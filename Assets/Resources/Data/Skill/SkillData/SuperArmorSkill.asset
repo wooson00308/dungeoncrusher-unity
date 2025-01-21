@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SuperArmorSkill
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 604
-  <Name>k__BackingField: SuperArmor
+  <Name>k__BackingField: "\uC288\uD37C\uC544\uBA38"
   <DisplayName>k__BackingField: SuperArmorSkill
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 64f1e198b9303415b8165441b2aa752b, type: 3}

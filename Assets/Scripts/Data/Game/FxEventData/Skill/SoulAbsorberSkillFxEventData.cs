@@ -8,6 +8,7 @@ public class SoulAbsorberSkillFxEventData : SkillFxEventData
 
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        owner.UpdateMaxHealth(healthValue);
+        Debug.Log("hi");
+        owner.UpdateMaxHealth(owner.Health.Max + healthValue);
     }
 }

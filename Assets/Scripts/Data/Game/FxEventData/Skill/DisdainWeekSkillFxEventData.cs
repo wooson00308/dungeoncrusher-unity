@@ -5,5 +5,6 @@ public class DisdainWeekSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
+        
     }
 }

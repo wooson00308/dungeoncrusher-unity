@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class EngageView : BaseView
 {
-    public enum GameObjects
-    {
-        EngageStart_Group
-    }
-
     private Queue<OnHitEventArgs> _damageEventQueue = new Queue<OnHitEventArgs>();
+    private Queue<UnitEventOnKillArgs> _executionEventQueue = new Queue<UnitEventOnKillArgs>();
     private bool _isProcessingDamageQueue = false;
+    private bool _isProcessingExecutionQueue = false;
 
     private void Awake()
     {
@@ -20,12 +17,14 @@ public class EngageView : BaseView
     {
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, ShowHealthSlider, ShowMpSlider);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, EnqueueDamageText);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Execution, ExecutionText);
     }
 
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, ShowHealthSlider, ShowMpSlider);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, EnqueueDamageText);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Execution, ExecutionText);
     }
 
     private void EnqueueDamageText(object gameEvent)
@@ -38,6 +37,35 @@ public class EngageView : BaseView
                 ProcessDamageQueue();
             }
         }
+    }
+
+    private void ExecutionText(object gameEvent)
+    {
+        if (gameEvent is UnitEventOnKillArgs onHitArgs)
+        {
+            _executionEventQueue.Enqueue(onHitArgs);
+            if (!_isProcessingExecutionQueue)
+            {
+                ProcessExecutionQueue();
+            }
+        }
+    }
+
+    private async void ProcessExecutionQueue()
+    {
+        _isProcessingExecutionQueue = true;
+
+        while (_executionEventQueue.Count > 0)
+        {
+            var unitEventOnKillArgs = _executionEventQueue.Dequeue();
+            var executionText = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI").GetComponent<ExecutionTextUI>();
+            
+            executionText.Show("처형!", unitEventOnKillArgs.publisher.transform.position);
+
+            await Awaitable.EndOfFrameAsync();
+        }
+
+        _isProcessingExecutionQueue = false;
     }
 
     private async void ProcessDamageQueue()
@@ -56,6 +84,7 @@ public class EngageView : BaseView
             {
                 damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position);
             }
+
             await Awaitable.EndOfFrameAsync();
         }
 
@@ -102,6 +131,5 @@ public class EngageView : BaseView
 
     public override void BindUI()
     {
-        Bind<GameObject>(typeof(GameObjects));
     }
 }

@@ -4,9 +4,11 @@ public interface IStats
 {
     public IntStat Health { get; }
     public IntStat Attack { get; }
+    public FloatStat AP { get; }
+    public FloatStat AD { get; }
     public IntStat Defense { get; }
     public IntStat Mp { get; }
-    public FloatStat MpPercent { get; }            
+    public FloatStat MpPercent { get; }
     public IntStat Exp { get; }
     public FloatStat ExpPercent { get; }
     public IntStat Level { get; }

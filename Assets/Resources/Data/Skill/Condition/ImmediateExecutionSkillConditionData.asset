@@ -16,5 +16,5 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  condition: 10004
-  executionPercent: 5
+  UnitEvent: 209
+  executionRate: 10
