@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SupportShotSkill
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 605
-  <Name>k__BackingField: SupportShot
+  <Name>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7"
   <DisplayName>k__BackingField: SupportShotSkill
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: d04b2233b9c0a0c41ac79096e0e12a99, type: 3}
@@ -36,7 +36,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 2\uB819"
-    <Duration>k__BackingField: 3
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0.5
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
@@ -48,7 +48,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 100
     <Description>k__BackingField: "\uC11C\uD3EC\uD2B8\uC0F7 3\uB819"
-    <Duration>k__BackingField: 3
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0.5
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}

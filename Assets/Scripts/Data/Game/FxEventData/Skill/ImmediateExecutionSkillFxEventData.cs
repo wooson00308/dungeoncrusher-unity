@@ -7,6 +7,6 @@ public class ImmediateExecutionSkillFxEventData : SkillFxEventData
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
         Debug.Log("처형");
-        owner.Target?.OnDeath(owner);
+        owner.Target?.OnDeath(owner, isExecution: true);
     }
 }

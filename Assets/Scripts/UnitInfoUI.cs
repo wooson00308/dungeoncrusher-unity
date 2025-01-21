@@ -74,7 +74,7 @@ public class UnitInfoUI : BaseView
 
     #region HpUI
 
-    private int _maxHealth = 0;
+    // private int _maxHealth = 0;
 
     private void ShowHpUI()
     {
@@ -85,17 +85,17 @@ public class UnitInfoUI : BaseView
 
         if (_unitId != _unit.Id) return;
 
-        if (_maxHealth <= _unit.Health.Value)
-        {
-            _maxHealth = _unit.Health.Value;
-        }
+        // if (_maxHealth <= _unit.Health.Value)
+        // {
+        //     _maxHealth = _unit.Health.Value;
+        // }
     }
 
     private void UpdateHpUI(object gameEvent)
     {
         if (_unit.Team == Team.Enemy) return;
 
-        var fillAmount = (float)_unit.Health.Value / _maxHealth;
+        var fillAmount = (float)_unit.Health.Value / _unit.Health.Max /*_maxHealth*/;
         Get<Image>((int)Images.Unit_Bar_Hp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 

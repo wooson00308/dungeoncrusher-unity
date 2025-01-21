@@ -10,27 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: CounterAttackSkill
+  m_Name: SoulAbsorberSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 609
-  <Name>k__BackingField: "\uBC18\uACA9"
-  <DisplayName>k__BackingField: CounterAttackSkill
+  <Id>k__BackingField: 612
+  <Name>k__BackingField: "\uC601\uD63C\uD761\uC218\uC790"
+  <DisplayName>k__BackingField: SoulAbsorberSkill
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: d30fcbd832ef786408e46594d6303673, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: be94f5bfcf94b0243a05c5fa2d257ba7, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "CounterAttack\n\uD53C\uACA9 \uBC1B\uC744\uC2DC
-      50\uD504\uB85C \uD655\uB960\uB85C \uACF5\uACA9\uB825\uC758 150% \uD53C\uD574\uB85C 
-      \uBC18\uACA9\uD568.\n"
+    <Description>k__BackingField: "\uC601\uD63C\uD761\uC218\uC790 1\uB808\uBCA8\n\uC801
+      \uC800\uCE58\uC2DC \uCD5C\uB300\uCCB4\uB825 1\uC99D\uAC00\n"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: f13b8dc9d664b46359a0a143840eb31e, type: 2}
+    - {fileID: 11400000, guid: 2b775c67fbd7340ba8799ca829ecfaa3, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 2124e44de8f014472beea686a0032f18, type: 2}
+    - {fileID: 11400000, guid: c713f4bee122640eeb46313148de7f55, type: 2}
     <RemoveFxDatas>k__BackingField: []

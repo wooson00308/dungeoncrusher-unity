@@ -80,6 +80,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public IntStat Health { get; private set; }
     public IntStat Attack { get; private set; }
+    public FloatStat AP { get; private set; }
+    public FloatStat AD { get; private set; }
     public IntStat Defense { get; private set; }
     public IntStat Mp { get; private set; }
     public FloatStat MpPercent { get; private set; }
@@ -101,11 +103,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         // 이거 굳이 Setup 메서드가 필요한가? new 해버려도 메모리 부하 없을거 같은데..
         Health = new(stats.Health.Value);
+        Health.SetMaxValue(stats.Health.Value);
         Mp = new(0);
         Mp.SetMaxValue(stats.Mp.Value);
         MpPercent = new(1);
-        Health.SetMaxValue(stats.Health.Value);
         Attack = new(stats.Attack.Value);
+        AP = new(stats.AP.Value);
+        AD = new(stats.AD.Value);
         Defense = new(stats.Defense.Value);
         Speed = new(stats.Speed.Value);
         AttackSpeed = new(stats.AttackSpeed.Value);
@@ -138,6 +142,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         Health.Update(key, stats.Health.Value);
         Attack.Update(key, stats.Attack.Value);
+        AP.Update(key, stats.AP.Value);
+        AD.Update(key, stats.AD.Value);
         Defense.Update(key, stats.Defense.Value);
         Mp.Update(key, stats.Mp.Value, StatValueType.Max);
         MpPercent.Update(key, stats.MpPercent.Value);
@@ -159,6 +165,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     {
         Health.Reset(key);
         Attack.Reset(key);
+        AP.Reset(key);
+        AD.Reset(key);
         Defense.Reset(key);
         Mp.Reset(key);
         Mp.Reset(key, StatValueType.Max);
@@ -190,6 +198,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void UpdateMaxHealth(int value)
     {
         Health.SetMaxValue(value);
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Health_Regen);
     }
 
     public void UpdateMpPercent(string key, float value)
@@ -304,14 +313,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             ResetStats("Ready");
             _fsm.UnlockState();
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            OnDeath();
         }
     }
 
@@ -465,7 +466,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Health.Update("Engage", healValue);
     }
 
-    public void OnDeath(Unit killer = null, bool isSpecialDeath = false)
+    public void OnDeath(Unit killer = null, bool isSpecialDeath = false, bool isExecution = false)
     {
         if (IsDeath) return;
         Health.Reset("Engage");
@@ -477,6 +478,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (_isBoss)
         {
             TimeManager.Instance.SlowMotion();
+        }
+
+        if (isExecution)
+        {
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution, new UnitEventOnKillArgs()
+            {
+                publisher = this
+            });
         }
 
         if (!isSpecialDeath)
@@ -560,7 +569,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void UpdateSkillMp(int mpValue)
     {
-        if (mpValue >= 0)//mpValue가 0보다 낮으면 감소라
+        if (mpValue >= 0) //mpValue가 0보다 낮으면 감소라
         {
             if (Mp.Max <= Mp.Value + (int)(mpValue * MpPercent.Value))
             {

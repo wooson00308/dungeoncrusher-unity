@@ -7,10 +7,7 @@ public class DisdainWeekSkillConditionData : SkillConditionData // 약자멸시 
     public UnitEvents condition;
     [SerializeField] private int healthPercent;
 
-    public override int EventId
-    {
-        get { return (int)condition; }
-    }
+    public override int EventId => (int)condition;
 
     public override bool IsSatisfied(Skill skill, object gameEvent)
     {
@@ -23,7 +20,7 @@ public class DisdainWeekSkillConditionData : SkillConditionData // 약자멸시 
         if (owner == null) return false;
         if (!owner.IsActive) return false;
 
-        if (owner.Target.Health.Value > owner.Target.Health.Max * (healthPercent * 100)) return false;
+        if (owner.Target.Health.Value > owner.Target.Health.Max / healthPercent) return false;
         return true;
     }
 }

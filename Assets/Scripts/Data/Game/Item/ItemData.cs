@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class ItemData : ScriptableObject, IStats
 {
@@ -13,6 +14,9 @@ public abstract class ItemData : ScriptableObject, IStats
 
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
+    [SerializeField] private FloatStat _ap;
+    [SerializeField] private FloatStat _ad;
+
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
     [SerializeField] private FloatStat _mpPercent;
@@ -42,6 +46,8 @@ public abstract class ItemData : ScriptableObject, IStats
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;
+    public FloatStat AP => _ap;
+    public FloatStat AD => _ad;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
     public FloatStat MpPercent => _mpPercent;

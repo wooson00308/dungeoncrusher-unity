@@ -17,6 +17,8 @@ public class UnitData : ScriptableObject, IStats
 
     [Header("Stats")] [SerializeField] private IntStat _health;
     [SerializeField] private IntStat _attack;
+    [SerializeField] private FloatStat _ap;
+    [SerializeField] private FloatStat _ad;
     [SerializeField] private IntStat _defense;
     [SerializeField] private IntStat _mp;
     private FloatStat _mpPercent;
@@ -49,6 +51,8 @@ public class UnitData : ScriptableObject, IStats
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;
+    public FloatStat AP => _ap;
+    public FloatStat AD => _ad;
     public IntStat Defense => _defense;
     public IntStat Mp => _mp;
     public FloatStat MpPercent => _mpPercent;

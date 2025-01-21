@@ -10,27 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: CounterAttackSkill
+  m_Name: ImmediateExecutionSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 609
-  <Name>k__BackingField: "\uBC18\uACA9"
-  <DisplayName>k__BackingField: CounterAttackSkill
+  <Id>k__BackingField: 611
+  <Name>k__BackingField: "\uC989\uACB0\uCC98\uD615"
+  <DisplayName>k__BackingField: ImmediateExecutionSkill
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: d30fcbd832ef786408e46594d6303673, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: e64edc6295fad3e48bbc96bf29c39e0d, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "CounterAttack\n\uD53C\uACA9 \uBC1B\uC744\uC2DC
-      50\uD504\uB85C \uD655\uB960\uB85C \uACF5\uACA9\uB825\uC758 150% \uD53C\uD574\uB85C 
-      \uBC18\uACA9\uD568.\n"
+    <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
+      \uC77C\uC815 10\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: f13b8dc9d664b46359a0a143840eb31e, type: 2}
+    - {fileID: 11400000, guid: 3d36af8baa3a6448cbee462d6d357ba6, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 2124e44de8f014472beea686a0032f18, type: 2}
+    - {fileID: 11400000, guid: 56da8463c6f0b44489ba10c90b7d8bec, type: 2}
     <RemoveFxDatas>k__BackingField: []

@@ -20,6 +20,7 @@ public enum UnitEvents
     UnitEvent_OnDestroy,
     UnitEvent_OnDeath,
     UnitEvent_OnDeath_Special,
+    UnitEvent_OnDeath_Execution,
     UnitEvent_OnKill,
 }
 

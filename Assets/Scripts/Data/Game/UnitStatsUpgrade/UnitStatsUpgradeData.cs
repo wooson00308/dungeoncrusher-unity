@@ -12,6 +12,8 @@ public class UnitStatsUpgradeData : ScriptableObject, IStats
     public string Description => _description;
     [field: SerializeField] public IntStat Health { get; set; }
     [field: SerializeField] public IntStat Attack { get; set; }
+    [field: SerializeField] public FloatStat AP { get; set; }
+    [field: SerializeField] public FloatStat AD { get; set; }
     [field: SerializeField] public IntStat Defense { get; set; }
     [field: SerializeField] public IntStat Mp { get; set; }
     [field: SerializeField] public FloatStat MpPercent { get; set; }
