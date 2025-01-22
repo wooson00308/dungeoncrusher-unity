@@ -18,12 +18,14 @@ public class LogSystem : MonoBehaviour
     {
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, Log);
     }
 
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, Log);
     }
 
     public void Log(object gameEvent)

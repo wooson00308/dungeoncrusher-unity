@@ -10,7 +10,7 @@ public class Skill : MonoBehaviour
     private Unit _owner;
     private SkillData _data;
     private SkillLevelData _currentLevelData;
-    private readonly Dictionary<SkillConditionData, Action<object>> _conditionActions = new();
+    private readonly Dictionary<ConditionData, Action<object>> _conditionActions = new();
 
     private int _level = 1;
     private bool _isInitialized;
@@ -81,7 +81,7 @@ public class Skill : MonoBehaviour
             GameEventSystem.Instance.Subscribe(condition.EventId, _conditionActions[condition]);
         }
 
-        Action<object> OnEvent(SkillConditionData condition)
+        Action<object> OnEvent(ConditionData condition)
         {
             // �̸� delegate(����) ���� �� ����
             return (gameEvent) => { condition.TryEvent(this, gameEvent); };
@@ -137,6 +137,7 @@ public class Skill : MonoBehaviour
         if (_owner.Mp.Value >= _currentLevelData.NeedMP && _currentLevelData.NeedMP != 0)
         {
             _owner.UpdateSkillMp(-_currentLevelData.NeedMP);
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Ulti);
         }
 
         // Debug.Log($"[{name}] ��ų ���! (��Ÿ�� {_cooltimeRemain:F2}s, ���ӽð� {_durationRemain:F2}s)");
@@ -159,6 +160,11 @@ public class Skill : MonoBehaviour
 
         _currentLevelData = _data.GetSkillLevelData(_level);
         SubscribeConditionEvents();
+
+        foreach (var fxEventData in _currentLevelData.ApplyFxDatas)
+        {
+            fxEventData.OnSkillEvent(_owner, this);
+        }
     }
 
     public void ResetCooltime()

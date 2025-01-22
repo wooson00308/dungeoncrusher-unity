@@ -1,15 +1,13 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "InertiaSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/InertiaSkillFxEventData")]
-public class InertiaSkillFxEventData : SkillFxEventData
+[CreateAssetMenu(fileName = "ChainSpearSkillFxEventData",
+    menuName = "Scriptable Objects/Skill/FxEvent/ChainSpearSkillFxEventData")]
+public class ChainSpearSkillFxEventData : SkillFxEventData
 {
-    [SerializeField] private int damageBuffValue;
-    [SerializeField] private int damageValue;
-    [SerializeField] private int maxOverlapCount;
-    private int _currentOverlapCount = 0;
+    [SerializeField] private int percentValue;
+    [SerializeField] private int maxOverlapCount = 100;
+    [SerializeField] private int criticalPercent;
+    private int _currentOverlapCount;
 
     private void OnEnable()
     {
@@ -28,11 +26,12 @@ public class InertiaSkillFxEventData : SkillFxEventData
     {
         if (_currentOverlapCount >= maxOverlapCount)
         {
-            owner.UpdateAttack("Ready", damageValue);
+            owner.CriticalPercent.Update("Ready", criticalPercent);
             return;
         }
 
         _currentOverlapCount++;
-        owner.UpdateAttack("Ready", damageBuffValue);
+
+        owner.UpdateCriticalRate("Ready", percentValue);
     }
 }

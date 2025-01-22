@@ -10,25 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: MeditationSkill
+  m_Name: ChainSpearSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 613
-  <Name>k__BackingField: "\uBA54\uB514\uD14C\uC774\uC158"
-  <DisplayName>k__BackingField: MeditationSkill
+  <Id>k__BackingField: 615
+  <Name>k__BackingField: "\uCCB4\uC778 \uC2A4\uD53C\uC5B4"
+  <DisplayName>k__BackingField: ChainSpearSkill
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: d29144052ef7b0b4ca6450e48cb3afc7, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: c0f1db55e428a374cbc1c281cdb4c840, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uBA54\uB514\uD14C\uC774\uC158 1\uB808\uBCA8\n\uC804\uD22C
-      \uC2DC\uC791 \uD6C4 \uB9E4 1\uCD08\uB9C8\uB2E4 \uB9C8\uB825 \uC99D\uAC00\n"
+    <Description>k__BackingField: "\uCCB4\uC778\uC2A4\uD53C\uC5B4 1\uB808\uBCA8\n\uC801
+      \uCC98\uCE58\uC2DC \uCE58\uBA85\uD0C0\uD655\uB960 \uC99D\uAC00\n"
     <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField: []
+    <Cooltime>k__BackingField: 0
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 3a484477a39194d3a9b40132720513ef, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 856f4a28d7e6a4465affb273ac064281, type: 2}
+    - {fileID: 11400000, guid: 6e9dcbefb4c054782ab8c1dc72431e4f, type: 2}
     <RemoveFxDatas>k__BackingField: []

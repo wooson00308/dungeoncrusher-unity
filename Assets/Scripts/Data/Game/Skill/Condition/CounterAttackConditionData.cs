@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "CounterAttackSkillConditionData",
     menuName = "Scriptable Objects/Skill/Condition/CounterAttackSkillConditionData")]
-public class CounterAttackSkillConditionData : UnitEventSkillConditionData
+public class CounterAttackConditionData : UnitEventSkillConditionData
 {
     [SerializeField] private int counterAttackRate;
 

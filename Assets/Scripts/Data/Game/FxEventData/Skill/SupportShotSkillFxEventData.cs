@@ -14,7 +14,7 @@ public class SupportShotSkillFxEventData : SkillFxEventData
 
         var target = owner.Target;
 
-        if(target != null)
+        if (target != null)
         {
             var dir = target.transform.position - owner.transform.position;
             dir.Normalize();

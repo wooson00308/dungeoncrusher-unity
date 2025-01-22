@@ -11,6 +11,7 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 {
     #region Fields
+
     public const int MOVE_SPEED_FACTOR = 100;
     public Team Team { get; set; }
 
@@ -187,6 +188,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void UpdateCriticalRate(string key, float value)
     {
+        Debug.Log($"{key}{value}");
         CriticalRate.Update(key, value);
     }
 
@@ -209,6 +211,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void UpdateExpPercent(string key, int value)
     {
         ExpPercent.Update(key, value);
+    }
+
+    public void UpdateAP(string key, float value)
+    {
+        AP.Update(key, value);
+        // Debug.Log(AP.Value);
     }
 
     #endregion
@@ -237,6 +245,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void OnInitialized(UnitData data, Team team)
     {
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
+
         if (IsDeath)
         {
             ResetStats("Engage");
@@ -494,12 +503,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         }
         else
         {
-            if(GameTime.TimeScale != 1)
+            if (GameTime.TimeScale != 1)
             {
                 TimeManager.Instance.SlowMotion(false);
                 CameraController.Instance.ZoomInOut(true);
             }
-            
+
             AddForce(killer);
             TimeManager.Instance.FreezeTime(0.005f);
             CameraController.Instance.Shake(8, 0.05f);
@@ -682,8 +691,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team) return;
-
-        Exp.Update("Main", unit.DropExp); //Levelup 하고나면 0
+        
+        var expPercentValue = (int)(unit.DropExp * (ExpPercent.Value * 0.01f));
+        Exp.Update("Main", unit._dropExp + expPercentValue); //Levelup 하고나면 0
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { publisher = this });
 

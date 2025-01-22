@@ -4,9 +4,12 @@ using UnityEngine;
     menuName = "Scriptable Objects/Skill/FxEvent/PreviewStudySkillFxEventData")]
 public class PreviewStudySkillFxEventData : SkillFxEventData
 {
-    [SerializeField] private int percentValue;
+    private int level = 1;
+
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        //유닛스탯에 경험치 관련 스탯 필요 
+        Debug.Log("Apply");
+        owner.ExpPercent.Reset($"{skill.Data.Id}");
+        owner.UpdateExpPercent($"{skill.Data.Id}", (int)skill.CurrentLevelData.SkillValue);
     }
 }

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: SoulyearningSkill
+  m_Name: PreviewStudySkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 610
-  <Name>k__BackingField: "\uC601\uD63C\uAC08\uB9DD"
-  <DisplayName>k__BackingField: SoulyearningSkill
+  <Id>k__BackingField: 616
+  <Name>k__BackingField: "\uC608\uC2B5\uBCF5\uC2B5"
+  <DisplayName>k__BackingField: PreviewStudy
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: b68a1a0ee82c32244bb07f81d93406f0, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2b53a1509fd7a8b48a84803a167e6365, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
@@ -24,38 +24,40 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 10
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
-      \uB9C8\uB098\uD68D\uB4DD 10% \uC99D\uAC00"
+    <Description>k__BackingField: "\uC608\uC2B5\uBCF5\uC2B5 1\uB808\uBCA8\n\uC801
+      \uCC98\uCE58\uC2DC \uD68D\uB4DD\uD558\uB294 \uACBD\uD5D8\uCE58 10% \uC99D\uAC00"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
-    <Conditions>k__BackingField: []
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 03b21cce956144467ad86d5c329621ad, type: 2}
     <ApplyFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 888aebff0155a4fc5ae94455ceaab9d5, type: 2}
+    - {fileID: 11400000, guid: 9bb49e57bc03646f182dd734caf5f16e, type: 2}
+    <UseSkillFxDatas>k__BackingField: []
+    <RemoveFxDatas>k__BackingField: []
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 15
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "\uC608\uC2B5\uBCF5\uC2B5 2\uB808\uBCA8\n\uC801
+      \uCC98\uCE58\uC2DC \uD68D\uB4DD\uD558\uB294 \uACBD\uD5D8\uCE58 15% \uC99D\uAC00"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 0
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 03b21cce956144467ad86d5c329621ad, type: 2}
+    <ApplyFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 9bb49e57bc03646f182dd734caf5f16e, type: 2}
     <UseSkillFxDatas>k__BackingField: []
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 20
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 2\uB808\uBCA8\n\uACF5\uACA9\uC2DC
-      \uB9C8\uB098\uD68D\uB4DD 20% \uC99D\uAC00"
+    <Description>k__BackingField: "\uC608\uC2B5\uBCF5\uC2B5 3\uB808\uBCA8\n\uC801
+      \uCC98\uCE58\uC2DC \uD68D\uB4DD\uD558\uB294 \uACBD\uD5D8\uCE58 20% \uC99D\uAC00"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField: []
     <ApplyFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 888aebff0155a4fc5ae94455ceaab9d5, type: 2}
-    <UseSkillFxDatas>k__BackingField: []
-    <RemoveFxDatas>k__BackingField: []
-  - <ADRatio>k__BackingField: 0
-    <APRatio>k__BackingField: 0
-    <SkillValue>k__BackingField: 30
-    <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 3\uB808\uBCA8\n\uACF5\uACA9\uC2DC
-      \uB9C8\uB098\uD68D\uB4DD 30% \uC99D\uAC00"
-    <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 0
-    <Conditions>k__BackingField: []
-    <ApplyFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 888aebff0155a4fc5ae94455ceaab9d5, type: 2}
+    - {fileID: 11400000, guid: 9bb49e57bc03646f182dd734caf5f16e, type: 2}
     <UseSkillFxDatas>k__BackingField: []
     <RemoveFxDatas>k__BackingField: []

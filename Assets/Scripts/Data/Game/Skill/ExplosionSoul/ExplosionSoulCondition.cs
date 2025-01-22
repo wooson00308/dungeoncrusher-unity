@@ -1,10 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PreviewStudySkillConditionData",
-    menuName = "Scriptable Objects/Skill/Condition/PreviewStudySkillConditionData")]
-public class PreviewStudySkillConditionData : SkillConditionData
+[CreateAssetMenu(fileName = "ExplosionSoulSkillCondition",
+    menuName = "Scriptable Objects/Skill/Condition/ExplosionSoulSkillCondition")]
+public class ExplosionSoulCondition : ConditionData
 {
     public UnitEvents condition;
+    [SerializeField] private int explosionPercent;
 
     public override int EventId
     {
@@ -21,6 +22,9 @@ public class PreviewStudySkillConditionData : SkillConditionData
         var owner = skill.Owner;
         if (owner == null) return false;
         if (!owner.IsActive) return false;
+
+        int random = Random.Range(1, 100);
+        if (random > explosionPercent) return false;
 
         return true;
     }

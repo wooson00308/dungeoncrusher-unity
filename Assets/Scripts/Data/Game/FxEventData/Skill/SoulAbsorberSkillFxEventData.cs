@@ -4,11 +4,8 @@ using UnityEngine;
     menuName = "Scriptable Objects/Skill/FxEvent/SoulAbsorberSkillFxEventData")]
 public class SoulAbsorberSkillFxEventData : SkillFxEventData
 {
-    public int healthValue;
-
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        Debug.Log("hi");
-        owner.UpdateMaxHealth(owner.Health.Max + healthValue);
+        owner.UpdateMaxHealth(owner.Health.Max + (int)skill.CurrentLevelData.SkillValue);
     }
 }
