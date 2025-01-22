@@ -292,7 +292,7 @@ public class ChoiceView : BaseView
         }
         else
         {
-            player.UpdateStats("Enagage", _data.unitStatUpgradeData);
+            player.UpdateStats("Enagage", _data.unitStatUpgradeData, true);
             _readyView.DisCountStatChoiceCount();
         }
 

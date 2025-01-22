@@ -70,7 +70,7 @@ public class SkillButton : BaseView
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
     }
-
+                          
     public void OnClick()
     {
         if (GameTime.TimeScale == 0) return;
@@ -80,7 +80,7 @@ public class SkillButton : BaseView
         {
             if (skill.IsCoolingdown) return;
 
-            if (skill.Data.Id == 605) //궁극기 임시 서포트샷
+            if (skill.Data.Id == 690) //궁극기 임시 서포트샷
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, new SkillEventArgs
                 {

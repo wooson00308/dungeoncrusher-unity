@@ -52,7 +52,7 @@ public class UnitEventWithAttackerArgs : UnitEventArgs
     public Unit attacker;
 }
 
-public class UnitEventOnKillArgs : UnitEventArgs
+public class UnitEventOnAttackArgs : UnitEventArgs
 {
     public Unit target;
 }

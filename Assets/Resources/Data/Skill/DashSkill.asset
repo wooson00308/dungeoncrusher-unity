@@ -16,44 +16,47 @@ MonoBehaviour:
   <Name>k__BackingField: Dash
   <DisplayName>k__BackingField: DashSkill
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 4313501347480536470, guid: 16123bdce0fa2ab4abb8be44d370add6, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
     <Description>k__BackingField: "\uBC84\uD2BC \uC561\uC158 \uB300\uC26C"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 6
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
+    - {fileID: 11400000, guid: 2c8dc5e31414b447ea58f90eb84bb9f4, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
     <Description>k__BackingField: "\uBC84\uD2BC \uC561\uC158 \uB300\uC26C"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 6
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 0fdd4b8e0f6002940b34d656c35cac58, type: 2}
-    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
+    - {fileID: 11400000, guid: 2c8dc5e31414b447ea58f90eb84bb9f4, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
     <Description>k__BackingField: "\uBC84\uD2BC \uC561\uC158 \uB300\uC26C"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 6
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 0fdd4b8e0f6002940b34d656c35cac58, type: 2}
-    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
+    - {fileID: 11400000, guid: 2c8dc5e31414b447ea58f90eb84bb9f4, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: cb1d3456db7eb497aa563672a8835f08, type: 2}

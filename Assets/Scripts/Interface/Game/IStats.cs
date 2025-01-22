@@ -32,6 +32,6 @@ public interface IStatSetable
 
 public interface IStatUpdatable
 {
-    public void UpdateStats(string key, IStats stats);
+    public void UpdateStats(string key, IStats stats, bool isStatTable);
     public void ResetStats(string key);
 }

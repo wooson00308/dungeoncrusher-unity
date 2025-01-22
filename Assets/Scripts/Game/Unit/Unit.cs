@@ -139,7 +139,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         IsDeath = false;
     }
 
-    public void UpdateStats(string key, IStats stats)
+    public void UpdateStats(string key, IStats stats, bool isStatTable = false)
     {
         Health.Update(key, stats.Health.Value);
         Attack.Update(key, stats.Attack.Value);
@@ -160,6 +160,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         AttackStunRate.Update(key, stats.AttackStunRate.Value);
         LifestealRate.Update(key, stats.LifestealRate.Value);
         LifestealPercent.Update(key, stats.LifestealPercent.Value);
+
+        if (isStatTable)
+        {
+            if (stats.Health.Value <= 0) return;
+            Health.SetMaxValue(Health.Max + stats.Health.Value);
+        }
     }
 
     public void ResetStats(string key)
@@ -443,7 +449,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit,
             new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
-
+        
         if (_isRevivable)
         {
             // Todo : 부활 로직
@@ -489,9 +495,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             TimeManager.Instance.SlowMotion();
         }
 
-        if (isExecution)
+        if (isExecution)// 처형
         {
-            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution, new UnitEventOnKillArgs()
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution, new UnitEventOnAttackArgs()//처형이라면 처형 텍스트 띄우기위함.
             {
                 publisher = this
             });
@@ -691,7 +697,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Unit unit = unitEventArgs.publisher;
 
         if (unit.Team == Team) return;
-        
+
         var expPercentValue = (int)(unit.DropExp * (ExpPercent.Value * 0.01f));
         Exp.Update("Main", unit._dropExp + expPercentValue); //Levelup 하고나면 0
 

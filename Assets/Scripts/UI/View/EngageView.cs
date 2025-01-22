@@ -4,7 +4,7 @@ using UnityEngine;
 public class EngageView : BaseView
 {
     private Queue<OnHitEventArgs> _damageEventQueue = new Queue<OnHitEventArgs>();
-    private Queue<UnitEventOnKillArgs> _executionEventQueue = new Queue<UnitEventOnKillArgs>();
+    private Queue<UnitEventOnAttackArgs> _executionEventQueue = new Queue<UnitEventOnAttackArgs>();
     private bool _isProcessingDamageQueue = false;
     private bool _isProcessingExecutionQueue = false;
 
@@ -41,7 +41,7 @@ public class EngageView : BaseView
 
     private void ExecutionText(object gameEvent)
     {
-        if (gameEvent is UnitEventOnKillArgs onHitArgs)
+        if (gameEvent is UnitEventOnAttackArgs onHitArgs)
         {
             _executionEventQueue.Enqueue(onHitArgs);
             if (!_isProcessingExecutionQueue)

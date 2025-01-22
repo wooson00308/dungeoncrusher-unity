@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb85a4971645e4c3e826d49885a96f10, type: 3}
-  m_Name: InputSkillConditionData
+  m_Script: {fileID: 11500000, guid: 4fb6f75ee9ab8e946960ddceba4c2b6d, type: 3}
+  m_Name: ThornsArmorSkillCondition
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 0
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  UnitEvent: 204
-  IsNotEqualsSkill: 0
+  UnitEvent: 210

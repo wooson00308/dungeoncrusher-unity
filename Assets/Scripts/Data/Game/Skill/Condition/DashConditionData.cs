@@ -6,7 +6,7 @@ using UnityEngine;
 /// ���� ������ ��ų ��Ÿ�� �ʱ�ȭ
 /// </summary>
 [CreateAssetMenu(fileName = "DashSkillConditionData", menuName = "Scriptable Objects/DashSkillConditionData")]
-public class DashConditionData : UnitEventSkillConditionData
+public class DashConditionData : UnitEventConditionData
 {
     public override bool IsSatisfied(Skill skill, object gameEvent)
     {

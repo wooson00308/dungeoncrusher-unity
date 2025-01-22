@@ -56,6 +56,11 @@ public class UnitInfoUI : BaseView
 
     private async void Initialized(object gameEvent)
     {
+        if (gameEvent is UnitEventArgs eventArgs)
+        {
+            if (eventArgs.publisher.Team == Team.Enemy) return;
+        }
+
         if (_unit == null)
         {
             _unit = UnitFactory.Instance.GetPlayer();
@@ -165,17 +170,18 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
 
         var groupListSkill = Get<RectTransform>((int)RectTransforms.Group_List_Skill);
-        List<Image> images = new List<Image>();
+        List<UnitSkillSloatView> unitSkillSloatViews = new List<UnitSkillSloatView>();
 
         for (int i = 0; i < groupListSkill.childCount; i++)
         {
-            images.Add(groupListSkill.GetChild(i).GetComponent<Image>());
+            var unitSkillSloatView = groupListSkill.GetChild(i).GetComponent<UnitSkillSloatView>();
+            unitSkillSloatViews.Add(unitSkillSloatView);
         }
 
-        foreach (Image image in images)
+        foreach (UnitSkillSloatView unitSkillSloat in unitSkillSloatViews)
         {
-            image.sprite = _defaultSkillSprite;
-            var skillLevelBackground = image.transform.GetChild(0).GetComponent<Image>();
+            unitSkillSloat.Image.sprite = _defaultSkillSprite;
+            var skillLevelBackground = unitSkillSloat.transform.GetChild(0).GetComponent<Image>();
             skillLevelBackground.gameObject.SetActive(false);
         }
 
@@ -197,11 +203,17 @@ public class UnitInfoUI : BaseView
         {
             var skill = _unit.SkillDic[key];
             var data = skill.Data;
-            var image = images[index++];
+            var unitSkillSloatView = unitSkillSloatViews[index++];
+            if (index > 3) //초기 스킬
+            {
+                Debug.Log(index);
+                unitSkillSloatView.Initialize(skill);
+            }
 
-            image.sprite = data.Icon;
 
-            var skillLevelBackground = image.transform.GetChild(0).GetComponent<Image>();
+            unitSkillSloatView.Image.sprite = data.Icon;
+
+            var skillLevelBackground = unitSkillSloatView.transform.GetChild(0).GetComponent<Image>();
             skillLevelBackground.gameObject.SetActive(true);
 
             var skillLevelTxt = skillLevelBackground.GetComponentInChildren<TextMeshProUGUI>();

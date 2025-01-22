@@ -5,6 +5,7 @@ public class ExtraSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
+        Debug.Log("hi");
         var fx = ResourceManager.Instance.Spawn(Prefab.gameObject);
 
         var triggers = fx.GetComponentsInChildren<TriggerFx>();
