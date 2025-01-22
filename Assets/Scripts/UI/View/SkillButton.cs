@@ -80,10 +80,20 @@ public class SkillButton : BaseView
         {
             if (skill.IsCoolingdown) return;
 
-            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
+            if (skill.Data.Id == 605) //궁극기 임시 서포트샷
             {
-                data = _data
-            });
+                GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, new SkillEventArgs
+                {
+                    data = _data
+                });
+            }
+            else
+            {
+                GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
+                {
+                    data = _data
+                });
+            }
         }
     }
 

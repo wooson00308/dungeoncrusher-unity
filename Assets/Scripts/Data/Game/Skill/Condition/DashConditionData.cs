@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// ´ë½¬ ½ºÅ³
-/// ÄðÅ¸ÀÓ Áö³ª¸é ½ºÅ³ ½ÇÇà
-/// ÀûÀÌ Á×À¸¸é ½ºÅ³ ÄðÅ¸ÀÓ ÃÊ±âÈ­
+/// ï¿½ë½¬ ï¿½ï¿½Å³
+/// ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ê±ï¿½È­
 /// </summary>
 [CreateAssetMenu(fileName = "DashSkillConditionData", menuName = "Scriptable Objects/DashSkillConditionData")]
-public class DashSkillConditionData : UnitEventSkillConditionData
+public class DashConditionData : UnitEventSkillConditionData
 {
     public override bool IsSatisfied(Skill skill, object gameEvent)
     {

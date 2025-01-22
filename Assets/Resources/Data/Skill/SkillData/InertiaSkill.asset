@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: MeditationSkill
+  m_Name: InertiaSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 613
-  <Name>k__BackingField: "\uBA54\uB514\uD14C\uC774\uC158"
-  <DisplayName>k__BackingField: MeditationSkill
+  <Id>k__BackingField: 614
+  <Name>k__BackingField: "\uAD00\uC131"
+  <DisplayName>k__BackingField: InertiaSkill
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: d29144052ef7b0b4ca6450e48cb3afc7, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: bb698c7aca24f384d891168f9e0f2e28, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uBA54\uB514\uD14C\uC774\uC158 1\uB808\uBCA8\n\uC804\uD22C
-      \uC2DC\uC791 \uD6C4 \uB9E4 1\uCD08\uB9C8\uB2E4 \uB9C8\uB825 \uC99D\uAC00\n"
+    <Description>k__BackingField: "\uAD00\uC131 1\uB808\uBCA8\n\uC801\uC744 \uCC98\uCE58\uD588\uC744
+      \uB54C \uACF5\uACA9\uB825 \uC99D\uAC00 \uBC84\uD504 \uCD5C\uB300 5\uC911\uCCA9"
     <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField: []
+    <Cooltime>k__BackingField: 0
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: c072325665d6040ddaeca202558a490c, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 856f4a28d7e6a4465affb273ac064281, type: 2}
+    - {fileID: 11400000, guid: 2f7ce0ef173574bf38289b03ff4f5e2d, type: 2}
     <RemoveFxDatas>k__BackingField: []

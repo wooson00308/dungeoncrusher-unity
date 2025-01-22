@@ -16,4 +16,6 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  manaValue: 1
+  IsGameTime: 1
+  Prefab: {fileID: 0}
+  apValue: 1

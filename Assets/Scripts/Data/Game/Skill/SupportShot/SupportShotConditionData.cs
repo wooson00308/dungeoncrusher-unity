@@ -1,13 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InertiaSkillConditionData",
-    menuName = "Scriptable Objects/Skill/Condition/InertiaSkillConditionData")]
-public class InertiaSkillConditionData : SkillConditionData //관성 - 적을 처치했을 때, 공격력이 x만큼 증가하는 버프 효과를 얻음 최대 5중첩
+[CreateAssetMenu(fileName = "SupportShotSkillConditionData", menuName = "Scriptable Objects/Skill/Condition/SupportShotSkillConditionData")]
+public class SupportShotConditionData : ConditionData
 {
     public UnitEvents condition;
 
     public override int EventId
-    {
+    {                                                               
         get { return (int)condition; }
     }
 

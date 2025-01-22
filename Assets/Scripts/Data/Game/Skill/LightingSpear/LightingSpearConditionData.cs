@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "LightingSpearConditionData",
     menuName = "Scriptable Objects/Skill/Condition/LightingSpearConditionData")]
-public class LightingSpearConditionData : SkillConditionData
+public class LightingSpearConditionData : ConditionData
 {
     public UnitEvents condition;
 

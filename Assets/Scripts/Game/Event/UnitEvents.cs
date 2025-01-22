@@ -22,6 +22,7 @@ public enum UnitEvents
     UnitEvent_OnDeath_Special,
     UnitEvent_OnDeath_Execution,
     UnitEvent_OnKill,
+    UnitEvent_ChangeStat
 }
 
 public class UnitEventArgs

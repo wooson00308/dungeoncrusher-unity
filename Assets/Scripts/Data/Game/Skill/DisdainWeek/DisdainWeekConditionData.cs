@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "DisdainWeekSkillConditionData",
     menuName = "Scriptable Objects/Skill/Condition/DisdainWeekSkillConditionData")]
-public class DisdainWeekSkillConditionData : SkillConditionData // 약자멸시 - 공격하는 적의 현재 체력이 해당 몬스터 최대 체력의 n% 이하일 경우 피해량이 증가
+public class DisdainWeekConditionData : ConditionData // 약자멸시 - 공격하는 적의 현재 체력이 해당 몬스터 최대 체력의 n% 이하일 경우 피해량이 증가
 {
     public UnitEvents condition;
     [SerializeField] private int healthPercent;

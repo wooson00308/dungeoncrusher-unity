@@ -22,9 +22,38 @@ MonoBehaviour:
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 10
     <NeedMP>k__BackingField: 0
     <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uC77C\uC815 10\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 0
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 3d36af8baa3a6448cbee462d6d357ba6, type: 2}
+    <ApplyFxDatas>k__BackingField: []
+    <UseSkillFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 56da8463c6f0b44489ba10c90b7d8bec, type: 2}
+    <RemoveFxDatas>k__BackingField: []
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 20
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
+      \uC77C\uC815 20\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
+    <Duration>k__BackingField: 0
+    <Cooltime>k__BackingField: 0
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 3d36af8baa3a6448cbee462d6d357ba6, type: 2}
+    <ApplyFxDatas>k__BackingField: []
+    <UseSkillFxDatas>k__BackingField:
+    - {fileID: 11400000, guid: 56da8463c6f0b44489ba10c90b7d8bec, type: 2}
+    <RemoveFxDatas>k__BackingField: []
+  - <ADRatio>k__BackingField: 0
+    <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 20
+    <NeedMP>k__BackingField: 0
+    <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
+      \uC77C\uC815 30\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:

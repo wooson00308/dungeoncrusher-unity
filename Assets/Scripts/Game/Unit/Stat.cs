@@ -98,6 +98,8 @@ public abstract class Stat<T>
 
         T add = Add(_value, value);
         SetValue(add);
+
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_ChangeStat);
     }
 
     protected abstract T Add(T a, T b);
