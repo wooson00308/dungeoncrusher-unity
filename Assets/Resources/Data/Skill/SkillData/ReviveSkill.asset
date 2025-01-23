@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: ExplodeSoulSkill
+  m_Name: ReviveSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 620
-  <Name>k__BackingField: "\uD3ED\uBC1C\uD558\uB294 \uC601\uD63C"
-  <DisplayName>k__BackingField: ExplodeSoul
+  <Id>k__BackingField: 621
+  <Name>k__BackingField: "\uBD80\uD65C"
+  <DisplayName>k__BackingField: Revive
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: c9dba19ce670f6944b0e1d44eebff18f, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3f9a63e1dd022ba4397b5237ceb9a4ee, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
@@ -24,12 +24,13 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uD3ED\uBC1C\uD558\uB294 \uC601\uD63C 1\uB808\uBCA8"
+    <Description>k__BackingField: "\uBD80\uD65C\uC774\uB2E4.\n\uC8FD\uC740 \uC774\uD6C4\uC5D0
+      \uCD5C\uB300\uCCB4\uB825 20%\uB85C \uBD80\uD65C\uD55C\uB2E4."
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 78cfa2c827ca9466d9ada1cd522a3d56, type: 2}
+    - {fileID: 11400000, guid: 38044ce8790df40b587847e3f9f8cdc5, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: e4a1eab2ca6c64261b711d3651537592, type: 2}
+    - {fileID: 11400000, guid: 9262aa514463744fb89f156ad8d2c192, type: 2}
     <RemoveFxDatas>k__BackingField: []

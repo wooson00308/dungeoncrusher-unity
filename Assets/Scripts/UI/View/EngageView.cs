@@ -58,8 +58,9 @@ public class EngageView : BaseView
         while (_executionEventQueue.Count > 0)
         {
             var unitEventOnKillArgs = _executionEventQueue.Dequeue();
-            var executionText = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI").GetComponent<ExecutionTextUI>();
-            
+            var executionText = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI")
+                .GetComponent<ExecutionTextUI>();
+
             executionText.Show("처형!", unitEventOnKillArgs.publisher.transform.position);
 
             await Awaitable.EndOfFrameAsync();

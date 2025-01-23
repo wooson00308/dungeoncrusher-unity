@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
   m_Name: DisdainWeekSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 0
+  <Id>k__BackingField: 619
   <Name>k__BackingField: "\uC57D\uC790\uBA78\uC2DC"
   <DisplayName>k__BackingField: DisdainWeekSkill
   <Description>k__BackingField: 

@@ -69,7 +69,7 @@ public class UnitAnimator : MonoBehaviour
     public void AttackEvent(AnimationEvent e)
     {
         var realDamage = _owner.Attack.Value;
-        
+
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventOnAttackArgs
         {
             publisher = _owner,
@@ -93,18 +93,51 @@ public class UnitAnimator : MonoBehaviour
 
     public void DeathEvent(AnimationEvent e)
     {
-        UnitFactory.Instance.Destroy(_owner.Id, _owner);
-        
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath, new UnitEventArgs { publisher = _owner });
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnAttackArgs { publisher = _owner.Killer, target = _owner });
+        ReviveWait();
+    }
+
+    private async void ReviveWait()
+    {
+        if (_owner.Team == Team.Enemy)
+        {
+            Death((int)UnitEvents.UnitEvent_OnDeath);
+        }
+        else
+        {
+            _owner.IsActive = true;
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnRevive,
+                new UnitEventArgs { publisher = _owner });
+
+            if (_owner.ReviveCount <= 0)
+            {
+                Death((int)UnitEvents.UnitEvent_OnDeath);
+            }
+            
+            await Awaitable.WaitForSecondsAsync(2);
+
+            if (_owner.IsRevive && _owner.ReviveCount > 0)
+            {
+                _owner.OnRevive();
+            }
+            else
+            {
+                Death((int)UnitEvents.UnitEvent_OnDeath);
+            }
+        }
     }
 
     public void SpecialDeathEvent(AnimationEvent e)
     {
+        Death((int)UnitEvents.UnitEvent_OnDeath_Special);
+    }
+
+    private void Death(int eventId)
+    {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Special, new UnitEventArgs { publisher = _owner });
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnAttackArgs { publisher = _owner.Killer, target = _owner });
+        GameEventSystem.Instance.Publish(eventId, new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill,
+            new UnitEventOnAttackArgs { publisher = _owner.Killer, target = _owner });
     }
 
     private void OrderSprite()

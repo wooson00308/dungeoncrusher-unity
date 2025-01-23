@@ -42,7 +42,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public Sprite Icon => _icon;
 
-    private bool _isRevivable;
     private bool _hasHitState;
     private bool _isAerial;
     public float StunDuration => _stunDuration;
@@ -57,8 +56,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public bool IsAerial { get; set; }
     public bool IsHit { get; private set; }
     public bool IsDeath { get; private set; }
-    public bool IsActive { get; private set; }
+    public bool IsActive { get; set; }
     public bool IsSuperArmor { get; set; }
+
+    public bool IsRevive { get; set; }
+
+    private int _reviveCount = 1;
+    public int ReviveCount => _reviveCount;
 
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
@@ -449,12 +453,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit,
             new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
-        
-        if (_isRevivable)
-        {
-            // Todo : 부활 로직
-            return;
-        }
+
+        // if (IsRevive)
+        // {
+        //     OnRevive();
+        //     // Todo : 부활 로직
+        //     return;
+        // }
 
         if (Health.Value <= 0)
         {
@@ -495,12 +500,13 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             TimeManager.Instance.SlowMotion();
         }
 
-        if (isExecution)// 처형
+        if (isExecution) // 처형
         {
-            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution, new UnitEventOnAttackArgs()//처형이라면 처형 텍스트 띄우기위함.
-            {
-                publisher = this
-            });
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution,
+                new UnitEventOnAttackArgs() //처형이라면 처형 텍스트 띄우기위함.
+                {
+                    publisher = this
+                });
         }
 
         if (!isSpecialDeath)
@@ -559,6 +565,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             _fsm.TransitionTo<AerialState>();
         }
+    }
+
+    public void OnRevive()
+    {
+        IsRevive = false;
+        IsDeath = false;
+        IsActive = true;
+        _agent.enabled = true;
+        _fsm.UnlockState();
+        _reviveCount--;
+        _fsm.TransitionTo<IdleState>();
+        var reviveHealthValue = (int)(Health.Max * 0.2f);
+        Health.Update("Engage", -Health.Max);
+        Health.Update("Engage", reviveHealthValue);
     }
 
     #endregion

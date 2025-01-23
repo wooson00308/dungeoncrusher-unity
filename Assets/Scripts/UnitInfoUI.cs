@@ -100,7 +100,7 @@ public class UnitInfoUI : BaseView
     {
         if (_unit.Team == Team.Enemy) return;
 
-        var fillAmount = (float)_unit.Health.Value / _unit.Health.Max /*_maxHealth*/;
+        var fillAmount = (float)_unit.Health.Value / _unit.Health.Max;
         Get<Image>((int)Images.Unit_Bar_Hp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 

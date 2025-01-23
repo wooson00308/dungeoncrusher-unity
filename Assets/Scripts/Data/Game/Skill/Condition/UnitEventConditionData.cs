@@ -10,12 +10,12 @@ public class UnitEventConditionData : ConditionData
     public override bool IsSatisfied(Skill skill, object gameEvent)
     {
         if (!base.IsSatisfied(skill, gameEvent)) return false;
-        //if (gameEvent is not UnitEventArgs args) return false;
+        // if (gameEvent is not UnitEventArgs args) return false;
 
         var owner = skill.Owner;
         if (owner == null) return false;
         if (!owner.IsActive) return false;
-
+        
         return true;
     }
 }
