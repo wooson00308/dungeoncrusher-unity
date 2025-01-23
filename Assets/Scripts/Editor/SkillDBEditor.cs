@@ -1,339 +1,132 @@
 #if UNITY_EDITOR
-using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SkillDB_old))]
-public class SkillDBEditor : Editor
+[CustomEditor(typeof(SkillDB))]
+public class SkillDBEditor : DBEditor
 {
-    private SkillDB_old _skillDatabase;
-    private string _newSkillName = "NewSkill";
-    private Type _selectedType;
-    private string[] _availableTypes;
+    private SerializedProperty _skillDatas;
+    private SkillDB _skillDB;
 
-    private Dictionary<SkillData_old, bool> _foldoutStates = new(); // ����ƿ� ���� ����
-
-    private const string SKILL_BASE_PATH = "Assets/Resources/Skill";
-    private const string SKILL_PREFAB_PATH = SKILL_BASE_PATH + "/";
-    private const string SKILL_FX_PREFAB_PATH = SKILL_BASE_PATH + "/Fx/Base/Prf_Skill_Fx_Base.prefab";
-    private const string SKILL_FX_PATH = SKILL_BASE_PATH + "/Fx/";
+    private string _skillPath = "Skill";
 
     private void OnEnable()
     {
-        _skillDatabase = (SkillDB_old)target;
-        _availableTypes = GetSkillDataTypes();
-        RefreshSkillDatabase();
+        _skillDatas = serializedObject.FindProperty("SkillDatas");
+        _skillDB = target as SkillDB;
+
+        RefreshData(_skillPath);
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
 
-        EditorGUILayout.LabelField("Skill Save Path", EditorStyles.boldLabel);
-        _skillDatabase.SkillSavePath = EditorGUILayout.TextField("Path", _skillDatabase.SkillSavePath);
+        var style = EditorStyles.helpBox;
+        EditorGUILayout.BeginVertical(style);
 
-        if (GUILayout.Button("Refresh Database"))
+        EditorGUILayout.PropertyField(_skillDatas, true);
+
+        EditorGUILayout.LabelField("제작하고 싶은 스킬 데이터 이름");
+        _dataName = EditorGUILayout.TextField("", _dataName);
+
+        _skillDB.IsRateSkill = EditorGUILayout.Toggle("IsRateSkill", _skillDB.IsRateSkill);
+
+        CreateButton();
+
+        EditorGUILayout.Space(20);
+
+        EditorGUILayout.LabelField("마지막 스킬 데이터 제거");
+        DeleteButton();
+
+        EditorGUILayout.EndVertical();
+    }
+
+    protected override void CreateButton()
+    {
+        if (GUILayout.Button("Create Skill Data"))
         {
-            RefreshSkillDatabase();
-        }
-
-        EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Add New Skill", EditorStyles.boldLabel);
-
-        _newSkillName = EditorGUILayout.TextField("Skill Name", _newSkillName);
-
-        int selectedIndex = ArrayUtility.IndexOf(_availableTypes, _selectedType?.Name);
-        selectedIndex = EditorGUILayout.Popup("Skill Type", selectedIndex, _availableTypes);
-        if (selectedIndex >= 0 && selectedIndex < _availableTypes.Length)
-        {
-            _selectedType = GetTypeByName(_availableTypes[selectedIndex]);
-        }
-
-        if (GUILayout.Button("Create Skill"))
-        {
-            CreateSkillData(_newSkillName);
-        }
-
-        EditorGUILayout.Space();
-
-        EditorGUILayout.LabelField("Registered Skills", EditorStyles.boldLabel);
-
-        foreach (var skillData in _skillDatabase.SkillDatas)
-        {
-            if (!_foldoutStates.ContainsKey(skillData))
-                _foldoutStates[skillData] = false;
-
-            _foldoutStates[skillData] = EditorGUILayout.Foldout(_foldoutStates[skillData], skillData.name, true);
-
-            if (_foldoutStates[skillData])
+            if (_dataName == "")
             {
-                EditorGUI.indentLevel++;
+                _dataName = "DummySkill";
+            }
 
-                // ��ų ������ ǥ��
-                EditorGUILayout.ObjectField("Skill Data", skillData, typeof(SkillData_old), false);
+            var skillDataPath = $"{resourcesPath}{_dataPath}{_skillPath}/SkillData/{_dataName}Data.asset";
+            string conditionDataPath;
 
-                // Skill Prefab ���� ǥ��
-                EditorGUILayout.ObjectField("Skill Prefab", skillData.Prefab, typeof(GameObject), false);
+            if (!AssetDatabase.AssetPathExists(skillDataPath))
+            {
+                var createData = CreateInstance<SkillData>();
 
-                // Skill FX Prefab ���� ǥ��
-                if (skillData.SkillLevelDatas != null)
+                ConditionData conditionData;
+
+                if (_skillDB.IsRateSkill)
                 {
-                    for (int i = 0; i < skillData.SkillLevelDatas.Count; i++)
-                    {
-                        EditorGUILayout.ObjectField($"Skill FX Prefab (Level {i + 1})",
-                            skillData.SkillLevelDatas[i].skillFxPrefab, typeof(GameObject), false);
-                    }
+                    conditionData = CreateInstance<UnitEventRateConditionData>();
+                    conditionDataPath =
+                        $"{resourcesPath}{_dataPath}{_skillPath}/Condition/{_dataName}RateCondition.asset";
+                }
+                else
+                {
+                    conditionData = CreateInstance<UnitEventConditionData>();
+                    conditionDataPath = $"{resourcesPath}{_dataPath}{_skillPath}/Condition/{_dataName}Condition.asset";
                 }
 
-                // ���� ��ư
-                if (GUILayout.Button("Remove Skill"))
-                {
-                    RemoveSkillData(skillData);
-                    break; // ���� �� ����� ����ǹǷ� ���� ����
-                }
+                AssetDatabase.CreateAsset(conditionData, conditionDataPath);
+                AssetDatabase.CreateAsset(createData, skillDataPath);
 
-                EditorGUI.indentLevel--;
+                var skillLevelData = new SkillLevelData();
+                createData.LevelDatas.Add(skillLevelData);
+                skillLevelData.Conditions.Add(conditionData);
+
+                _skillDB.AddedSkillDatas.Push(createData);
+                _skillDB.AddedConditionDatas.Push(conditionData);
+
+                RefreshData(_skillPath);
             }
-        }
-
-        serializedObject.ApplyModifiedProperties();
-    }
-
-
-    private void RefreshSkillDatabase()
-    {
-        _skillDatabase.SkillDatas.Clear();
-
-        string path = _skillDatabase.SkillSavePath;
-        if (!Directory.Exists(path))
-        {
-            Debug.LogWarning($"Path {path} does not exist.");
-            return;
-        }
-
-        string[] assetFiles = Directory.GetFiles(path, "*.asset");
-        foreach (string file in assetFiles)
-        {
-            SkillData_old skillData = AssetDatabase.LoadAssetAtPath<SkillData_old>(file);
-            if (skillData != null)
+            else
             {
-                _skillDatabase.AddSkillData(skillData);
-            }
-        }
-
-        Debug.Log("Skill database refreshed.");
-    }
-
-    private void CreateSkillData(string skillName)
-    {
-        if (_selectedType == null || string.IsNullOrEmpty(skillName))
-        {
-            Debug.LogWarning("Skill Type or Name is invalid.");
-            return;
-        }
-
-        // �ߺ� �̸� üũ
-        foreach (var skillData in _skillDatabase.SkillDatas)
-        {
-            if (skillData.name == skillName)
-            {
-                Debug.LogWarning($"Skill with the name '{skillName}' already exists in the database.");
-                return; // �ߺ� �̸� ���
-            }
-        }
-
-        string directoryPath = _skillDatabase.SkillSavePath;
-        string savePath = $"{directoryPath}/{skillName}.asset";
-
-        if (!Directory.Exists(directoryPath))
-        {
-            Directory.CreateDirectory(directoryPath);
-            Debug.Log($"Directory created at: {directoryPath}");
-        }
-
-        SkillData_old newSkillData = (SkillData_old)ScriptableObject.CreateInstance(_selectedType);
-        newSkillData.name = skillName;
-
-        AssetDatabase.CreateAsset(newSkillData, savePath);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-
-        _skillDatabase.AddSkillData(newSkillData);
-
-        CreateSkillPrefab(skillName, newSkillData);
-        CreateSkillFxPrefabs(skillName, newSkillData);
-
-        Debug.Log($"Skill {skillName} created and saved to {savePath}");
-    }
-
-
-    private GameObject CreateSkillPrefab(string skillName, SkillData_old skillData)
-    {
-        GameObject skillPrefab = new(skillName);
-        Skill_old skillComponent = skillPrefab.AddComponent<Skill_old>();
-        //skillComponent.SetSkillData(skillData);
-
-        string prefabPath = SKILL_PREFAB_PATH + $"{skillName}.prefab";
-        string directoryPath = Path.GetDirectoryName(prefabPath);
-        if (!Directory.Exists(directoryPath))
-        {
-            Directory.CreateDirectory(directoryPath);
-        }
-
-        skillData.Prefab = PrefabUtility.SaveAsPrefabAsset(skillPrefab, prefabPath);
-        GameObject.DestroyImmediate(skillPrefab);
-
-        Debug.Log($"Skill prefab created at: {prefabPath}");
-        return skillPrefab;
-    }
-
-    private void CreateSkillFxPrefabs(string skillName, SkillData_old skillData)
-    {
-        GameObject fxBase = AssetDatabase.LoadAssetAtPath<GameObject>(SKILL_FX_PREFAB_PATH);
-        if (fxBase == null)
-        {
-            Debug.LogError($"Base FX prefab not found at {SKILL_FX_PREFAB_PATH}");
-            return;
-        }
-
-        string fxPrefabName = $"Prf_Skill_Fx_{skillName}";
-        string fxPrefabPath = SKILL_FX_PATH + $"{fxPrefabName}.prefab";
-
-        GameObject fxPrefab = PrefabUtility.InstantiatePrefab(fxBase) as GameObject;
-        var skillFxPrefab = PrefabUtility.SaveAsPrefabAsset(fxPrefab, fxPrefabPath);
-
-        Debug.Log($"Skill FX prefab created at: {fxPrefabPath}");
-
-        skillData.SkillLevelDatas = new List<SkillLevelData_old>();
-
-        for (int i = 0; i < 3; i++)
-        {
-            fxPrefab.name = fxPrefabName;
-
-            var skillLevelData = new SkillLevelData_old
-            {
-                activationChance = 50,
-                skillValue = 100,
-                skillFxPrefab = skillFxPrefab
-            };
-            skillData.SkillLevelDatas.Add(skillLevelData);
-        }
-
-        GameObject.DestroyImmediate(fxPrefab);
-
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }
-
-    private void RemoveSkillData(SkillData_old skillData)
-    {
-        if (skillData == null)
-        {
-            Debug.LogWarning("SkillData is null.");
-            return;
-        }
-
-        // Ȯ�� �˾� ����
-        bool confirmDelete = EditorUtility.DisplayDialog(
-            "Delete Skill",
-            $"Are you sure you want to delete the skill \"{skillData.name}\"? This action cannot be undone.",
-            "Yes",
-            "No"
-        );
-
-        if (!confirmDelete)
-        {
-            Debug.Log($"Deletion of skill \"{skillData.name}\" was canceled.");
-            return;
-        }
-
-        // �����ͺ��̽����� ��ų ������ ����
-        _skillDatabase.RemoveSkillData(skillData);
-
-        // ��ų ������ ���� ����
-        string assetPath = AssetDatabase.GetAssetPath(skillData);
-        if (!string.IsNullOrEmpty(assetPath))
-        {
-            AssetDatabase.DeleteAsset(assetPath);
-            Debug.Log($"Skill data asset removed: {assetPath}");
-        }
-        else
-        {
-            Debug.LogWarning($"Could not find asset path for skill data.");
-        }
-
-        // ��ų �����Ϳ� ����� ������ ����
-        RemovePrefabsFromSkillData(skillData);
-
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }
-
-
-    private void RemovePrefabsFromSkillData(SkillData_old skillData)
-    {
-        // Skill Prefab ����
-        if (skillData.Prefab != null)
-        {
-            string prefabPath = AssetDatabase.GetAssetPath(skillData.Prefab);
-            if (!string.IsNullOrEmpty(prefabPath))
-            {
-                AssetDatabase.DeleteAsset(prefabPath);
-                Debug.Log($"Skill prefab removed: {prefabPath}");
-            }
-        }
-
-        // Skill FX Prefab ���� (���� �����Ϳ� ����� �����յ�)
-        foreach (var levelData in skillData.SkillLevelDatas)
-        {
-            if (levelData.skillFxPrefab != null)
-            {
-                string fxPrefabPath = AssetDatabase.GetAssetPath(levelData.skillFxPrefab);
-                if (!string.IsNullOrEmpty(fxPrefabPath))
-                {
-                    AssetDatabase.DeleteAsset(fxPrefabPath);
-                    Debug.Log($"Skill FX prefab removed: {fxPrefabPath}");
-                }
+                Debug.LogWarning($"{_dataName}과 같은 이름의 데이터가 있습니다.");
             }
         }
     }
 
-
-    private string[] GetSkillDataTypes()
+    protected override void DeleteButton()
     {
-        var skillDataType = typeof(SkillData_old);
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        var types = new List<string>();
-
-        foreach (var assembly in assemblies)
+        if (GUILayout.Button("Delete Linoleum Data"))
         {
-            foreach (var type in assembly.GetTypes())
+            if (_skillDB.AddedSkillDatas.Count > 0)
             {
-                if (type.IsSubclassOf(skillDataType) && !type.IsAbstract)
-                {
-                    types.Add(type.Name);
-                }
+                AssetDatabase.DeleteAsset(GetAssetPath());
+                AssetDatabase.DeleteAsset(GetConditionPath());
             }
-        }
+            else
+            {
+                Debug.LogWarning("버튼으로 추가된 데이터가 없습니다.");
+            }
 
-        return types.ToArray();
+            RefreshData(_skillPath);
+        }
     }
 
-    private Type GetTypeByName(string typeName)
+    protected override void RefreshData(string path)
     {
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        foreach (var assembly in assemblies)
-        {
-            var type = assembly.GetType(typeName);
-            if (type != null)
-            {
-                return type;
-            }
-        }
+        var loadAllData = Resources.LoadAll($"{_dataPath}{path}");
+        _skillDB.SkillDatas = loadAllData.Select(data => data as SkillData).ToList();
+        _skillDB.SkillDatas = _skillDB.SkillDatas.Where(data => data != null).ToList();
+    }
 
-        return null;
+    protected override string GetAssetPath()
+    {
+        string path = AssetDatabase.GetAssetPath(_skillDB.AddedSkillDatas.Pop());
+        return path;
+    }
+
+    private string GetConditionPath()
+    {
+        string path = AssetDatabase.GetAssetPath(_skillDB.AddedConditionDatas.Pop());
+        return path;
     }
 }
 #endif

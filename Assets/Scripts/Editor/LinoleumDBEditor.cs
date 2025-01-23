@@ -39,7 +39,7 @@ public class LinoleumDBEditor : DBEditor
 
         EditorGUILayout.Space(20);
 
-        EditorGUILayout.LabelField("마지막 투사체 데이터 제거");
+        EditorGUILayout.LabelField("마지막 장판 데이터 제거");
         DeleteButton();
 
         EditorGUILayout.EndVertical();
@@ -64,7 +64,7 @@ public class LinoleumDBEditor : DBEditor
                 createData.tickInterval = _linoleumDB.TickInterval;
                 createData.detectRange = _linoleumDB.DetectRange;
 
-                _linoleumDB.AddedLinoleum.Push(createData);
+                _linoleumDB.AddedLinoleumDatas.Push(createData);
 
                 AssetDatabase.CreateAsset(createData, path);
                 RefreshData(_linoleumPath);
@@ -80,7 +80,7 @@ public class LinoleumDBEditor : DBEditor
     {
         if (GUILayout.Button("Delete Linoleum Data"))
         {
-            if (_linoleumDB.AddedLinoleum.Count > 0)
+            if (_linoleumDB.AddedLinoleumDatas.Count > 0)
             {
                 AssetDatabase.DeleteAsset(GetAssetPath());
             }
@@ -102,7 +102,7 @@ public class LinoleumDBEditor : DBEditor
 
     protected override string GetAssetPath()
     {
-        string path = AssetDatabase.GetAssetPath(_linoleumDB.AddedLinoleum.Pop());
+        string path = AssetDatabase.GetAssetPath(_linoleumDB.AddedLinoleumDatas.Pop());
         return path;
     }
 }

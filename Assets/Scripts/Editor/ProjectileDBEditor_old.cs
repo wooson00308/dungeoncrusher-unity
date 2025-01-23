@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(ProjectileDB_old))]
-public class ProjectileDBEditor : DBEditor
+public class ProjectileDBEditor_old : DBEditor
 {
     private SerializedProperty _projectileData;
     private ProjectileDB_old _projectileDB;

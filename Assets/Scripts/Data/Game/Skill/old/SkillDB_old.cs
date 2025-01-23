@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillDB_old", menuName = "SkillData/Create SkillDB_old")]
+// [CreateAssetMenu(fileName = "SkillDB_old", menuName = "SkillData/Create SkillDB_old")]
 public class SkillDB_old : ScriptableObject
 {
-    [Tooltip("½ºÅ³ µ¥ÀÌÅÍ ÀúÀå °æ·Î")]
+    [Tooltip("ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½")]
     [SerializeField] private string _skillSavePath = "Assets/Resources/Data/Skill/old";
 
-    [Tooltip("µî·ÏµÈ ½ºÅ³ µ¥ÀÌÅÍ ¸ñ·Ï")]
+    [Tooltip("ï¿½ï¿½Ïµï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½")]
     [SerializeField] private List<SkillData_old> _skillDatas = new List<SkillData_old>();
 
     public string SkillSavePath 

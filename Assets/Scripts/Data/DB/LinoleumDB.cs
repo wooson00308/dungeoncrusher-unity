@@ -9,5 +9,5 @@ public class LinoleumDB : ScriptableObject
     public float DetectRange;
 
     public List<LinoleumData> LinoleumDatas = new();
-    public Stack<LinoleumData> AddedLinoleum = new();
+    public Stack<LinoleumData> AddedLinoleumDatas = new();
 }
