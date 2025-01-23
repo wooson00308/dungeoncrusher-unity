@@ -70,6 +70,12 @@ public class UnitAnimator : MonoBehaviour
     {
         var realDamage = _owner.Attack.Value;
 
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventOnAttackArgs
+        {
+            publisher = _owner,
+            target = _owner.Target,
+        });
+
         if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))
         {
             realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
@@ -82,28 +88,56 @@ public class UnitAnimator : MonoBehaviour
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventArgs
-        {
-            publisher = _owner
-        });
-
         _owner.UpdateSkillMp(10); //AnimationEvent Int 파라미터로 받는게 좋을 듯
     }
 
     public void DeathEvent(AnimationEvent e)
     {
-        UnitFactory.Instance.Destroy(_owner.Id, _owner);
+        ReviveWait();
+    }
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath, new UnitEventArgs { publisher = _owner });
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnKillArgs { publisher = _owner.Killer, target = _owner });
+    private async void ReviveWait()
+    {
+        if (_owner.Team == Team.Enemy)
+        {
+            Death((int)UnitEvents.UnitEvent_OnDeath);
+        }
+        else
+        {
+            _owner.IsActive = true;
+            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnRevive,
+                new UnitEventArgs { publisher = _owner });
+
+            if (_owner.ReviveCount <= 0)
+            {
+                Death((int)UnitEvents.UnitEvent_OnDeath);
+            }
+            
+            await Awaitable.WaitForSecondsAsync(2);
+
+            if (_owner.IsRevive && _owner.ReviveCount > 0)
+            {
+                _owner.OnRevive();
+            }
+            else
+            {
+                Death((int)UnitEvents.UnitEvent_OnDeath);
+            }
+        }
     }
 
     public void SpecialDeathEvent(AnimationEvent e)
     {
+        Death((int)UnitEvents.UnitEvent_OnDeath_Special);
+    }
+
+    private void Death(int eventId)
+    {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Special, new UnitEventArgs { publisher = _owner });
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill, new UnitEventOnKillArgs { publisher = _owner.Killer, target = _owner });
+        GameEventSystem.Instance.Publish(eventId, new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill,
+            new UnitEventOnAttackArgs { publisher = _owner.Killer, target = _owner });
     }
 
     private void OrderSprite()
