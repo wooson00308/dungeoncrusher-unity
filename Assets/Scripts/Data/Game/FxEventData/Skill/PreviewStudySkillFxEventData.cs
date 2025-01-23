@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PreviewStudySkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/PreviewStudySkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/PreviewStudySkillFxEventData")]
 public class PreviewStudySkillFxEventData : SkillFxEventData
 {
     private int level = 1;

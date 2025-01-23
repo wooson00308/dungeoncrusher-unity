@@ -24,6 +24,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 10
     <Description>k__BackingField: "\uD3ED\uBC1C\uD558\uB294 \uC601\uD63C 1\uB808\uBCA8"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0

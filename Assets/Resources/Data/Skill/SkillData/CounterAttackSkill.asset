@@ -22,7 +22,9 @@ MonoBehaviour:
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 50
     <Description>k__BackingField: "CounterAttack\n\uD53C\uACA9 \uBC1B\uC744\uC2DC
       50\uD504\uB85C \uD655\uB960\uB85C \uACF5\uACA9\uB825\uC758 150% \uD53C\uD574\uB85C 
       \uBC18\uACA9\uD568.\n"

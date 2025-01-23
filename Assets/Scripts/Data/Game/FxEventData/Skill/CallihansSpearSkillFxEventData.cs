@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "CallihansSpearSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/CallihansSpearSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/CallihansSpearSkillFxEventData")]
 public class CallihansSpearSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private ProjectileData _callihansSpearPrefab;

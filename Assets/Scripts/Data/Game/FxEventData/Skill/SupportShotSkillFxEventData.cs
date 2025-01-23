@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SupportShotSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/SupportShotSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/SupportShotSkillFxEventData")]
 public class SupportShotSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private FxEventData data;

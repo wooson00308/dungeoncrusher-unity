@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DisdainWeekSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/DisdainWeekSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/DisdainWeekSkillFxEventData")]
 public class DisdainWeekSkillFxEventData : SkillFxEventData
 {
     private Unit _target;

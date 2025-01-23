@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Animator))]
 public class UnitAnimator : MonoBehaviour

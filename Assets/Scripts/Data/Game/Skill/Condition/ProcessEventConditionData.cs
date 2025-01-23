@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProcessEventConditionData",
-    menuName = "Scriptable Objects/ProcessEventConditionData")]
+    menuName = "Data/ConditionData/ProcessEventConditionData")]
 public class ProcessEventConditionData : ConditionData
 {
     public ProcessEvents ProcessEvent;

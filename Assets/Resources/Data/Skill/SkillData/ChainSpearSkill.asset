@@ -29,7 +29,7 @@ MonoBehaviour:
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 3a484477a39194d3a9b40132720513ef, type: 2}
+    - {fileID: 11400000, guid: 70bf800cc82ab4805b801fcba0c72469, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 6e9dcbefb4c054782ab8c1dc72431e4f, type: 2}

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileDB", menuName = "Data/DB/ProjectileDB")]
+// [CreateAssetMenu(fileName = "ProjectileDB", menuName = "Data/DB/ProjectileDB")]
 public class ProjectileDB_old : ScriptableObject
 {
     public ProjectileInfo projectileInfo;

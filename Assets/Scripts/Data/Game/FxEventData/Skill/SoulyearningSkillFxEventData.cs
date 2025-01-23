@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SoulyearningSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/SoulyearningSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/SoulyearningSkillFxEventData")]
 public class SoulyearningSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)

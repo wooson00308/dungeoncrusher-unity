@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FireballProjectileData", menuName = "Scriptable Objects/FireballProjectileData")]
+[CreateAssetMenu(fileName = "FireballProjectileData", menuName = "Data/ProjectileData/FireballProjectileData")]
 public class FireballProjectileData : ProjectileData
 {
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_981", menuName = "SkillData/Create Dash")]
+// [CreateAssetMenu(fileName = "Data_Skill_981", menuName = "SkillData/Create Dash")]
 public class DashData : SkillData_old
 {
     [Header("Dash Config")]
@@ -38,7 +38,7 @@ public class DashData : SkillData_old
             {
                 if (target.IsDeath)
                 {
-                    // ÄðÅ¸ÀÓ ÃÊ±âÈ­
+                    // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ê±ï¿½È­
                     skill.ResetCooltime();
                 }
 
@@ -47,7 +47,7 @@ public class DashData : SkillData_old
                     if(target != null)
                     {
                         target.OnAerial();
-                        // ¹«·ÂÈ­ È¿°ú
+                        // ï¿½ï¿½ï¿½ï¿½È­ È¿ï¿½ï¿½
                     } 
                 }
             }

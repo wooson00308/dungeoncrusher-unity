@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ExplodeSoulSkillProjectileData", menuName = "Scriptable Objects/ExplodeSoulSkillProjectileData")]
+[CreateAssetMenu(fileName = "ExplodeSoulSkillProjectileData", menuName = "Data/ProjectileData/ExplodeSoulSkillProjectileData")]
 public class ExplodeSoulSkillProjectileData : ProjectileData
 {
     

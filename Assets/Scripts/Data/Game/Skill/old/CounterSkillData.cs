@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_1115", menuName = "SkillData/Create CounterSkill")]
+// [CreateAssetMenu(fileName = "Data_Skill_1115", menuName = "SkillData/Create CounterSkill")]
 public class CounterSkillData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)

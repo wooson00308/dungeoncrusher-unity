@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LifeStealSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/LifeStealSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/LifeStealSkillFxEventData")]
 public class LifeStealSkillFxEventData : SkillFxEventData
 {
     private int totalDamage;

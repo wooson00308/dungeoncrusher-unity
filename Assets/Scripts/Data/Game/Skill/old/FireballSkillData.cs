@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_1116", menuName = "SkillData/Create FireballSkill")]
+// [CreateAssetMenu(fileName = "Data_Skill_1116", menuName = "SkillData/Create FireballSkill")]
 public class FireballSkillData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)

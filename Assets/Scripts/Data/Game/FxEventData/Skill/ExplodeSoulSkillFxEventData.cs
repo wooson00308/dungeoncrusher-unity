@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ExplodeSoulSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/ExplodeSoulSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/ExplodeSoulSkillFxEventData")]
 public class ExplodeSoulSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private ProjectileData explodeEffectPrefab;

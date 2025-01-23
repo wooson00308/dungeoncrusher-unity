@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CounterAttackSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/CounterAttackSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/CounterAttackSkillFxEventData")]
 public class CounterAttackSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int counterAttackPercent;

@@ -22,8 +22,9 @@ MonoBehaviour:
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
-    <SkillValue>k__BackingField: 10
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 10
     <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uC77C\uC815 10\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
     <Duration>k__BackingField: 0
@@ -36,8 +37,9 @@ MonoBehaviour:
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
-    <SkillValue>k__BackingField: 20
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 20
     <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uC77C\uC815 20\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
     <Duration>k__BackingField: 0
@@ -50,8 +52,9 @@ MonoBehaviour:
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
-    <SkillValue>k__BackingField: 20
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 30
     <Description>k__BackingField: "\uC989\uACB0\uCC98\uD615 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uC77C\uC815 30\uD504\uB85C \uD655\uB960\uB85C \uC801 \uCC98\uD615"
     <Duration>k__BackingField: 0
