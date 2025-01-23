@@ -206,7 +206,6 @@ public class UnitInfoUI : BaseView
             var unitSkillSloatView = unitSkillSloatViews[index++];
             if (index > 3) //초기 스킬
             {
-                Debug.Log(index);
                 unitSkillSloatView.Initialize(skill);
             }
 
