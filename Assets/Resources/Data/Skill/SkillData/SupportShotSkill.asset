@@ -41,7 +41,7 @@ MonoBehaviour:
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0.5
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
+    - {fileID: 11400000, guid: 41c6dfdafaa41479da4436e6af6cc64e, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}
@@ -54,7 +54,7 @@ MonoBehaviour:
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0.5
     <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 53f5603fc9d1b0243ad927588d00cc89, type: 2}
+    - {fileID: 11400000, guid: 41c6dfdafaa41479da4436e6af6cc64e, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 2e56cae2d3afd48d8b79dd208320434c, type: 2}

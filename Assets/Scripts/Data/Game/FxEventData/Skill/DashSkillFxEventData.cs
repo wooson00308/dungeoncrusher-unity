@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DashSkillFxEventData", menuName = "Scriptable Objects/Skill/FxEvent/DashSkillFxEventData")]
+[CreateAssetMenu(fileName = "DashSkillFxEventData", menuName = "Data/SkillData/FxEventData/DashSkillFxEventData")]
 public class DashSkillFxEventData : SkillFxEventData
 {
     public float DashSpeed;

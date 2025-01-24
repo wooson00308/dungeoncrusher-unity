@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ImmediateExecutionSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/ImmediateExecutionSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/ImmediateExecutionSkillFxEventData")]
 public class ImmediateExecutionSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileData", menuName = "Data/ProjectileData")]
+// [CreateAssetMenu(fileName = "ProjectileData", menuName = "Data/ProjectileData")]
 public class ProjectileData_old : ScriptableObject
 {
     public ProjectileInfo projectileInfo = new();

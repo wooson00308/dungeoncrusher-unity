@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ChainSpearSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/ChainSpearSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/ChainSpearSkillFxEventData")]
 public class ChainSpearSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int percentValue;

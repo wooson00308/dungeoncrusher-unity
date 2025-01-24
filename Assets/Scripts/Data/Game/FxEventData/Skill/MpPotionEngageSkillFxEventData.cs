@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MpPotionEngageSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/MpPotionEngageSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/MpPotionEngageSkillFxEventData")]
 public class MpPotionEngageSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int engageValue;

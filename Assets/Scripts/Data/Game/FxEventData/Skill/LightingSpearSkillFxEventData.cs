@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LightingSpearSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/LightingSpearSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/LightingSpearSkillFxEventData")]
 public class LightingSpearSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)

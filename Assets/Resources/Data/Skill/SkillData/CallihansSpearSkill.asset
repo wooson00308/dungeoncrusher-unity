@@ -22,9 +22,13 @@ MonoBehaviour:
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 1\uB808\uBCA8 "
-    <Duration>k__BackingField: 3
+    <Rate>k__BackingField: 10
+    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 1\uB808\uBCA8
+      \n\uACF5\uACA9\uC2DC 10\uD504\uB85C \uD655\uB960\uB85C \uCE7C\uB9AC\uD55C\uC774
+      \uC9C0\uC6D0\uACF5\uACA9"
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: b99925f4526bb44378ba1b836096476c, type: 2}
@@ -34,9 +38,13 @@ MonoBehaviour:
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 2\uB808\uBCA8 "
-    <Duration>k__BackingField: 3
+    <Rate>k__BackingField: 20
+    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 2\uB808\uBCA8
+      \n\uACF5\uACA9\uC2DC 20\uD504\uB85C \uD655\uB960\uB85C \uCE7C\uB9AC\uD55C\uC774
+      \uC9C0\uC6D0\uACF5\uACA9"
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: b99925f4526bb44378ba1b836096476c, type: 2}
@@ -46,13 +54,17 @@ MonoBehaviour:
     <RemoveFxDatas>k__BackingField: []
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
-    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 3\uB808\uBCA8 "
-    <Duration>k__BackingField: 3
+    <Rate>k__BackingField: 20
+    <Description>k__BackingField: "\uCE7C\uB9AC\uD55C\uC758 \uCC3D 3\uB808\uBCA8
+      \n\uCE7C\uB9AC\uD55C\uC5D0\uAC8C \uACF5\uACA9 \uBC1B\uC740 \uC801\uC740 \uB744\uC6CC\uC9C4\uB2E4."
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: b99925f4526bb44378ba1b836096476c, type: 2}
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 223549babf12d4025b9141f03f0be07d, type: 2}
+    - {fileID: 11400000, guid: 7451047d855a43645ba48ff7bd303e0d, type: 2}
     <RemoveFxDatas>k__BackingField: []

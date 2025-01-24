@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_1111", menuName = "SkillData/Create CoolDownSkill")]
+// [CreateAssetMenu(fileName = "Data_Skill_1111", menuName = "SkillData/Create CoolDownSkill")]
 public class CooldownSkillData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)

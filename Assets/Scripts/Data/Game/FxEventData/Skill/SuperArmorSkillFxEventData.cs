@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SuperArmorSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/SuperArmorSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/SuperArmorSkillFxEventData")]
 public class SuperArmorSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)

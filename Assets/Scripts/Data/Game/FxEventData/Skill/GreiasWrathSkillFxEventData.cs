@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GreiasWrathSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/GreiasWrathSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/GreiasWrathSkillFxEventData")]
 public class GreiasWrathSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private ProjectileData _prefab;

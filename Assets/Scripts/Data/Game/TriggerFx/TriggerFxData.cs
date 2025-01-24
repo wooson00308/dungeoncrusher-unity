@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TriggerFxData", menuName = "Scriptable Objects/TriggerFxData")]
+[CreateAssetMenu(fileName = "TriggerFxData", menuName = "Data/TriggerFxData")]
 public class TriggerFxData : Data
 {
     [field: SerializeField] public int MaxMultiTriggerCount { get; private set; }

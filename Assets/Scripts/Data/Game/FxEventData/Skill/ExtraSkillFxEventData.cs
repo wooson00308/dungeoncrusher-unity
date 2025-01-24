@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ExtraSkillFxEventData", menuName = "Scriptable Objects/ExtraSkillFxEventData")]
+[CreateAssetMenu(fileName = "ExtraSkillFxEventData", menuName = "Data/SkillData/FxEventData/ExtraSkillFxEventData")]
 public class ExtraSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)

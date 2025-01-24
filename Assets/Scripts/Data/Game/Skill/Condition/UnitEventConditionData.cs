@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UnitEventConditionData", menuName = "Scriptable Objects/UnitEventConditionData")]
+[CreateAssetMenu(fileName = "UnitEventConditionData", menuName = "Data/UnitEventConditionData")]
 public class UnitEventConditionData : ConditionData
 {
     public UnitEvents UnitEvent;

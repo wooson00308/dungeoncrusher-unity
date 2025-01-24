@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "NewUnitData", menuName = "Data/Unit/Create UnitData")]
 public class UnitData : ScriptableObject, IStats

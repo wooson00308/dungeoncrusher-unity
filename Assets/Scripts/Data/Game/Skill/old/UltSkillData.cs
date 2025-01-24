@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_1112", menuName = "SkillData/Create UltTestData")]
+// [CreateAssetMenu(fileName = "Data_Skill_1112", menuName = "SkillData/Create UltTestData")]
 public class UltSkillData : SkillData_old
 {
     

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageFxData", menuName = "Scriptable Objects/DamageFxData")]
+[CreateAssetMenu(fileName = "DamageFxData", menuName = "Data/FxEventData/DamageFxData")]
 public class DamageFxData : FxEventData
 {
     public int DamageCoefficient;

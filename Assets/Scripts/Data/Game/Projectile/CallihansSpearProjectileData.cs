@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CallihansSpearProjectileData", menuName = "Scriptable Objects/CallihansSpearProjectileData")]
+[CreateAssetMenu(fileName = "CallihansSpearProjectileData", menuName = "Data/ProjectileData/CallihansSpearProjectileData")]
 public class CallihansSpearProjectileData : ProjectileData
 {
     

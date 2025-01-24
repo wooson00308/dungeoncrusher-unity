@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "InertiaSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/InertiaSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/InertiaSkillFxEventData")]
 public class InertiaSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int damageBuffValue;

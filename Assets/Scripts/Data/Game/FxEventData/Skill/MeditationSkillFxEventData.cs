@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "MeditationSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/MeditationSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/MeditationSkillFxEventData")]
 public class MeditationSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int apValue;

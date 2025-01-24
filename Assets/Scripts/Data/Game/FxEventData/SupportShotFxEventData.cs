@@ -1,7 +1,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SupportShotFxEventData", menuName = "Scriptable Objects/SupportShotFxEventData")]
+[CreateAssetMenu(fileName = "SupportShotFxEventData", menuName = "Data/FxEventData/SupportShotFxEventData")]
 public class SupportShotFxEventData : FxEventData
 {
     public override void OnEvent(Unit owner, object args = null)

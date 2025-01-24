@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Skill_997", menuName = "SkillData/Create PowerStrike")]
+// [CreateAssetMenu(fileName = "Data_Skill_997", menuName = "SkillData/Create PowerStrike")]
 public class PowerStrikeData : SkillData_old
 {
     public override bool IsValidTarget(Unit unit)

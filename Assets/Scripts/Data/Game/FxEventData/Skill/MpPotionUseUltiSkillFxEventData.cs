@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "MpPotionUseUltiSkillFxEventData",
-    menuName = "Scriptable Objects/Skill/FxEvent/MpPotionUseUltiSkillFxEventData")]
+    menuName = "Data/SkillData/FxEventData/MpPotionUseUltiSkillFxEventData")]
 public class MpPotionUseUltiSkillFxEventData : SkillFxEventData
 {
     [SerializeField] private int useUltiMp;
