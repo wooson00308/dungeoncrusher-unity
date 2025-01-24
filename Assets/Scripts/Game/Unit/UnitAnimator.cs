@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -111,7 +110,7 @@ public class UnitAnimator : MonoBehaviour
             {
                 Death((int)UnitEvents.UnitEvent_OnDeath);
             }
-            
+
             await Awaitable.WaitForSecondsAsync(2);
 
             if (_owner.IsRevive && _owner.ReviveCount > 0)

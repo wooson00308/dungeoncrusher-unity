@@ -16,6 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  Prefab: {fileID: 0}
+  IsGameTime: 1
+  Prefab: {fileID: 2017119685302849515, guid: 08a4251a202a90b4c8afe69f5d1937f4, type: 3}
   data: {fileID: 11400000, guid: 3acf624ff3973c94dae6020468ab68c8, type: 2}
   offset: {x: 0, y: 0}

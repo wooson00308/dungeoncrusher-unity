@@ -198,7 +198,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void UpdateCriticalRate(string key, float value)
     {
-        Debug.Log($"{key}{value}");
         CriticalRate.Update(key, value);
     }
 

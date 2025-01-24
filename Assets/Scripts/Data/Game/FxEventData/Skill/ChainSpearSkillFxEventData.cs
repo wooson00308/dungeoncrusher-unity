@@ -8,24 +8,36 @@ public class ChainSpearSkillFxEventData : SkillFxEventData
     [SerializeField] private int maxOverlapCount = 100;
     [SerializeField] private int criticalPercent;
     private int _currentOverlapCount;
+    private bool isSubscribe = false;
+    private bool isCriticalPercentUpgrade = false;
 
-    private void OnEnable()
+    public void Initialize()
     {
-        if (GameEventSystem.Instance != null)
+        if (Application.isPlaying)
         {
-            GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, ResetOverlapCount);
+            _currentOverlapCount = 0;
+            isCriticalPercentUpgrade = false;
+            isSubscribe = false;
+            if (!isSubscribe)
+            {
+                GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, ResetOverlapCount);
+                isSubscribe = true;
+            }
         }
     }
 
     private void ResetOverlapCount(object gameEvent)
     {
         _currentOverlapCount = 0;
+        isCriticalPercentUpgrade = false;
     }
 
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
         if (_currentOverlapCount >= maxOverlapCount)
         {
+            if (isCriticalPercentUpgrade) return;
+            isCriticalPercentUpgrade = true;
             owner.CriticalPercent.Update("Ready", criticalPercent);
             return;
         }
@@ -33,5 +45,10 @@ public class ChainSpearSkillFxEventData : SkillFxEventData
         _currentOverlapCount++;
 
         owner.UpdateCriticalRate("Ready", percentValue);
+    }
+
+    public void DisEvent()
+    {
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Engage, ResetOverlapCount);
     }
 }

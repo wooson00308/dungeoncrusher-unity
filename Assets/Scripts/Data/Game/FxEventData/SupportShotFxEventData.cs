@@ -1,12 +1,10 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SupportShotFxEventData", menuName = "Data/FxEventData/SupportShotFxEventData")]
-public class SupportShotFxEventData : FxEventData
+public class SupportShotFxEventData : SkillFxEventData
 {
-    public override void OnEvent(Unit owner, object args = null)
+    public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        Skill skill = args as Skill;
         var target = owner.Target;
         var damage = owner.Attack.Value * skill.CurrentLevelData.ADRatio;
 

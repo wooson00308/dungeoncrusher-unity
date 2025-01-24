@@ -16,5 +16,8 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  damageValue: 5
+  IsGameTime: 1
+  Prefab: {fileID: 0}
+  damageBuffValue: 5
+  damageValue: 100
   maxOverlapCount: 5
