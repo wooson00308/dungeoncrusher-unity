@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +50,7 @@ public class LogSystem : MonoBehaviour
         }
 
         LogSpawn();
-        
+
         yield return StartCoroutine(DestroyLogUIWhenEnoughLogs());
     }
 

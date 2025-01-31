@@ -137,7 +137,6 @@ public class InfoView : BaseView
 
     #endregion
 
-
     private int killCount = 0;
 
     public void UpdateKillCountUI(object gameEvent)

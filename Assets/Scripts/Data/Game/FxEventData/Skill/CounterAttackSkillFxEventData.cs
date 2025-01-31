@@ -11,9 +11,9 @@ public class CounterAttackSkillFxEventData : SkillFxEventData
     {
         var spawnPrefab = ResourceManager.Instance.Spawn(prefab);
 
-        if (owner.Attacker != null)
+        if (owner.Target != null)
         {
-            spawnPrefab.transform.position = owner.Attacker.transform.position;
+            spawnPrefab.transform.position = owner.Target.transform.position;
         }
 
         var percent = counterAttackPercent / 100f;
