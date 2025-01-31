@@ -38,6 +38,7 @@ public class UnitInfoUI : BaseView
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_ChangeStat, UpdateHpUI, UpdateMpUI);
     }
 
     private void OnDisable()
@@ -46,6 +47,7 @@ public class UnitInfoUI : BaseView
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, Initialized);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnHit, UpdateHpUI);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_Mana_Regen, UpdateMpUI);
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_ChangeStat, UpdateHpUI, UpdateMpUI);
     }
 
     public override void BindUI()
@@ -98,9 +100,17 @@ public class UnitInfoUI : BaseView
 
     private void UpdateHpUI(object gameEvent)
     {
+        if (_unit == null) return;
+
         if (_unit.Team == Team.Enemy) return;
 
         var fillAmount = (float)_unit.Health.Value / _unit.Health.Max;
+
+        if (fillAmount <= 0)
+        {
+            fillAmount = 0;
+        }
+
         Get<Image>((int)Images.Unit_Bar_Hp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 
@@ -127,6 +137,7 @@ public class UnitInfoUI : BaseView
 
     private void UpdateMpUI(object gameEvent)
     {
+        if (_unit == null) return;
         if (_unitId != _unit.Id) return;
         if (_unit.Team == Team.Enemy) return;
 
@@ -167,6 +178,7 @@ public class UnitInfoUI : BaseView
 
     private void ShowSkillUI()
     {
+        if (_unit == null) return;
         if (_unitId != _unit.Id) return;
 
         var groupListSkill = Get<RectTransform>((int)RectTransforms.Group_List_Skill);

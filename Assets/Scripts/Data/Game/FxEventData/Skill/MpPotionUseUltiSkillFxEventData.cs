@@ -8,7 +8,6 @@ public class MpPotionUseUltiSkillFxEventData : SkillFxEventData
 
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        Debug.Log("UltiSkill");
         owner.UpdateSkillMp(useUltiMp);
     }
 }

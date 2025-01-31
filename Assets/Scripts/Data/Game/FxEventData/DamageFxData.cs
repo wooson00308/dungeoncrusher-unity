@@ -8,8 +8,9 @@ public class DamageFxData : FxEventData
     public override void OnEventToTarget(Unit owner, Unit target)
     {
         float damageCoefficient = DamageCoefficient / 100f; // ������ ����� ��� (100 ����)
-        int totalDamage = (int)(owner.LastDamage() * damageCoefficient); // ���� ������ ���
+        (int damage, bool isCritical) = owner.LastDamage();
+        int totalDamage = (int)(damage * damageCoefficient); // ���� ������ ���
         if (target == null) return;
-        target.OnHit(totalDamage, owner);
+        target.OnHit(totalDamage, owner, isCritical);
     }
 }

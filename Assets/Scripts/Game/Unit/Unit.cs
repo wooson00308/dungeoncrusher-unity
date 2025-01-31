@@ -59,10 +59,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public bool IsActive { get; set; }
     public bool IsSuperArmor { get; set; }
 
-    public bool IsRevive { get; set; }
-
-    private int _reviveCount = 1;
+    private int _reviveCount = 0;
     public int ReviveCount => _reviveCount;
+    public void AddRevive() => _reviveCount++;
 
     [Header("Config")] [SerializeField] private string _id;
     [SerializeField] private Line _line;
@@ -568,7 +567,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void OnRevive()
     {
-        IsRevive = false;
         IsDeath = false;
         IsActive = true;
         _agent.enabled = true;
@@ -738,19 +736,21 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #endregion
 
-    public int LastDamage() //기존 UnitAnimator에서 Attack할때만 치명타 계산하면 스킬에서는 활용못해서 변경함. 
+    public (int damage, bool isCritical) LastDamage() //기존 UnitAnimator에서 Attack할때만 치명타 계산하면 스킬에서는 활용못해서 변경함. 
     {
         int realDamage;
+        bool isCritical = false;
         if (CriticalOperator.IsCritical(CriticalRate.Value))
         {
             realDamage = CriticalOperator.GetCriticalDamageIntValue(Attack.Value, CriticalPercent.Value);
+            isCritical = true;
         }
         else
         {
             realDamage = Attack.Value;
         }
 
-        return realDamage;
+        return (realDamage, isCritical);
     }
 }
 

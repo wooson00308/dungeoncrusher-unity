@@ -15,7 +15,7 @@ public class DashSkillFxEventData : SkillFxEventData
             var target = owner.Target;
 
             var damage = skillLevelData.ADRatio;
-            target.OnHit((int)damage, owner);
+            target?.OnHit((int)damage, owner);
         });
     }
 }

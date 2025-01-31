@@ -66,8 +66,6 @@ public class UnitAnimator : MonoBehaviour
 
     public void AttackEvent(AnimationEvent e)
     {
-        var realDamage = _owner.Attack.Value;
-
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventOnAttackArgs
         {
             publisher = _owner,
@@ -83,8 +81,8 @@ public class UnitAnimator : MonoBehaviour
         // {
         //     _owner.Target?.OnHit(realDamage, _owner);
         // }
-
-        _owner.Target?.OnHit(_owner.LastDamage());
+        (int damage, bool isCritical) = _owner.LastDamage();
+        _owner.Target?.OnHit(damage, isCritical: isCritical);
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
@@ -99,15 +97,12 @@ public class UnitAnimator : MonoBehaviour
     private async void ReviveWait()
     {
         if (_owner.Team == Team.Enemy)
-        {                            
-            
+        {
             Death((int)UnitEvents.UnitEvent_OnDeath);
         }
         else
         {
             _owner.IsActive = true;
-            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnRevive,
-                new UnitEventArgs { publisher = _owner });
 
             if (_owner.ReviveCount <= 0)
             {
@@ -116,7 +111,7 @@ public class UnitAnimator : MonoBehaviour
 
             await Awaitable.WaitForSecondsAsync(2);
 
-            if (_owner.IsRevive && _owner.ReviveCount > 0)
+            if (_owner.ReviveCount > 0)
             {
                 _owner.OnRevive();
             }

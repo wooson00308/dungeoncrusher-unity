@@ -275,11 +275,17 @@ public class ChoiceView : BaseView
         return result;
     }
 
-    public void OnClick()
+    public async void OnClick()
     {
-        var player = UnitFactory.Instance.GetPlayer();
+        Unit player;
+        while (true)
+        {
+            player = UnitFactory.Instance.GetPlayer();
 
-        if (player == null) return;
+            await Awaitable.EndOfFrameAsync();
+
+            if (player != null) break;
+        }
 
         if (_data.choiceType == ChoiceType.Item)
         {

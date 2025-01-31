@@ -122,7 +122,8 @@ public class UnitFactory : SingletonMini<UnitFactory>
     {
         ResourceManager.Instance.Destroy(unit.gameObject);
         _unitList.Remove(unit);
-        _teamUnitDic[unit.Team].Remove(unit);
+        if(_teamUnitDic.TryGetValue(unit.Team, out var value))
+            value.Remove(unit);
     }
 
     /// <summary>

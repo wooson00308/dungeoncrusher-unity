@@ -6,6 +6,6 @@ public class ReviveSkillFxEventData : SkillFxEventData
 {
     public override void OnSkillEvent(Unit owner, Skill skill)
     {
-        owner.IsRevive = true;                       
+        owner.AddRevive();
     }
 }

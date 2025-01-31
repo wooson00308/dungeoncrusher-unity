@@ -17,6 +17,7 @@ public class CounterAttackSkillFxEventData : SkillFxEventData
         }
 
         var percent = counterAttackPercent / 100f;
-        owner.Target.OnHit((int)(owner.LastDamage() * percent));
+        (int damage, bool isCritical) = owner.LastDamage();
+        owner.Target.OnHit((int)(damage * percent), isCritical: isCritical);
     }
 }
