@@ -5,7 +5,7 @@ public class BuffManager : SingletonMini<BuffManager>
 {
     [SerializeField] private InertiaSkillFxEventData buffFxEventData1;
     [SerializeField] private ChainSpearSkillFxEventData buffFxEventData2;
-
+    
     private void Start()
     {
         buffFxEventData1.Initialize();

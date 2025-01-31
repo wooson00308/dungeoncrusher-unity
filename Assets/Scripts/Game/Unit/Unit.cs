@@ -737,6 +737,21 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     }
 
     #endregion
+
+    public int LastDamage() //기존 UnitAnimator에서 Attack할때만 치명타 계산하면 스킬에서는 활용못해서 변경함. 
+    {
+        int realDamage;
+        if (CriticalOperator.IsCritical(CriticalRate.Value))
+        {
+            realDamage = CriticalOperator.GetCriticalDamageIntValue(Attack.Value, CriticalPercent.Value);
+        }
+        else
+        {
+            realDamage = Attack.Value;
+        }
+
+        return realDamage;
+    }
 }
 
 public enum Team

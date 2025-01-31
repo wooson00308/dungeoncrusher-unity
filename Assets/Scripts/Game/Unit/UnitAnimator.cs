@@ -74,15 +74,17 @@ public class UnitAnimator : MonoBehaviour
             target = _owner.Target,
         });
 
-        if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))
-        {
-            realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
-            _owner.Target?.OnHit(realDamage, _owner, true);
-        }
-        else
-        {
-            _owner.Target?.OnHit(realDamage, _owner);
-        }
+        // if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))  
+        // {
+        //     realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
+        //     _owner.Target?.OnHit(realDamage, _owner, true);
+        // }
+        // else
+        // {
+        //     _owner.Target?.OnHit(realDamage, _owner);
+        // }
+
+        _owner.Target?.OnHit(_owner.LastDamage());
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
@@ -97,7 +99,8 @@ public class UnitAnimator : MonoBehaviour
     private async void ReviveWait()
     {
         if (_owner.Team == Team.Enemy)
-        {
+        {                            
+            
             Death((int)UnitEvents.UnitEvent_OnDeath);
         }
         else

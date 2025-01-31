@@ -24,11 +24,13 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 10
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 1\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uB9C8\uB098\uD68D\uB4DD 10% \uC99D\uAC00"
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
-    <Conditions>k__BackingField: []
+    <Conditions>k__BackingField:
+    - {fileID: 11400000, guid: 128e8cf957451493db364cd3611b031a, type: 2}
     <ApplyFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 888aebff0155a4fc5ae94455ceaab9d5, type: 2}
     <UseSkillFxDatas>k__BackingField: []
@@ -37,6 +39,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 20
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 2\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uB9C8\uB098\uD68D\uB4DD 20% \uC99D\uAC00"
     <Duration>k__BackingField: 0
@@ -50,6 +53,7 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 30
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uC601\uD63C\uAC08\uB9DD 3\uB808\uBCA8\n\uACF5\uACA9\uC2DC
       \uB9C8\uB098\uD68D\uB4DD 30% \uC99D\uAC00"
     <Duration>k__BackingField: 0

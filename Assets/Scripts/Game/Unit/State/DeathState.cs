@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class DeathState : StateBase, IState
 {
     public void OnEnter(Unit unit)

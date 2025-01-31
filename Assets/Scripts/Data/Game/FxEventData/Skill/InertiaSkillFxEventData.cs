@@ -44,6 +44,13 @@ public class InertiaSkillFxEventData : SkillFxEventData
         }
 
         _currentOverlapCount++;
+
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkillBuff, new BuffSkillEventArgs()
+        {
+            data = skill.Data,
+            currentCount = _currentOverlapCount
+        });
+
         owner.UpdateAttack("Ready", damageBuffValue);
     }
 

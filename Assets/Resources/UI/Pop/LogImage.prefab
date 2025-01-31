@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 3707322148154055128}
   - component: {fileID: 6569880579283471435}
   - component: {fileID: 2927810192268311496}
-  - component: {fileID: -8514514843511432026}
+  - component: {fileID: 6005311728788404377}
   - component: {fileID: 8505677183310579550}
   m_Layer: 5
   m_Name: LogImage
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: e88fb449e5f594f88b2e0e530de963f7, type: 3}
---- !u!114 &-8514514843511432026
+--- !u!114 &6005311728788404377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e199cab3638ea48b88a513a9b57b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 1
+  destroyTime: 3
 --- !u!95 &8505677183310579550
 Animator:
   serializedVersion: 7
