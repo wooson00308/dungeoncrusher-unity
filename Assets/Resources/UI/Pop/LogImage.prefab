@@ -361,7 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e199cab3638ea48b88a513a9b57b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 3
+  destroyTime: 0.5
+  isNonGameTime: 1
 --- !u!95 &8505677183310579550
 Animator:
   serializedVersion: 7

@@ -92,7 +92,6 @@ public class LogSystem : MonoBehaviour
         logImageView.transform.SetAsFirstSibling();
 
         var imageView = logImageView.GetComponent<LogImageView>();
-        imageView.Initialize(this);
 
         if (args is SkillEventArgs skillEventArgs)
         {

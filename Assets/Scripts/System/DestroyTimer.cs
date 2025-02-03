@@ -5,30 +5,45 @@ using UnityEngine;
 public class DestroyTimer : MonoBehaviour
 {
     [SerializeField] private float destroyTime;
+    [SerializeField] private bool isNonGameTime;
     private bool _isDestroy;
 
     private void OnEnable()
     {
         _isDestroy = false;
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_GameOver, DestroyThis);
         DestroyTime();
+    }
+
+    private void OnDisable()
+    {
+        GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_GameOver, DestroyThis);
     }
 
     private async void DestroyTime()
     {
-        float time = 0;
-
-        while(time < destroyTime)
+        if (isNonGameTime)
         {
-            if (_isDestroy) return;
-
-            time += GameTime.DeltaTime; 
-            await Awaitable.EndOfFrameAsync();
+            await Awaitable.WaitForSecondsAsync(destroyTime);
+            DestroyThis();
         }
+        else
+        {
+            float time = 0;
 
-        DestroyThis();
+            while (time < destroyTime)
+            {
+                if (_isDestroy) return;
+
+                time += GameTime.DeltaTime;
+                await Awaitable.EndOfFrameAsync();
+            }
+
+            DestroyThis();
+        }
     }
 
-    private void DestroyThis()
+    private void DestroyThis(object gameEvent = null)
     {
         if (_isDestroy) return;
         _isDestroy = true;
