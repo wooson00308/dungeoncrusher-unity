@@ -22,25 +22,33 @@ public class ReadyProcess : Process
 
     private async void Ready2Units()
     {
-        if (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
-            UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
-        {
-            UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-        }
-
-        // if (_processSystem.IsSpawnPlayer)
+        // while (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
+        //        UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
         // {
-        //     _processSystem.IsSpawnPlayer = false;
-
-        while (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
+        //     UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+        //     await Awaitable.EndOfFrameAsync();
+        // }
+        //
+        // while (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
+        // {
+        //     UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+        //     await Awaitable.EndOfFrameAsync();
+        // }
+        //
+        // if (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
+        //     UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
+        // {
+        //     Debug.Log("null or Count 0");
+        // }
+        //
+        // if (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
+        // {
+        //     Debug.Log("null");
+        // }
+        if (_processSystem.IsSpawnPlayer)
         {
+            _processSystem.IsSpawnPlayer = false;
             UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-            await Awaitable.EndOfFrameAsync();
-        }
-
-        if (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
-        {
-            Debug.Log("null");
         }
 
         var player = UnitFactory.Instance.GetPlayer();

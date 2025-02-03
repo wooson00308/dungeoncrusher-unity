@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -250,6 +251,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         ResetItemNSkills();
     }
 
+   
+
     public void OnInitialized(UnitData data, Team team)
     {
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
@@ -297,11 +300,19 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
             ResetStats(equipment.Value.Data.Id);
         }
-
+        
         _equipments.Clear();
         _equipments = new();
         _skillDic.Clear();
         _skillDic = new();
+        
+        var skills = _skillStorage.GetComponentsInChildren<Transform>(true).ToList();
+        skills.Remove(skills[0]);
+
+        foreach (var skill in skills)
+        {
+            Destroy(skill.gameObject);
+        }
     }
 
     private void SetActiveEvent(object gameEvent)
@@ -489,6 +500,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         Health.Reset("Engage");
         IsDeath = true;
+
         IsActive = false;
         _agent.enabled = false;
         _killer = killer;

@@ -18,7 +18,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
 
     public Unit GetPlayer()
     {
-        return _unitList.Find(x => x.Team == Team.Friendly);
+        return GetTeamUnits(Team.Friendly)?.FirstOrDefault();
     }
 
     public HashSet<Unit> GetTeamUnits(Team team)
@@ -65,6 +65,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
         {
             var spawnObj = ResourceManager.Instance.Spawn(data.Prefab, _parent);
             Unit spawnUnit = spawnObj.GetComponent<Unit>();
+
             spawnUnit.OnInitialized(data, team);
 
             GoToSpawnPoint(spawnUnit);
@@ -120,10 +121,13 @@ public class UnitFactory : SingletonMini<UnitFactory>
     /// <param name="unit"></param>
     public void Destroy(string id, Unit unit)
     {
-        ResourceManager.Instance.Destroy(unit.gameObject);
         _unitList.Remove(unit);
-        if(_teamUnitDic.TryGetValue(unit.Team, out var value))
+        if (_teamUnitDic.TryGetValue(unit.Team, out var value))
+        {
             value.Remove(unit);
+        }
+
+        ResourceManager.Instance.Destroy(unit.gameObject);
     }
 
     /// <summary>
