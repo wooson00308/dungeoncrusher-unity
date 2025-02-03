@@ -39,11 +39,6 @@ public abstract class BaseSlider : BaseView
     private void MoveSlider()
     {
         Vector2 movePos;
-        if (_unit.IsBoss)
-        {
-            movePos = Vector2.zero + _pivot;
-            return;
-        }
 
         var worldToCanvasPoint =
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas,
@@ -51,14 +46,21 @@ public abstract class BaseSlider : BaseView
 
         if (_unit.Team == Team.Enemy)
         {
-            if (_unit.IsAerial)
+            if (_unit.IsBoss)
             {
-                movePos = (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas,
-                    _unit.Model.Body.transform.position) + _pivot * 0.5f;
+                movePos = Vector2.zero + _pivot;
             }
             else
             {
-                movePos = worldToCanvasPoint;
+                if (_unit.IsAerial)
+                {
+                    movePos = (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas,
+                        _unit.Model.Body.transform.position) + _pivot * 0.5f;
+                }
+                else
+                {
+                    movePos = worldToCanvasPoint;
+                }    
             }
         }
         else

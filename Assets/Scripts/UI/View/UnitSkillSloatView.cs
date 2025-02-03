@@ -6,19 +6,21 @@ public class UnitSkillSloatView : BaseView
 {
     private Image _image;
     public Image Image => _image;
+    private Image _coolTimeImage;
     private Skill _skill;
     private Unit _player;
 
     private void Awake()
     {
         _image = GetComponent<Image>();
+        _coolTimeImage = transform.Find("SkillCoolImage").GetComponent<Image>();
         _player = UnitFactory.Instance.GetPlayer();
     }
 
     public void Initialize(Skill skill)
     {
         _skill = skill;
-        _image.fillAmount = 1;
+        _coolTimeImage.fillAmount = 0;
     }
 
     public override void BindUI()
@@ -36,7 +38,7 @@ public class UnitSkillSloatView : BaseView
         float maxCooltime = skill.CurrentLevelData.Cooltime;
         if (maxCooltime == 0)
         {
-            _image.fillAmount = 1;
+            _coolTimeImage.fillAmount = 0;
             return;
         }
 
@@ -48,11 +50,11 @@ public class UnitSkillSloatView : BaseView
             return;
         }
 
-        _image.fillAmount = remainCooltime / maxCooltime;
+        _coolTimeImage.fillAmount = remainCooltime / maxCooltime;
     }
 
     private void ResetSkillUI()
     {
-        _image.fillAmount = 0;
+        _coolTimeImage.fillAmount = 0;
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,7 +82,7 @@ public class InfoView : BaseView
 
         Get<Slider>((int)Sliders.Group_Exp).value = unit.Exp.Value / (float)unit.Exp.Max;
         Get<TextMeshProUGUI>((int)Texts.Txt_Exp)
-            .SetText($"{unit.Exp.Value / (float)unit.Exp.Max * 100}%");
+            .SetText($"{(unit.Exp.Value / (float)unit.Exp.Max * 100):N2}%");
     }
 
     public void UpdateLevelUI(object gameEvent)
@@ -139,7 +136,6 @@ public class InfoView : BaseView
     }
 
     #endregion
-
 
     private int killCount = 0;
 

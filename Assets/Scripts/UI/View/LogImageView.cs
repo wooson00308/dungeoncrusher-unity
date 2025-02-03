@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LogImageView : BaseView
 {
     [SerializeField] private Sprite defaultSprite;
+    private LogSystem _logSystem;
 
     public enum Images
     {
@@ -26,6 +27,11 @@ public class LogImageView : BaseView
     {
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
+    }
+
+    public void Initialize(LogSystem logSystem)
+    {
+        _logSystem = logSystem;
     }
 
     public void SetLog(Sprite icon, string description)

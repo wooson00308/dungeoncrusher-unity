@@ -47,7 +47,7 @@ public class MainView : BaseView
 
     private void Update()
     {
-        Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{StageManager.Instance.EnageTime}s");
+        Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{(int)StageManager.Instance.EnageTime}s");
     }
     
     public override void BindUI()

@@ -24,13 +24,14 @@ MonoBehaviour:
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uBD80\uD65C\uC774\uB2E4.\n\uC8FD\uC740 \uC774\uD6C4\uC5D0
       \uCD5C\uB300\uCCB4\uB825 20%\uB85C \uBD80\uD65C\uD55C\uB2E4."
     <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 0
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 38044ce8790df40b587847e3f9f8cdc5, type: 2}
-    <ApplyFxDatas>k__BackingField: []
-    <UseSkillFxDatas>k__BackingField:
+    <ApplyFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 9262aa514463744fb89f156ad8d2c192, type: 2}
+    <UseSkillFxDatas>k__BackingField: []
     <RemoveFxDatas>k__BackingField: []

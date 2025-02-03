@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -8,12 +7,9 @@ public class ReadyProcess : Process
     [SerializeField] private ChoiceTable _choiceTable;
     [SerializeField] private CinemachineCamera _camera;
 
-    private bool _isSpawnPlayers = true; // 플레이어 스폰여부
-
     private void OnEnable()
     {
         GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, AllReady);
-        UIManager.Instance.ShowLayoutUI<ReadyUI>();
 
         Ready2Units();
     }
@@ -26,42 +22,56 @@ public class ReadyProcess : Process
 
     private async void Ready2Units()
     {
-        await Awaitable.EndOfFrameAsync();
-
-        var stageInfoData = StageManager.Instance.GetStageData().stageUnitDatas;
-
-        if (_isSpawnPlayers)
+        if (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
+            UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
         {
-            _isSpawnPlayers = false;
-
             UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-            var player = UnitFactory.Instance.GetPlayer();
+        }
 
-            _camera.Follow = player.transform;
+        // if (_processSystem.IsSpawnPlayer)
+        // {
+        //     _processSystem.IsSpawnPlayer = false;
 
-            foreach(var data in _choiceTable.ChoiceDatas)
+        while (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
+        {
+            UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+            await Awaitable.EndOfFrameAsync();
+        }
+
+        if (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
+        {
+            Debug.Log("null");
+        }
+
+        var player = UnitFactory.Instance.GetPlayer();
+
+        _camera.Follow = player.transform;
+
+        foreach (var data in _choiceTable.ChoiceDatas)
+        {
+            if (data.choiceType == ChoiceType.Item)
             {
-                if (data.choiceType == ChoiceType.Item)
-                {
-                    var item = ResourceManager.Instance.Spawn(data.itemData.Prefab).GetComponent<Item>();
-                    player.EquipItem(item);
-                }
-                else if (data.choiceType == ChoiceType.Skill)
-                {
-                    player.AddSkill(data.skillData);
-                }
-                else
-                {
-                    player.UpdateStats("Enagage", data.unitStatUpgradeData);
-                }
+                var item = ResourceManager.Instance.Spawn(data.itemData.Prefab).GetComponent<Item>();
+                player.EquipItem(item);
+            }
+            else if (data.choiceType == ChoiceType.Skill)
+            {
+                player.AddSkill(data.skillData);
+            }
+            else
+            {
+                player.UpdateStats("Enagage", data.unitStatUpgradeData);
             }
         }
+        // }
 
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, false);
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Ready);
         SoundSystem.Instance.PlayBGM("EngageBGM");
 
         TimeManager.Instance.StopTime();
+
+        UIManager.Instance.ShowLayoutUI<ReadyUI>();
     }
 
     private void AllReady(object gameEvent)

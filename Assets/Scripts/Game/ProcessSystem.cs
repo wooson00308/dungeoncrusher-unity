@@ -7,6 +7,8 @@ public class ProcessSystem : SingletonMini<ProcessSystem>
 
     public Process _prevProcess;
 
+    public bool IsSpawnPlayer = true;
+
     private void Start()
     {
         foreach (var process in _processList)

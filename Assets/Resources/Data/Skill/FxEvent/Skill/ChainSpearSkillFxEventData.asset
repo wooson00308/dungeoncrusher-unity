@@ -20,3 +20,4 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   percentValue: 1
   maxOverlapCount: 100
+  criticalPercent: 100

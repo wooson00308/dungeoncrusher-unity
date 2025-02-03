@@ -5,6 +5,7 @@ public enum UnitEvents
     None = 200,
     UnitEvent_SetActive,
     UnitEvent_UseSkill,
+    UnitEvent_UseSkillBuff,
     UnitEvent_UseSkill_Ulti,
     UnitEvent_UseSkill_Publish_UI,
     UnitEvent_UseSkill_Publish_UI_Ulti,
@@ -46,6 +47,11 @@ public class SkillEventArgs : UnitEventArgs
 {
     public SkillData_old data_old;
     public SkillData data;
+}
+
+public class BuffSkillEventArgs : SkillEventArgs
+{
+    public int currentCount;
 }
 
 public class UnitEventWithAttackerArgs : UnitEventArgs

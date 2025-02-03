@@ -22,7 +22,9 @@ MonoBehaviour:
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
+    <SkillValue>k__BackingField: 0
     <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uBA54\uB514\uD14C\uC774\uC158 1\uB808\uBCA8\n\uC804\uD22C
       \uC2DC\uC791 \uD6C4 \uB9E4 1\uCD08\uB9C8\uB2E4 \uB9C8\uB825 \uC99D\uAC00\n"
     <Duration>k__BackingField: 0

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -67,23 +66,23 @@ public class UnitAnimator : MonoBehaviour
 
     public void AttackEvent(AnimationEvent e)
     {
-        var realDamage = _owner.Attack.Value;
-
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventOnAttackArgs
         {
             publisher = _owner,
             target = _owner.Target,
         });
 
-        if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))
-        {
-            realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
-            _owner.Target?.OnHit(realDamage, _owner, true);
-        }
-        else
-        {
-            _owner.Target?.OnHit(realDamage, _owner);
-        }
+        // if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))  
+        // {
+        //     realDamage = CriticalOperator.GetCriticalDamageIntValue(_owner.Attack.Value, _owner.CriticalPercent.Value);
+        //     _owner.Target?.OnHit(realDamage, _owner, true);
+        // }
+        // else
+        // {
+        //     _owner.Target?.OnHit(realDamage, _owner);
+        // }
+        (int damage, bool isCritical) = _owner.LastDamage();
+        _owner.Target?.OnHit(damage, isCritical: isCritical);
 
         SoundSystem.Instance.PlayFx("AttackSound1"); //AnimationEvent string으로 사운드 받으면 될듯
 
@@ -104,17 +103,15 @@ public class UnitAnimator : MonoBehaviour
         else
         {
             _owner.IsActive = true;
-            GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnRevive,
-                new UnitEventArgs { publisher = _owner });
 
             if (_owner.ReviveCount <= 0)
             {
                 Death((int)UnitEvents.UnitEvent_OnDeath);
             }
-            
+
             await Awaitable.WaitForSecondsAsync(2);
 
-            if (_owner.IsRevive && _owner.ReviveCount > 0)
+            if (_owner.ReviveCount > 0)
             {
                 _owner.OnRevive();
             }

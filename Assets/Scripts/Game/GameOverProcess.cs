@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 public class GameOverProcess : Process
 {
     public void OnEnable()
@@ -10,6 +7,7 @@ public class GameOverProcess : Process
 
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_GameOver);
         SoundSystem.Instance.PlayBGM("GameOver");
+        _processSystem.IsSpawnPlayer = true;
     }
 
     public void OnDisable()

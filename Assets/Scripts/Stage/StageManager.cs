@@ -142,9 +142,9 @@ public class StageManager : SingletonMini<StageManager>
         _engageTime = maxDuration;
         while (_engageTime > 0 && !_isStageCleared)
         {
-            yield return new WaitForSeconds(1f);
-            _engageTime--;
-            Debug.Log($"Time Remaining: {_engageTime}s");
+            _engageTime -= GameTime.DeltaTime;
+            // Debug.Log($"Time Remaining: {_engageTime}s");
+            yield return new WaitForFixedUpdate();
         }
 
         if (!_isStageCleared)

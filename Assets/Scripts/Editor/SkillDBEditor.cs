@@ -1,4 +1,6 @@
 #if UNITY_EDITOR
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -8,6 +10,10 @@ public class SkillDBEditor : DBEditor
 {
     private SerializedProperty _skillDatas;
     private SkillDB _skillDB;
+    private Type _selectedConditionType;
+    private Type _selectedFxEventType;
+    private string[] _availableConditionTypes;
+    private string[] _availableFxEventTypes;
 
     private string _skillPath = "Skill";
 
@@ -15,7 +21,8 @@ public class SkillDBEditor : DBEditor
     {
         _skillDatas = serializedObject.FindProperty("SkillDatas");
         _skillDB = target as SkillDB;
-
+        _availableConditionTypes = GetConditionTypes();
+        _availableFxEventTypes = GetFxEventTypes();
         RefreshData(_skillPath);
     }
 
@@ -31,7 +38,20 @@ public class SkillDBEditor : DBEditor
         EditorGUILayout.LabelField("제작하고 싶은 스킬 데이터 이름");
         _dataName = EditorGUILayout.TextField("", _dataName);
 
-        _skillDB.IsRateSkill = EditorGUILayout.Toggle("IsRateSkill", _skillDB.IsRateSkill);
+        int selectedConditionIndex = ArrayUtility.IndexOf(_availableConditionTypes, _selectedConditionType?.Name);
+        selectedConditionIndex =
+            EditorGUILayout.Popup("Condition Type", selectedConditionIndex, _availableConditionTypes);
+        if (selectedConditionIndex >= 0 && selectedConditionIndex < _availableConditionTypes.Length)
+        {
+            _selectedConditionType = GetTypeByName(_availableConditionTypes[selectedConditionIndex]);
+        }
+
+        int selectedFxEventIndex = ArrayUtility.IndexOf(_availableFxEventTypes, _selectedFxEventType?.Name);
+        selectedFxEventIndex = EditorGUILayout.Popup("FxEvent Type", selectedFxEventIndex, _availableFxEventTypes);
+        if (selectedFxEventIndex >= 0 && selectedFxEventIndex < _availableFxEventTypes.Length)
+        {
+            _selectedFxEventType = GetTypeByName(_availableFxEventTypes[selectedFxEventIndex]);
+        }
 
         CreateButton();
 
@@ -53,35 +73,36 @@ public class SkillDBEditor : DBEditor
             }
 
             var skillDataPath = $"{resourcesPath}{_dataPath}{_skillPath}/SkillData/{_dataName}Data.asset";
+
             string conditionDataPath;
+            string fxEventDataPath;
 
             if (!AssetDatabase.AssetPathExists(skillDataPath))
             {
                 var createData = CreateInstance<SkillData>();
 
                 ConditionData conditionData;
+                conditionData = (ConditionData)CreateInstance(_selectedConditionType);
+                conditionDataPath =
+                    $"{resourcesPath}{_dataPath}{_skillPath}/Condition/{_dataName}ConditionData.asset";
 
-                if (_skillDB.IsRateSkill)
-                {
-                    conditionData = CreateInstance<UnitEventRateConditionData>();
-                    conditionDataPath =
-                        $"{resourcesPath}{_dataPath}{_skillPath}/Condition/{_dataName}RateCondition.asset";
-                }
-                else
-                {
-                    conditionData = CreateInstance<UnitEventConditionData>();
-                    conditionDataPath = $"{resourcesPath}{_dataPath}{_skillPath}/Condition/{_dataName}Condition.asset";
-                }
+                SkillFxEventData fxEventData;
+                fxEventData = (SkillFxEventData)CreateInstance(_selectedFxEventType);
+                fxEventDataPath =
+                    $"{resourcesPath}{_dataPath}{_skillPath}/FxEvent/Skill/{_dataName}FxEventData.asset";
 
                 AssetDatabase.CreateAsset(conditionData, conditionDataPath);
+                AssetDatabase.CreateAsset(fxEventData, fxEventDataPath);
                 AssetDatabase.CreateAsset(createData, skillDataPath);
 
                 var skillLevelData = new SkillLevelData();
                 createData.LevelDatas.Add(skillLevelData);
                 skillLevelData.Conditions.Add(conditionData);
+                skillLevelData.UseSkillFxDatas.Add(fxEventData);
 
                 _skillDB.AddedSkillDatas.Push(createData);
                 _skillDB.AddedConditionDatas.Push(conditionData);
+                _skillDB.AddedFxEventDatas.Push(fxEventData);
 
                 RefreshData(_skillPath);
             }
@@ -127,6 +148,61 @@ public class SkillDBEditor : DBEditor
     {
         string path = AssetDatabase.GetAssetPath(_skillDB.AddedConditionDatas.Pop());
         return path;
+    }
+
+    private string[] GetConditionTypes()
+    {
+        var skillDataType = typeof(UnitEventConditionData);
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var types = new List<string>();
+
+        foreach (var assembly in assemblies)
+        {
+            foreach (var type in assembly.GetTypes())
+            {
+                if (type.IsSubclassOf(skillDataType) && !type.IsAbstract)
+                {
+                    types.Add(type.Name);
+                }
+            }
+        }
+
+        return types.ToArray();
+    }
+
+    private string[] GetFxEventTypes()
+    {
+        var skillDataType = typeof(SkillFxEventData);
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var types = new List<string>();
+
+        foreach (var assembly in assemblies)
+        {
+            foreach (var type in assembly.GetTypes())
+            {
+                if (type.IsSubclassOf(skillDataType) && !type.IsAbstract)
+                {
+                    types.Add(type.Name);
+                }
+            }
+        }
+
+        return types.ToArray();
+    }
+
+    private Type GetTypeByName(string typeName)
+    {
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        foreach (var assembly in assemblies)
+        {
+            var type = assembly.GetType(typeName);
+            if (type != null)
+            {
+                return type;
+            }
+        }
+
+        return null;
     }
 }
 #endif
