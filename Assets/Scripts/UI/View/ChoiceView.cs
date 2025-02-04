@@ -34,6 +34,7 @@ public class ChoiceView : BaseView
     {
         _readyView = transform.parent.GetComponentInParent<ReadyView>();
         _owner = UnitFactory.Instance.GetPlayer();
+        weaponHolder = GameObject.FindGameObjectWithTag("Weapon").gameObject.transform; //무기 이미지 변경을 위한 초기화
         BindUI();
     }
 
@@ -62,7 +63,21 @@ public class ChoiceView : BaseView
 
     private List<TextMeshProUGUI> texts = new();
     private List<TextMeshProUGUI> afterTexts = new();
+    #region 아이템 장착 이미지 변경
+    private Transform weaponHolder;
+    public void ChangeWeapon(GameObject newWeaponPrefab)
+    {
+        foreach (Transform child in weaponHolder)
+        {
+            Destroy(child.gameObject);
+        }
 
+        GameObject newWeapon = Instantiate(newWeaponPrefab, weaponHolder);
+
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localRotation = Quaternion.identity;
+    }
+    #endregion
     private void ItemUI(ChoiceData data)
     {
         if (texts.Count == 0)
@@ -281,6 +296,10 @@ public class ChoiceView : BaseView
         {
             var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
             _owner.EquipItem(item);
+            if (_data.itemData.PartType == PartType.Weapon)
+            {
+                ChangeWeapon(_data.itemData.Prefab);
+            }
         }
         else if (_data.choiceType == ChoiceType.Skill)
         {

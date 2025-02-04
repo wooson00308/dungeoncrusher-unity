@@ -10935,6 +10935,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5509219858335321786, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 6259805268575014934, guid: 1fd138d005daa4c7a84d8a035de0b855, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.9662821
