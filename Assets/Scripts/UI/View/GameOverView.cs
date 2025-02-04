@@ -20,9 +20,9 @@ public class GameOverView : BaseView
 
     public override void BindUI()
     {
-        Bind<Button>(typeof(Buttons));
-        Bind<GameObject>(typeof(GameObjects));
-        UpdateUI();
+        // Bind<Button>(typeof(Buttons));
+        // Bind<GameObject>(typeof(GameObjects));
+        // UpdateUI();
     }
 
     private void UpdateUI()

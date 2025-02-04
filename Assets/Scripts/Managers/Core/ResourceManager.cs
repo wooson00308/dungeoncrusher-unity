@@ -30,8 +30,8 @@ public class ResourceManager : Singleton<ResourceManager>
             // 큐에서 오브젝트를 가져옴
             GameObject pooledObject = _objectPool[key].Dequeue();
 
-            pooledObject.SetActive(true);
-            if (parent != null) pooledObject.transform.SetParent(parent);
+            pooledObject.SetActive(true);     
+            if (parent != null){ pooledObject.transform.SetParent(parent);}
             ResetObject(pooledObject);
             return pooledObject;
         }

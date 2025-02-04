@@ -6,12 +6,11 @@ public class ReadyProcess : Process
     [SerializeField] private UnitData _playerData;
     [SerializeField] private ChoiceTable _choiceTable;
     [SerializeField] private CinemachineCamera _camera;
-
+    Unit _player = null;
     private void OnEnable()
     {
-        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, AllReady);
-
         Ready2Units();
+        GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, AllReady);
     }
 
     private void OnDisable()
@@ -45,41 +44,65 @@ public class ReadyProcess : Process
         // {
         //     Debug.Log("null");
         // }
-        if (_processSystem.IsSpawnPlayer)
-        {
-            _processSystem.IsSpawnPlayer = false;
-            UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-        }
-
-        var player = UnitFactory.Instance.GetPlayer();
-
-        _camera.Follow = player.transform;
-
-        foreach (var data in _choiceTable.ChoiceDatas)
-        {
-            if (data.choiceType == ChoiceType.Item)
-            {
-                var item = ResourceManager.Instance.Spawn(data.itemData.Prefab).GetComponent<Item>();
-                player.EquipItem(item);
-            }
-            else if (data.choiceType == ChoiceType.Skill)
-            {
-                player.AddSkill(data.skillData);
-            }
-            else
-            {
-                player.UpdateStats("Enagage", data.unitStatUpgradeData);
-            }
-        }
         // }
+        
+
+
+        if (!_processSystem.IsSpawnPlayer)
+        {
+            UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
+            _processSystem.IsSpawnPlayer = true;
+        }
+
+        while (_player == null)
+        {
+            _player = UnitFactory.Instance.GetPlayer();
+            await Awaitable.EndOfFrameAsync();
+        }
+
+        if (_player != null)
+        {
+            _camera.Follow = _player.transform;
+
+            if (_processSystem.IsSpawnPlayer)
+            {
+                UIManager.Instance.ShowLayoutUI<ReadyUI>();
+            }
+        }
+
+        SetPlayerSkillsItems(_player);
 
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, false);
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Ready);
         SoundSystem.Instance.PlayBGM("EngageBGM");
 
         TimeManager.Instance.StopTime();
+    }
 
-        UIManager.Instance.ShowLayoutUI<ReadyUI>();
+    private bool isSetPlayerSkillsItems = false;
+
+    private void SetPlayerSkillsItems(Unit _player)
+    {
+        if (isSetPlayerSkillsItems) return;
+        
+        foreach (var data in _choiceTable.ChoiceDatas)
+        {
+            if (data.choiceType == ChoiceType.Item)
+            {
+                var item = ResourceManager.Instance.Spawn(data.itemData.Prefab).GetComponent<Item>();
+                _player.EquipItem(item);
+            }
+            else if (data.choiceType == ChoiceType.Skill)
+            {
+                _player.AddSkill(data.skillData);
+            }
+            else
+            {
+                _player.UpdateStats("Enagage", data.unitStatUpgradeData);
+            }
+        }
+
+        isSetPlayerSkillsItems = true;
     }
 
     private void AllReady(object gameEvent)

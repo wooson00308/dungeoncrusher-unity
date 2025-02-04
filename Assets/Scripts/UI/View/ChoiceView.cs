@@ -275,30 +275,20 @@ public class ChoiceView : BaseView
         return result;
     }
 
-    public async void OnClick()
+    public void OnClick()
     {
-        Unit player;
-        while (true)
-        {
-            player = UnitFactory.Instance.GetPlayer();
-
-            await Awaitable.EndOfFrameAsync();
-
-            if (player != null) break;
-        }
-
         if (_data.choiceType == ChoiceType.Item)
         {
             var item = ResourceManager.Instance.Spawn(_data.itemData.Prefab).GetComponent<Item>();
-            player.EquipItem(item);
+            _owner.EquipItem(item);
         }
         else if (_data.choiceType == ChoiceType.Skill)
         {
-            player.AddSkill(_data.skillData);
+            _owner.AddSkill(_data.skillData);
         }
         else
         {
-            player.UpdateStats("Enagage", _data.unitStatUpgradeData, true);
+            _owner.UpdateStats("Enagage", _data.unitStatUpgradeData, true);
             _readyView.DisCountStatChoiceCount();
         }
 

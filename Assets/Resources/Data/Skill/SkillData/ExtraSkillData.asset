@@ -27,7 +27,7 @@ MonoBehaviour:
     <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uD544\uC0B4\uAE30"
     <Duration>k__BackingField: 3
-    <Cooltime>k__BackingField: 0.5
+    <Cooltime>k__BackingField: 1
     <Conditions>k__BackingField:
     - {fileID: 11400000, guid: 41c6dfdafaa41479da4436e6af6cc64e, type: 2}
     <ApplyFxDatas>k__BackingField: []

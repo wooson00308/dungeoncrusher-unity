@@ -102,23 +102,20 @@ public class UnitAnimator : MonoBehaviour
         }
         else
         {
-            _owner.IsActive = true;
-
-            if (_owner.ReviveCount <= 0)
+            float time = 0;
+            while (time <= 2f)
             {
-                Death((int)UnitEvents.UnitEvent_OnDeath);
+                if (_owner.ReviveCount <= 0)
+                {
+                    Death((int)UnitEvents.UnitEvent_OnDeath);
+                    return;
+                }  
+                
+                time += Time.deltaTime;
+                await Awaitable.EndOfFrameAsync();
             }
-
-            await Awaitable.WaitForSecondsAsync(2);
-
-            if (_owner.ReviveCount > 0)
-            {
-                _owner.OnRevive();
-            }
-            else
-            {
-                Death((int)UnitEvents.UnitEvent_OnDeath);
-            }
+            
+            _owner.OnRevive();
         }
     }
 

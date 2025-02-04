@@ -7,7 +7,7 @@ public class ProcessSystem : SingletonMini<ProcessSystem>
 
     public Process _prevProcess;
 
-    public bool IsSpawnPlayer = true;
+    public bool IsSpawnPlayer = false;
 
     private void Start()
     {

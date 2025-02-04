@@ -70,7 +70,7 @@ public class SkillButton : BaseView
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
     }
-                          
+
     public void OnClick()
     {
         if (GameTime.TimeScale == 0) return;
@@ -101,25 +101,28 @@ public class SkillButton : BaseView
     {
         if (_player == null)
         {
-            _player = UnitFactory.Instance.GetPlayer();
+            _player ??= UnitFactory.Instance.GetPlayer();
         }
 
         _button.enabled = !IsNotEnoughUltiMana;
 
         if (!_isRootSkill) return;
-
-        if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
+        
+        if (_player != null)
         {
-            if (!IsNotEnoughUltiMana)
+            if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
             {
-                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCoolingdown;
-            }
-            else
-            {
-                Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = true;
-            }
+                if (!IsNotEnoughUltiMana)
+                {
+                    Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = skill.IsCoolingdown;
+                }
+                else
+                {
+                    Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).enabled = true;
+                }
 
-            UpdateSkillCooldown(skill);
+                UpdateSkillCooldown(skill);
+            }
         }
     }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "InertiaSkillFxEventData",
     menuName = "Data/SkillData/FxEventData/InertiaSkillFxEventData")]

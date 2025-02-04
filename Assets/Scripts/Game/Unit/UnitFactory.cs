@@ -49,6 +49,7 @@ public class UnitFactory : SingletonMini<UnitFactory>
     [Header("설정")] [Tooltip("스폰 포인트 둘레")] public Transform _parent;
     [Tooltip("각 팀별 스폰 설정")] public List<TeamSpawnConfig> _teamSpawnPoints = new();
 
+    // ReSharper disable Unity.PerformanceAnalysis
     /// <summary>
     /// 유닛 생성
     /// </summary>
@@ -58,31 +59,48 @@ public class UnitFactory : SingletonMini<UnitFactory>
     public void Spawn(UnitData data, Team team, int value)
     {
         int spawnedCount = 0;
-        var teamSpawnPoint = _teamSpawnPoints.Find(x => x.team == team);
-        var spawnUnits = new List<Unit>();
+        // var teamSpawnPoint = _teamSpawnPoints.Find(x => x.team == team);
+        // var spawnUnits = new List<Unit>();
+
+        if (data.Prefab == null || data == null)
+        {
+            Debug.LogWarning("unitData or unitData Prefab is Null");
+        }
 
         while (spawnedCount < value)
         {
-            var spawnObj = ResourceManager.Instance.Spawn(data.Prefab, _parent);
+            var spawnObj = ResourceManager.Instance.Spawn(data.Prefab, transform);
+
+            if (spawnObj == null)
+            {
+                Debug.LogWarning("spawnObject is Null");
+                return;
+            }
+
             Unit spawnUnit = spawnObj.GetComponent<Unit>();
+
+            // if (team == Team.Friendly)
+            // {
+            //     Debug.Log(spawnUnit);
+            // }
 
             spawnUnit.OnInitialized(data, team);
 
             GoToSpawnPoint(spawnUnit);
-            spawnedCount++;
 
             _unitList.Add(spawnUnit);
-            spawnUnits.Add(spawnUnit);
+            // spawnUnits.Add(spawnUnit);
 
-            if (_teamUnitDic.ContainsKey(team))
+            if (_teamUnitDic.TryGetValue(team, out var unitHash))
             {
-                var hashSet = _teamUnitDic[team];
-                hashSet.Add(spawnUnit);
+                unitHash.Add(spawnUnit);
             }
             else
             {
                 _teamUnitDic.Add(team, new HashSet<Unit> { spawnUnit });
             }
+
+            spawnedCount++;
         }
     }
 
@@ -207,7 +225,7 @@ public enum SpawnShape
     Box
 }
 
-[System.Serializable]
+[Serializable]
 public class TeamSpawnConfig
 {
     [Tooltip("팀 정보")] public Team team;
@@ -228,7 +246,7 @@ public class TeamSpawnConfig
 
         public SpawnPoints(TeamSpawnConfig parent)
         {
-            this._parent = parent;
+            _parent = parent;
         }
 
         public Vector2 this[Line line]
@@ -240,7 +258,7 @@ public class TeamSpawnConfig
                     Line.Frontline => _parent.frontlinePoint,
                     Line.Midline => _parent.midlinePoint,
                     Line.Backline => _parent.backlinePoint,
-                    _ => throw new System.ArgumentOutOfRangeException(nameof(line), "Invalid line type"),
+                    _ => throw new ArgumentOutOfRangeException(nameof(line), "Invalid line type"),
                 };
             }
             set
@@ -257,7 +275,7 @@ public class TeamSpawnConfig
                         _parent.backlinePoint = value;
                         break;
                     default:
-                        throw new System.ArgumentOutOfRangeException(nameof(line), "Invalid line type");
+                        throw new ArgumentOutOfRangeException(nameof(line), "Invalid line type");
                 }
             }
         }

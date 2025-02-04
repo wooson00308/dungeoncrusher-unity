@@ -15,6 +15,7 @@ public class UnitSkillSloatView : BaseView
         _image = GetComponent<Image>();
         _coolTimeImage = transform.Find("SkillCoolImage").GetComponent<Image>();
         _player = UnitFactory.Instance.GetPlayer();
+        _coolTimeImage.fillAmount = 0;
     }
 
     public void Initialize(Skill skill)

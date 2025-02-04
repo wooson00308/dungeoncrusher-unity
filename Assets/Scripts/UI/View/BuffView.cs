@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class BuffView : BaseView
 {
@@ -21,8 +19,6 @@ public class BuffView : BaseView
     {
         if (gameEvents is BuffSkillEventArgs buffSkillEventArgs)
         {
-            Debug.Log(buffSkillEventArgs.data);
-
             if (!_skillDatas.ContainsKey(buffSkillEventArgs.data))
             {
                 var buffSloatObject = ResourceManager.Instance.SpawnFromPath("UI/BuffSloat", transform);
@@ -43,7 +39,6 @@ public class BuffView : BaseView
         }
 
         _skillDatas.Clear();
-        Debug.Log(_skillDatas.Count);
     }
 
 
