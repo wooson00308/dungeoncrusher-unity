@@ -9,7 +9,7 @@ public class TriggerFx : MonoBehaviour
 {
     private readonly List<Unit> _targets = new();
     private readonly Dictionary<int, bool> _canCollideIds = new();
-
+    private bool hasEntered = false;
     private Unit _owner;
     private Collider2D[] _colliders;
     private TriggerFxAnimator _model;
@@ -138,9 +138,10 @@ public class TriggerFx : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasEntered) return;
         if (!CanCollide(collision)) return;
         if (!_isInitialized) return;
-
+        if (Data.OnEventOnce) hasEntered = true;
         if (collision.TryGetComponent(out Unit target) && target.IsActive)
         {
             if (!_onEventFromSelf && _owner.EqualsUnit(target)) return;
