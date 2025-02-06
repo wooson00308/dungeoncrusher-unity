@@ -1,3 +1,6 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class GameOverProcess : Process
 {
     public void OnEnable()
@@ -7,11 +10,19 @@ public class GameOverProcess : Process
 
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_GameOver);
         SoundSystem.Instance.PlayBGM("GameOver");
-        _processSystem.IsSpawnPlayer = true;
     }
 
     public void OnDisable()
     {
         UIManager.Instance.CloseLayoutUI<GameOverUI>();
+    }
+    
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            UIManager.Instance.CloseLayoutUI<GameOverUI>();
+            SceneManager.LoadScene(0);
+        }
     }
 }

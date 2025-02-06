@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b433889c8986543bd5d416878c6035, type: 3}
+  m_Name: DotDealSkillFxEventData
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: 0
+  <Name>k__BackingField: 
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: 
+  IsGameTime: 1
+  Prefab: {fileID: 1782945705155582042, guid: 5926d78d5e612c04bb228faf52e2901d, type: 3}

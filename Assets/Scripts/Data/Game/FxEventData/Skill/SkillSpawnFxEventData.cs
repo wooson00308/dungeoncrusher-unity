@@ -32,6 +32,8 @@ public class SkillSpawnFxEventData : SkillFxEventData
 
     private Vector3 SetFxPos(Unit owner)
     {
+        if (owner == null) return Vector3.zero;
+        
         if (offSet == Vector3.zero)
         {
             return owner.transform.position;

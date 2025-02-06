@@ -30,13 +30,16 @@ public class TimeManager : Singleton<TimeManager>
         if (isBossDead) return;
         _timeScale = _timeScale == 1 ? 2 : 1;
         Time.timeScale = _timeScale;
+        GameTime.TimeScale = _timeScale;
     }
 
     public async void SlowMotion()
     {
         isBossDead = true;
+        Time.timeScale = 0.2f;
         GameTime.TimeScale = 0.2f;
         await Awaitable.WaitForSecondsAsync(0.5f);
+        Time.timeScale = _gameTimeScale;
         GameTime.TimeScale = _gameTimeScale;
         isBossDead = false;
     }

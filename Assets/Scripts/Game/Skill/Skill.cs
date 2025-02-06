@@ -112,6 +112,11 @@ public class Skill : MonoBehaviour
             return;
         }
 
+        if(_data.IsNotVisiable)
+        {
+            _owner.SetVisialbe(false);
+        }
+
         _isCoolingDown = true;
 
         // ��ų ��� FX ó��
@@ -214,6 +219,11 @@ public class Skill : MonoBehaviour
                 foreach (var fxEventData in _currentLevelData.UseSkillFxDatas)
                 {
                     fxEventData.OnEndEvent(_owner, this);
+                }
+
+                if (_data.IsNotVisiable)
+                {
+                    _owner.SetVisialbe(true);
                 }
             }
         }

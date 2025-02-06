@@ -10,28 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf745fa90bd7bf44b4908f7851a47d7, type: 3}
-  m_Name: ExtraSkillData
+  m_Name: CursedStepSkill
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 690
-  <Name>k__BackingField: "\uD544\uC0B4\uAE30"
-  <DisplayName>k__BackingField: 
+  <Id>k__BackingField: 111
+  <Name>k__BackingField: "\uC800\uC8FC\uC758 \uBC1C\uAC78\uC74C"
+  <DisplayName>k__BackingField: Cursed Step
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: -5392625257635239999, guid: 93e485463fa2a844e9ff1cba07c991cf, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: bc610b7ccb445df42a50fc8e7bd4f852, type: 3}
   _defaultPrefabPath: Skill/Skill
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
-  - <ADRatio>k__BackingField: 258
+  - <ADRatio>k__BackingField: 0
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 0
-    <NeedMP>k__BackingField: 100
-    <Rate>k__BackingField: 0
-    <Description>k__BackingField: "\uD544\uC0B4\uAE30"
-    <Duration>k__BackingField: 1
+    <NeedMP>k__BackingField: 0
+    <Rate>k__BackingField: 100
+    <Description>k__BackingField: 
+    <Duration>k__BackingField: 0
     <Cooltime>k__BackingField: 1
-    <Conditions>k__BackingField:
-    - {fileID: 11400000, guid: 41c6dfdafaa41479da4436e6af6cc64e, type: 2}
+    <Conditions>k__BackingField: []
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:
-    - {fileID: 11400000, guid: 9bf6204acb08d834785d63c8ad091c63, type: 2}
+    - {fileID: 11400000, guid: 7fa8946e30eebaa49a82e180346b9cdb, type: 2}
     <RemoveFxDatas>k__BackingField: []
-  <IsNotVisiable>k__BackingField: 1

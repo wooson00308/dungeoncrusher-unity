@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
+  m_Name: Data_Item_Test02
+  m_EditorClassIdentifier: 
+  _id: Weapon_003
+  _prefab: {fileID: 419567602478597437, guid: 867325d4351dc4c4fbfb8f0c55127c69, type: 3}
+  _name: Prf_Weapon_003
+  _iconId: 
+  _icon: {fileID: 21300000, guid: 88c21579d0b21564b8f53e9ddc599041, type: 3}
+  _partType: 1
+  _description: "\uACF5\uACA9\uB825 +10"
+  _health:
+    _value: 0
+  _attack:
+    _value: 10
+  _ap:
+    _value: 0
+  _ad:
+    _value: 0
+  _defense:
+    _value: 0
+  _mp:
+    _value: 0
+  _mpPercent:
+    _value: 0
+  _maxMp:
+    _value: 0
+  _exp:
+    _value: 0
+  _expPercent:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
+    _value: 0
+  _speed:
+    _value: 0
+  _attackSpeed:
+    _value: -0.1
+  _attackRange:
+    _value: 0
+  _criticalRate:
+    _value: 0
+  _criticalDamage:
+    _value: 0
+  _stunRate:
+    _value: 0
+  _lifestealRate:
+    _value: 0
+  _lifestealPercent:
+    _value: 0
+  _skillDatas: []

@@ -230,6 +230,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #endregion
 
+    public void SetVisialbe(bool value)
+    {
+        _model.SetVisialbe(value);
+    }
+
     private void Awake()
     {
         _fsm = GetComponent<FSM>();
@@ -250,8 +255,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
         ResetItemNSkills();
     }
-
-   
 
     public void OnInitialized(UnitData data, Team team)
     {
@@ -300,12 +303,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
             ResetStats(equipment.Value.Data.Id);
         }
-        
+
         _equipments.Clear();
         _equipments = new();
         _skillDic.Clear();
         _skillDic = new();
-        
+
         var skills = _skillStorage.GetComponentsInChildren<Transform>(true).ToList();
         skills.Remove(skills[0]);
 
@@ -498,7 +501,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     public void OnDeath(Unit killer = null, bool isSpecialDeath = false, bool isExecution = false)
     {
         if (IsDeath) return;
-        Health.Reset("Engage");
         IsDeath = true;
 
         IsActive = false;
@@ -586,7 +588,6 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _reviveCount--;
         _fsm.TransitionTo<IdleState>();
         var reviveHealthValue = (int)(Health.Max * 0.2f);
-        Health.Update("Engage", -Health.Max);
         Health.Update("Engage", reviveHealthValue);
     }
 

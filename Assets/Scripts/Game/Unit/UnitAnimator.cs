@@ -9,6 +9,7 @@ public class UnitAnimator : MonoBehaviour
     private SortingGroup _sortingGroup;
     private Transform _body;
     public Transform Body => _body;
+    public GameObject model;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class UnitAnimator : MonoBehaviour
     private void FixedUpdate()
     {
         OrderSprite();
+    }
+
+    public void SetVisialbe(bool value)
+    {
+        model.SetActive(value);
     }
 
     public void ChargeAttackEvent(AnimationEvent e)
@@ -102,23 +108,20 @@ public class UnitAnimator : MonoBehaviour
         }
         else
         {
-            _owner.IsActive = true;
-
-            if (_owner.ReviveCount <= 0)
+            float time = 0;
+            while (time <= 2f)
             {
-                Death((int)UnitEvents.UnitEvent_OnDeath);
+                if (_owner.ReviveCount <= 0)
+                {
+                    Death((int)UnitEvents.UnitEvent_OnDeath);
+                    return;
+                }  
+                
+                time += Time.deltaTime;
+                await Awaitable.EndOfFrameAsync();
             }
-
-            await Awaitable.WaitForSecondsAsync(2);
-
-            if (_owner.ReviveCount > 0)
-            {
-                _owner.OnRevive();
-            }
-            else
-            {
-                Death((int)UnitEvents.UnitEvent_OnDeath);
-            }
+            
+            _owner.OnRevive();
         }
     }
 
