@@ -9,6 +9,7 @@ public class UnitAnimator : MonoBehaviour
     private SortingGroup _sortingGroup;
     private Transform _body;
     public Transform Body => _body;
+    public GameObject model;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class UnitAnimator : MonoBehaviour
     private void FixedUpdate()
     {
         OrderSprite();
+    }
+
+    public void SetVisialbe(bool value)
+    {
+        model.SetActive(value);
     }
 
     public void ChargeAttackEvent(AnimationEvent e)

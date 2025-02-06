@@ -230,6 +230,11 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #endregion
 
+    public void SetVisialbe(bool value)
+    {
+        _model.SetVisialbe(value);
+    }
+
     private void Awake()
     {
         _fsm = GetComponent<FSM>();
