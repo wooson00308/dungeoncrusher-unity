@@ -27,7 +27,7 @@ MonoBehaviour:
     <Rate>k__BackingField: 100
     <Description>k__BackingField: 
     <Duration>k__BackingField: 0
-    <Cooltime>k__BackingField: 5
+    <Cooltime>k__BackingField: 2
     <Conditions>k__BackingField: []
     <ApplyFxDatas>k__BackingField: []
     <UseSkillFxDatas>k__BackingField:

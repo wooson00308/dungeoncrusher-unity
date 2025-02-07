@@ -16,4 +16,6 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  DamageCoefficient: 110
+  IsGameTime: 1
+  Prefab: {fileID: 0}
+  DamageCoefficient: 300
