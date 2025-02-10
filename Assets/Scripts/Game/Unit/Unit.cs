@@ -286,7 +286,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             SetActive(true);
         }
-
+        weaponHolder = GameObject.FindGameObjectWithTag("Weapon").gameObject.transform; //무기 이미지 변경을 위한 초기화
         ResetStats("Main");
     }
 
@@ -680,7 +680,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void EquipItem(Item item)
     {
-        Item spawnItem = ResourceManager.Instance.SpawnFromPath($"Item/{item.name}").GetComponent<Item>();
+
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
@@ -706,6 +706,12 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         UpdateStats(item.Data.Id, item.Data);
 
+        if (item.Data.PartType == PartType.Weapon)
+        {
+            ChangeWeapon(item.gameObject);
+            return;
+        }
+        Item spawnItem = ResourceManager.Instance.SpawnFromPath($"Item/{item.name}").GetComponent<Item>();
         spawnItem.transform.SetParent(_inventory);
     }
 
@@ -749,6 +755,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     #endregion
 
+    #region 아이템 장착 이미지 변경
+    private Transform weaponHolder;
+    public void ChangeWeapon(GameObject newWeaponPrefab)
+    {
+        foreach (Transform child in weaponHolder)
+        {
+            Destroy(child.gameObject);
+        }
+
+        newWeaponPrefab.transform.SetParent(weaponHolder);
+        newWeaponPrefab.transform.localPosition = Vector3.zero;
+        newWeaponPrefab.transform.localRotation = Quaternion.identity;
+    }
+    #endregion
     public (int damage, bool isCritical) LastDamage() //기존 UnitAnimator에서 Attack할때만 치명타 계산하면 스킬에서는 활용못해서 변경함. 
     {
         int realDamage;

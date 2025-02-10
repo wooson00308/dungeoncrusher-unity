@@ -9,14 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fbd13607ef443c081b1365767a3c0c, type: 3}
-  m_Name: LightingSpearSkillFxEventData
+  m_Script: {fileID: 11500000, guid: 87b2ac0ca18b26140a974b68f4412790, type: 3}
+  m_Name: LightingSpearProjectileData
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 0
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
-  IsGameTime: 1
-  Prefab: {fileID: 0}
-  _lightingSpearDotPrefab: {fileID: 11400000, guid: ae5a0a30f28575d4ca0518bb961844b6, type: 2}
-  _lightingSpearPrefab: {fileID: 11400000, guid: 50a3339774b2db6469ebf760bd1b8083, type: 2}
+  <HasHoming>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 8501783444568476474, guid: c71f7f8687831fc4f97ce5a04d31e423, type: 3}
+  <MoveSpeed>k__BackingField:
+    _value: 0
+  <RotationSpeed>k__BackingField:
+    _value: 0
+  <Duration>k__BackingField:
+    _value: 0

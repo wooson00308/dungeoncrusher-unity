@@ -22,13 +22,13 @@ MonoBehaviour:
   _health:
     _value: 0
   _attack:
-    _value: 10
+    _value: 20
   _ap:
     _value: 0
   _ad:
     _value: 0
   _defense:
-    _value: 0
+    _value: 10
   _mp:
     _value: 0
   _mpPercent:
