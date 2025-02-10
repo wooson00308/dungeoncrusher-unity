@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612e15b335187a04d801827e8e459929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 7788336731029061870}
+  _model: {fileID: 8491870567337036977}
 --- !u!50 &2924405753405347345
 Rigidbody2D:
   serializedVersion: 5
@@ -197,7 +197,7 @@ Animator:
   m_GameObject: {fileID: 335642645559679506}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 47e1341b591c48744834f2540387b291, type: 2}
+  m_Controller: {fileID: 9100000, guid: b2db3ab863e818d49b315ed63b11f835, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -284,9 +284,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 0.57489336, b: 0, a: 0.49019608}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
