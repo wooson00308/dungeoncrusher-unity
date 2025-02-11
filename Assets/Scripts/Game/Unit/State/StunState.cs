@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class StunState : StateBase, IState
 {
     private float _currentCheckDelay = 0;

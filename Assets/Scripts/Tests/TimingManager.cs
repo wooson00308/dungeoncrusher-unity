@@ -1,15 +1,13 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class TimingManager : SingletonMini<TimingManager>
 {
     public async Awaitable SetTimer(float duration, Action onComplete)
     {
-        Debug.Log("ÁøÀÔ");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½");
         await Awaitable.WaitForSecondsAsync(duration);
         onComplete?.Invoke();
-        Debug.Log("¹ÝÈ¯");
+        Debug.Log("ï¿½ï¿½È¯");
     }
-    
 }

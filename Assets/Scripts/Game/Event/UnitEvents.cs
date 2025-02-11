@@ -29,37 +29,37 @@ public enum UnitEvents
 
 public class UnitEventArgs
 {
-    public Unit publisher;
+    public Unit Publisher;
 }
 
 public class SetActiveEventArgs : UnitEventArgs
 {
-    public bool isActive;
+    public bool IsActive;
 }
 
 public class OnHitEventArgs : UnitEventArgs
 {
-    public int damageValue;
-    public bool isCiritical;
+    public int DamageValue;
+    public bool IsCiritical;
 }
 
 public class SkillEventArgs : UnitEventArgs
 {
     public SkillData_old data_old;
-    public SkillData data;
+    public SkillData Data;
 }
 
 public class BuffSkillEventArgs : SkillEventArgs
 {
-    public int currentCount;
+    public int CurrentCount;
 }
 
 public class UnitEventWithAttackerArgs : UnitEventArgs
 {
-    public Unit attacker;
+    public Unit Attacker;
 }
 
 public class UnitEventOnAttackArgs : UnitEventArgs
 {
-    public Unit target;
+    public Unit Target;
 }

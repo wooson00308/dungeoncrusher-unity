@@ -6,8 +6,10 @@ public class StraightWarning : Warning
     {
         _owner = owner;
         float x = targetPos.x - owner.transform.position.x;
+        
         transform.position =
             Vector3.Lerp(owner.transform.position, targetPos, 0.5f);
+        
         transform.localScale = new Vector3(x, transform.lossyScale.y, transform.lossyScale.z);
         transform.rotation = Quaternion.Euler(Util.LookAt2D(owner.transform.position, targetPos));
     }

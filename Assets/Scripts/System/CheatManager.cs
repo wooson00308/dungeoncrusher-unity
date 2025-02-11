@@ -1,8 +1,8 @@
-using UnityEditor;
 using UnityEngine;
 
 public class CheatManager : MonoBehaviour
 {
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -27,4 +27,5 @@ public class CheatManager : MonoBehaviour
             }
         }
     }
+#endif
 }

@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_Test01
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 2
+  <Name>k__BackingField: Test Weapon 02
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uACF5\uACA9\uB825 +10"
   _id: Weapon_002
   _prefab: {fileID: 419567602478597437, guid: aa9b94c4fce94e140bfb310cefdcce26, type: 3}
   _name: Test Weapon 02

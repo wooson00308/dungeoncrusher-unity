@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class FxEventData : Data
 {
     public bool IsGameTime = true;

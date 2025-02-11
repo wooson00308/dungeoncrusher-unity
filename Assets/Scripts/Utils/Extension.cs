@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +7,7 @@ public static class Extension
     {
         return Util.GetOrAddComponent<T>(go);
     }
+    
     public static void AddUniqueEventHandler(this UnityEvent unityEvent, UnityAction unityAction)
     {
         unityEvent.RemoveListener(unityAction);
@@ -18,6 +18,7 @@ public static class Extension
     {
         return SafeConvertToByte((float)value);
     }
+    
     public static byte SafeConvertToByte(this float value)
     {
         const byte maxValue = byte.MaxValue; // 255

@@ -33,7 +33,7 @@ public class SkillEffect_old : MonoBehaviour
         if (!_isInitialized) return;
 
         var args = e as UnitEventArgs;
-        if (!args.publisher.GetInstanceID().Equals(_user.GetInstanceID())) return;
+        if (!args.Publisher.GetInstanceID().Equals(_user.GetInstanceID())) return;
 
         Destroy(null);
     }

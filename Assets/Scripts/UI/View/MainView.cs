@@ -1,6 +1,5 @@
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +48,7 @@ public class MainView : BaseView
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{(int)StageManager.Instance.EnageTime}s");
     }
-    
+
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -60,7 +59,7 @@ public class MainView : BaseView
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
 
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         var worldToViewportPoint = Camera.main.WorldToViewportPoint(unit.transform.position);
         worldToViewportPoint.x = Mathf.Clamp(worldToViewportPoint.x, 0, 1);
@@ -83,11 +82,10 @@ public class MainView : BaseView
     {
         var image = Get<Image>((int)Images.SUPER_ARMOR_IMAGE);
         image.enabled = !image.enabled;
-        var friendlys = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
-        if (friendlys == null) return;
-        var player = friendlys.FirstOrDefault();
-        // var player = friendlys.ToArray()[0];
 
+        var player = UnitFactory.Instance.GetPlayer();
+        if (player == null) return;
+        
         player.IsSuperArmor = !player.IsSuperArmor;
     }
 }

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class CriticalOperator
 {
     public static bool IsCritical(float criticalValue)

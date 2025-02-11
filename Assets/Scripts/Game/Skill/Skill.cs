@@ -134,9 +134,9 @@ public class Skill : MonoBehaviour
             _isDurationActive = false;
         }
 
-        if (_owner.Mp.Value >= _currentLevelData.NeedMP && _currentLevelData.NeedMP != 0)
+        if (_owner.Mp.Value >= _currentLevelData.NeedMp && _currentLevelData.NeedMp != 0)
         {
-            _owner.UpdateSkillMp(-_currentLevelData.NeedMP);
+            _owner.UpdateSkillMp(-_currentLevelData.NeedMp);
             GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Ulti);
         }
 
@@ -190,7 +190,7 @@ public class Skill : MonoBehaviour
         }
         else
         {
-            if (CurrentLevelData.Conditions.Count <= 0 && _owner.Mp.Value >= _currentLevelData.NeedMP)
+            if (CurrentLevelData.Conditions.Count <= 0 && _owner.Mp.Value >= _currentLevelData.NeedMp)
             {
                 UseSkill();
             }

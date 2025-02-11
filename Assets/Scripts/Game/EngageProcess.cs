@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class EngageProcess : Process
@@ -32,7 +31,7 @@ public class EngageProcess : Process
     private void TryNextProcess(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         if (unit.Team == Team.Friendly)
         {
@@ -42,8 +41,6 @@ public class EngageProcess : Process
             {
                 _processSystem.OnNextProcess<GameOverProcess>();
             }
-
-            return;
         }
     }
 }

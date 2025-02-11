@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Unit))]
@@ -12,8 +11,10 @@ public class FSM : MonoBehaviour
     private string _currentStateName;
     public string CurrentStateName => _currentStateName;
     private bool _isLocked = false;
+    
     public void LockState() => _isLocked = true;
     public void UnlockState() => _isLocked = false;
+    
     private void Awake()
     {
         _unit = GetComponent<Unit>();

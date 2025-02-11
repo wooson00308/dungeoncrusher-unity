@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class Util
 {
-    const double EPSILON = 0.0001;
+    private const double EPSILON = 0.0001;
 
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
@@ -89,7 +87,7 @@ public class Util
 
     public static bool IsEqual(double x, double y) // 비교 함수.
     {
-        return (((x - EPSILON) < y) && (y < (x + EPSILON)));
+        return ((x - EPSILON) < y && (y < (x + EPSILON)));
     }
 
     public static string GetStringWithinSection(string str, string begin, string end)
@@ -112,7 +110,6 @@ public class Util
 
     public static Vector3 WorldToCanvasPoint(Camera camera, Canvas canvas, Vector3 worldPosition)
     {
-        // Vector3 result;
         Vector3 viewportPosition = camera.WorldToViewportPoint(worldPosition);
 
         RectTransform canvasRect = canvas.GetComponent<RectTransform>();
@@ -120,7 +117,6 @@ public class Util
         var result = new Vector2(
             ((viewportPosition.x * delta.x) - (delta.x * 0.5f)),
             ((viewportPosition.y * delta.y) - (delta.y * 0.5f)));
-
 
         return result;
     }

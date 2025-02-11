@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_Test02
   m_EditorClassIdentifier: 
-  _id: Weapon_003
+  <Id>k__BackingField: 3
+  <Name>k__BackingField: Test Weapon 03
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uACF5\uACA9\uB825 +20"
   _prefab: {fileID: 419567602478597437, guid: 867325d4351dc4c4fbfb8f0c55127c69, type: 3}
-  _name: Test Weapon 03
-  _iconId: 
   _icon: {fileID: 6799453868218975435, guid: ab86c42b07bf5d24c9b056231b468d81, type: 3}
   _partType: 1
-  _description: "\uACF5\uACA9\uB825 +10"
   _health:
     _value: 0
   _attack:
