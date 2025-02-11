@@ -108,7 +108,8 @@ public class UnitFactory : SingletonMini<UnitFactory>
     {
         var teamSpawnPoint = _teamSpawnPoints.Find(x => x.team == unit.Team);
 
-        Vector2 randomPosition = Vector2.zero;
+        Vector2 randomPosition;
+        
         if (teamSpawnPoint.spawnShape == SpawnShape.Circle)
         {
             randomPosition = Util.GetRandomSpawnPositionCircle(
@@ -242,7 +243,7 @@ public class TeamSpawnConfig
 
     public class SpawnPoints
     {
-        private TeamSpawnConfig _parent;
+        private readonly TeamSpawnConfig _parent;
 
         public SpawnPoints(TeamSpawnConfig parent)
         {

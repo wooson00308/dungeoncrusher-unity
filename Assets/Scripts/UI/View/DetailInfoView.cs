@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +22,7 @@ public class DetailInfoView : BaseView
     private void OnEnable()
     {
         UpdateStatsUI();
+        
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateStatsUI);
         GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateStatsUI);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_ChangeStat, UpdateStatsUI);

@@ -1,18 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public abstract class ItemData : ScriptableObject, IStats
+public abstract class ItemData : Data, IStats
 {
-    [SerializeField] protected string _id;
+    // [SerializeField] protected string _id;
     [SerializeField] protected GameObject _prefab;
-    [SerializeField] protected string _name;
-    [SerializeField] protected string _iconId;
     [SerializeField] protected Sprite _icon;
     [SerializeField] protected PartType _partType;
-    [TextArea] [SerializeField] protected string _description;
 
     [Header("Stats")] [SerializeField] private IntStat _health;
+    
     [SerializeField] private IntStat _attack;
     [SerializeField] private FloatStat _ap;
     [SerializeField] private FloatStat _ad;
@@ -36,13 +33,10 @@ public abstract class ItemData : ScriptableObject, IStats
     [SerializeField] private FloatStat _lifestealPercent;
     [SerializeField] protected List<SkillData_old> _skillDatas;
 
-    public string Id => _id;
+    // public string Id => _id;
     public GameObject Prefab => _prefab;
-    public string Name => _name;
     public PartType PartType => _partType;
-    public string IconId => _iconId;
     public Sprite Icon => _icon;
-    public string Description => _description;
 
     public IntStat Health => _health;
     public IntStat Attack => _attack;

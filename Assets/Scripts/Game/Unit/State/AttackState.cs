@@ -36,6 +36,7 @@ public class AttackState : StateBase, IState
         }
 
         if (unit.Target == null) return;
+        
         unit.Rotation(unit.Target.transform.position - unit.transform.position);
 
         if (unit.GetAttackState() == 0)

@@ -9,11 +9,11 @@ public class ReadyUI : BasePresenter<ReadyView, ReadyModel>
     private int _statChoiceCount;
     public int StatChoiceCount => _statChoiceCount;
 
-    private bool isReady;
+    private bool _isReady;
 
     public void OnEnable()
     {
-        isReady = true;
+        _isReady = true;
         ChoiceTable();
     }
 
@@ -33,27 +33,27 @@ public class ReadyUI : BasePresenter<ReadyView, ReadyModel>
 
         List<ChoiceData> datas = new();
 
-        if (isReady)
+        if (_isReady)
         {
             if (player.StageLevel.Value > 0)
             {
                 _statChoiceCount = player.StageLevel.Value;
             }
 
-            isReady = false;
+            _isReady = false;
         }
 
         if (_statChoiceCount > 0)
         {
             datas = _statChoiceTable.GetRandomChoices();
-            _view.UpdateChoiceView(datas);
         }
         else
         {
             _statChoiceCount = -1;
             datas = _itemnSkillChoiceTable.GetRandomChoices();
-            _view.UpdateChoiceView(datas);
         }
+
+        _view.UpdateChoiceView(datas);
     }
 
     public void DisCountStatChoiceCount()

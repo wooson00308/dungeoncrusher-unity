@@ -1,10 +1,7 @@
-using UnityEngine;
-
 public class OptionPopUpModel : BaseModel
 {
     public override void Initialize()
     {
-        throw new System.NotImplementedException();
     }
 
     public void ChangeBGMSliderValue(float value)

@@ -35,41 +35,41 @@ public class UnitAnimator : MonoBehaviour
         AttackEvent(e);
     }
 
-    private GameObject warningPrefab;
-    private Vector2 targetPos;
+    private GameObject _warningPrefab;
+    private Vector2 _targetPos;
 
     public void WarningEvent(AnimationEvent e)
     {
-        warningPrefab = ResourceManager.Instance.Spawn(_owner.WarningPrefab.gameObject);
+        _warningPrefab = ResourceManager.Instance.Spawn(_owner.WarningPrefab.gameObject);
 
-        if (warningPrefab == null) return;
+        if (_warningPrefab == null) return;
 
-        targetPos = _owner.Target.transform.position;
-        warningPrefab.GetComponent<Warning>().Initialize(_owner, targetPos);
+        _targetPos = _owner.Target.transform.position;
+        _warningPrefab.GetComponent<Warning>().Initialize(_owner, _targetPos);
     }
 
 
     public void RangeAttackEvent(AnimationEvent e)
     {
-        ResourceManager.Instance.Destroy(warningPrefab);
+        ResourceManager.Instance.Destroy(_warningPrefab);
         var projectilePrefab = _owner.ProjectilePrefab;
 
         if (projectilePrefab == null) return;
 
-        Projectile_old _spawnProjectilePrefab =
+        Projectile_old spawnProjectilePrefab =
             ResourceManager.Instance.Spawn(projectilePrefab.gameObject).GetComponent<Projectile_old>();
-        _spawnProjectilePrefab.transform.position = transform.position;
+        spawnProjectilePrefab.transform.position = transform.position;
 
         var target = _owner.Target;
-        _spawnProjectilePrefab.Initialize(target, targetPos, _owner.Attack.Value);
+        spawnProjectilePrefab.Initialize(target, _targetPos, _owner.Attack.Value);
     }
 
     public void AttackEvent(AnimationEvent e)
     {
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnAttack, new UnitEventOnAttackArgs
         {
-            publisher = _owner,
-            target = _owner.Target,
+            Publisher = _owner,
+            Target = _owner.Target,
         });
 
         // if (CriticalOperator.IsCritical(_owner.CriticalRate.Value))  
@@ -109,12 +109,12 @@ public class UnitAnimator : MonoBehaviour
                 {
                     Death((int)UnitEvents.UnitEvent_OnDeath);
                     return;
-                }  
-                
+                }
+
                 time += Time.deltaTime;
                 await Awaitable.EndOfFrameAsync();
             }
-            
+
             _owner.OnRevive();
         }
     }
@@ -128,9 +128,9 @@ public class UnitAnimator : MonoBehaviour
     {
         UnitFactory.Instance.Destroy(_owner.Id, _owner);
 
-        GameEventSystem.Instance.Publish(eventId, new UnitEventArgs { publisher = _owner });
+        GameEventSystem.Instance.Publish(eventId, new UnitEventArgs { Publisher = _owner });
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnKill,
-            new UnitEventOnAttackArgs { publisher = _owner.Killer, target = _owner });
+            new UnitEventOnAttackArgs { Publisher = _owner.Killer, Target = _owner });
     }
 
     private void OrderSprite()

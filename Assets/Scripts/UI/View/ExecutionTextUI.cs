@@ -29,7 +29,9 @@ public class ExecutionTextUI : BaseView
     public void Show(string name, Vector3 worldPos)
     {
         _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
+        
         var randomPos = Random.insideUnitCircle * randomValue;
+        
         _rectTransform.anchoredPosition =
             (Vector2)Util.WorldToCanvasPoint(Camera.main, UIManager.Instance.Root.canvas, worldPos) + _pivot +
             randomPos;

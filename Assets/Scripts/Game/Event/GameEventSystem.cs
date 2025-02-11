@@ -34,6 +34,7 @@ public class GameEventSystem : SingletonMini<GameEventSystem>
         if (_eventDictionary.ContainsKey(eventType))
         {
             _eventDictionary[eventType] -= listener;
+            
             if (_eventDictionary[eventType] == null) // 리스너가 모두 제거되면 삭제
             {
                 _eventDictionary.Remove(eventType);

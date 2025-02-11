@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;
 
 public abstract class PopupPresenter<V, M> : BasePresenter<V, M>, IPopup
-        where V : BaseView
-        where M : BaseModel
+    where V : BaseView
+    where M : BaseModel
 {
-    private Coroutine showCoroutine;
+    private Coroutine _showCoroutine;
 
     public Transform tr => transform;
 
@@ -18,9 +18,9 @@ public abstract class PopupPresenter<V, M> : BasePresenter<V, M>, IPopup
 
     public void Show()
     {
-        if (showCoroutine != null) return;
+        if (_showCoroutine != null) return;
         gameObject.SetActive(true);
-        showCoroutine = StartCoroutine(RunShow());
+        _showCoroutine = StartCoroutine(RunShow());
     }
 
     protected abstract void Open();
@@ -34,13 +34,13 @@ public abstract class PopupPresenter<V, M> : BasePresenter<V, M>, IPopup
 
     public virtual void Hide()
     {
-
     }
 
     public virtual void ClosePopupUI()
     {
-        if (showCoroutine != null)
-            StopCoroutine(showCoroutine);
+        if (_showCoroutine != null)
+            StopCoroutine(_showCoroutine);
+        
         Hide();
         UIManager.Instance.ClosePopupUI(this);
     }

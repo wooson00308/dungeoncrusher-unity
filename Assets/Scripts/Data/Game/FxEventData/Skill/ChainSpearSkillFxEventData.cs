@@ -46,8 +46,8 @@ public class ChainSpearSkillFxEventData : SkillFxEventData
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkillBuff, new BuffSkillEventArgs()
         {
-            data = skill.Data,
-            currentCount = _currentOverlapCount
+            Data = skill.Data,
+            CurrentCount = _currentOverlapCount
         });
 
         owner.UpdateCriticalRate("Ready", percentValue);

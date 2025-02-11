@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class StageManager : SingletonMini<StageManager>
 
     public bool IsAllStageClear => _stageDatas.stageInfos.Count < _currentStage;
 
-    private List<Coroutine> _spawnCoroutines = new List<Coroutine>();
+    private readonly List<Coroutine> _spawnCoroutines = new List<Coroutine>();
     private Coroutine _stageTimerCoroutine;
     private bool _isStageCleared = false;
 

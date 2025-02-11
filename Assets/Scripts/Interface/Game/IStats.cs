@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface IStats
 {
     public IntStat Health { get; }

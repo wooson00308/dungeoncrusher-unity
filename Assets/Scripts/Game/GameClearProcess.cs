@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameClearProcess : Process
 {
     public void OnEnable()

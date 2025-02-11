@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_1990
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 1990
+  <Name>k__BackingField: "\uAC80 A"
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uACF5\uACA9\uB825 +4, \uACF5\uACA9\uC18D\uB3C4
+    +0.2"
   _id: Item_1990
   _prefab: {fileID: 5564285513405598355, guid: eb278e9dd0b0ad24f879fc69679134a1, type: 3}
   _name: "\uAC80 A"
@@ -23,13 +28,21 @@ MonoBehaviour:
     _value: 0
   _attack:
     _value: 4
+  _ap:
+    _value: 0
+  _ad:
+    _value: 0
   _defense:
     _value: 0
   _mp:
     _value: 0
+  _mpPercent:
+    _value: 0
   _maxMp:
     _value: 0
   _exp:
+    _value: 0
+  _expPercent:
     _value: 0
   _level:
     _value: 0
