@@ -18,12 +18,13 @@ MonoBehaviour:
   <Description>k__BackingField: 
   <MaxMultiTriggerCount>k__BackingField: 0
   <Durtaion>k__BackingField: 0
-  <EventPerTime>k__BackingField: 0
+  <EventPerTime>k__BackingField: 0.25
   <OnDestroyEventWhenCollideUnit>k__BackingField: 0
   <OnEventFromSelf>k__BackingField: 0
   <OnEventFromOwnerProjectile>k__BackingField: 0
   <EnterFxDatas>k__BackingField:
   - {fileID: 11400000, guid: 05c2d492764608c4c92ddf0661c449fc, type: 2}
-  <StayFxDatas>k__BackingField: []
+  <StayFxDatas>k__BackingField:
+  - {fileID: 11400000, guid: ed0c42014f836c947949c58b86c18e47, type: 2}
   <ExitFxDatas>k__BackingField:
   - {fileID: 11400000, guid: e5e3ad41cb168ef45ac85c286dde40ed, type: 2}
