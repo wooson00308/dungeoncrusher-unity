@@ -33,7 +33,7 @@ public class ChoiceView : BaseView
     private void Awake()
     {
         _readyView = transform.parent.GetComponentInParent<ReadyView>();
-        _owner = UnitFactory.Instance.GetPlayer(); 
+        _owner = UnitFactory.Instance.GetPlayer();
         BindUI();
     }
 
@@ -207,6 +207,11 @@ public class ChoiceView : BaseView
         text?.SetText($"{name} {ResultValueText(value)}");
     }
 
+    /// <summary>
+    /// 아이템 데이터에 있는 이름을 불러옴
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private string GetNameData(ChoiceData data)
     {
         if (data.skillData != null)
@@ -228,6 +233,11 @@ public class ChoiceView : BaseView
         }
     }
 
+    /// <summary>
+    /// 아이템 데이터에 있는 Description을 불러옴
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private string GetDescriptionData(ChoiceData data)
     {
         if (data.skillData != null)
@@ -256,7 +266,12 @@ public class ChoiceView : BaseView
         }
     }
 
-    private string ResultValueText(float value) //값이+라면 "+"값   값이-라면 "-"값 
+    /// <summary>
+    /// 값이 + 라면 "+"값, 값이 - 라면 "-"값 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private string ResultValueText(float value)
     {
         string result;
         if (value > 0)

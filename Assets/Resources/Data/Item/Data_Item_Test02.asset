@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Weapon_003
   _prefab: {fileID: 419567602478597437, guid: 867325d4351dc4c4fbfb8f0c55127c69, type: 3}
-  _name: Prf_Weapon_003
+  _name: Test Weapon 03
   _iconId: 
-  _icon: {fileID: 21300000, guid: 88c21579d0b21564b8f53e9ddc599041, type: 3}
+  _icon: {fileID: 6799453868218975435, guid: ab86c42b07bf5d24c9b056231b468d81, type: 3}
   _partType: 1
   _description: "\uACF5\uACA9\uB825 +10"
   _health:
