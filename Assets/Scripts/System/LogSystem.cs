@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LogSystem : MonoBehaviour
@@ -19,6 +21,19 @@ public class LogSystem : MonoBehaviour
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, Log);
+    }
+
+    private void OnEnable()
+    {
+        //스타트 로그 지움.
+        var componentsInChildren = GetComponentsInChildren<Transform>().ToList();
+        componentsInChildren.RemoveAt(0);
+
+        foreach (var child in componentsInChildren)
+        {
+            if (child == null) return;
+            ResourceManager.Instance.Destroy(child.gameObject);
+        }
     }
 
     private void OnDisable()
