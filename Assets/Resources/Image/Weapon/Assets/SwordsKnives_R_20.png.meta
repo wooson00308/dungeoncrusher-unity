@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SwordsKnives_R_20_0: -7846686493533050848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
