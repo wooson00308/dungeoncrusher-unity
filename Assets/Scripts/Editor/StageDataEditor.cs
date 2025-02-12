@@ -33,7 +33,7 @@ public class StageDataEditor : Editor
         StringBuilder sb = new StringBuilder();
 
         // CSV 헤더 (원하는 항목에 맞게 수정 가능)
-        sb.AppendLine("StageIndex,StageDurationTime,UnitIndex,SpawnCount,FirstSpawnTime,AdditionalSpawnCycle,AdditionalSpawnCount,UnderX2Threshold,UnderX4Threshold,MinimumSpawnCycle,MaxAdditionalSpawns,UnderX2Factor,UnderX4Factor");
+        sb.AppendLine("스테이지 번호,유닛 번호,스테이지 지속 시간 (초),스폰 시 생성되는 기본 몬스터 수,첫 스폰 타임 (ms),추가 스폰 주기 (초),추가 스폰 몬스터 수,Under_x2 기준 값 (X2),Under_x4 기준 값 (X4),추가 스폰 주기 최소값 (MinX),추가 스폰 최대 횟수 (-1: 무제한 | 0: 없음 | n: 제한 횟수),Under_x2 감소 비율 (÷2),Under_x4 감소 비율 (÷4)");
 
         // StageData의 각 스테이지 정보를 순회하며 CSV 데이터 생성
         for (int stageIndex = 0; stageIndex < stageData.stageInfos.Count; stageIndex++)
@@ -51,8 +51,8 @@ public class StageDataEditor : Editor
                 // CSV의 한 행 생성
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
                     stageIndex,
-                    stageInfo.durationTime,
                     unitIndex,
+                    stageInfo.durationTime,
                     unitData.spawnCount,
                     unitData.firstSpawnTime,
                     unitData.additionalSpawnCycle,
@@ -70,7 +70,7 @@ public class StageDataEditor : Editor
         string path = EditorUtility.SaveFilePanel("Save CSV", "", "StageData.csv", "csv");
         if (!string.IsNullOrEmpty(path))
         {
-            File.WriteAllText(path, sb.ToString());
+            File.WriteAllText(path, sb.ToString(), new UTF8Encoding(true));
             Debug.Log("CSV exported to: " + path);
         }
     }
@@ -109,23 +109,9 @@ public class StageDataEditor : Editor
                     continue;
                 }
 
-                // CSV 컬럼 순서
-                // 0: StageIndex
-                // 1: StageDurationTime
-                // 2: UnitIndex (불필요)
-                // 3: SpawnCount
-                // 4: FirstSpawnTime
-                // 5: AdditionalSpawnCycle
-                // 6: AdditionalSpawnCount
-                // 7: UnderX2Threshold
-                // 8: UnderX4Threshold
-                // 9: MinimumSpawnCycle
-                // 10: MaxAdditionalSpawns
-                // 11: UnderX2Factor
-                // 12: UnderX4Factor
                 int stageIndex = int.Parse(columns[0]);
-                int stageDurationTime = int.Parse(columns[1]);
-                // int unitIndex = int.Parse(columns[2]); // 사용하지 않음
+                //int unitIndex = int.Parse(columns[1]); // 사용하지 않음
+                int stageDurationTime = int.Parse(columns[2]);
                 int spawnCount = int.Parse(columns[3]);
                 float firstSpawnTime = float.Parse(columns[4]);
                 float additionalSpawnCycle = float.Parse(columns[5]);
