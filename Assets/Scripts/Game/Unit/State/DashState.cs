@@ -37,6 +37,7 @@ public class DashState : StateBase, IState
         unit.Stop();
 
         var target = unit.Target;
+        
         if (target == null)
         {
             _fsm.TransitionTo<ChaseState>();
@@ -86,7 +87,7 @@ public class DashState : StateBase, IState
             unit.Warp(hit.position);
         }
 
-        if (Vector2.Distance(unit.transform.position, _dashPos) < 0.5f)
+        if (Vector2.Distance(unit.transform.position, _dashPos) < 0.5f)//벽에 끼는 문제 이것 때문일 수 도 있을 듯 
         {
             _isEndDash = true;
         }

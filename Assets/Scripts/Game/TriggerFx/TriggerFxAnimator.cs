@@ -11,7 +11,7 @@ public class TriggerFxAnimator : MonoBehaviour
 
     public void Update()
     {
-        if (Animator == null) return;
+        if (Animator == null) return; //캐싱되어 있으니 == 가 아닌 is null로 비교
         Animator.speed = GameTime.TimeScale;
     }
 

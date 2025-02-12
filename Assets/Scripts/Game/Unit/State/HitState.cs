@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class HitState : StateBase, IState
 {
     private float _currentAttackStateCheckDelay = 0;

@@ -11,7 +11,7 @@ public class LifeStealSkillFxEventData : SkillFxEventData
         if (gameEvent is OnHitEventArgs)
         {
             OnHitEventArgs onHitEventArgs = (OnHitEventArgs)gameEvent;
-            totalDamage = onHitEventArgs.damageValue;
+            totalDamage = onHitEventArgs.DamageValue;
         }
     }
 

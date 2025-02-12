@@ -140,9 +140,9 @@ public class TriggerFx : MonoBehaviour
     {
         if (!CanCollide(collision)) return;
         if (!_isInitialized) return;
-
         if (collision.TryGetComponent(out Unit target) && target.IsActive)
         {
+
             if (!_onEventFromSelf && _owner.EqualsUnit(target)) return;
             if (_owner.Team == target.Team) return;
 

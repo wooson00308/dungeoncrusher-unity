@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UnitInfoUI : BaseView
@@ -16,7 +14,6 @@ public class UnitInfoUI : BaseView
     {
         Unit_Bar_Hp,
         Unit_Bar_Mp,
-        Img_UnitProfile,
         Unit_Equip_Weapon,
         Unit_Equip_Head,
         Unit_Equip_Arm,
@@ -60,7 +57,7 @@ public class UnitInfoUI : BaseView
     {
         if (gameEvent is UnitEventArgs eventArgs)
         {
-            if (eventArgs.publisher.Team == Team.Enemy) return;
+            if (eventArgs.Publisher.Team == Team.Enemy) return;
         }
 
         if (_unit == null)
@@ -73,30 +70,12 @@ public class UnitInfoUI : BaseView
             }
         }
 
-        ShowHpUI();
         ShowMpUI();
         ShowItemUI();
         ShowSkillUI();
     }
 
     #region HpUI
-
-    // private int _maxHealth = 0;
-
-    private void ShowHpUI()
-    {
-        if (_unitId == null || String.IsNullOrEmpty(_unitId))
-        {
-            Debug.LogWarning("unitId가 안들어가 있어요");
-        }
-
-        if (_unitId != _unit.Id) return;
-
-        // if (_maxHealth <= _unit.Health.Value)
-        // {
-        //     _maxHealth = _unit.Health.Value;
-        // }
-    }
 
     private void UpdateHpUI(object gameEvent)
     {
@@ -106,10 +85,7 @@ public class UnitInfoUI : BaseView
 
         var fillAmount = (float)_unit.Health.Value / _unit.Health.Max;
 
-        if (fillAmount <= 0)
-        {
-            fillAmount = 0;
-        }
+        fillAmount = Mathf.Clamp(fillAmount, 0, 1);
 
         Get<Image>((int)Images.Unit_Bar_Hp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
@@ -142,6 +118,12 @@ public class UnitInfoUI : BaseView
         if (_unit.Team == Team.Enemy) return;
 
         var fillAmount = _unit.Mp.Value / _maxMp;
+        
+        if (fillAmount <= 0)
+        {
+            fillAmount = 0;
+        }
+
         Get<Image>((int)Images.Unit_Bar_Mp).rectTransform.localScale = new Vector2(fillAmount, 1);
     }
 
@@ -153,19 +135,22 @@ public class UnitInfoUI : BaseView
     {
         if (_unitId != _unit.Id) return;
 
-        _unit.Equipment.TryGetValue(PartType.Weapon, out Item weaponItem);
+        _unit.Equipment.TryGetValue(PartType.Weapon, out var weaponItem);
+        
         if (weaponItem != null)
         {
             Get<Image>((int)Images.Unit_Equip_Weapon).sprite = weaponItem.Data.Icon;
         }
 
-        _unit.Equipment.TryGetValue(PartType.Helmet, out Item helmetItem);
+        _unit.Equipment.TryGetValue(PartType.Helmet, out var helmetItem);
+        
         if (helmetItem != null)
         {
             Get<Image>((int)Images.Unit_Equip_Head).sprite = helmetItem.Data.Icon;
         }
 
-        _unit.Equipment.TryGetValue(PartType.Armor, out Item armorItem);
+        _unit.Equipment.TryGetValue(PartType.Armor, out var armorItem);
+        
         if (armorItem != null)
         {
             Get<Image>((int)Images.Unit_Equip_Arm).sprite = armorItem.Data.Icon;
@@ -182,6 +167,7 @@ public class UnitInfoUI : BaseView
         if (_unitId != _unit.Id) return;
 
         var groupListSkill = Get<RectTransform>((int)RectTransforms.Group_List_Skill);
+        
         List<UnitSkillSloatView> unitSkillSloatViews = new List<UnitSkillSloatView>();
 
         for (int i = 0; i < groupListSkill.childCount; i++)
@@ -197,18 +183,6 @@ public class UnitInfoUI : BaseView
             skillLevelBackground.gameObject.SetActive(false);
         }
 
-        //foreach (var skills in _unit.SkillDic.Keys)
-        //{
-        //    for (int i = 0; i < _unit.SkillDic.Count; i++)
-        //    {
-        //        var skillDataIcon = _unit.SkillDic[skills].SkillData.Icon;
-        //        if (skillDataIcon != null)
-        //        {
-        //            images[i].sprite = skillDataIcon;
-        //        }
-        //    }
-        //}
-
         int index = 0;
 
         foreach (var key in _unit.SkillDic.Keys)
@@ -216,11 +190,11 @@ public class UnitInfoUI : BaseView
             var skill = _unit.SkillDic[key];
             var data = skill.Data;
             var unitSkillSloatView = unitSkillSloatViews[index++];
+            
             if (index > 3) //초기 스킬
             {
                 unitSkillSloatView.Initialize(skill);
             }
-
 
             unitSkillSloatView.Image.sprite = data.Icon;
 

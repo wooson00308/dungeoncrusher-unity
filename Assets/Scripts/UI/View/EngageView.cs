@@ -61,7 +61,7 @@ public class EngageView : BaseView
             var executionText = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI")
                 .GetComponent<ExecutionTextUI>();
 
-            executionText.Show("처형!", unitEventOnKillArgs.publisher.transform.position);
+            executionText.Show("처형!", unitEventOnKillArgs.Publisher.transform.position);
 
             await Awaitable.EndOfFrameAsync();
         }
@@ -77,13 +77,13 @@ public class EngageView : BaseView
         {
             var onHitArgs = _damageEventQueue.Dequeue();
             var damageText = ResourceManager.Instance.SpawnFromPath("UI/DamageTextUI").GetComponent<DamageTextUI>();
-            if (onHitArgs.isCiritical)
+            if (onHitArgs.IsCiritical)
             {
-                damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position, true);
+                damageText.Show(onHitArgs.DamageValue, onHitArgs.Publisher.transform.position, true);
             }
             else
             {
-                damageText.Show(onHitArgs.damageValue, onHitArgs.publisher.transform.position);
+                damageText.Show(onHitArgs.DamageValue, onHitArgs.Publisher.transform.position);
             }
 
             await Awaitable.EndOfFrameAsync();
@@ -95,11 +95,12 @@ public class EngageView : BaseView
     private void ShowHealthSlider(object gameEvent)
     {
         var setActiveEventArgs = gameEvent as SetActiveEventArgs;
-        if (!setActiveEventArgs.isActive) return;
+        if (setActiveEventArgs == null) return;
+        if (!setActiveEventArgs.IsActive) return;
 
         HpSliderUI hpSlider;
 
-        if (setActiveEventArgs.publisher.IsBoss)
+        if (setActiveEventArgs.Publisher.IsBoss)
         {
             hpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossHpSlider").GetComponent<HpSliderUI>();
         }
@@ -108,17 +109,18 @@ public class EngageView : BaseView
             hpSlider = ResourceManager.Instance.SpawnFromPath("UI/HpSlider").GetComponent<HpSliderUI>();
         }
 
-        hpSlider.Show(setActiveEventArgs.publisher);
+        hpSlider.Show(setActiveEventArgs.Publisher);
     }
 
     private void ShowMpSlider(object gameEvent)
     {
         var setActiveEventArgs = gameEvent as SetActiveEventArgs;
-        if (!setActiveEventArgs.isActive) return;
+        if (setActiveEventArgs == null) return;
+        if (!setActiveEventArgs.IsActive) return;
 
         MpSliderUI mpSlider;
 
-        if (setActiveEventArgs.publisher.IsBoss)
+        if (setActiveEventArgs.Publisher.IsBoss)
         {
             mpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider").GetComponent<MpSliderUI>();
         }
@@ -127,7 +129,7 @@ public class EngageView : BaseView
             mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
         }
 
-        mpSlider.Show(setActiveEventArgs.publisher);
+        mpSlider.Show(setActiveEventArgs.Publisher);
     }
 
     public override void BindUI()

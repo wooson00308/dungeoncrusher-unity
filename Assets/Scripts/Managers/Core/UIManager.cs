@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +5,9 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     private int _order = 10;
-    private Stack<IPopup> _popupStack = new Stack<IPopup>();
+    private readonly Stack<IPopup> _popupStack = new Stack<IPopup>();
 
-    private Dictionary<string, IBasePresenter<BaseView, BaseModel>> _layoutPresenters = new Dictionary<string, IBasePresenter<BaseView, BaseModel>>();
+    private readonly Dictionary<string, IBasePresenter<BaseView, BaseModel>> _layoutPresenters = new Dictionary<string, IBasePresenter<BaseView, BaseModel>>();
     public IPopup PeekPopup => _popupStack.Count > 0 ? _popupStack.Peek() : null;
 
     private (Canvas canvas, CanvasScaler scaler, GraphicRaycaster raycaster) _root;

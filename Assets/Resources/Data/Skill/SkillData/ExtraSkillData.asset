@@ -23,7 +23,7 @@ MonoBehaviour:
   - <ADRatio>k__BackingField: 258
     <APRatio>k__BackingField: 0
     <SkillValue>k__BackingField: 0
-    <NeedMP>k__BackingField: 100
+    <NeedMp>k__BackingField: 100
     <Rate>k__BackingField: 0
     <Description>k__BackingField: "\uD544\uC0B4\uAE30"
     <Duration>k__BackingField: 1

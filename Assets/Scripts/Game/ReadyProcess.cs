@@ -6,7 +6,7 @@ public class ReadyProcess : Process
     [SerializeField] private UnitData _playerData;
     [SerializeField] private ChoiceTable _choiceTable;
     [SerializeField] private CinemachineCamera _camera;
-    Unit _player = null;
+    Unit _player;
     private void OnEnable()
     {
         Ready2Units();
@@ -21,33 +21,6 @@ public class ReadyProcess : Process
 
     private async void Ready2Units()
     {
-        // while (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
-        //        UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
-        // {
-        //     UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-        //     await Awaitable.EndOfFrameAsync();
-        // }
-        //
-        // while (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
-        // {
-        //     UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
-        //     await Awaitable.EndOfFrameAsync();
-        // }
-        //
-        // if (UnitFactory.Instance.GetTeamUnits(Team.Friendly) == null ||
-        //     UnitFactory.Instance.GetTeamUnits(Team.Friendly).Count == 0)
-        // {
-        //     Debug.Log("null or Count 0");
-        // }
-        //
-        // if (UnitFactory.Instance._parent.Find("Prf_Unit_3") == null)
-        // {
-        //     Debug.Log("null");
-        // }
-        // }
-        
-
-
         if (!_processSystem.IsSpawnPlayer)
         {
             UnitFactory.Instance.Spawn(_playerData, Team.Friendly, 1);
@@ -70,7 +43,7 @@ public class ReadyProcess : Process
             }
         }
 
-        SetPlayerSkillsItems(_player);
+        SetPlayerSkillsNItems(_player);
 
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, false);
         GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_Ready);
@@ -79,11 +52,11 @@ public class ReadyProcess : Process
         TimeManager.Instance.StopTime();
     }
 
-    private bool isSetPlayerSkillsItems = false;
+    private bool _isSetPlayerSkillsItems = false;
 
-    private void SetPlayerSkillsItems(Unit _player)
+    private void SetPlayerSkillsNItems(Unit _player)
     {
-        if (isSetPlayerSkillsItems) return;
+        if (_isSetPlayerSkillsItems) return;
         
         foreach (var data in _choiceTable.ChoiceDatas)
         {
@@ -102,7 +75,7 @@ public class ReadyProcess : Process
             }
         }
 
-        isSetPlayerSkillsItems = true;
+        _isSetPlayerSkillsItems = true;
     }
 
     private void AllReady(object gameEvent)

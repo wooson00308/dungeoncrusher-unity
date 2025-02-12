@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InfoView : BaseView
 {
-    private Image[] levelUpImages;
+    private Image[] _levelUpImages;
 
     public enum Sliders
     {
@@ -36,6 +36,7 @@ public class InfoView : BaseView
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, UpdateKillCountUI);
         GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Engage, UpdateLevelUppoint);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvnet_LevelUpCount, UpdateLevelUppoint);
+
         StartInfo();
     }
 
@@ -55,7 +56,7 @@ public class InfoView : BaseView
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<RectTransform>(typeof(RectTransforms));
 
-        levelUpImages = Get<RectTransform>((int)RectTransforms.Group_List_Leveluppoint)
+        _levelUpImages = Get<RectTransform>((int)RectTransforms.Group_List_Leveluppoint)
             .GetComponentsInChildren<Image>();
         StartInfo();
     }
@@ -64,7 +65,7 @@ public class InfoView : BaseView
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Level).SetText($"LV.{1}");
         Get<TextMeshProUGUI>((int)Texts.Txt_Exp).SetText($"{0}%");
-        killCount = 0;
+        _killCount = 0;
         Get<TextMeshProUGUI>((int)Texts.Txt_Count_Kill).SetText($"{0}");
         Get<Slider>((int)Sliders.Group_Exp).value = 0;
 
@@ -76,19 +77,22 @@ public class InfoView : BaseView
     public void UpdateExpUI(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         if (unit.Team == Team.Enemy) return;
 
         Get<Slider>((int)Sliders.Group_Exp).value = unit.Exp.Value / (float)unit.Exp.Max;
+
+        var expValue = unit.Exp.Value / (float)unit.Exp.Max * 100;
         Get<TextMeshProUGUI>((int)Texts.Txt_Exp)
-            .SetText($"{(unit.Exp.Value / (float)unit.Exp.Max * 100):N2}%");
+            .SetText($"{expValue:N2}%");
     }
 
     public void UpdateLevelUI(object gameEvent)
     {
-        UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        UnitEventArgs unitEventArgs = gameEvent as UnitEventArgs;
+        if (unitEventArgs == null) return;
+        Unit unit = unitEventArgs.Publisher;
 
         if (unit.Team == Team.Enemy) return;
 
@@ -113,23 +117,23 @@ public class InfoView : BaseView
         {
             for (int i = 0; i < levelUpPoint; i++)
             {
-                if (levelUpPoint >= levelUpImages.Length) break;
-                levelUpImages[i].transform.GetChild(0).gameObject.SetActive(true);
+                if (levelUpPoint >= _levelUpImages.Length) break;
+                _levelUpImages[i].transform.GetChild(0).gameObject.SetActive(true);
             }
 
-            for (int i = levelUpPoint; i < levelUpImages.Length; i++)
+            for (int i = levelUpPoint; i < _levelUpImages.Length; i++)
             {
-                if (levelUpPoint >= levelUpImages.Length) break;
-                levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
+                if (levelUpPoint >= _levelUpImages.Length) break;
+                _levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
             }
         }
         else
         {
-            for (int i = 0; i < levelUpImages.Length; i++)
+            for (int i = 0; i < _levelUpImages.Length; i++)
             {
-                if (levelUpImages[i].transform.childCount > 0)
+                if (_levelUpImages[i].transform.childCount > 0)
                 {
-                    levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
+                    _levelUpImages[i].transform.GetChild(0)?.gameObject.SetActive(false);
                 }
             }
         }
@@ -137,13 +141,13 @@ public class InfoView : BaseView
 
     #endregion
 
-    private int killCount = 0;
+    private int _killCount = 0;
 
     public void UpdateKillCountUI(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
         if (unit.Team == Team.Friendly) return;
-        Get<TextMeshProUGUI>((int)Texts.Txt_Count_Kill).SetText($"{++killCount}");
+        Get<TextMeshProUGUI>((int)Texts.Txt_Count_Kill).SetText($"{++_killCount}");
     }
 }

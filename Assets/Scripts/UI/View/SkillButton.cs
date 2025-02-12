@@ -84,14 +84,14 @@ public class SkillButton : BaseView
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, new SkillEventArgs
                 {
-                    data = _data
+                    Data = _data
                 });
             }
             else
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
                 {
-                    data = _data
+                    Data = _data
                 });
             }
         }
@@ -162,7 +162,7 @@ public class SkillButton : BaseView
             if (_player == null) return false;
             if (_skill == null) return false;
 
-            return _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+            return _player.Mp.Value < _skill.CurrentLevelData.NeedMp;
         }
     }
 }

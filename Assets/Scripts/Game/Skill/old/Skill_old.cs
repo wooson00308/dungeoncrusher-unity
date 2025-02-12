@@ -78,10 +78,10 @@ public class Skill_old : MonoBehaviour
         UnitEventArgs args = (UnitEventArgs)gameEvent;
 
         if (args == null) return;
-        if (!args.publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
-        if (args.publisher.Target == null) return;
+        if (!args.Publisher.GetInstanceID().Equals(_owner.GetInstanceID())) return;
+        if (args.Publisher.Target == null) return;
 
-        UseSkill(args.publisher);
+        UseSkill(args.Publisher);
     }
 
     public void TryUseSkillFromUI(object e)

@@ -7,14 +7,8 @@ public class GameTime : Singleton<GameTime>
     [Tooltip("���� �� ��ü �ӵ� ���. 1�̸� ���� �ӵ�, 0.5f�� ���� �ӵ�, 2�̸� �� ���.")]
     public static float TimeScale
     {
-        get
-        {
-            return Instance.timeScale;
-        }
-        set
-        {
-            Instance.timeScale = value;
-        }
+        get => Instance.timeScale;
+        set => Instance.timeScale = value;
     }
 
     public static float DeltaTime { get; private set; }

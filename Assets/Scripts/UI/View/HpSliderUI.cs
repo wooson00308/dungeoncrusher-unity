@@ -1,6 +1,3 @@
-using System;
-using JetBrains.Annotations;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class HpSliderUI : BaseSlider

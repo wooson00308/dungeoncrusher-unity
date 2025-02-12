@@ -28,7 +28,6 @@ public class Linoleum : MonoBehaviour
         await Awaitable.WaitForSecondsAsync(_data.tickInterval);
         _target?.OnHit(_realDamage);
         _isTick = false;
-        Debug.Log("tick");
     }
 
     protected bool IsTargetInSight()

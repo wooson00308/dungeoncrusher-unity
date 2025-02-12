@@ -16,3 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <DisplayName>k__BackingField: 
   <Description>k__BackingField: 
+  IsGameTime: 1
+  Prefab: {fileID: 0}
+  _lightingSpearDotPrefab: {fileID: 11400000, guid: ae5a0a30f28575d4ca0518bb961844b6, type: 2}
+  _lightingSpearPrefab: {fileID: 11400000, guid: 50a3339774b2db6469ebf760bd1b8083, type: 2}

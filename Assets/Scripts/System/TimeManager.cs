@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class TimeManager : Singleton<TimeManager>
 {
     private int _timeScale = 1;
     private int _gameTimeScale = 1;
-    private bool isBossDead = false;
+    private bool _isBossDead = false;
 
     protected override void Awake()
     {
@@ -27,7 +25,7 @@ public class TimeManager : Singleton<TimeManager>
 
     public void ChangeTimeScale()
     {
-        if (isBossDead) return;
+        if (_isBossDead) return;
         _timeScale = _timeScale == 1 ? 2 : 1;
         Time.timeScale = _timeScale;
         GameTime.TimeScale = _timeScale;
@@ -35,13 +33,13 @@ public class TimeManager : Singleton<TimeManager>
 
     public async void SlowMotion()
     {
-        isBossDead = true;
+        _isBossDead = true;
         Time.timeScale = 0.2f;
         GameTime.TimeScale = 0.2f;
         await Awaitable.WaitForSecondsAsync(0.5f);
         Time.timeScale = _gameTimeScale;
         GameTime.TimeScale = _gameTimeScale;
-        isBossDead = false;
+        _isBossDead = false;
     }
 
     public void SlowMotion(bool value)
