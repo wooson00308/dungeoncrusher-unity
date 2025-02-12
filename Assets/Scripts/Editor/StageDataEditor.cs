@@ -11,17 +11,14 @@ public class StageDataEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        // 기본 인스펙터 GUI 표시
         base.OnInspectorGUI();
 
-        // CSV 내보내기 버튼 추가
-        if (GUILayout.Button("Export CSV"))
+        if (GUILayout.Button("CSV 내보내기"))
         {
             ExportCSV();
         }
 
-        // CSV 불러오기 버튼 추가
-        if (GUILayout.Button("Import CSV"))
+        if (GUILayout.Button("CSV 불러오기"))
         {
             ImportCSV();
         }
@@ -32,23 +29,17 @@ public class StageDataEditor : Editor
         StageData stageData = (StageData)target;
         StringBuilder sb = new StringBuilder();
 
-        // CSV 헤더 (원하는 항목에 맞게 수정 가능)
         sb.AppendLine("스테이지 번호,유닛 번호,스테이지 지속 시간 (초),스폰 시 생성되는 기본 몬스터 수,첫 스폰 타임 (ms),추가 스폰 주기 (초),추가 스폰 몬스터 수,Under_x2 기준 값 (X2),Under_x4 기준 값 (X4),추가 스폰 주기 최소값 (MinX),추가 스폰 최대 횟수 (-1: 무제한 | 0: 없음 | n: 제한 횟수),Under_x2 감소 비율 (÷2),Under_x4 감소 비율 (÷4)");
 
-        // StageData의 각 스테이지 정보를 순회하며 CSV 데이터 생성
         for (int stageIndex = 0; stageIndex < stageData.stageInfos.Count; stageIndex++)
         {
             StageInfo stageInfo = stageData.stageInfos[stageIndex];
-
             for (int unitIndex = 0; unitIndex < stageInfo.stageUnitDatas.Count; unitIndex++)
             {
                 StageUnitData unitData = stageInfo.stageUnitDatas[unitIndex];
-
-                // reductionFormula가 null일 경우 대비하여 기본값(0) 처리
                 float underX2Factor = unitData.reductionFormula != null ? unitData.reductionFormula.underX2Factor : 0;
                 float underX4Factor = unitData.reductionFormula != null ? unitData.reductionFormula.underX4Factor : 0;
 
-                // CSV의 한 행 생성
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
                     stageIndex,
                     unitIndex,
@@ -66,19 +57,17 @@ public class StageDataEditor : Editor
             }
         }
 
-        // CSV 파일을 저장할 위치 선택
-        string path = EditorUtility.SaveFilePanel("Save CSV", "", "StageData.csv", "csv");
+        string path = EditorUtility.SaveFilePanel("CSV 파일 저장", "", "StageData.csv", "csv");
         if (!string.IsNullOrEmpty(path))
         {
             File.WriteAllText(path, sb.ToString(), new UTF8Encoding(true));
-            Debug.Log("CSV exported to: " + path);
+            ShowNotification("CSV 내보내기 완료\nCSV 파일이 다음 경로에 저장되었습니다:\n" + path);
         }
     }
 
     private void ImportCSV()
     {
-        // CSV 파일 열기 대화상자 호출
-        string path = EditorUtility.OpenFilePanel("Import CSV", "", "csv");
+        string path = EditorUtility.OpenFilePanel("CSV 파일 불러오기", "", "csv");
         if (string.IsNullOrEmpty(path))
         {
             return;
@@ -93,10 +82,7 @@ public class StageDataEditor : Editor
                 return;
             }
 
-            // StageIndex를 key로 StageInfo를 저장할 딕셔너리
             Dictionary<int, StageInfo> stageDict = new Dictionary<int, StageInfo>();
-
-            // 첫 줄은 헤더이므로 건너뜁니다.
             for (int i = 1; i < lines.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(lines[i]))
@@ -110,7 +96,6 @@ public class StageDataEditor : Editor
                 }
 
                 int stageIndex = int.Parse(columns[0]);
-                //int unitIndex = int.Parse(columns[1]); // 사용하지 않음
                 int stageDurationTime = int.Parse(columns[2]);
                 int spawnCount = int.Parse(columns[3]);
                 float firstSpawnTime = float.Parse(columns[4]);
@@ -123,7 +108,6 @@ public class StageDataEditor : Editor
                 float underX2Factor = float.Parse(columns[11]);
                 float underX4Factor = float.Parse(columns[12]);
 
-                // 해당 StageIndex의 StageInfo가 없으면 새로 생성
                 if (!stageDict.TryGetValue(stageIndex, out StageInfo stageInfo))
                 {
                     stageInfo = new StageInfo
@@ -133,16 +117,11 @@ public class StageDataEditor : Editor
                     };
                     stageDict.Add(stageIndex, stageInfo);
                 }
-                else
+                else if (stageInfo.durationTime != stageDurationTime)
                 {
-                    // 이미 존재하는 StageInfo가 있을 경우 durationTime이 다르다면 덮어씁니다.
-                    if (stageInfo.durationTime != stageDurationTime)
-                    {
-                        stageInfo.durationTime = stageDurationTime;
-                    }
+                    stageInfo.durationTime = stageDurationTime;
                 }
 
-                // StageUnitData 생성 및 데이터 할당
                 StageUnitData unitData = new StageUnitData
                 {
                     spawnCount = spawnCount,
@@ -163,7 +142,6 @@ public class StageDataEditor : Editor
                 stageInfo.stageUnitDatas.Add(unitData);
             }
 
-            // StageIndex 순으로 정렬하여 StageInfo 리스트 생성
             List<int> keys = new List<int>(stageDict.Keys);
             keys.Sort();
             List<StageInfo> stageInfos = new List<StageInfo>();
@@ -172,18 +150,30 @@ public class StageDataEditor : Editor
                 stageInfos.Add(stageDict[key]);
             }
 
-            // 불러온 데이터를 StageData에 할당
             StageData stageData = (StageData)target;
             stageData.stageInfos = stageInfos;
 
             EditorUtility.SetDirty(stageData);
             AssetDatabase.SaveAssets();
 
-            Debug.Log("CSV imported successfully from: " + path);
+            ShowNotification("CSV 불러오기 완료\nCSV 파일이 성공적으로 불러와졌습니다:\n" + path);
         }
         catch (Exception ex)
         {
-            Debug.LogError("CSV import 실패: " + ex.Message);
+            ShowNotification("CSV 불러오기 실패\n" + ex.Message);
+        }
+    }
+
+    private void ShowNotification(string message)
+    {
+        EditorWindow window = EditorWindow.focusedWindow;
+        if (window != null)
+        {
+            window.ShowNotification(new GUIContent(message));
+        }
+        else
+        {
+            Debug.Log(message);
         }
     }
 }
