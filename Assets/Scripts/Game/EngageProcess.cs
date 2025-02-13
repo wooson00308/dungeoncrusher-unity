@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class EngageProcess : Process
@@ -15,9 +16,12 @@ public class EngageProcess : Process
     {
         StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
-        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
 
-        TimeManager.Instance.PlayTime();
+        if (UnitFactory.Instance.GetBoss() == null)
+        {
+            GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
+            TimeManager.Instance.PlayTime();
+        }
     }
 
     private void OnDisable()

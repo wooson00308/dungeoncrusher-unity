@@ -99,15 +99,16 @@ public class SkillButton : BaseView
 
     private void Update()
     {
-        if (_player == null)
-        {
-            _player ??= UnitFactory.Instance.GetPlayer();
-        }
-
         _button.enabled = !IsNotEnoughUltiMana;
 
         if (!_isRootSkill) return;
-        
+
+        if (_player == null)
+        {
+            _player = UnitFactory.Instance.GetPlayer();
+            return;
+        }
+
         if (_player != null)
         {
             if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
@@ -134,6 +135,12 @@ public class SkillButton : BaseView
 
     private void UpdateSkillCooldown(Skill skill)
     {
+        if (skill.CurrentLevelData.NeedMp > 0)
+        {
+            Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
+        }
+
         if (IsNotEnoughUltiMana)
         {
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");

@@ -19,6 +19,11 @@ public class MainView : BaseView
         SUPER_ARMOR_IMAGE
     }
 
+    public enum RectTransforms
+    {
+        BossCut
+    }
+
     private void Awake()
     {
         _presenter = GetComponent<MainUI>();
@@ -27,6 +32,7 @@ public class MainView : BaseView
 
     private void OnEnable()
     {
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, BossWarning);
         GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
         Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
@@ -35,6 +41,7 @@ public class MainView : BaseView
 
     private void OnDisable()
     {
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, BossWarning);
         GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
     }
@@ -53,6 +60,8 @@ public class MainView : BaseView
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        Bind<RectTransform>(typeof(RectTransforms));
+        Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(false);
     }
 
     private void SpecialDeathEffect(object gameEvent)
@@ -72,6 +81,24 @@ public class MainView : BaseView
             spawnPos;
     }
 
+    private async void BossWarning(object gameEvent)
+    {
+        if (gameEvent is UnitEventArgs unitEventArgs)
+        {
+            var publisher = unitEventArgs.Publisher;
+            if (publisher == null) return;
+            if (!publisher.IsBoss) return;
+
+            Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(true);
+            TimeManager.Instance.StopTime();
+            await Awaitable.WaitForSecondsAsync(2);
+            Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(false);
+
+            GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
+            TimeManager.Instance.PlayTime();
+        }
+    }
+
     public void OnClickChangeGameSpeed()
     {
         _presenter.ChangeGameSpeed();
@@ -85,7 +112,7 @@ public class MainView : BaseView
 
         var player = UnitFactory.Instance.GetPlayer();
         if (player == null) return;
-        
+
         player.IsSuperArmor = !player.IsSuperArmor;
     }
 }
