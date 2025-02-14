@@ -15,7 +15,7 @@ public class FxEventAnimator : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
     }
-
+    
     public void Update()
     {
         if(isGameTime)

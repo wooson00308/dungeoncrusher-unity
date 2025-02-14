@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DestroyTimer : MonoBehaviour
@@ -15,6 +16,7 @@ public class DestroyTimer : MonoBehaviour
 
     private void OnDisable()
     {
+        gameObject.SetActive(false);
         GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_GameOver, DestroyThis);
     }
 
@@ -42,6 +44,21 @@ public class DestroyTimer : MonoBehaviour
     }
 
     private void DestroyThis(object gameEvent = null)
+    {
+        if (_isDestroy) return;
+        _isDestroy = true;
+
+        if (TryGetComponent(out RectTransform rectTransform))
+        {
+            ResourceManager.Instance.DestroyUI(gameObject);
+        }
+        else
+        {
+            ResourceManager.Instance.Destroy(gameObject);
+        }
+    }
+
+    public void DestroyAnim()
     {
         if (_isDestroy) return;
         _isDestroy = true;

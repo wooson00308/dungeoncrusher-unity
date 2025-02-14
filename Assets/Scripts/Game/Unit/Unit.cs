@@ -660,7 +660,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _skillDic.Add(skillData.Id, skillComponent);
 
             skillObj.transform.SetParent(_skillStorage);
-
+            
             GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_RootSkill, skillData);
         }
     }

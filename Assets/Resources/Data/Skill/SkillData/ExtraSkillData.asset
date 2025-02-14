@@ -18,6 +18,7 @@ MonoBehaviour:
   <Description>k__BackingField: 
   <Icon>k__BackingField: {fileID: -5392625257635239999, guid: 93e485463fa2a844e9ff1cba07c991cf, type: 3}
   _defaultPrefabPath: Skill/Skill
+  isUltiSkill: 1
   _prefab: {fileID: 0}
   <LevelDatas>k__BackingField:
   - <ADRatio>k__BackingField: 258
@@ -34,4 +35,3 @@ MonoBehaviour:
     <UseSkillFxDatas>k__BackingField:
     - {fileID: 11400000, guid: 9bf6204acb08d834785d63c8ad091c63, type: 2}
     <RemoveFxDatas>k__BackingField: []
-  <IsNotVisiable>k__BackingField: 1
