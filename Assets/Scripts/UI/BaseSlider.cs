@@ -2,12 +2,12 @@ using UnityEngine;
 
 public abstract class BaseSlider : BaseView
 {
+    protected Transform _parent;
     protected RectTransform _rectTransform;
 
     [SerializeField] protected Vector2 _pivot;
 
     [SerializeField] protected Unit _unit;
-    public Unit Unit => _unit;
 
     protected virtual void Awake()
     {
@@ -19,18 +19,23 @@ public abstract class BaseSlider : BaseView
     {
     }
 
+    public void OnInitialize(Transform parent)
+    {
+        _parent = parent;
+    }
+
     public abstract void Show(Unit unit);
 
     protected virtual void FixedUpdate()
     {
-        MoveSlider();
-
         if (!_unit.IsActive)
         {
             ResourceManager.Instance.Destroy(gameObject);
             return;
         }
 
+        MoveSlider();
+        
         UpdateSlider();
     }
 
@@ -60,7 +65,7 @@ public abstract class BaseSlider : BaseView
                 else
                 {
                     movePos = worldToCanvasPoint;
-                }    
+                }
             }
         }
         else

@@ -10,7 +10,13 @@ public class ReadyView : BaseView
     private void Awake()
     {
         _readyUI = GetComponent<ReadyUI>();
+
         BindUI();
+    }
+
+    private void FixedUpdate()
+    {
+        transform.SetSiblingIndex(2);
     }
 
     public void UpdateChoiceView(List<ChoiceData> tripleChoices)

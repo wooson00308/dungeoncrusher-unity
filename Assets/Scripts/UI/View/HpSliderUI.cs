@@ -8,7 +8,7 @@ public class HpSliderUI : BaseSlider
     {
         Hp_Slider
     }
-    
+
     public override void BindUI()
     {
         base.BindUI();
@@ -20,7 +20,7 @@ public class HpSliderUI : BaseSlider
         _unit = unit;
 
         _maxHealth = _unit.Health.Value;
-        _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
+        _parent.SetParent(transform.parent);
         var slider = Get<Slider>((int)Sliders.Hp_Slider);
         slider.value = 1;
     }

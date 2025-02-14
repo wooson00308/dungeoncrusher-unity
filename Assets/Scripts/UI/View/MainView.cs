@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,6 +48,11 @@ public class MainView : BaseView
     private void UpdateStageUI(object gameEvent)
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Stage_Value).SetText($"{StageManager.Instance.CurrentStage}");
+    }
+
+    private void FixedUpdate()
+    {
+        transform.SetSiblingIndex(1);
     }
 
     private void Update()

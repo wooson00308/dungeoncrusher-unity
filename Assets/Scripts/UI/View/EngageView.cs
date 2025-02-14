@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EngageView : BaseView
 {
-    private Queue<OnHitEventArgs> _damageEventQueue = new Queue<OnHitEventArgs>();
-    private Queue<UnitEventOnAttackArgs> _executionEventQueue = new Queue<UnitEventOnAttackArgs>();
+    private readonly Queue<OnHitEventArgs> _damageEventQueue = new();
+    private readonly Queue<UnitEventOnAttackArgs> _executionEventQueue = new();
     private bool _isProcessingDamageQueue = false;
     private bool _isProcessingExecutionQueue = false;
 
@@ -18,6 +18,7 @@ public class EngageView : BaseView
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, ShowHealthSlider, ShowMpSlider);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnHit, EnqueueDamageText);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Execution, ExecutionText);
+        transform.SetSiblingIndex(0); //Main UI 보다 밑에 있게(일부 적 체력바가 Main UI 위로 올라옴)
     }
 
     private void OnDisable()
@@ -58,7 +59,8 @@ public class EngageView : BaseView
         while (_executionEventQueue.Count > 0)
         {
             var unitEventOnKillArgs = _executionEventQueue.Dequeue();
-            var executionText = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI")
+            var executionTxtObject = ResourceManager.Instance.SpawnFromPath("UI/ExecutionTextUI", transform);
+            var executionText = executionTxtObject
                 .GetComponent<ExecutionTextUI>();
 
             executionText.Show("처형!", unitEventOnKillArgs.Publisher.transform.position);
@@ -76,7 +78,9 @@ public class EngageView : BaseView
         while (_damageEventQueue.Count > 0)
         {
             var onHitArgs = _damageEventQueue.Dequeue();
-            var damageText = ResourceManager.Instance.SpawnFromPath("UI/DamageTextUI").GetComponent<DamageTextUI>();
+            var damageTxtObject = ResourceManager.Instance.SpawnFromPath("UI/DamageTextUI", transform);
+            var damageText = damageTxtObject
+                .GetComponent<DamageTextUI>();
             if (onHitArgs.IsCiritical)
             {
                 damageText.Show(onHitArgs.DamageValue, onHitArgs.Publisher.transform.position, true);
@@ -102,13 +106,16 @@ public class EngageView : BaseView
 
         if (setActiveEventArgs.Publisher.IsBoss)
         {
-            hpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossHpSlider").GetComponent<HpSliderUI>();
+            var bossHpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossHpSlider", transform);
+            hpSlider = bossHpSlider.GetComponent<HpSliderUI>();
         }
         else
         {
-            hpSlider = ResourceManager.Instance.SpawnFromPath("UI/HpSlider").GetComponent<HpSliderUI>();
+            var normalHpSlider = ResourceManager.Instance.SpawnFromPath("UI/HpSlider", transform);
+            hpSlider = normalHpSlider.GetComponent<HpSliderUI>();
         }
 
+        hpSlider.OnInitialize(transform);
         hpSlider.Show(setActiveEventArgs.Publisher);
     }
 
@@ -122,13 +129,16 @@ public class EngageView : BaseView
 
         if (setActiveEventArgs.Publisher.IsBoss)
         {
-            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider").GetComponent<MpSliderUI>();
+            var bossMpSlider = ResourceManager.Instance.SpawnFromPath("UI/BossMpSlider", transform);
+            mpSlider = bossMpSlider.GetComponent<MpSliderUI>();
         }
         else
         {
-            mpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider").GetComponent<MpSliderUI>();
+            var normalMpSlider = ResourceManager.Instance.SpawnFromPath("UI/MpSlider", transform);
+            mpSlider = normalMpSlider.GetComponent<MpSliderUI>();
         }
 
+        mpSlider.OnInitialize(transform);
         mpSlider.Show(setActiveEventArgs.Publisher);
     }
 
