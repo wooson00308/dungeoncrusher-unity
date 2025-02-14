@@ -40,6 +40,7 @@ public class SkillButton : BaseView
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
+        _player = null;
     }
 
     private void RootSkillEvent(object e)
@@ -55,6 +56,7 @@ public class SkillButton : BaseView
         if (_player == null)
         {
             _player = UnitFactory.Instance.GetPlayer();
+            
             if (_player.SkillDic.TryGetValue(data.Id, out Skill skill))
             {
                 _skill = skill;
@@ -79,7 +81,7 @@ public class SkillButton : BaseView
         if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
         {
             if (skill.IsCoolingdown) return;
-
+            
             if (skill.Data.Id == 690) //궁극기 임시 서포트샷
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, new SkillEventArgs
