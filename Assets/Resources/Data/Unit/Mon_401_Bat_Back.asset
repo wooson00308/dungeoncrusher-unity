@@ -18,7 +18,7 @@ MonoBehaviour:
   _hitPrefab: {fileID: 1314346859962251579, guid: ee9818566bd9b714fa1825e60b5c15fa, type: 3}
   _projectilePrefab: {fileID: 0}
   _warningPrefab: {fileID: 0}
-  _dropExp: 500
+  _dropExp: 14
   _health:
     _value: 14
   _attack:

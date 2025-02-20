@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StageData
   m_EditorClassIdentifier: 
   stageInfos:
-  - durationTime: 5
+  - durationTime: 15
     stageUnitDatas:
-    - spawnCount: 5
+    - spawnCount: 20
       firstSpawnTime: 0
       additionalSpawnCycle: 10
       additionalSpawnCount: 2
