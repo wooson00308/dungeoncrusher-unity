@@ -1,6 +1,4 @@
-using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +18,11 @@ public class MainView : BaseView
         SUPER_ARMOR_IMAGE
     }
 
+    public enum RectTransforms
+    {
+        BossCut
+    }
+
     private void Awake()
     {
         _presenter = GetComponent<MainUI>();
@@ -28,6 +31,7 @@ public class MainView : BaseView
 
     private void OnEnable()
     {
+        GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_SetActive, BossWarning);
         GameEventSystem.Instance.Subscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
         Get<TextMeshProUGUI>((int)Texts.Txt_GameSpeed)
@@ -36,6 +40,7 @@ public class MainView : BaseView
 
     private void OnDisable()
     {
+        GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_SetActive, BossWarning);
         GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_Ready, UpdateStageUI);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath_Special, SpecialDeathEffect);
     }
@@ -45,22 +50,29 @@ public class MainView : BaseView
         Get<TextMeshProUGUI>((int)Texts.Txt_Stage_Value).SetText($"{StageManager.Instance.CurrentStage}");
     }
 
+    private void FixedUpdate()
+    {
+        transform.SetSiblingIndex(1);
+    }
+
     private void Update()
     {
         Get<TextMeshProUGUI>((int)Texts.Txt_Timer).SetText($"{(int)StageManager.Instance.EnageTime}s");
     }
-    
+
     public override void BindUI()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        Bind<RectTransform>(typeof(RectTransforms));
+        Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(false);
     }
 
     private void SpecialDeathEffect(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
 
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         var worldToViewportPoint = Camera.main.WorldToViewportPoint(unit.transform.position);
         worldToViewportPoint.x = Mathf.Clamp(worldToViewportPoint.x, 0, 1);
@@ -73,6 +85,24 @@ public class MainView : BaseView
             spawnPos;
     }
 
+    private async void BossWarning(object gameEvent)
+    {
+        if (gameEvent is UnitEventArgs unitEventArgs)
+        {
+            var publisher = unitEventArgs.Publisher;
+            if (publisher == null) return;
+            if (!publisher.IsBoss) return;
+
+            Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(true);
+            TimeManager.Instance.StopTime();
+            await Awaitable.WaitForSecondsAsync(2);
+            Get<RectTransform>((int)RectTransforms.BossCut).gameObject.SetActive(false);
+
+            GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
+            TimeManager.Instance.PlayTime();
+        }
+    }
+
     public void OnClickChangeGameSpeed()
     {
         _presenter.ChangeGameSpeed();
@@ -83,10 +113,9 @@ public class MainView : BaseView
     {
         var image = Get<Image>((int)Images.SUPER_ARMOR_IMAGE);
         image.enabled = !image.enabled;
-        var friendlys = UnitFactory.Instance.GetTeamUnits(Team.Friendly);
-        if (friendlys == null) return;
-        var player = friendlys.FirstOrDefault();
-        // var player = friendlys.ToArray()[0];
+
+        var player = UnitFactory.Instance.GetPlayer();
+        if (player == null) return;
 
         player.IsSuperArmor = !player.IsSuperArmor;
     }

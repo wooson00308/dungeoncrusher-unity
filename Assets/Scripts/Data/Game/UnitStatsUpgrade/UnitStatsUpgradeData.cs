@@ -1,15 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UnitStatsUpgradeData", menuName = "Data/UnitStatsUpgradeData")]
-public class UnitStatsUpgradeData : ScriptableObject, IStats
+public class UnitStatsUpgradeData : Data, IStats
 {
-    [SerializeField] private string _upgradeName;
-    [SerializeField] private Sprite _upgradeIcon;
-    [SerializeField] private string _description;
-
-    public string UpgradeName => _upgradeName;
-    public Sprite UpgradeIcon => _upgradeIcon;
-    public string Description => _description;
+    [SerializeField] private Sprite _icon;
+    public Sprite Icon => _icon;
     [field: SerializeField] public IntStat Health { get; set; }
     [field: SerializeField] public IntStat Attack { get; set; }
     [field: SerializeField] public FloatStat AP { get; set; }

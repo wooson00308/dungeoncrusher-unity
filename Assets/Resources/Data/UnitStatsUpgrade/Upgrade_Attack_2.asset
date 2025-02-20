@@ -12,18 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18455622e71d043ba940a96db9027f07, type: 3}
   m_Name: Upgrade_Attack_2
   m_EditorClassIdentifier: 
-  _upgradeName: "\uAC80\uC220 \uC218\uB828 II"
-  _upgradeIcon: {fileID: 21300000, guid: aaec66b2011b6ed41a83d7b2a04350b6, type: 3}
-  _description: "\uACF5\uACA9\uB825 5 \uC0C1\uC2B9\uD569\uB2C8\uB2E4."
+  <Id>k__BackingField: 0
+  <Name>k__BackingField: "\uACF5\uACA9\uB825 \uC5C5 2"
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uACF5\uACA9\uB825\uC774 5 \uC0C1\uC2B9\uD569\uB2C8\uB2E4."
+  _icon: {fileID: 21300000, guid: aaec66b2011b6ed41a83d7b2a04350b6, type: 3}
   <Health>k__BackingField:
     _value: 0
   <Attack>k__BackingField:
     _value: 5
+  <AP>k__BackingField:
+    _value: 0
+  <AD>k__BackingField:
+    _value: 0
   <Defense>k__BackingField:
     _value: 0
   <Mp>k__BackingField:
     _value: 0
+  <MpPercent>k__BackingField:
+    _value: 0
   <Exp>k__BackingField:
+    _value: 0
+  <ExpPercent>k__BackingField:
     _value: 0
   <Level>k__BackingField:
     _value: 0

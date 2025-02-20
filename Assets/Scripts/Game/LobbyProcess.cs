@@ -6,9 +6,14 @@ public class LobbyProcess : Process
     {
         UIManager.Instance.ShowLayoutUI<LobbyUI>();
         SoundSystem.Instance.PlayBGM("MainBGM");
+        ResetTimeScale();
+        _processSystem.IsSpawnPlayer = false;
+    }
+
+    private static void ResetTimeScale()
+    {
         GameTime.TimeScale = 1;
         Time.timeScale = 1;
-        _processSystem.IsSpawnPlayer = false;
     }
 
     private void OnDisable()

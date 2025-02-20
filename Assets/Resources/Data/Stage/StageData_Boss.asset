@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d765980c41ca444fb8e2c8093e45f90b, type: 3}
+  m_Name: StageData_Boss
+  m_EditorClassIdentifier: 
+  stageInfos:
+  - durationTime: 25
+    stageUnitDatas:
+    - spawnCount: 7
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 2
+      underX2Threshold: 3
+      underX4Threshold: 2
+      minimumSpawnCycle: 1
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: e4401f680d69dea42826dbb0ee88ad19, type: 2}
+    - spawnCount: 5
+      firstSpawnTime: 0
+      additionalSpawnCycle: 10
+      additionalSpawnCount: 2
+      underX2Threshold: 3
+      underX4Threshold: 2
+      minimumSpawnCycle: 1
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: eb7fe51b83ff9484f8f956fb992c5973, type: 2}
+    - spawnCount: 1
+      firstSpawnTime: 0
+      additionalSpawnCycle: 0
+      additionalSpawnCount: 0
+      underX2Threshold: 0
+      underX4Threshold: 0
+      minimumSpawnCycle: 0
+      maxAdditionalSpawns: -1
+      reductionFormula:
+        underX2Factor: 0.5
+        underX4Factor: 0.25
+      stageUnit: {fileID: 11400000, guid: 365d3df6d6cbdd74eae3aaf4c2cf3449, type: 2}

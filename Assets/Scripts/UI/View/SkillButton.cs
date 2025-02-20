@@ -40,6 +40,7 @@ public class SkillButton : BaseView
     private void OnDisable()
     {
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_RootSkill, RootSkillEvent);
+        _player = null;
     }
 
     private void RootSkillEvent(object e)
@@ -55,6 +56,7 @@ public class SkillButton : BaseView
         if (_player == null)
         {
             _player = UnitFactory.Instance.GetPlayer();
+
             if (_player.SkillDic.TryGetValue(data.Id, out Skill skill))
             {
                 _skill = skill;
@@ -80,18 +82,18 @@ public class SkillButton : BaseView
         {
             if (skill.IsCoolingdown) return;
 
-            if (skill.Data.Id == 690) //궁극기 임시 서포트샷
+            if (skill.Data.IsUltiSkill)
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, new SkillEventArgs
                 {
-                    data = _data
+                    Data = _data
                 });
             }
             else
             {
                 GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, new SkillEventArgs
                 {
-                    data = _data
+                    Data = _data
                 });
             }
         }
@@ -99,15 +101,16 @@ public class SkillButton : BaseView
 
     private void Update()
     {
-        if (_player == null)
-        {
-            _player ??= UnitFactory.Instance.GetPlayer();
-        }
-
         _button.enabled = !IsNotEnoughUltiMana;
 
         if (!_isRootSkill) return;
-        
+
+        if (_player == null)
+        {
+            _player = UnitFactory.Instance.GetPlayer();
+            return;
+        }
+
         if (_player != null)
         {
             if (_player.SkillDic.TryGetValue(_data.Id, out Skill skill))
@@ -134,6 +137,12 @@ public class SkillButton : BaseView
 
     private void UpdateSkillCooldown(Skill skill)
     {
+        if (skill.CurrentLevelData.NeedMp > 0)
+        {
+            Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
+            Get<Image>((int)Images.Skill_Cooltime_Image).fillAmount = 1;
+        }
+
         if (IsNotEnoughUltiMana)
         {
             Get<TextMeshProUGUI>((int)Texts.Skill_Cooltime_Text).SetText("Not Enough MP");
@@ -162,7 +171,7 @@ public class SkillButton : BaseView
             if (_player == null) return false;
             if (_skill == null) return false;
 
-            return _player.Mp.Value < _skill.CurrentLevelData.NeedMP;
+            return _player.Mp.Value < _skill.CurrentLevelData.NeedMp;
         }
     }
 }

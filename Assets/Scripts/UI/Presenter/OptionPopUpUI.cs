@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class OptionPopUpUI : BasePresenter<OptionPopUpView, OptionPopUpModel>
 {
     public void ChangeBGMSliderValue(float value)

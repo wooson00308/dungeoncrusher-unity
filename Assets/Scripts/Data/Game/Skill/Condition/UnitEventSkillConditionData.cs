@@ -11,7 +11,7 @@ public class UnitEventSkillConditionData : UnitEventConditionData
         
         if (gameEvent is SkillEventArgs skillArgs)
         {
-            if (!IsNotEqualsSkill && skillArgs.data.Id != skill.Data.Id) return false;
+            if (!IsNotEqualsSkill && skillArgs.Data.Id != skill.Data.Id) return false;
         }
 
         return true;

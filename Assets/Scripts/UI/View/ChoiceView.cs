@@ -33,7 +33,7 @@ public class ChoiceView : BaseView
     private void Awake()
     {
         _readyView = transform.parent.GetComponentInParent<ReadyView>();
-        _owner = UnitFactory.Instance.GetPlayer(); 
+        _owner = UnitFactory.Instance.GetPlayer();
         BindUI();
     }
 
@@ -60,32 +60,32 @@ public class ChoiceView : BaseView
     }
 
 
-    private List<TextMeshProUGUI> texts = new();
-    private List<TextMeshProUGUI> afterTexts = new();
+    private List<TextMeshProUGUI> _texts = new();
+    private List<TextMeshProUGUI> _afterTexts = new();
 
     private void ItemUI(ChoiceData data)
     {
-        if (texts.Count == 0)
+        if (_texts.Count == 0)
         {
-            texts = Get<GameObject>((int)GameObjects.Group_Stats)?
+            _texts = Get<GameObject>((int)GameObjects.Group_Stats)?
                 .GetComponentsInChildren<TextMeshProUGUI>().ToList();
         }
 
-        if (afterTexts.Count == 0)
+        if (_afterTexts.Count == 0)
         {
-            afterTexts = Get<GameObject>((int)GameObjects.Group_Stats_After)?
+            _afterTexts = Get<GameObject>((int)GameObjects.Group_Stats_After)?
                 .GetComponentsInChildren<TextMeshProUGUI>().ToList();
         }
 
         Dictionary<string, float> statValues = new();
         Dictionary<string, float> afterStatValues = new();
 
-        foreach (var text in texts)
+        foreach (var text in _texts)
         {
             text.gameObject.SetActive(false);
         }
 
-        foreach (var afterText in afterTexts)
+        foreach (var afterText in _afterTexts)
         {
             afterText.gameObject.SetActive(false);
         }
@@ -119,18 +119,18 @@ public class ChoiceView : BaseView
 
         #endregion
 
-        if (texts != null) //현재 아이템 스탯 증가값 표기
+        if (_texts != null) //현재 아이템 스탯 증가값 표기
         {
             int textCount = 0;
             foreach (var value in statValues)
             {
-                texts[textCount].gameObject.SetActive(true);
-                SetStatTextUI(texts[textCount], value.Key, value.Value);
+                _texts[textCount].gameObject.SetActive(true);
+                SetStatTextUI(_texts[textCount], value.Key, value.Value);
                 textCount++;
             }
         }
 
-        if (afterTexts != null) //현재 아이템을 장착했을때 바뀌는 스탯 값 표기
+        if (_afterTexts != null) //현재 아이템을 장착했을때 바뀌는 스탯 값 표기
         {
             var player = UnitFactory.Instance.GetPlayer();
 
@@ -139,8 +139,8 @@ public class ChoiceView : BaseView
                 int textCount = 0;
                 foreach (var value in statValues)
                 {
-                    afterTexts[textCount].gameObject.SetActive(true);
-                    SetStatTextUI(afterTexts[textCount], value.Key, value.Value);
+                    _afterTexts[textCount].gameObject.SetActive(true);
+                    SetStatTextUI(_afterTexts[textCount], value.Key, value.Value);
                     textCount++;
                 }
             }
@@ -178,8 +178,8 @@ public class ChoiceView : BaseView
                     int textCount = 0;
                     foreach (var value in afterStatValues)
                     {
-                        afterTexts[textCount].gameObject.SetActive(true);
-                        SetStatTextUI(afterTexts[textCount], value.Key, value.Value);
+                        _afterTexts[textCount].gameObject.SetActive(true);
+                        SetStatTextUI(_afterTexts[textCount], value.Key, value.Value);
                         textCount++;
                     }
                 }
@@ -188,8 +188,8 @@ public class ChoiceView : BaseView
                     int textCount = 0;
                     foreach (var value in statValues)
                     {
-                        afterTexts[textCount].gameObject.SetActive(true);
-                        SetStatTextUI(afterTexts[textCount], value.Key, value.Value);
+                        _afterTexts[textCount].gameObject.SetActive(true);
+                        SetStatTextUI(_afterTexts[textCount], value.Key, value.Value);
                         textCount++;
                     }
                 }
@@ -207,6 +207,11 @@ public class ChoiceView : BaseView
         text?.SetText($"{name} {ResultValueText(value)}");
     }
 
+    /// <summary>
+    /// 아이템 데이터에 있는 이름을 불러옴
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private string GetNameData(ChoiceData data)
     {
         if (data.skillData != null)
@@ -219,7 +224,7 @@ public class ChoiceView : BaseView
         }
         else if (data.unitStatUpgradeData != null)
         {
-            return data.unitStatUpgradeData.UpgradeName;
+            return data.unitStatUpgradeData.Name;
         }
         else
         {
@@ -228,6 +233,11 @@ public class ChoiceView : BaseView
         }
     }
 
+    /// <summary>
+    /// 아이템 데이터에 있는 Description을 불러옴
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private string GetDescriptionData(ChoiceData data)
     {
         if (data.skillData != null)
@@ -256,7 +266,12 @@ public class ChoiceView : BaseView
         }
     }
 
-    private string ResultValueText(float value) //값이+라면 "+"값   값이-라면 "-"값 
+    /// <summary>
+    /// 값이 + 라면 "+"값, 값이 - 라면 "-"값 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private string ResultValueText(float value)
     {
         string result;
         if (value > 0)

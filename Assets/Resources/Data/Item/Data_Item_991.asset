@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_991
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 991
+  <Name>k__BackingField: "\uAE30\uBCF8 \uC544\uBA38"
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uC874\uC774 \uB9CC\uB4E0 \uC138\uACC4 \uCD5C\uACE0\uC758
+    \uC544\uBA38\uB2E4. \uC785\uC73C\uBA74 \uBB34\uC801\uC5D0 \uAC00\uAE5D\uB2E4."
   _id: Item_991
   _prefab: {fileID: 5564285513405598355, guid: 73275dff08f2646c9978c21edf5c5e23, type: 3}
   _name: "\uAE30\uBCF8 \uC544\uBA38"
@@ -24,13 +29,21 @@ MonoBehaviour:
     _value: 0
   _attack:
     _value: 0
+  _ap:
+    _value: 0
+  _ad:
+    _value: 0
   _defense:
     _value: 0
   _mp:
     _value: 0
+  _mpPercent:
+    _value: 0
   _maxMp:
     _value: 0
   _exp:
+    _value: 0
+  _expPercent:
     _value: 0
   _level:
     _value: 0

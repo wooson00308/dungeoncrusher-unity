@@ -6,26 +6,26 @@ using System.Collections.Generic;
 public class SoundData : ScriptableObject
 {
     public List<BGMSoundData> bgmSoundDatas = new();
-    private Dictionary<string, AudioClip> bgmSounds = new();
+    private readonly Dictionary<string, AudioClip> _bgmSounds = new();
 
     public List<FxSoundData> fxSoundDatas = new();
-    private Dictionary<string, AudioClip> fxSounds = new();
+    private readonly Dictionary<string, AudioClip> _fxSounds = new();
 
     private void SetSoundData()
     {
-        if (bgmSounds.Count <= 0)
+        if (_bgmSounds.Count <= 0)
         {
             foreach (var bgmSoundData in bgmSoundDatas)
             {
-                bgmSounds.Add(bgmSoundData.SoundName, bgmSoundData.SoundClip);
+                _bgmSounds.Add(bgmSoundData.SoundName, bgmSoundData.SoundClip);
             }
         }
 
-        if (fxSounds.Count <= 0)
+        if (_fxSounds.Count <= 0)
         {
             foreach (var fxSoundData in fxSoundDatas)
             {
-                fxSounds.Add(fxSoundData.SoundName, fxSoundData.SoundClip);
+                _fxSounds.Add(fxSoundData.SoundName, fxSoundData.SoundClip);
             }
         }
     }
@@ -33,14 +33,14 @@ public class SoundData : ScriptableObject
     public AudioClip GetBGMSound(string soundName)
     {
         SetSoundData();
-        bgmSounds.TryGetValue(soundName, out var bgmSound);
+        _bgmSounds.TryGetValue(soundName, out var bgmSound);
         return bgmSound;
     }
 
     public AudioClip GetFXSound(string soundName)
     {
         SetSoundData();
-        fxSounds.TryGetValue(soundName, out var fxSound);
+        _fxSounds.TryGetValue(soundName, out var fxSound);
         return fxSound;
     }
 }

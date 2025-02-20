@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LogSystem : MonoBehaviour
@@ -7,10 +8,10 @@ public class LogSystem : MonoBehaviour
     [SerializeField] private int _logCount = 4;
     [SerializeField] private Transform _parent;
 
-    private Queue<GameObject> _logImages = new();
+    private readonly Queue<GameObject> _logImages = new();
 
-    private Queue<UnitEventArgs> _killLogEvents = new();
-    private Queue<SkillEventArgs> _skillLogEvents = new();
+    private readonly Queue<UnitEventArgs> _killLogEvents = new();
+    private readonly Queue<SkillEventArgs> _skillLogEvents = new();
 
     private int _currentLogCount = 0;
 
@@ -19,6 +20,19 @@ public class LogSystem : MonoBehaviour
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_OnDeath, Log);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI, Log);
         GameEventSystem.Instance.Subscribe((int)UnitEvents.UnitEvent_UseSkill_Publish_UI_Ulti, Log);
+    }
+
+    private void OnEnable()
+    {
+        //스타트 로그 지움.
+        var componentsInChildren = GetComponentsInChildren<Transform>().ToList();
+        componentsInChildren.RemoveAt(0);
+
+        foreach (var child in componentsInChildren)
+        {
+            if (child == null) return;
+            ResourceManager.Instance.Destroy(child.gameObject);
+        }
     }
 
     private void OnDisable()
@@ -95,12 +109,12 @@ public class LogSystem : MonoBehaviour
 
         if (args is SkillEventArgs skillEventArgs)
         {
-            var skillData = skillEventArgs.data;
+            var skillData = skillEventArgs.Data;
             imageView.SetLog(skillData.Icon, skillData.Name);
         }
         else if (args is UnitEventArgs unitEventArgs)
         {
-            var unit = unitEventArgs.publisher;
+            var unit = unitEventArgs.Publisher;
             imageView.SetLog(unit.Icon, unit.Id);
         }
 

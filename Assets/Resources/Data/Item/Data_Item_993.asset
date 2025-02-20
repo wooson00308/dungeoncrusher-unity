@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_993
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 993
+  <Name>k__BackingField: Thon's Helmet
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uC3DC\uC774 \uB9CC\uB4E0 \uC138\uACC4 \uCD5C\uACE0\uC758
+    \uD22C\uAD6C\uC774\uB2E4. \uC785\uC73C\uBA74 \uBB34\uC801\uC5D0 \uAC00\uAE5D\uB2E4."
   _id: Item_993
   _prefab: {fileID: 5564285513405598355, guid: b770fbaa5dcd24cd992bbdf39e71160b, type: 3}
   _name: Thon's Helmet
@@ -24,11 +29,25 @@ MonoBehaviour:
     _value: 100
   _attack:
     _value: 0
+  _ap:
+    _value: 0
+  _ad:
+    _value: 0
   _defense:
     _value: 12
   _mp:
     _value: 0
+  _mpPercent:
+    _value: 0
   _maxMp:
+    _value: 0
+  _exp:
+    _value: 0
+  _expPercent:
+    _value: 0
+  _level:
+    _value: 0
+  _stageLevel:
     _value: 0
   _speed:
     _value: 0
@@ -38,8 +57,12 @@ MonoBehaviour:
     _value: 0
   _criticalRate:
     _value: 0
+  _criticalDamage:
+    _value: 0
   _stunRate:
     _value: 0
   _lifestealRate:
+    _value: 0
+  _lifestealPercent:
     _value: 0
   _skillDatas: []

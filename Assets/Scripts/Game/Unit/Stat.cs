@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum StatValueType
 {
     None,
@@ -12,7 +11,7 @@ public enum StatValueType
 
 public abstract class Stat<T>
 {
-    [SerializeField] protected T _value;
+    [SerializeField] protected T _value; 
 
     private bool _isUsedMinValue = false;
     private bool _isUsedMaxValue = false;

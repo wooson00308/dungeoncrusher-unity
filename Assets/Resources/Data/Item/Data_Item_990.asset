@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b242a7f2e747b8a01c5be9f7521ff, type: 3}
   m_Name: Data_Item_990
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 990
+  <Name>k__BackingField: "\uAE30\uBCF8"
+  <DisplayName>k__BackingField: 
+  <Description>k__BackingField: "\uAE30\uBCF8"
   _id: Item_990
   _prefab: {fileID: 419567602478597437, guid: 9de911be546ae5243909b537eda8ecad, type: 3}
   _name: "\uAE30\uBCF8"

@@ -1,5 +1,3 @@
-using System;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class MpSliderUI : BaseSlider
@@ -22,7 +20,7 @@ public class MpSliderUI : BaseSlider
         _unit = unit;
 
         _maxMp = _unit.Mp.Max;
-        _rectTransform.SetParent(UIManager.Instance.Root.canvas.transform);
+        _parent.SetParent(transform.parent);
 
         Get<Slider>((int)Sliders.Mp_Slider).value = 0;
     }

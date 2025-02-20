@@ -3,7 +3,7 @@ using UnityEngine;
 public class AerialState : StateBase, IState
 {
     [SerializeField] private float aerialTime = 1;
-    private float currentAerialTime = 0;
+    private float _currentAerialTime = 0;
 
     public void OnEnter(Unit unit)
     {
@@ -14,16 +14,16 @@ public class AerialState : StateBase, IState
 
     public void OnUpdate(Unit unit)
     {
-        currentAerialTime += GameTime.DeltaTime;
-        if (currentAerialTime >= aerialTime)
+        _currentAerialTime += GameTime.DeltaTime;
+        if (_currentAerialTime >= aerialTime)
         {
             _fsm.TransitionTo<ChaseState>();
-            currentAerialTime = 0;
         }
     }
 
     public void OnExit(Unit unit)
     {
+        _currentAerialTime = 0;
         unit.IsAerial = false;
     }
 }

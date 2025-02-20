@@ -2,37 +2,37 @@ using UnityEngine;
 
 public class Visualizer : Singleton<Visualizer>
 {
-    public GameObject rangeIndicatorPrefab; // ¹üÀ§¸¦ Ç¥½ÃÇÒ ÇÁ¸®ÆÕ (¿øÀÇ Sprite Æ÷ÇÔ)
-    private GameObject currentRangeIndicator;
+    public GameObject rangeIndicatorPrefab; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ Sprite ï¿½ï¿½ï¿½ï¿½)
+    private GameObject _currentRangeIndicator;
 
     /// <summary>
-    /// ½ºÅ³ ¹üÀ§¸¦ ½Ã°¢ÀûÀ¸·Î Ç¥½ÃÇÕ´Ï´Ù.
+    /// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
-    /// <param name="center">¿øÀÇ Áß½É ÁÂÇ¥</param>
-    /// <param name="range">½ºÅ³ ¹üÀ§</param>
+    /// <param name="center">ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½Ç¥</param>
+    /// <param name="range">ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½</param>
     public void ShowRange(Vector3 center, float range)
     {
-        if (currentRangeIndicator == null)
+        if (_currentRangeIndicator == null)
         {
-            currentRangeIndicator = Instantiate(rangeIndicatorPrefab);
+            _currentRangeIndicator = Instantiate(rangeIndicatorPrefab);
         }
 
-        currentRangeIndicator.transform.position = center;
+        _currentRangeIndicator.transform.position = center;
 
-        // SpriteRenderer¸¦ »ç¿ëÇÏ¿© Å©±â Á¶Á¤
-        float diameter = range * 2; // ¿øÀÇ Áö¸§ °è»ê
-        currentRangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1);
-        currentRangeIndicator.SetActive(true);
+        // SpriteRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        float diameter = range * 2; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        _currentRangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1);
+        _currentRangeIndicator.SetActive(true);
     }
 
     /// <summary>
-    /// ¹üÀ§ ½Ã°¢È­¸¦ ¼û±é´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
     /// </summary>
     public void HideRange()
     {
-        if (currentRangeIndicator != null)
+        if (_currentRangeIndicator != null)
         {
-            currentRangeIndicator.SetActive(false);
+            _currentRangeIndicator.SetActive(false);
         }
     }
 }

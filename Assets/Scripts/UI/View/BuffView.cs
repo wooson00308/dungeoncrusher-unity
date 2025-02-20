@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class BuffView : BaseView
 {
-    private Dictionary<SkillData, BuffSloatView> _skillDatas = new();
+    private readonly Dictionary<SkillData, BuffSloatView> _skillDatas = new();
 
     private void OnEnable()
     {
@@ -19,15 +19,15 @@ public class BuffView : BaseView
     {
         if (gameEvents is BuffSkillEventArgs buffSkillEventArgs)
         {
-            if (!_skillDatas.ContainsKey(buffSkillEventArgs.data))
+            if (!_skillDatas.ContainsKey(buffSkillEventArgs.Data))
             {
                 var buffSloatObject = ResourceManager.Instance.SpawnFromPath("UI/BuffSloat", transform);
                 var buffSloat = buffSloatObject.GetComponent<BuffSloatView>();
-                _skillDatas.Add(buffSkillEventArgs.data, buffSloat);
+                _skillDatas.Add(buffSkillEventArgs.Data, buffSloat);
             }
 
-            _skillDatas[buffSkillEventArgs.data]
-                .UpdateUI(buffSkillEventArgs.data.Icon, buffSkillEventArgs.currentCount);
+            _skillDatas[buffSkillEventArgs.Data]
+                .UpdateUI(buffSkillEventArgs.Data.Icon, buffSkillEventArgs.CurrentCount);
         }
     }
 

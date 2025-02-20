@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "ChoiceTable", menuName = "Data/Create ChoiceTable")]
 public class ChoiceTable : ScriptableObject
 {
-    [SerializeField] private List<ChoiceData> _choiceDatas;
+    [SerializeField] private List<ChoiceData> _choiceDatas = new();
 
     public List<ChoiceData> ChoiceDatas => _choiceDatas;
 
@@ -29,7 +29,7 @@ public class ChoiceTable : ScriptableObject
 
         while (result.Count < count && weightedChoices.Count > 0)
         {
-            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+            float randomValue = Random.Range(0f, totalWeight);
             float runningTotal = 0f;
 
             foreach (var (data, weight) in weightedChoices.ToList())
@@ -125,7 +125,7 @@ public class ChoiceData
             return skillData?.Icon;
 
         if (choiceType == ChoiceType.Stat)
-            return unitStatUpgradeData?.UpgradeIcon;
+            return unitStatUpgradeData?.Icon;
 
         return null;
     }

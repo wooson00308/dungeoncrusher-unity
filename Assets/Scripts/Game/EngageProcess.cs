@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using UnityEngine;
 
 public class EngageProcess : Process
@@ -16,9 +16,12 @@ public class EngageProcess : Process
     {
         StageManager.Instance.StartStage();
         await Awaitable.WaitForSecondsAsync(1f);
-        GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
 
-        TimeManager.Instance.PlayTime();
+        if (UnitFactory.Instance.GetBoss() == null)
+        {
+            GameEventSystem.Instance.Publish((int)ProcessEvents.ProcessEvent_SetActive, true);
+            TimeManager.Instance.PlayTime();
+        }
     }
 
     private void OnDisable()
@@ -32,7 +35,7 @@ public class EngageProcess : Process
     private void TryNextProcess(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         if (unit.Team == Team.Friendly)
         {
@@ -42,8 +45,6 @@ public class EngageProcess : Process
             {
                 _processSystem.OnNextProcess<GameOverProcess>();
             }
-
-            return;
         }
     }
 }

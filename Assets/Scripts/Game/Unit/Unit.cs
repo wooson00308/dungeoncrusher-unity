@@ -250,6 +250,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
     private void OnDisable()
     {
         IsActive = false;
+        
         if (Team == Team.Enemy) return;
         GameEventSystem.Instance.Unsubscribe((int)ProcessEvents.ProcessEvent_SetActive, SetActiveEvent);
         GameEventSystem.Instance.Unsubscribe((int)UnitEvents.UnitEvent_OnDeath, ExpUp);
@@ -272,8 +273,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         _hitPrefab ??= data.HitPrefab;
         _projectilePrefab ??= data.ProjectilePrefab;
         _warningPrefab ??= data.WarningPrefab;
-        _dropExp = data.dropExp;
-        _fsm.enabled = false;
+        _dropExp = data.DropExp;
+        if (_fsm is not null) _fsm.enabled = false; //캐싱되어 있기 때문에 is not null을 사용 함.
         Team = team;
 
         SetupStats(data);
@@ -286,7 +287,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         {
             SetActive(true);
         }
-        weaponHolder = GameObject.FindGameObjectWithTag("Weapon").gameObject.transform; //무기 이미지 변경을 위한 초기화
+
+        _weaponHolder ??= GameObject.FindGameObjectWithTag("Weapon")?.gameObject.transform; //무기 이미지 변경을 위한 초기화
         ResetStats("Main");
     }
 
@@ -301,7 +303,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
                 Health.SetMaxValue(Health.Max - equipment.Value.Data.Health.Value);
             }
 
-            ResetStats(equipment.Value.Data.Id);
+            ResetStats(equipment.Value.Data.Id.ToString());
         }
 
         _equipments.Clear();
@@ -331,8 +333,8 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_SetActive, new SetActiveEventArgs()
         {
-            publisher = this,
-            isActive = IsActive
+            Publisher = this,
+            IsActive = IsActive
         });
 
         if (!IsActive)
@@ -458,20 +460,9 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             GameObject hitEffect = ResourceManager.Instance.Spawn(_hitPrefab);
             hitEffect.transform.position = transform.position;
         }
-        else
-        {
-            //Debug.Log("hitPrefab이 없습니다");
-        }
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnHit,
-            new OnHitEventArgs { publisher = this, damageValue = damage, isCiritical = isCritical });
-
-        // if (IsRevive)
-        // {
-        //     OnRevive();
-        //     // Todo : 부활 로직
-        //     return;
-        // }
+            new OnHitEventArgs { Publisher = this, DamageValue = damage, IsCiritical = isCritical });
 
         if (Health.Value <= 0)
         {
@@ -517,7 +508,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnDeath_Execution,
                 new UnitEventOnAttackArgs() //처형이라면 처형 텍스트 띄우기위함.
                 {
-                    publisher = this
+                    Publisher = this
                 });
         }
 
@@ -547,7 +538,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         if (IsDeath) return;
         if (IsSuperArmor) return;
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnStun, new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_OnStun, new UnitEventArgs { Publisher = this });
 
         if (TryGetComponent<StunState>(out var state))
         {
@@ -635,7 +626,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Mp.Update("mp", mpValue);
 
         GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Mana_Regen,
-            new UnitEventArgs() { publisher = this });
+            new UnitEventArgs() { Publisher = this });
     }
 
     public void SetSuperArmor(float time)
@@ -669,7 +660,7 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             _skillDic.Add(skillData.Id, skillComponent);
 
             skillObj.transform.SetParent(_skillStorage);
-
+            
             GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_RootSkill, skillData);
         }
     }
@@ -680,11 +671,10 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
 
     public void EquipItem(Item item)
     {
-
         // 아이템 교체
         if (_equipments.TryGetValue(item.Data.PartType, out var equipment))
         {
-            ResetStats(equipment.Data.Id);
+            ResetStats(equipment.Data.Id.ToString());
 
             if (equipment.Data.Health.Value != 0)
             {
@@ -704,13 +694,14 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             Health.SetMaxValue(Health.Max + item.Data.Health.Value);
         }
 
-        UpdateStats(item.Data.Id, item.Data);
+        UpdateStats(item.Data.Id.ToString(), item.Data);
 
         if (item.Data.PartType == PartType.Weapon)
         {
             ChangeWeapon(item.gameObject);
             return;
         }
+
         Item spawnItem = ResourceManager.Instance.SpawnFromPath($"Item/{item.name}").GetComponent<Item>();
         spawnItem.transform.SetParent(_inventory);
     }
@@ -724,20 +715,20 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
         Level.Update("Main", value);
         StageLevel.Update("Ready", value);
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Level, new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Level, new UnitEventArgs { Publisher = this });
     }
 
     public void ExpUp(object gameEvent)
     {
         UnitEventArgs unitEventArgs = (UnitEventArgs)gameEvent;
-        Unit unit = unitEventArgs.publisher;
+        Unit unit = unitEventArgs.Publisher;
 
         if (unit.Team == Team) return;
 
         var expPercentValue = (int)(unit.DropExp * (ExpPercent.Value * 0.01f));
         Exp.Update("Main", unit._dropExp + expPercentValue); //Levelup 하고나면 0
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { Publisher = this });
 
         if (Exp.Value < Exp.Max) return;
 
@@ -750,29 +741,34 @@ public class Unit : MonoBehaviour, IStats, IStatSetable, IStatUpdatable
             Exp.Update("Main", -Exp.Value);
         }
 
-        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { publisher = this });
+        GameEventSystem.Instance.Publish((int)UnitEvents.UnitEvent_Exp, new UnitEventArgs { Publisher = this });
     }
 
     #endregion
 
     #region 아이템 장착 이미지 변경
-    private Transform weaponHolder;
+
+    private Transform _weaponHolder;
+
     public void ChangeWeapon(GameObject newWeaponPrefab)
     {
-        foreach (Transform child in weaponHolder)
+        foreach (Transform child in _weaponHolder)
         {
             Destroy(child.gameObject);
         }
 
-        newWeaponPrefab.transform.SetParent(weaponHolder);
+        newWeaponPrefab.transform.SetParent(_weaponHolder);
         newWeaponPrefab.transform.localPosition = Vector3.zero;
         newWeaponPrefab.transform.localRotation = Quaternion.identity;
     }
+
     #endregion
+
     public (int damage, bool isCritical) LastDamage() //기존 UnitAnimator에서 Attack할때만 치명타 계산하면 스킬에서는 활용못해서 변경함. 
     {
         int realDamage;
         bool isCritical = false;
+        
         if (CriticalOperator.IsCritical(CriticalRate.Value))
         {
             realDamage = CriticalOperator.GetCriticalDamageIntValue(Attack.Value, CriticalPercent.Value);
